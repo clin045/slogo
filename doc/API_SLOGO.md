@@ -1,4 +1,8 @@
 # SLogo Architecture Design
+cl349 
+mmb70
+xp19
+mg367
 
 1. What is the parsing and who receives it?
     * The front-end will split the input string into an array of string based upon the location of spaces and pass it to back-end.
