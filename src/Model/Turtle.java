@@ -1,10 +1,11 @@
+package Model;
 
 import java.util.*;
 
 /**
  * 
  */
-public interface Tutrtle {
+public interface Turtle {
 
     /**
      * 
