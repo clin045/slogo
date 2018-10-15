@@ -12,6 +12,9 @@ public class CommandManager {
     private List<Entry<String, Pattern>>mySymbols;
     private Map<String, Command>myCommands;
 
+    /**
+     * default constructor
+     */
     public CommandManager(){
         mySymbols=new ArrayList<>();
         myCommands=new HashMap<>();
@@ -20,6 +23,11 @@ public class CommandManager {
             System.out.println(myCommands.get(key).getDescription()+" Params:"+myCommands.get(key).getParamNumber());
         }
     };
+
+    /**
+     * Constructor with a predefined language
+     * @param path path to the resource bundle containing the language specific commands
+     */
     public CommandManager(String path){
         mySymbols=new ArrayList<>();
         myCommands=new HashMap<>();
@@ -60,6 +68,12 @@ public class CommandManager {
         }
         throw new IllegalArgumentException(ERROR+text);
     }
+
+    /**
+     * @author Michael Glushakov (mg367)
+     * @apiNote Followed Java 10 Class Documentation and this link: http://www.avajava.com/tutorials/lessons/how-do-i-instantiate-an-object-of-a-class-via-its-string-name.html?page=2
+     * @apiNote To Implement new Commands: add the matching key-value pair to the config/Commands resource bundle; Command class must have a constructor with no parameters
+     */
     private void setCommands(){
       try{
         ResourceBundle commandBundle = ResourceBundle.getBundle("resources/config/Commands");
