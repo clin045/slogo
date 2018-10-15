@@ -1,22 +1,20 @@
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.regex.Pattern;
 import java.util.ResourceBundle;
 
 /**
  * @author Michael Glushakov (mg367)
  */
 public class CommandManager {
-    private List<Entry<String, Pattern>>mySymbols;
+
     private Map<String, Command>myCommands;
+    private TextParser myParser;
 
     /**
      * default constructor
      */
     public CommandManager(){
-        mySymbols=new ArrayList<>();
+        myParser=new TextParser();
         myCommands=new HashMap<>();
         setCommands();
         for(String key:myCommands.keySet()){
@@ -29,45 +27,42 @@ public class CommandManager {
      * @param path path to the resource bundle containing the language specific commands
      */
     public CommandManager(String path){
-        mySymbols=new ArrayList<>();
+       myParser=new TextParser(path);
         myCommands=new HashMap<>();
-        setLanguage(path);
+
         setCommands();
         for(String key:myCommands.keySet()){
             System.out.println(myCommands.get(key).getDescription()+" Params:"+myCommands.get(key).getParamNumber());
         }
     }
 
-    /**
-     * @author Robert C. Duvall
-     * @apiNote sets the language o be recognized by the parser
-     * @param path: url path to the properties file location
-     */
-    public void setLanguage(String path){
-        mySymbols.clear();
-        ResourceBundle languageBundle=ResourceBundle.getBundle(path);
-        for(var key: Collections.list(languageBundle.getKeys())){
-            var regex = languageBundle.getString(key);
-            mySymbols.add(new SimpleEntry<>(key,Pattern.compile(regex,Pattern.CASE_INSENSITIVE)));
-        }
+
+
+    public String execute(String userInput){
+        Stack<String>[]parsedInput=myParser.parse(userInput, myCommands);
+        Stack<String>commands=parsedInput[0];
+        Stack <String>params = parsedInput[1];
+       while(!commands.empty()){
+           String currentStr=commands.pop();
+           Command current=myCommands.get(currentStr);
+           String [] args= new String[current.getParamNumber()];
+           for(int i=0;i<current.getParamNumber();i+=1){
+               args[i]=params.pop();
+           }
+          current.parseParameters(args);
+           if(current.hasReturnValue()){
+               String out=current.execute();
+               System.out.println(out);
+               params.push(out);
+           }else{System.out.println(current.execute());}
+       }
+
+
+        return "";
     }
 
-    /**
-     * @author Robert C. Duvall
-     * @author Michael Glushakov (mg367)
-     * @param text
-     * @return the String matcing the key in the Command Map
-     * @throws IllegalArgumentException
-     */
-    private String getSymbol(String text)throws IllegalArgumentException{
-        final String ERROR= "INVALID EXPRESSION: ";
-        for(var e:mySymbols){
-            if(e.getValue().matcher(text).matches()){
-                return e.getKey();
-            }
-        }
-        throw new IllegalArgumentException(ERROR+text);
-    }
+//_________________________________________MIDDLEWARE___________________________________________________________________
+
 
     /**
      * @author Michael Glushakov (mg367)
