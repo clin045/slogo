@@ -1,3 +1,5 @@
+package Backend;
+
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -80,7 +82,7 @@ public class TextParser {
 
     /**
      * @param text
-     * @return the String matcing the key in the Command Map
+     * @return the String matcing the key in the Backend.Command Map
      * @throws IllegalArgumentException
      * @author Robert C. Duvall
      * @author Michael Glushakov (mg367)

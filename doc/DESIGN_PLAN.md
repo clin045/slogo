@@ -5,9 +5,9 @@ Slogo Design Doc
 
 
 # Introduction
-This project implements a SLogo interpreter, which is a simplified version of the Logo programming language. Our implementation will be most flexible in adding and interpreting new commands. The Command class will be open and extensible, while the rest of the program should be mostly closed. 
+This project implements a SLogo interpreter, which is a simplified version of the Logo programming language. Our implementation will be most flexible in adding and interpreting new commands. The Backend.Command class will be open and extensible, while the rest of the program should be mostly closed. 
 
-When a user enters a command into the UI, the text is passed to the TextParser, which instantiates the appropriate Command objects which execute the command. Output is either in the form of a text string passed back to the UI or movement of the Turtle, which is then displayed by the UI. 
+When a user enters a command into the UI, the text is passed to the Backend.TextParser, which instantiates the appropriate Backend.Command objects which execute the command. Output is either in the form of a text string passed back to the UI or movement of the Turtle, which is then displayed by the UI. 
 
 # Design Overview
 
@@ -29,8 +29,8 @@ When a user enters a command into the UI, the text is passed to the TextParser, 
         * Take text input for commands
         * Display command history and errors
     * Interactions
-        * Passes input to TextParser
-        * Recieves output/errors from TextParser
+        * Passes input to Backend.TextParser
+        * Recieves output/errors from Backend.TextParser
     
 
 ### Back-End
@@ -55,7 +55,7 @@ When a user enters a command into the UI, the text is passed to the TextParser, 
     * Responsibilities:
         * Track variables
     * Interactions
-        * Methods are called by TextParser
+        * Methods are called by Backend.TextParser
     * External Methods
         * public Object addVar(String key, Object Value)
         * public Object setVar(String key, Object Value)
@@ -70,12 +70,12 @@ When a user enters a command into the UI, the text is passed to the TextParser, 
         * Check for validity of parameters
             * Pass errors to View
         * Call methods in Turtle
-        * Calls the correct Command class
+        * Calls the correct Backend.Command class
     * External Methods
         * public String parse(String[] arguments)
             * returns the String representation of the parsed command
 
-* Command
+* Backend.Command
      * Responsibilities:
         * Call the correct methods
     * Internal Methods
@@ -99,18 +99,18 @@ Here is an image for the layout of our GUI:
 * **Controller.java**
     * Main Class that contains the logic for loading the stage and scene.
 * **CommandInputView.java**
-    * CommandInputView is responsible for passing the commands users enter to TextParser as a string. Then, TextParser will return either an output or a error message due to invalid commands. It will display command history. 
+    * CommandInputView is responsible for passing the commands users enter to Backend.TextParser as a string. Then, Backend.TextParser will return either an output or a error message due to invalid commands. It will display command history. 
 * **TurtleView.java**
     * View responsible for moving turtle on the screen and drawing lines after the turtle moves. Contains the turtle ImageView and variables storing the turtle's location and orientation on the screen. An instance of TurtleView is stored in Turtle.java, and each time a change to Turtle occurs, the update() method with Turtle's new location and orientation is called on that isntance of TurtleView. This allows for multiple turtles to be on the screen.
-* **TextParser.java(maybe CommandManager.java as an alternate name)**
+* **Backend.TextParser.java(maybe Backend.CommandManager.java as an alternate name)**
     * Responsible for parsing the text input as commands. Contains a map of Regex keys matched to commands. Tries to parse the user input, checking if each space separated expression is either a command or a valid parameter. If it's a valid command, it is pushed into a command stack and if it is a parameter, it is pushed to a parameter stack. If something is neither, then parser throws an error. Otherwirse, once the input is entirely parsed, the parser enters a while loop until the stack is empty and pops one command at a time. It then checks the number of parameters the command requires and pops that many parameters from the parameters stack. Then it calls command.execute() with those parameters, and adds the return value of that command to a parameter stack. This allows the user to string commands as long as the return type is consistent.
-* **Command.java**
+* **Backend.Command.java**
     * Interface that will be implemented by all commands
     * Required methods: 
         * int getParamNumber(): returns number of required parameters
         * Object execute(List <String> params): executes the command; throws error if parameters cannot be pased to integer or double
 * **VariableTracker.java**
-    * Stores and manages the user defined variables. Called by TextParser to set and get variable values
+    * Stores and manages the user defined variables. Called by Backend.TextParser to set and get variable values
 * **Turtle.java**
     * Keeps track of turtle coordinates and penup/down, as well as visibility
     * Calls its instance of TurtleView to update() the turtle on the screen
@@ -159,7 +159,7 @@ import java.util.*;
 /**
  * 
  */
-public interface Command {
+public interface Backend.Command {
 
     /**
      * @param methodKey
@@ -183,7 +183,7 @@ import java.util.*;
 /**
  * 
  */
-public interface TextParser {
+public interface Backend.TextParser {
 
 
     /**
@@ -244,15 +244,15 @@ public interface TurtleView {
         * ```commandMap.get(commandStack.pop()).execute(paramsStack.pop)```
             * ```myTurtle.move(50)```
                 * ```myTurtleView.update(myXPos,myYPos,myOrientation)```
-* Command Logic
+* Backend.Command Logic
     * *User types 'pu' in the command window*
-        * pu.execute is called by TextParser
+        * pu.execute is called by Backend.TextParser
         * ```myTurtle.penUp;```
         * ```return null;```
     * *User types 'fd sum 1 2' in the command window*
-        * ```sum.execute(int exp1, int exp2)``` is called by TextParser with parameters popped of the parameter stack
+        * ```sum.execute(int exp1, int exp2)``` is called by Backend.TextParser with parameters popped of the parameter stack
             * ```return exp1 +exp2```
-        * fd.execute(int dist) is called by the TextParser 
+        * fd.execute(int dist) is called by the Backend.TextParser 
             * ```myTurtle.move(dist)```
             * ```return null```
 * Parser Logic
@@ -300,7 +300,7 @@ public interface TurtleView {
         ```
 * VariableTracker Logic
     * *User types SET distance 20*
-        * VariableTracker object within TextParser adds string "distance" and Integer 20 to its own map of stored variables of type Map<String, Object>
+        * VariableTracker object within Backend.TextParser adds string "distance" and Integer 20 to its own map of stored variables of type Map<String, Object>
         ```java
             tracker.put("distance", 20);
         ```
@@ -330,9 +330,9 @@ public interface TurtleView {
         ```
 
 # Design Considerations
-* Should commands validate their own parameters or should TextParser do it?
-    * Giving parameter validation responsibility to TextParser would keep all validation centralized in one class
-    * Letting each command validate its own parameters means that it will be more modular; adding new commands will not require changing parameter validation code in TextParser
+* Should commands validate their own parameters or should Backend.TextParser do it?
+    * Giving parameter validation responsibility to Backend.TextParser would keep all validation centralized in one class
+    * Letting each command validate its own parameters means that it will be more modular; adding new commands will not require changing parameter validation code in Backend.TextParser
 * Should TurtleView call a methods in Turtle to update, or should Turtle call methods in TurtleView to update?
     * Turtle calling TurtleView is more consistent with the MVC design pattern
     * TurtleView calling Turtle means that Turtle will not have to have access to TurtleView, making it more encapsulated. 
@@ -342,9 +342,9 @@ public interface TurtleView {
 # Team Responsibility
 
 * Michael
-    * TextParser input parsing logic
+    * Backend.TextParser input parsing logic
 * Christopher
-    * Command interface and command logic
+    * Backend.Command interface and command logic
 * Max
     * Turtle.java and VariableTracker.java
 * Xi

@@ -55,12 +55,12 @@ mg367
         * Check for validity of parameters
             * Pass errors to View
         * Call methods in Turtle
-        * Calls the correct Model.Command class
+        * Calls the correct Model.Backend.Command class
     * External Methods
         * public String parse(String[] arguments)
             * returns the String representation of the parsed command
 
-* Model.Command
+* Model.Backend.Command
      * Responsibilities:
         * Hold map of strings to method calls
         * Call the correct methods
@@ -70,11 +70,11 @@ mg367
 # Use Cases
 * The user types 'fd 50' in the command window, sees the turtle move in the display window leaving a trail, and has the command added to the environment's history.
     * 'fd' and '50' are recieved by CommandInputHandler and split up and passed to textParser as a String[]
-    * textParser looks up and creates a new Model.Command object and passes '50' as an int to it. Also passes "fd 50" to CommandInputHandler
+    * textParser looks up and creates a new Model.Backend.Command object and passes '50' as an int to it. Also passes "fd 50" to CommandInputHandler
     * CommandInputHandler displays "fd 50" in the command history window
     * fd command object calls Turtle.move(50)
     * TurtleRenderer updates turtle sprite location and draws line if pen is down
 * The user types '50 fd' in the command window and sees an error message that the command was not formatted correctly.
     * '50' and 'fd' are recieved by CommandInputHandler and split up and passed to textParser as a String[] 
-    * textParser detects an error and passes "Error: Invalid Model.Command" to CommandInputHandler
-    * CommandInputHandler displays "Error: Invalid Model.Command"
+    * textParser detects an error and passes "Error: Invalid Model.Backend.Command" to CommandInputHandler
+    * CommandInputHandler displays "Error: Invalid Model.Backend.Command"

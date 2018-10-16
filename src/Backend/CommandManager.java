@@ -1,3 +1,5 @@
+package Backend;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -67,7 +69,7 @@ public class CommandManager {
     /**
      * @author Michael Glushakov (mg367)
      * @apiNote Followed Java 10 Class Documentation and this link: http://www.avajava.com/tutorials/lessons/how-do-i-instantiate-an-object-of-a-class-via-its-string-name.html?page=2
-     * @apiNote To Implement new Commands: add the matching key-value pair to the config/Commands resource bundle; Command class must have a constructor with no parameters
+     * @apiNote To Implement new Commands: add the matching key-value pair to the config/Commands resource bundle; Backend.Command class must have a constructor with no parameters
      */
     private void setCommands(){
       try{
@@ -79,16 +81,16 @@ public class CommandManager {
                   myCommands.put(key,command);
               } catch (ClassNotFoundException e) {
                   e.printStackTrace();
-                  throw new RuntimeException("Could Not Load Command String: "+e.getMessage());
+                  throw new RuntimeException("Could Not Load Backend.Command String: "+e.getMessage());
               } catch (IllegalAccessException e) {
                   e.printStackTrace();
-                  throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                  throw new RuntimeException("Could Not Create Backend.Command Object: "+e.getMessage());
               } catch (InstantiationException e) {
                   e.printStackTrace();
-                  throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                  throw new RuntimeException("Could Not Create Backend.Command Object: "+e.getMessage());
               } catch (NoSuchMethodException e) {
                   e.printStackTrace();
-                  throw new RuntimeException("Could not Create Command Object");
+                  throw new RuntimeException("Could not Create Backend.Command Object");
               } catch (InvocationTargetException e) {
                   e.printStackTrace();
               }
