@@ -7,7 +7,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 
 public class WorkspaceManager {
 
@@ -31,10 +30,10 @@ public class WorkspaceManager {
         borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());
 
-        borderPane.setCenter(tabPane);
+        borderPane.setTop(tabPane);
     }
 
-    Pane getWorkspace(){
+    BorderPane getWorkspace(){
         return borderPane;
     }
 

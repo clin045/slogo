@@ -1,4 +1,17 @@
 package FrontEnd;
 
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+
 public class UIFactory {
+
+
+    public static HBox createInputFieldWithLabel(String label, Node node){
+        HBox hBox = new HBox(new Label(label), node);
+//        hBox.setAlignment(Pos.CENTER);
+        return hBox;
+    }
+
 }
