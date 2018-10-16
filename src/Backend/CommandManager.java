@@ -1,5 +1,6 @@
 package Backend;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -73,7 +74,7 @@ public class CommandManager {
      */
     private void setCommands(){
       try{
-        ResourceBundle commandBundle = ResourceBundle.getBundle("resources/config/Commands");
+        ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
           for(String key: Collections.list(commandBundle.getKeys())){
               try{
                   Class commandStr= Class.forName(commandBundle.getString(key));
