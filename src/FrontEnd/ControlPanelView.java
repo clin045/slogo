@@ -2,15 +2,17 @@ package FrontEnd;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/*
+    This class represents the view for setting
+    @author xp19
+ */
 public class ControlPanelView {
 
     private static final String WORKSPACE_SETTING_TITLE = "Workspace Setting";
@@ -19,17 +21,20 @@ public class ControlPanelView {
     VBox vBox;
     TitledPane workspaceSetting;
     TitledPane commandHistory;
+    TitledPane userDefinedCommands;
+    TitledPane definedVariables;
 
-    public ControlPanelView(){
+    public ControlPanelView(Workspace workspace){
         //using a two-parameter constructor
         setUpWorkspaceSetting();
         setUpCommandHistoryPane();
-        vBox = new VBox(workspaceSetting, commandHistory);
+        userDefinedCommands = new TitledPane("Defined commands", new VBox());
+        definedVariables = new TitledPane("Defined variables", new VBox());
+        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
+        workspace.setRight(vBox);
     }
 
-    public VBox getSettingMenu(){
-        return vBox;
-    }
+
 
     private void setUpWorkspaceSetting(){
         ColorPicker colorPicker = new ColorPicker();

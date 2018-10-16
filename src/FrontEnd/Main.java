@@ -17,7 +17,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle(TITLE);
         Group root = new Group();
-        Scene scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
+        Scene scene = new Scene(root, WIDTH, HEIGHT, Color.AZURE);
 
         UIManager uiManager = new UIManager(root, scene);
 

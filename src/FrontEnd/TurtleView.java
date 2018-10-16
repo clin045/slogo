@@ -8,6 +8,7 @@ public class TurtleView {
     private static final String TURTLE_IMAGE = "turtle_green.png";
     private static final int SIZE = 50;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
+    private boolean isPenUp = false;
 
     public TurtleView(){
         turtleImageView = new ImageView(turtleImage);
@@ -19,7 +20,10 @@ public class TurtleView {
         return turtleImageView;
     }
 
-
+    public void update(double x, double y){
+        turtleImageView.setLayoutX(x);
+        turtleImageView.setLayoutY(y);
+    }
 
 
 }
