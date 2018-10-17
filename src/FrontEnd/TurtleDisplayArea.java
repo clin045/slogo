@@ -40,13 +40,10 @@ public class TurtleDisplayArea extends Pane {
     }
 
     public void update(double x, double y){
-//        Line trail = pen.drawLine(new Point2D(turtleView.getX(), turtleView.getY()), new Point2D(x,y));
-//        Line line = new Line(10,10,80,80);
         System.out.println(turtleView.getX()+":"+turtleView.getY());
         Line trail = new Line(turtleView.getX(), turtleView.getY(), x, y);
         turtleView.update(x,y);
         this.getChildren().add(trail);
-//        this.getChildren().add(line);
     }
 
     // put an additional turtle to the center of pane
@@ -56,5 +53,8 @@ public class TurtleDisplayArea extends Pane {
         this.heightProperty().addListener(e -> element.setLayoutY(this.getHeight() / 2.0));
     }
 
+    public void setPenColor(Color color){
+
+    }
 
 }

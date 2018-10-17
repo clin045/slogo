@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
@@ -15,6 +14,9 @@ import javafx.scene.paint.Color;
 public class ControlPanelView {
 
     private static final String WORKSPACE_SETTING_TITLE = "Workspace Setting";
+    private static final String DEFINED_COMMANDS_TITLE = "Defined Commands";
+    private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
+    private static final String COMMAND_HISTORY_TITLE = "Command History";
     private static final double VERTICAL_SPACING = 10.0;
 
     VBox vBox;
@@ -29,8 +31,8 @@ public class ControlPanelView {
         setUpWorkspaceSetting();
         setUpCommandHistoryPane();
         this.controller = controller;
-        userDefinedCommands = new TitledPane("Defined commands", new VBox());
-        definedVariables = new TitledPane("Defined variables", new VBox());
+        userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
+        definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
         workspace.setRight(vBox);
         workspace.setBottom(new TextArea());
@@ -41,7 +43,7 @@ public class ControlPanelView {
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
             controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
-            controller.update(30,30);
+//            controller.update(30,30);
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
 
@@ -60,7 +62,7 @@ public class ControlPanelView {
     }
 
     private void setUpCommandHistoryPane(){
-        commandHistory = new TitledPane("Command History", new Button("Button"));
+        commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, new VBox());
     }
 
 
