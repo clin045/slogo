@@ -22,10 +22,26 @@ public class TurtleView {
         return turtleImageView;
     }
 
+    public double getX(){
+        return turtleImageView.getLayoutX();
+    }
+
+    public double getY(){
+        return turtleImageView.getLayoutY();
+    }
+
     // update the position of the turtle
     public void update(double x, double y){
         turtleImageView.setLayoutX(x);
         turtleImageView.setLayoutY(y);
+        if(!isPenUp){
+
+        }
+    }
+
+    // turn the turtle by a certain degree
+    public void turn(double degrees){
+        turtleImageView.setRotate(turtleImageView.getRotate() + degrees);
     }
 
     public void setTurtleImage(String path){
@@ -33,8 +49,5 @@ public class TurtleView {
         turtleImageView.setImage(turtleImage);
     }
 
-    public void leaveTrail(){
-
-    }
 
 }

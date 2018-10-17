@@ -16,5 +16,9 @@ public class Controller {
         turtleDisplayArea.setBgColor(color);
     }
 
+    public void update(double x, double y){
+        turtleDisplayArea.update(x,y);
+    }
+
 
 }

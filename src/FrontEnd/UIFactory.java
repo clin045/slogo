@@ -14,7 +14,7 @@ public class UIFactory {
 
     public static HBox createInputFieldWithLabel(String label, Node node){
         HBox hBox = new HBox(new Label(label), node);
-//        hBox.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
         return hBox;
     }
 

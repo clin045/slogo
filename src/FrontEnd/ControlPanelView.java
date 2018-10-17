@@ -1,7 +1,5 @@
 package FrontEnd;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextArea;
@@ -39,22 +37,22 @@ public class ControlPanelView {
     }
 
     private void setUpWorkspaceSetting(){
-        ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setOnAction(event -> {
-            controller.setTurtleDisplayAreaColor(colorPicker.getValue());
-//            Color c = colorPicker.getValue();
-//
-//            System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
+        // add bg color picker
+        ColorPicker bgColorPicker = new ColorPicker();
+        bgColorPicker.setOnAction(event -> {
+            controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
+            controller.update(30,30);
         });
-        HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", colorPicker);
+        HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
 
-        ColorPicker colorPicker1 = new ColorPicker();
-        colorPicker1.setOnAction(event -> {
-            Color c = colorPicker.getValue();
+        // add pen color picker
+        ColorPicker penColorPicker = new ColorPicker();
+        penColorPicker.setOnAction(event -> {
+            Color c = penColorPicker.getValue();
             System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
         });
 
-        HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", colorPicker1);
+        HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
 
         VBox setting = new VBox(bgColorBox, penColorBox);
         setting.setSpacing(VERTICAL_SPACING);
