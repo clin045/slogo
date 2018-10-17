@@ -39,6 +39,14 @@ public class TurtleView {
         }
     }
 
+    public double getWidth(){
+        return turtleImageView.getBoundsInLocal().getWidth();
+    }
+
+    public double getHeight(){
+        return turtleImageView.getBoundsInLocal().getHeight();
+    }
+
     // turn the turtle by a certain degree
     public void turn(double degrees){
         turtleImageView.setRotate(turtleImageView.getRotate() + degrees);

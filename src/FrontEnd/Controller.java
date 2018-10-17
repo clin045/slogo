@@ -20,5 +20,9 @@ public class Controller {
         turtleDisplayArea.update(x,y);
     }
 
+    public void setPenColor(Color color){
+        turtleDisplayArea.setPenColor(color);
+    }
+
 
 }

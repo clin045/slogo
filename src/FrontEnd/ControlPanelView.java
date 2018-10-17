@@ -43,15 +43,15 @@ public class ControlPanelView {
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
             controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
-//            controller.update(30,30);
+            controller.update(30,30);
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
 
         // add pen color picker
         ColorPicker penColorPicker = new ColorPicker();
         penColorPicker.setOnAction(event -> {
-            Color c = penColorPicker.getValue();
-            System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
+            controller.setPenColor(penColorPicker.getValue());
+            controller.update(100,100);
         });
 
         HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
