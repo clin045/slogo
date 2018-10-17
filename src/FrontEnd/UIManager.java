@@ -3,7 +3,6 @@ package FrontEnd;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.stage.FileChooser;
 
 
 public class UIManager {
@@ -16,7 +15,5 @@ public class UIManager {
 
         root.getChildren().add(stackPane);
     }
-
-
 
 }

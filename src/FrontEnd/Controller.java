@@ -2,26 +2,31 @@ package FrontEnd;
 
 import javafx.scene.paint.Color;
 
+/*
+
+    @author xp19
+ */
+
 public class Controller {
 
-    TurtleDisplayArea turtleDisplayArea;
+    TurtlePlayground turtlePlayground;
     TurtleView turtleView;
 
-    public Controller(TurtleDisplayArea turtleDisplayArea, TurtleView turtleView){
-        this.turtleDisplayArea = turtleDisplayArea;
+    public Controller(TurtlePlayground turtlePlayground, TurtleView turtleView){
+        this.turtlePlayground = turtlePlayground;
         this.turtleView = turtleView;
     }
 
     public void setTurtleDisplayAreaColor(Color color){
-        turtleDisplayArea.setBgColor(color);
+        turtlePlayground.setBgColor(color);
     }
 
     public void update(double x, double y){
-        turtleDisplayArea.update(x,y);
+        turtlePlayground.update(x,y);
     }
 
     public void setPenColor(Color color){
-        turtleDisplayArea.setPenColor(color);
+        turtlePlayground.setPenColor(color);
     }
 
     public void setTurtleImage(String fileName){

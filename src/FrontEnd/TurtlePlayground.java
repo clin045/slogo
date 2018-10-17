@@ -3,7 +3,6 @@ package FrontEnd;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -13,19 +12,19 @@ import javafx.scene.shape.Line;
     @author xp19
  */
 
-public class TurtleDisplayArea extends Pane {
+public class TurtlePlayground extends Pane {
 
     TurtleView turtleView;
     Pen pen;
 
-    public TurtleDisplayArea(TurtleView turtleView){
+    public TurtlePlayground(TurtleView turtleView){
         setBgColor(Color.WHITE);
         this.turtleView = turtleView;
         addTurtle(turtleView.getTurtleImageView());
         pen = new Pen(this, true, Color.BLACK, 10);
     }
 
-    public TurtleDisplayArea(TurtleView turtleView, Color color){
+    public TurtlePlayground(TurtleView turtleView, Color color){
         setBgColor(color);
         this.turtleView = turtleView;
         addTurtle(turtleView.getTurtleImageView());
@@ -39,8 +38,8 @@ public class TurtleDisplayArea extends Pane {
         this.setBackground(background);
     }
 
+    // update the turtle's position and leave trail if pen is down
     public void update(double x, double y){
-        System.out.println(turtleView.getX()+":"+turtleView.getY());
         if(pen.isDown()){
             Line trail = pen.drawLine(new Point2D(turtleView.getX(), turtleView.getY()), new Point2D(x,y));
             this.getChildren().add(trail);

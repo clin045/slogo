@@ -31,16 +31,16 @@ public class ControlPanelView {
     Controller controller;
 
     public ControlPanelView(Workspace workspace, Controller controller){
-        //using a two-parameter constructor
+        this.controller = controller;
+        //set up UI
         setUpWorkspaceSetting();
         setUpCommandHistoryPane();
-        this.controller = controller;
         userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
         workspace.setRight(vBox);
         // add text input field
-        workspace.setBottom(new TextArea());
+        setUpTextInputArea(workspace);
     }
 
     private void setUpWorkspaceSetting(){
@@ -73,6 +73,15 @@ public class ControlPanelView {
         VBox setting = new VBox(bgColorBox, penColorBox, imageSetter);
         setting.setSpacing(VERTICAL_SPACING);
         workspaceSetting = new TitledPane(WORKSPACE_SETTING_TITLE, setting);
+    }
+
+    // add text input field and related buttons
+    private void setUpTextInputArea(Workspace workspace){
+        CommandInputHandler commandInputHandler = new CommandInputHandler(controller);
+        Button runButton = new Button("Run");
+        runButton.setOnAction(event -> commandInputHandler.run());
+        VBox textInput= new VBox(runButton, commandInputHandler);
+        workspace.setBottom(textInput);
     }
 
     private void setUpCommandHistoryPane(){
