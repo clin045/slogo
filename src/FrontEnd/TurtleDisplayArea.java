@@ -41,9 +41,11 @@ public class TurtleDisplayArea extends Pane {
 
     public void update(double x, double y){
         System.out.println(turtleView.getX()+":"+turtleView.getY());
-        Line trail = pen.drawLine(new Point2D(turtleView.getX(), turtleView.getY()), new Point2D(x,y));
+        if(pen.isDown()){
+            Line trail = pen.drawLine(new Point2D(turtleView.getX(), turtleView.getY()), new Point2D(x,y));
+            this.getChildren().add(trail);
+        }
         turtleView.update(x,y);
-        this.getChildren().add(trail);
     }
 
     // put an additional turtle to the center of pane

@@ -5,7 +5,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 /*
     This class represents the view for setting
@@ -35,6 +34,7 @@ public class ControlPanelView {
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
         workspace.setRight(vBox);
+        // add text input field
         workspace.setBottom(new TextArea());
     }
 
