@@ -1,9 +1,10 @@
 package FrontEnd;
 
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,29 +24,32 @@ public class ControlPanelView {
     TitledPane commandHistory;
     TitledPane userDefinedCommands;
     TitledPane definedVariables;
+    Controller controller;
 
-    public ControlPanelView(Workspace workspace){
+    public ControlPanelView(Workspace workspace, Controller controller){
         //using a two-parameter constructor
         setUpWorkspaceSetting();
         setUpCommandHistoryPane();
+        this.controller = controller;
         userDefinedCommands = new TitledPane("Defined commands", new VBox());
         definedVariables = new TitledPane("Defined variables", new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
         workspace.setRight(vBox);
+        workspace.setBottom(new TextArea());
     }
-
-
 
     private void setUpWorkspaceSetting(){
         ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setOnAction((EventHandler) t -> {
-            Color c = colorPicker.getValue();
-            System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
+        colorPicker.setOnAction(event -> {
+            controller.setTurtleDisplayAreaColor(colorPicker.getValue());
+//            Color c = colorPicker.getValue();
+//
+//            System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", colorPicker);
 
         ColorPicker colorPicker1 = new ColorPicker();
-        colorPicker1.setOnAction((EventHandler) t -> {
+        colorPicker1.setOnAction(event -> {
             Color c = colorPicker.getValue();
             System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
         });
@@ -59,7 +63,6 @@ public class ControlPanelView {
 
     private void setUpCommandHistoryPane(){
         commandHistory = new TitledPane("Command History", new Button("Button"));
-//        commandHistory.set
     }
 
 

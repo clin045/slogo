@@ -5,8 +5,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class UIFactory {
+/*
+    A utility class for creating UI elements
+    @author xp19
+ */
 
+public class UIFactory {
 
     public static HBox createInputFieldWithLabel(String label, Node node){
         HBox hBox = new HBox(new Label(label), node);
