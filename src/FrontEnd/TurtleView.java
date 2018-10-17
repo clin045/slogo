@@ -52,8 +52,8 @@ public class TurtleView {
         turtleImageView.setRotate(turtleImageView.getRotate() + degrees);
     }
 
-    public void setTurtleImage(String path){
-        turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(path));
+    public void setTurtleImage(String fileName){
+        turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(fileName));
         turtleImageView.setImage(turtleImage);
     }
 

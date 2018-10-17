@@ -24,5 +24,8 @@ public class Controller {
         turtleDisplayArea.setPenColor(color);
     }
 
+    public void setTurtleImage(String fileName){
+        turtleView.setTurtleImage(fileName);
+    }
 
 }

@@ -1,10 +1,14 @@
 package FrontEnd;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 /*
     This class represents the view for setting
@@ -17,6 +21,7 @@ public class ControlPanelView {
     private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
     private static final String COMMAND_HISTORY_TITLE = "Command History";
     private static final double VERTICAL_SPACING = 10.0;
+    private static final String IMAGE_FILE_EXTENSION = "*.png";
 
     VBox vBox;
     TitledPane workspaceSetting;
@@ -56,7 +61,16 @@ public class ControlPanelView {
 
         HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
 
-        VBox setting = new VBox(bgColorBox, penColorBox);
+        // add turtle image setter
+        Button button = new Button("Choose..");
+        button.setOnAction(event -> {
+            FileChooser chooser = UIFactory.createFileChooser(IMAGE_FILE_EXTENSION);
+            File file = chooser.showOpenDialog(null);
+            controller.setTurtleImage(file.getName());
+        });
+        HBox imageSetter = UIFactory.createInputFieldWithLabel("Change turtle image: ", button);
+
+        VBox setting = new VBox(bgColorBox, penColorBox, imageSetter);
         setting.setSpacing(VERTICAL_SPACING);
         workspaceSetting = new TitledPane(WORKSPACE_SETTING_TITLE, setting);
     }
