@@ -47,6 +47,7 @@ public class CommandManager {
         Stack<String>[]parsedInput=myParser.parse(userInput, myCommands);
         Stack<String>commands=parsedInput[0];
         Stack <String>params = parsedInput[1];
+        String output="";
        while(!commands.empty()){
            String currentStr=commands.pop();
            Command current=myCommands.get(currentStr);
@@ -57,13 +58,13 @@ public class CommandManager {
           current.parseParameters(args);
            if(current.hasReturnValue()){
                String out=current.execute();
-               System.out.println(out);
+               output+=out;
                params.push(out);
-           }else{System.out.println(current.execute());}
+           }else{output+=current.execute();}
        }
 
 
-        return "";
+        return output;
     }
 
 //_________________________________________MIDDLEWARE___________________________________________________________________
