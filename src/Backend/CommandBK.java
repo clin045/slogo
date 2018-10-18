@@ -25,7 +25,7 @@ public class CommandBK extends TurtleCommands{
     public void parseParameters(String[] params) throws IllegalArgumentException {
         if(params.length==1){
             try{amountBack=Integer.parseInt(params[0]);
-            }catch (Exception e){throw new IllegalArgumentException("Forward needs an integer parameter");}
+            }catch (Exception e){throw new IllegalArgumentException("BACK needs an integer parameter");}
         }else{throw new IllegalArgumentException("Wrong number of parameters. Expect: "+getParamNumber()+" got: "+params.length);}
     }
 
