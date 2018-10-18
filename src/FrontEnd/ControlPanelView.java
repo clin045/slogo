@@ -1,9 +1,8 @@
 package FrontEnd;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TitledPane;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -29,18 +28,18 @@ public class ControlPanelView {
     TitledPane userDefinedCommands;
     TitledPane definedVariables;
     Controller controller;
+    CommandInputHandler commandInputHandler;
 
     public ControlPanelView(Workspace workspace, Controller controller){
         this.controller = controller;
         //set up UI
+        setUpTextInputArea(workspace);// add text input field
         setUpWorkspaceSetting();
         setUpCommandHistoryPane();
         userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
         workspace.setRight(vBox);
-        // add text input field
-        setUpTextInputArea(workspace);
     }
 
     private void setUpWorkspaceSetting(){
@@ -62,24 +61,39 @@ public class ControlPanelView {
         HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
 
         // add turtle image setter
-        Button button = new Button("Choose..");
-        button.setOnAction(event -> {
+        Button button = UIFactory.createButton("Choose..", event -> {
             FileChooser chooser = UIFactory.createFileChooser(IMAGE_FILE_EXTENSION);
             File file = chooser.showOpenDialog(null);
-            controller.setTurtleImage(file.getName());
+            if(file!=null){
+                controller.setTurtleImage(file.getName());
+            }
         });
         HBox imageSetter = UIFactory.createInputFieldWithLabel("Change turtle image: ", button);
 
-        VBox setting = new VBox(bgColorBox, penColorBox, imageSetter);
+        // add language setting
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "English", "Chinese", "French", "German",
+                        "Italian", "Portuguese", "Russian", "Spanish"
+                );
+        final ComboBox comboBox = new ComboBox(options);
+        comboBox.getSelectionModel().selectFirst();
+        comboBox.setOnAction(event -> {
+            String s = comboBox.getSelectionModel().getSelectedItem().toString();
+            commandInputHandler.setLanguage(s);
+        });
+        HBox languageSetter = UIFactory.createInputFieldWithLabel("Language: ", comboBox);
+
+        // put everything inside a vbox
+        VBox setting = new VBox(bgColorBox, penColorBox, imageSetter, languageSetter);
         setting.setSpacing(VERTICAL_SPACING);
         workspaceSetting = new TitledPane(WORKSPACE_SETTING_TITLE, setting);
     }
 
     // add text input field and related buttons
     private void setUpTextInputArea(Workspace workspace){
-        CommandInputHandler commandInputHandler = new CommandInputHandler(controller);
-        Button runButton = new Button("Run");
-        runButton.setOnAction(event -> commandInputHandler.run());
+        commandInputHandler = new CommandInputHandler(controller);
+        Button runButton = UIFactory.createButton("Run", event -> commandInputHandler.run());
         VBox textInput= new VBox(runButton, commandInputHandler);
         workspace.setBottom(textInput);
     }
