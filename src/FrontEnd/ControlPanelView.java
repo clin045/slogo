@@ -47,7 +47,7 @@ public class ControlPanelView {
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
             controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
-            controller.turnTurtle(60);
+//            controller.turnTurtle(60);
 //            controller.update(30,30);
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
@@ -99,7 +99,13 @@ public class ControlPanelView {
             VBox history = ((VBox) commandHistory.getContent());
             history.getChildren().add(UIFactory.createText(command));
         });
-        VBox textInput= new VBox(runButton, commandInputHandler);
+        Button clearHistoryButton = UIFactory.createButton("Clear History", event -> {
+            VBox history = ((VBox) commandHistory.getContent());
+            history.getChildren().clear();
+        });
+
+        HBox buttonsGroup = new HBox(runButton, clearHistoryButton);
+        VBox textInput= new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
     }
 
