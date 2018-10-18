@@ -4,17 +4,16 @@ package Backend;
  * @author Christopher Lin cl349
  */
 
-public class CommandBK implements  Command {
+public class CommandBK extends TurtleCommands{
     private int amountBack;
-    private VariableTracker myTracker;
-
+    public static final int NUM_PARAMS = 1;
     CommandBK(VariableTracker tracker){
-        myTracker = tracker;
+        super(tracker);
     }
 
     @Override
     public int getParamNumber() {
-        return 1;
+        return NUM_PARAMS;
     }
 
     @Override
@@ -39,8 +38,4 @@ public class CommandBK implements  Command {
         return out;
     }
 
-    @Override
-    public boolean hasReturnValue() {
-        return false;
-    }
 }

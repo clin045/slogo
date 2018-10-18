@@ -1,11 +1,10 @@
 package Backend;
 
-public class CommandFD implements Command {
+public class CommandFD extends TurtleCommands {
     private int amountFD;
     private final int PARAM_NUMBER=1;
-    private VariableTracker myTracker;
     public CommandFD(VariableTracker tracker){
-        myTracker = tracker;
+        super(tracker);
     }
 
     @Override
@@ -34,9 +33,6 @@ public class CommandFD implements Command {
         return out;
     }
 
-    @Override
-    public boolean hasReturnValue() {
-        return false;
-    }
+
 
 }
