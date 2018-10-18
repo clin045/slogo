@@ -39,13 +39,21 @@ public class TurtleView {
         }
     }
 
-    // turn the turtle by a certain degree
+    public double getWidth(){
+        return turtleImageView.getBoundsInLocal().getWidth();
+    }
+
+    public double getHeight(){
+        return turtleImageView.getBoundsInLocal().getHeight();
+    }
+
+    // turnTurtle the turtle by a certain degree
     public void turn(double degrees){
         turtleImageView.setRotate(turtleImageView.getRotate() + degrees);
     }
 
-    public void setTurtleImage(String path){
-        turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(path));
+    public void setTurtleImage(String fileName){
+        turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(fileName));
         turtleImageView.setImage(turtleImage);
     }
 

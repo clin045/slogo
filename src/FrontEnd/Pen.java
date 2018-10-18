@@ -7,13 +7,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Pen {
-    private TurtleDisplayArea display;
+    private TurtlePlayground display;
     private SimpleBooleanProperty isDownProperty;
     private Color color;
     private double thickness;
     private int colorIndex;
 
-    protected Pen(TurtleDisplayArea canvas, boolean isDown, Color initialColor, double initialWidth) {
+    protected Pen(TurtlePlayground canvas, boolean isDown, Color initialColor, double initialWidth) {
         display = canvas;
         isDownProperty = new SimpleBooleanProperty(isDown);
         color = initialColor;

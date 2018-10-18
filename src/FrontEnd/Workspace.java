@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Workspace extends BorderPane {
 
-    TurtleDisplayArea area;
+    TurtlePlayground area;
     TurtleView view;
 
     // create a new workspace
@@ -22,7 +22,7 @@ public class Workspace extends BorderPane {
     // initialize the display area in the border pane
     private void setUpTurtleDisplayArea(){
         view = new TurtleView();
-        area = new TurtleDisplayArea(view);
+        area = new TurtlePlayground(view);
         this.setCenter(area);
     }
 
