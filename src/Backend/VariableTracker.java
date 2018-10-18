@@ -6,7 +6,7 @@ public class VariableTracker {
     }
 
     private Turtle myTurtle;
-    VariableTracker(){
+    public VariableTracker(){
         myTurtle = new Turtle();
     }
 }

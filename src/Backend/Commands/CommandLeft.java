@@ -16,7 +16,7 @@ public class CommandLeft extends TurtleCommands{
     public void parseParameters(String[] params) throws IllegalArgumentException {
         if(params.length==1){
             try{leftAmt=Double.parseDouble(params[0]);
-            }catch (Exception e){throw new IllegalArgumentException("BACK needs a double parameter");}
+            }catch (Exception e){throw new IllegalArgumentException("LEFT needs a double parameter");}
         }else{throw new IllegalArgumentException("Wrong number of parameters. Expect: "+getParamNumber()+" got: "+params.length);}
     }
 

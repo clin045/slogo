@@ -18,7 +18,7 @@ public class Turtle {
             myOrientation = 360 + myOrientation%360;
         }
         else if (myOrientation > 360){
-            myOrientation = 360 - myOrientation%360;
+            myOrientation = myOrientation%360;
         }
         System.out.println("New orientation is " + myOrientation);
     }

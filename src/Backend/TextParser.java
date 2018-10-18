@@ -14,7 +14,7 @@ public class TextParser {
     /**
      * @apiNote Default constructor
      */
-    protected TextParser() {
+    public TextParser() {
         mySymbols = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public class TextParser {
      * Constructor with path of the initial language file
      * @param path to the initial language file
      */
-    protected TextParser(String path) {
+    public TextParser(String path) {
         mySymbols = new ArrayList<>();
         setLanguage(path);
     }
