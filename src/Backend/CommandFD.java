@@ -3,7 +3,10 @@ package Backend;
 public class CommandFD implements Command {
     private int amountFD;
     private final int PARAM_NUMBER=1;
-    public CommandFD(){}
+    private VariableTracker myTracker;
+    public CommandFD(VariableTracker tracker){
+        myTracker = tracker;
+    }
 
     @Override
     public int getParamNumber() {
@@ -24,6 +27,8 @@ public class CommandFD implements Command {
 
     @Override
     public String execute() {
+        var turtle = myTracker.getTurtle();
+        turtle.move(amountFD);
         String out= "Executed FD "+amountFD;
         amountFD=0;
         return out;

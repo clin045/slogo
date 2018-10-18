@@ -12,6 +12,7 @@ public class CommandManager {
 
     private Map<String, Command>myCommands;
     private TextParser myParser;
+    private VariableTracker myTracker;
 
     /**
      * default constructor
@@ -30,6 +31,7 @@ public class CommandManager {
      * @param path path to the resource bundle containing the language specific commands
      */
     public CommandManager(String path){
+        myTracker = new VariableTracker();
        myParser=new TextParser(path);
         myCommands=new HashMap<>();
 
@@ -78,7 +80,7 @@ public class CommandManager {
           for(String key: Collections.list(commandBundle.getKeys())){
               try{
                   Class commandStr= Class.forName(commandBundle.getString(key));
-                  Command command= (Command) commandStr.getDeclaredConstructor().newInstance();
+                  Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(myTracker);
                   myCommands.put(key,command);
               } catch (ClassNotFoundException e) {
                   e.printStackTrace();
