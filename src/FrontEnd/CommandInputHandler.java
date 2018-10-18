@@ -17,8 +17,8 @@ public class CommandInputHandler extends TextArea {
         this method will be executed when users press run button,
         do all the text parsing and error handling here
      */
-    public void run(){
-        System.out.println(this.getText());
+    public String run(){
+        return this.getText();
     }
 
     private void showWarningDialog(String title, String header, String content){

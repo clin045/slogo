@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -31,6 +32,9 @@ public class UIFactory {
         return button;
     }
 
+    public static Text createText(String text){
+        return new Text(text);
+    }
 
     public static FileChooser createFileChooser(String extension){
         FileChooser fileChooser = new FileChooser();

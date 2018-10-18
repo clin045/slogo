@@ -47,7 +47,8 @@ public class ControlPanelView {
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
             controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
-            controller.update(30,30);
+            controller.turnTurtle(60);
+//            controller.update(30,30);
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
 
@@ -55,7 +56,7 @@ public class ControlPanelView {
         ColorPicker penColorPicker = new ColorPicker();
         penColorPicker.setOnAction(event -> {
             controller.setPenColor(penColorPicker.getValue());
-            controller.update(100,100);
+//            controller.update(100,100);
         });
 
         HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
@@ -93,7 +94,11 @@ public class ControlPanelView {
     // add text input field and related buttons
     private void setUpTextInputArea(Workspace workspace){
         commandInputHandler = new CommandInputHandler(controller);
-        Button runButton = UIFactory.createButton("Run", event -> commandInputHandler.run());
+        Button runButton = UIFactory.createButton("Run", event -> {
+            String command = commandInputHandler.run();
+            VBox history = ((VBox) commandHistory.getContent());
+            history.getChildren().add(UIFactory.createText(command));
+        });
         VBox textInput= new VBox(runButton, commandInputHandler);
         workspace.setBottom(textInput);
     }
@@ -101,6 +106,5 @@ public class ControlPanelView {
     private void setUpCommandHistoryPane(){
         commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, new VBox());
     }
-
 
 }

@@ -47,7 +47,7 @@ public class TurtleView {
         return turtleImageView.getBoundsInLocal().getHeight();
     }
 
-    // turn the turtle by a certain degree
+    // turnTurtle the turtle by a certain degree
     public void turn(double degrees){
         turtleImageView.setRotate(turtleImageView.getRotate() + degrees);
     }

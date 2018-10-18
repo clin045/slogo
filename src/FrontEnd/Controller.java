@@ -33,4 +33,9 @@ public class Controller {
         turtleView.setTurtleImage(fileName);
     }
 
+    // turn the turtle clockwise by certain degrees
+    public void turnTurtle(double degress){
+        turtleView.turn(degress);
+    }
+
 }
