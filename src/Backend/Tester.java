@@ -1,5 +1,7 @@
 package Backend;
 
+import Backend.Commands.CommandManager;
+
 public class Tester {
     public static void main (String[]args){
         CommandManager manager = new CommandManager("languages.English");

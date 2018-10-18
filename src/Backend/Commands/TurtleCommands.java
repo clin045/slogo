@@ -1,4 +1,7 @@
-package Backend;
+package Backend.Commands;
+
+import Backend.Command;
+import Backend.VariableTracker;
 
 /**@author Christopher Lin cl349
  *

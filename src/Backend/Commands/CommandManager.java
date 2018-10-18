@@ -1,4 +1,8 @@
-package Backend;
+package Backend.Commands;
+
+import Backend.Command;
+import Backend.TextParser;
+import Backend.VariableTracker;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;

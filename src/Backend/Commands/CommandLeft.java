@@ -1,4 +1,6 @@
-package Backend;
+package Backend.Commands;
+
+import Backend.VariableTracker;
 
 public class CommandLeft extends TurtleCommands{
     private double leftAmt;
