@@ -1,6 +1,9 @@
-package Backend;
+package Backend.Commands;
 
-import java.io.File;
+import Backend.Command;
+import Backend.TextParser;
+import Backend.VariableTracker;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -56,7 +59,7 @@ public class CommandManager {
                args[i]=params.pop();
            }
           current.parseParameters(args);
-           if(current.hasReturnValue()){
+           if(current.returnValueAsParam()){
                String out=current.execute();
                output+=out;
                params.push(out);
@@ -73,7 +76,7 @@ public class CommandManager {
     /**
      * @author Michael Glushakov (mg367)
      * @apiNote Followed Java 10 Class Documentation and this link: http://www.avajava.com/tutorials/lessons/how-do-i-instantiate-an-object-of-a-class-via-its-string-name.html?page=2
-     * @apiNote To Implement new Commands: add the matching key-value pair to the config/Commands resource bundle; Backend.Command class must have a constructor with no parameters
+     * @apiNote To Implement new Commands: add the matching key-value pair to the config/Commands resource bundle; Backend.Command class must have a constructor that accepts a VariableTracker
      */
     private void setCommands(){
       try{

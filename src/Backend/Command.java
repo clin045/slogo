@@ -19,6 +19,6 @@ public interface Command {
      */
     public void parseParameters(String[]params) throws IllegalArgumentException;
     public String execute();
-    public boolean hasReturnValue();
+    public boolean returnValueAsParam();
 
 }

@@ -1,11 +1,12 @@
-package Backend;
+package Backend.Commands;
 
-public class CommandFD implements Command {
+import Backend.VariableTracker;
+
+public class CommandFD extends TurtleCommands {
     private int amountFD;
     private final int PARAM_NUMBER=1;
-    private VariableTracker myTracker;
     public CommandFD(VariableTracker tracker){
-        myTracker = tracker;
+        super(tracker);
     }
 
     @Override
@@ -29,14 +30,9 @@ public class CommandFD implements Command {
     public String execute() {
         var turtle = myTracker.getTurtle();
         turtle.move(amountFD);
-        String out= "Executed FD "+amountFD;
-        amountFD=0;
-        return out;
+        return Integer.toString(amountFD);
     }
 
-    @Override
-    public boolean hasReturnValue() {
-        return false;
-    }
+
 
 }
