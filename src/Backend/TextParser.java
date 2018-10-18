@@ -59,7 +59,7 @@ public class TextParser {
                 if(i<input.length-1){
                     try {
                         String symbol2=getSymbol(input[i+1]);
-                        if(availibleCommands.get(symbol2).hasReturnValue()){
+                        if(availibleCommands.get(symbol2).returnValueAsParam()){
                             functions.push(symbol);
                             System.out.println("HAS RETURN VALUE");
                         }else{

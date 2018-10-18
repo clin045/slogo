@@ -4,7 +4,6 @@ import Backend.Command;
 import Backend.TextParser;
 import Backend.VariableTracker;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -59,7 +58,7 @@ public class CommandManager {
                args[i]=params.pop();
            }
           current.parseParameters(args);
-           if(current.hasReturnValue()){
+           if(current.returnValueAsParam()){
                String out=current.execute();
                System.out.println(out);
                params.push(out);

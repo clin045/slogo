@@ -35,9 +35,7 @@ public class CommandBK extends TurtleCommands{
     public String execute() {
         var turtle = myTracker.getTurtle();
         turtle.move(amountBack *-1);
-        String out= "Executed BK "+amountBack;
-        amountBack=0;
-        return out;
+        return Integer.toString(amountBack);
     }
 
 }

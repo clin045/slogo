@@ -30,9 +30,7 @@ public class CommandFD extends TurtleCommands {
     public String execute() {
         var turtle = myTracker.getTurtle();
         turtle.move(amountFD);
-        String out= "Executed FD "+amountFD;
-        amountFD=0;
-        return out;
+        return Integer.toString(amountFD);
     }
 
 

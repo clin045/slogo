@@ -26,6 +26,6 @@ public class CommandRight extends TurtleCommands{
         var turtle = myTracker.getTurtle();
         double newOrientation = turtle.getOrientation() + rightAmt;
         turtle.setOrientation(newOrientation);
-        return "Executed RIGHT " + rightAmt;
+        return Double.toString(rightAmt);
     }
 }

@@ -27,7 +27,7 @@ public abstract class TurtleCommands implements Command {
     public abstract String execute();
 
     @Override
-    public boolean hasReturnValue() {
+    public boolean returnValueAsParam() {
         return false;
     }
 }
