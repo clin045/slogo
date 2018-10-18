@@ -3,7 +3,8 @@ package FrontEnd;
 import javafx.scene.paint.Color;
 
 /*
-
+    Controller serves as a middleground for
+    Each workspace has its own controller
     @author xp19
  */
 
@@ -36,6 +37,10 @@ public class Controller {
     // turn the turtle clockwise by certain degrees
     public void turnTurtle(double degress){
         turtleView.turn(degress);
+    }
+
+    public void setPenDown(boolean isPenDown){
+        turtlePlayground.setPenDown(isPenDown);
     }
 
 }

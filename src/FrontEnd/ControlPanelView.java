@@ -99,10 +99,7 @@ public class ControlPanelView {
             VBox history = ((VBox) commandHistory.getContent());
             history.getChildren().add(UIFactory.createText(command));
         });
-        Button clearHistoryButton = UIFactory.createButton("Clear History", event -> {
-            VBox history = ((VBox) commandHistory.getContent());
-            history.getChildren().clear();
-        });
+        Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearCommandHistory());
 
         HBox buttonsGroup = new HBox(runButton, clearHistoryButton);
         VBox textInput= new VBox(buttonsGroup, commandInputHandler);
@@ -111,6 +108,11 @@ public class ControlPanelView {
 
     private void setUpCommandHistoryPane(){
         commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, new VBox());
+    }
+
+    private void clearCommandHistory(){
+        VBox history = ((VBox) commandHistory.getContent());
+        history.getChildren().clear();
     }
 
 }

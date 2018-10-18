@@ -7,7 +7,7 @@ import javafx.scene.control.TextArea;
 public class CommandInputHandler extends TextArea {
 
     Controller controller;
-    String language = "English";
+    String language = "English"; // default language
 
     public CommandInputHandler(Controller controller){
         this.controller = controller;

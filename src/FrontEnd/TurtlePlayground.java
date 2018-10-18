@@ -58,4 +58,8 @@ public class TurtlePlayground extends Pane {
         pen.setColor(color);
     }
 
+    public void setPenDown(boolean isPenDown){
+        pen.setDown(isPenDown);
+    }
+
 }
