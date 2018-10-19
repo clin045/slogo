@@ -11,7 +11,7 @@ public class CommandSetHeading extends TurtleCommands {
 
     @Override
     public String getDescription() {
-        return "SETHEADING: Sets the turtle's orientation";
+        return "SETHEADING: Sets the turtle's heading";
     }
 
     @Override
@@ -26,8 +26,8 @@ public class CommandSetHeading extends TurtleCommands {
     @Override
     public String execute() {
         Turtle myTurtle = myTracker.getTurtle();
-        double amtMoved = Math.abs(myTurtle.getOrientation()-heading);
-        myTurtle.setOrientation(heading);
+        double amtMoved = Math.abs(myTurtle.getHeading()-heading);
+        myTurtle.setHeading(heading);
         return Double.toString(amtMoved);
     }
 }
