@@ -3,11 +3,12 @@
  */
 
 package Backend;
-import java.awt.*;
+
+import javafx.geometry.Point2D;
 import java.lang.Math;
 
 public class Turtle {
-    private Point coordinates;
+    private Point2D coordinates;
     private double heading; //in degrees
     private boolean penDown;
     private boolean visibility;
@@ -19,123 +20,139 @@ public class Turtle {
     public static final boolean DEFAULT_VISIBILITY = true;
 
     /**
-     *
+     * constructs a Turtle object with custom parameters
+     * @param x initial x coordinate
+     * @param y initial y coordinate
+     * @param heading initial heading
+     * @param penDown initial penDown
+     * @param visibility initial visibility
      */
     private Turtle(int x, int y, int heading, boolean penDown, boolean visibility) {
-        coordinates = new Point(x, y);
+        coordinates = new Point2D(x, y);
         this.heading = heading;
         this.penDown = penDown;
         this.visibility = visibility;
     }
 
     /**
-     * @param x
-     * @param y
+     * constructs a Turtle object with a custom x, y
+     * @param x initial x coordinate
+     * @param y initial y coordinate
      */
     public Turtle(int x, int y) {
         this(x, y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
     }
 
     /**
-     *
+     * constructs a Turtle object with default parameters
      */
     public Turtle() {
         this(DEFAULT_X, DEFAULT_Y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
     }
 
     /**
-     * @return
+     * @return x coordinate
      */
-    public int getX() {
-        return coordinates.x;
+    public double getX() {
+        return coordinates.getX();
     }
 
     /**
-     * @return
+     * @return y coordinate
      */
-    public int getY() {
-        return coordinates.y;
+    public double getY() {
+        return coordinates.getY();
     }
 
     /**
-     * @return
+     * @return heading
      */
     public double getHeading() {
         return heading;
     }
 
     /**
-     * @return
+     * @return penDown
      */
     public boolean getPenDown() {
         return penDown;
     }
 
     /**
-     *
+     * sets penDown
+     * @param penDown new penDown value
      */
     private void setPenDown(boolean penDown) {
         this.penDown = penDown;
     }
 
     /**
-     * @return
+     * @return visibility
      */
     public boolean getVisibility() {
         return visibility;
     }
 
     /**
-     *
+     * sets visibility
+     * @param visibility new visibility value
      */
     private void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
 
     /**
-     * @param distance
+     * moves coordinates a given distance in the direction of heading
+     * @param distance distance to move coordinates
+     * @return distance
      */
-    private int move(int distance) {
+    private double move(double distance) {
         int dx = (int) Math.floor(distance * Math.cos(Math.toRadians(heading)));
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
-        this.coordinates.move(dx, dy);
+        this.coordinates.add(dx, dy);
         return distance;
     }
 
     /**
-     * @param distance
-     * @return
+     * moves coordinates a given distance in the direction of heading
+     * @param distance distance to move coordinates
+     * @return distance
      */
-    public int moveForward(int distance) {
-        return move(distance);
-    }
+    public double forward(double distance) { return move(distance); }
 
     /**
-     * @param distance
+     * moves coordinates a given distance in the opposite direction of heading
+     * @param distance distance to move coordinates
+     * @return distance
      */
-    public int moveBack(int distance) {
+    public double back(double distance) {
         return move(distance * -1);
     }
 
     /**
-     * @param heading
-     * @return
+     * turns heading degrees counterclockwise
+     * @param degrees number of degrees to add to heading
+     * @return degrees
      */
-    public double left(double heading) {
-        return setHeading(this.heading + heading);
+    public double left(double degrees) {
+        setHeading(this.heading + degrees);
+        return degrees;
     }
 
     /**
-     * @param heading
-     * @return
+     * turns heading heading degrees clockwise
+     * @param degrees number of degrees to subtract from heading
+     * @return degrees
      */
-    public double right(double heading) {
-        return setHeading(this.heading - heading);
+    public double right(double degrees) {
+        setHeading(this.heading - degrees);
+        return degrees;
     }
 
     /**
-     * @param heading
-     * @return
+     * sets heading to heading
+     * @param heading new heading value
+     * @return heading
      */
     public double setHeading(double heading) {
         if (heading < 0 || heading > 360) {
@@ -149,30 +166,30 @@ public class Turtle {
     }
 
     /**
-     * @param cx
-     * @param cy
-     * @return
+     * sets heading to face the point (x, y)
+     * @param x x coordinate of the point to turn towards
+     * @param y y coordinate of the point to turn towards
+     * @return angle between coordinates and (x, y)
      */
-    //https://stackoverflow.com/questions/46387747/find-angle-of-point-on-circle
-    //double check this
-    public double towards(int cx, int cy) {
-        double theta = (Math.abs(heading - Math.toDegrees(Math.atan2(coordinates.y - cy, coordinates.x - cx))));
-        setHeading(theta);
-        return theta;
+    public double towards(double x, double y) {
+        return setHeading(coordinates.angle(x, y));
     }
 
     /**
-     * @param x
-     * @param y
+     * sets coordinates to (x, y)
+     * @param x x coordinate
+     * @param y y coordinate
+     * @return distance from current coordinates to (x, y)
      */
-    public double setXY(int x, int y) {
+    public double setXY(double x, double y) {
         double distance = coordinates.distance(x, y);
-        this.coordinates.setLocation(x, y);
+        this.coordinates = new Point2D(x, y);
         return distance;
     }
 
     /**
-     * @return
+     * sets penDown to true
+     * @return 1
      */
     public int penDown() {
         setPenDown(true);
@@ -180,7 +197,8 @@ public class Turtle {
     }
 
     /**
-     * @return
+     * sets penDown to false
+     * @return 0
      */
     public int penUp() {
         setPenDown(false);
@@ -188,7 +206,8 @@ public class Turtle {
     }
 
     /**
-     * @return
+     * sets visibility to true
+     * @return 1
      */
     public int show() {
         setVisibility(true);
@@ -196,7 +215,8 @@ public class Turtle {
     }
 
     /**
-     * @return
+     * sets visiblity to false
+     * @return 0
      */
     public int hide() {
         setVisibility(false);
@@ -204,7 +224,8 @@ public class Turtle {
     }
 
     /**
-     * @return
+     * sets x and y to 0
+     * @return distance from current point to (0, 0)
      */
     public double home() {
         return setXY(0, 0);
