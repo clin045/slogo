@@ -5,24 +5,28 @@ package FrontEnd;
     @author xp19
  */
 
+import Backend.VariableTracker;
 import javafx.scene.layout.BorderPane;
 
 public class Workspace extends BorderPane {
 
     TurtlePlayground area;
-    TurtleView view;
+    TurtleView turtleView;
+    VariableTracker variableTracker;
 
     // create a new workspace
     public Workspace(){
         setUpTurtleDisplayArea();
-        Controller controller = new Controller(area, view);
+        variableTracker = new VariableTracker(); // possibly pass in the a reference to controller here
+        Controller controller = new Controller(area, turtleView);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
     }
 
-    // initialize the display area in the border pane
+    // initialize the playground in the border pane
+    // TODO: do the initialization inside the turtle class
     private void setUpTurtleDisplayArea(){
-        view = new TurtleView();
-        area = new TurtlePlayground(view);
+        turtleView = new TurtleView();
+        area = new TurtlePlayground(turtleView);
         this.setCenter(area);
     }
 

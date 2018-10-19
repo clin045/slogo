@@ -1,16 +1,19 @@
 package FrontEnd;
 
+import Backend.Commands.CommandManager;
+import Backend.TextParser;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 
 
 public class CommandInputHandler extends TextArea {
 
-    Controller controller;
-    String language = "English"; // default language
+    private Controller controller;
+    private String language = "English"; // default language
 
     public CommandInputHandler(Controller controller){
         this.controller = controller;
+        TextParser parser = new TextParser();
     }
 
     /*
