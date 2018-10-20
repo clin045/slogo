@@ -29,7 +29,7 @@ public class CommandFD extends TurtleCommands {
     @Override
     public String execute() {
         var turtle = myTracker.getTurtle();
-        turtle.move(amountFD);
+        turtle.forward(amountFD);
         return Integer.toString(amountFD);
     }
 
