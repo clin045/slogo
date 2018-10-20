@@ -4,7 +4,7 @@ import Backend.VariableTracker;
 
 public class CommandPenUp extends TurtleCommands {
 
-    CommandPenUp(VariableTracker tracker){
+    public CommandPenUp(VariableTracker tracker){
         super(tracker);
     }
 

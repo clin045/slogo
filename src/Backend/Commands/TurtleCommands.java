@@ -7,9 +7,9 @@ import Backend.VariableTracker;
  *
  */
 public abstract class TurtleCommands implements Command {
-    protected VariableTracker myTracker;
+    public VariableTracker myTracker;
 
-    TurtleCommands(VariableTracker tracker){
+    public TurtleCommands(VariableTracker tracker){
         myTracker = tracker;
     }
 

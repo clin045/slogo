@@ -5,7 +5,7 @@ import Backend.VariableTracker;
 
 public class CommandSetHeading extends TurtleCommands {
     private double heading;
-    CommandSetHeading(VariableTracker tracker){
+    public CommandSetHeading(VariableTracker tracker){
         super(tracker);
     }
 

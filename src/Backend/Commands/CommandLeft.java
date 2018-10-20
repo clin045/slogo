@@ -4,7 +4,7 @@ import Backend.VariableTracker;
 
 public class CommandLeft extends TurtleCommands{
     private double leftAmt;
-    CommandLeft(VariableTracker tracker){
+    public CommandLeft(VariableTracker tracker){
         super(tracker);
     }
 

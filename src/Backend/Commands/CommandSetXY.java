@@ -5,7 +5,7 @@ import Backend.VariableTracker;
 public class CommandSetXY extends TurtleCommands {
     int pointX;
     int pointY;
-    CommandSetXY(VariableTracker tracker){
+    public CommandSetXY(VariableTracker tracker){
         super(tracker);
     }
 

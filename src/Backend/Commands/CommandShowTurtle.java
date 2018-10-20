@@ -2,9 +2,8 @@ package Backend.Commands;
 
 import Backend.VariableTracker;
 
-public class CommandPenDown extends TurtleCommands{
-
-    public CommandPenDown(VariableTracker tracker){
+public class CommandShowTurtle extends TurtleCommands {
+    public CommandShowTurtle(VariableTracker tracker){
         super(tracker);
     }
 
@@ -15,7 +14,7 @@ public class CommandPenDown extends TurtleCommands{
 
     @Override
     public String getDescription() {
-        return "PENDOWN: puts pen down such that when the turtle moves, it leaves a trail";
+        return "SHOWTURTLE: makes turtle visible";
     }
 
     @Override
@@ -27,7 +26,7 @@ public class CommandPenDown extends TurtleCommands{
 
     @Override
     public String execute() {
-        myTracker.getTurtle().penDown();
-        return "0";
+        myTracker.getTurtle().show();
+        return "1";
     }
 }

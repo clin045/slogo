@@ -6,7 +6,7 @@ public class CommandTowards extends TurtleCommands{
     int pointX;
     int pointY;
 
-    CommandTowards(VariableTracker tracker){
+    public CommandTowards(VariableTracker tracker){
         super(tracker);
     }
 
