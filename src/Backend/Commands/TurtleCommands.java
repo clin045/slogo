@@ -13,10 +13,7 @@ public abstract class TurtleCommands implements Command {
         myTracker = tracker;
     }
 
-    @Override
-    public int getParamNumber() {
-        return 1;
-    }
+    public abstract int getParamNumber();
 
     @Override
     public abstract String getDescription();

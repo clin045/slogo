@@ -2,11 +2,10 @@ package Backend.Commands;
 
 import Backend.VariableTracker;
 
-public class CommandTowards extends TurtleCommands{
+public class CommandSetXY extends TurtleCommands {
     int pointX;
     int pointY;
-
-    CommandTowards(VariableTracker tracker){
+    CommandSetXY(VariableTracker tracker){
         super(tracker);
     }
 
@@ -17,7 +16,8 @@ public class CommandTowards extends TurtleCommands{
 
     @Override
     public String getDescription() {
-        return "TOWARDS: Sets heading towards a point";
+        return "SETXY: moves turtle to an absolute screen position, where (0, 0) is the center of the screen\n" +
+                "returns the distance turtle moved";
     }
 
     @Override
@@ -26,14 +26,14 @@ public class CommandTowards extends TurtleCommands{
             try{
                 pointX =Integer.parseInt(params[0]);
                 pointY = Integer.parseInt(params[1]);
-            }catch (Exception e){throw new IllegalArgumentException("TOWARDS takes 2 ints pointX and pointY");}
+            }catch (Exception e){throw new IllegalArgumentException("SETXY takes 2 ints pointX and pointY");}
         }else{throw new IllegalArgumentException("Wrong number of parameters. Expect: "+getParamNumber()+" got: "+params.length);}
     }
 
     @Override
-    //TODO: Check graphically that this works properly
     public String execute() {
         var myTurtle = myTracker.getTurtle();
-        return Double.toString(myTurtle.towards(pointX,pointY));
+        return Double.toString(myTurtle.setXY(pointX,pointY));
+
     }
 }

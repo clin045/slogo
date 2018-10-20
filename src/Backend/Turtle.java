@@ -95,7 +95,7 @@ public class Turtle {
     /**
      * @param distance
      */
-    private int move(int distance) {
+    public int move(int distance) {
         int dx = (int) Math.floor(distance * Math.cos(Math.toRadians(heading)));
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
         this.coordinates.move(dx, dy);

@@ -1,4 +1,4 @@
-package Backend.Commands;
+package Backend;
 
 import Backend.Command;
 import Backend.TextParser;

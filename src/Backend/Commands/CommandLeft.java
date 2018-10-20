@@ -7,6 +7,12 @@ public class CommandLeft extends TurtleCommands{
     CommandLeft(VariableTracker tracker){
         super(tracker);
     }
+
+    @Override
+    public int getParamNumber() {
+        return 1;
+    }
+
     @Override
     public String getDescription() {
         return "LEFT: Turns the turtle left by some number of degrees";
@@ -23,8 +29,8 @@ public class CommandLeft extends TurtleCommands{
     @Override
     public String execute() {
         var turtle = myTracker.getTurtle();
-        double newOrientation = turtle.getOrientation() - leftAmt;
-        turtle.setOrientation(newOrientation);
+        double newOrientation = turtle.getHeading() - leftAmt;
+        turtle.setHeading(newOrientation);
         return Double.toString(leftAmt);
     }
 }

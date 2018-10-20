@@ -10,6 +10,11 @@ public class CommandSetHeading extends TurtleCommands {
     }
 
     @Override
+    public int getParamNumber() {
+        return 1;
+    }
+
+    @Override
     public String getDescription() {
         return "SETHEADING: Sets the turtle's heading";
     }

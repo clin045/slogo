@@ -7,6 +7,12 @@ public class CommandRight extends TurtleCommands{
     CommandRight(VariableTracker tracker){
         super(tracker);
     }
+
+    @Override
+    public int getParamNumber() {
+        return 1;
+    }
+
     @Override
     public String getDescription() {
         return "RIGHT: Turns the turtle right by some number of degrees";
@@ -24,8 +30,8 @@ public class CommandRight extends TurtleCommands{
     @Override
     public String execute() {
         var turtle = myTracker.getTurtle();
-        double newOrientation = turtle.getOrientation() + rightAmt;
-        turtle.setOrientation(newOrientation);
+        double newOrientation = turtle.getHeading() + rightAmt;
+        turtle.setHeading(newOrientation);
         return Double.toString(rightAmt);
     }
 }
