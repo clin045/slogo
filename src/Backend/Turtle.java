@@ -53,15 +53,15 @@ public class Turtle {
     /**
      * @return x coordinate
      */
-    public double getX() {
-        return coordinates.getX();
+    public int getX() {
+        return (int) coordinates.getX();
     }
 
     /**
      * @return y coordinate
      */
-    public double getY() {
-        return coordinates.getY();
+    public int getY() {
+        return (int) coordinates.getY();
     }
 
     /**

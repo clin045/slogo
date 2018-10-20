@@ -29,8 +29,7 @@ public class CommandLeft extends TurtleCommands{
     @Override
     public String execute() {
         var turtle = myTracker.getTurtle();
-        double newOrientation = turtle.getHeading() - leftAmt;
-        turtle.setHeading(newOrientation);
-        return Double.toString(leftAmt);
+
+        return Double.toString(turtle.left(leftAmt));
     }
 }
