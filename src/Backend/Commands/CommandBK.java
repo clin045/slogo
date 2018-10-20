@@ -9,7 +9,7 @@ import Backend.VariableTracker;
 public class CommandBK extends TurtleCommands{
     private int amountBack;
     public static final int NUM_PARAMS = 1;
-    CommandBK(VariableTracker tracker){
+    public CommandBK(VariableTracker tracker){
         super(tracker);
     }
 

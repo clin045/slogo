@@ -7,16 +7,13 @@ import Backend.VariableTracker;
  *
  */
 public abstract class TurtleCommands implements Command {
-    protected VariableTracker myTracker;
+    public VariableTracker myTracker;
 
-    TurtleCommands(VariableTracker tracker){
+    public TurtleCommands(VariableTracker tracker){
         myTracker = tracker;
     }
 
-    @Override
-    public int getParamNumber() {
-        return 1;
-    }
+    public abstract int getParamNumber();
 
     @Override
     public abstract String getDescription();
