@@ -43,11 +43,16 @@ public class TurtlePlayground extends Pane {
 
     // update the turtle's position and leave trail if pen is down
     public void update(double x, double y){
+        double originX = turtleView.getX();
+        double originY = turtleView.getY();
+        double xpadding = turtleView.getWidth()/2;
+        double ypadding = turtleView.getHeight()/2;
+        turtleView.update(x,y);
         if(pen.isDown()){
-            Line trail = pen.drawLine(new Point2D(turtleView.getX(), turtleView.getY()), new Point2D(x,y));
+            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
         }
-        turtleView.update(x,y);
+
     }
 
     // put an additional turtle to the center of pane

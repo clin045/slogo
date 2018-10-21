@@ -4,6 +4,7 @@
 
 package Backend;
 
+import FrontEnd.Controller;
 import javafx.geometry.Point2D;
 import java.lang.Math;
 
@@ -12,10 +13,11 @@ public class Turtle {
     private double heading; //in degrees
     private boolean penDown;
     private boolean visibility;
+    private Controller controller;
 
     public static final int DEFAULT_X = 0;
     public static final int DEFAULT_Y = 0;
-    public static final int DEFAULT_HEADING = 0; //default is facing right
+    public static final int DEFAULT_HEADING = 90; //default is facing right
     public static final boolean DEFAULT_PENDOWN = true;
     public static final boolean DEFAULT_VISIBILITY = true;
 
@@ -110,6 +112,8 @@ public class Turtle {
         int dx = (int) Math.floor(distance * Math.cos(Math.toRadians(heading)));
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
         this.coordinates.add(dx, dy);
+//        System.out.println(dx+":"+dy);
+        controller.update(getX()+dx, getY()+dy);
         return distance;
     }
 
@@ -118,7 +122,9 @@ public class Turtle {
      * @param distance distance to move coordinates
      * @return distance
      */
-    public double forward(double distance) { return move(distance); }
+    public double forward(double distance) {
+        return move(distance);
+    }
 
     /**
      * moves coordinates a given distance in the opposite direction of heading
@@ -229,5 +235,9 @@ public class Turtle {
      */
     public double home() {
         return setXY(0, 0);
+    }
+
+    public void setController(Controller controller){
+        this.controller = controller;
     }
 }
