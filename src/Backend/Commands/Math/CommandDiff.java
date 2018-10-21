@@ -1,28 +1,25 @@
-package Backend.Commands;
+package Backend.Commands.Math;
 
-import Backend.VariableTracker;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Michael Glushakov (mg367)
+ * @author Michael Glushakov mg367
  */
-public class CommandAdd extends MathCommand{
-    private Double d1,d2;
-    public CommandAdd() {
-        super();
-    }
+public class CommandDiff extends MathCommand {
+    private double d1,d2;
 
+    public CommandDiff(){
+        super();
+
+    }
     @Override
     public String getDescription() {
-        return "SUM returns the sum of 2 numbers";
+        return "DIFFERENCE: returns difference of the arguments";
     }
 
 
-
     @Override
-    public String execute(List<String>params) {
+    public String execute(List<String> params) {
         System.out.println("PARAMS: "+params.size());
         for(String s:params){System.out.println(s);}
         d1=parseParameters(params);
@@ -30,6 +27,6 @@ public class CommandAdd extends MathCommand{
         System.out.println("d1: "+d1+" d2: "+d2);
         d2=parseParameters(params);
         System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
-        return ""+(d1+d2);
+        return ""+(d1-d2);
     }
 }

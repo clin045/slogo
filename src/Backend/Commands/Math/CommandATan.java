@@ -1,4 +1,6 @@
-package Backend.Commands;
+package Backend.Commands.Math;
+
+import Backend.Commands.Math.MathCommand;
 
 import java.util.List;
 

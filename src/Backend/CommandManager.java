@@ -40,6 +40,7 @@ public class CommandManager {
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
+            if(parsedList.get(0).equals("[")){return out;}
             Command init=Command.getCommand(parsedList.get(0));
             if(init==null){throw new IllegalArgumentException("Invalid input");}
             parsedList.remove(0);
