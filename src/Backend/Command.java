@@ -7,23 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public abstract class Command {
-    private int myParamNumber;
-    private String myDescription;
 
     public Command(){}
-    /**
-     *
-     * @return number of parameters
-     */
-    public int getParamNumber(){
-        return myParamNumber;
-    };
+
 
     /**
      *
      * @return description of what the command does to the user
      */
-    public String getDescription(){return myDescription;};
+    public abstract String getDescription();
 
     /**
      * @apiNote parses the parameters needed for command to execute

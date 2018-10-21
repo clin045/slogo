@@ -1,5 +1,7 @@
 package Backend.Commands.Turtle;
 
+import Backend.Command;
+
 import java.util.List;
 
 import static Backend.CommandManager.myTracker;
@@ -8,17 +10,13 @@ import static Backend.CommandManager.myTracker;
  * @author Christopher Lin cl349
  */
 
-public class CommandBK extends TurtleCommands{
+public class CommandBK extends Command {
     private double amountBack;
     public static final int NUM_PARAMS = 1;
     public CommandBK(){
         super();
     }
 
-    @Override
-    public int getParamNumber() {
-        return NUM_PARAMS;
-    }
 
     @Override
     public String getDescription() {

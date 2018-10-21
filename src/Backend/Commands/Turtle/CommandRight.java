@@ -1,19 +1,18 @@
 package Backend.Commands.Turtle;
 
+import Backend.Command;
+
 import java.util.List;
 
 import static Backend.CommandManager.myTracker;
 
-public class CommandRight extends TurtleCommands{
+public class CommandRight extends Command {
     private double rightAmt;
   public CommandRight(){
         super();
     }
 
-    @Override
-    public int getParamNumber() {
-        return 1;
-    }
+
 
     @Override
     public String getDescription() {

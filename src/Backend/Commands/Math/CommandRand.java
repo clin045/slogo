@@ -6,6 +6,12 @@ import java.util.List;
 public class CommandRand extends MathCommand {
     private double d1;
     public CommandRand(){super();}
+
+    @Override
+    public String getDescription() {
+        return "returns random non-negative number strictly less than max";
+    }
+
     @Override
     public String execute(List<String> params) {
         d1=parseParameters(params);

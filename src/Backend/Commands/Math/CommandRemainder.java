@@ -7,6 +7,12 @@ import java.util.List;
 public class CommandRemainder extends MathCommand {
     private double d1,d2;
     public CommandRemainder(){super();}
+
+    @Override
+    public String getDescription() {
+        return "returns remainder on dividing the values of expr1 by expr2";
+    }
+
     @Override
     public String execute(List<String> params) {
         System.out.println("PARAMS: "+params.size());
