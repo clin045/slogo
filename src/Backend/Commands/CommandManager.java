@@ -13,16 +13,17 @@ import java.util.ResourceBundle;
  */
 public class CommandManager {
 
-    private Map<String, Command>myCommands;
+    private static final Map<String, Command>myCommands= new HashMap<>();
+    private static final String WHITESPACE =" ";
     private TextParser myParser;
-    private VariableTracker myTracker;
+    private static final VariableTracker myTracker=new VariableTracker();
 
     /**
      * default constructor
      */
     public CommandManager(){
         myParser=new TextParser();
-        myCommands=new HashMap<>();
+
         setCommands();
         for(String key:myCommands.keySet()){
             System.out.println(myCommands.get(key).getDescription()+" Params:"+myCommands.get(key).getParamNumber());
@@ -34,9 +35,9 @@ public class CommandManager {
      * @param path path to the resource bundle containing the language specific commands
      */
     public CommandManager(String path){
-        myTracker = new VariableTracker();
+
        myParser=new TextParser(path);
-        myCommands=new HashMap<>();
+
 
         setCommands();
         for(String key:myCommands.keySet()){
@@ -44,30 +45,45 @@ public class CommandManager {
         }
     }
 
+    public static Command getCommand(String str){
+        ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+        try{
+            Class commandStr= Class.forName(commandBundle.getString(str));
+            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(myTracker);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return myCommands.get(str);
+    }
+
 
 
     public String execute(String userInput){
-        Stack<String>[]parsedInput=myParser.parse(userInput, myCommands);
-        Stack<String>commands=parsedInput[0];
-        Stack <String>params = parsedInput[1];
-        String output="";
-       while(!commands.empty()){
-           String currentStr=commands.pop();
-           Command current=myCommands.get(currentStr);
-           String [] args= new String[current.getParamNumber()];
-           for(int i=0;i<current.getParamNumber();i+=1){
-               args[i]=params.pop();
-           }
-          current.parseParameters(args);
-           if(current.returnValueAsParam()){
-               String out=current.execute();
-               output+=out;
-               params.push(out);
-           }else{output+=current.execute();}
-       }
+        String out="";
+       // Integer counter=0;
+        List<String>parsedList = myParser.parse(userInput,myCommands);
+        while(parsedList.size()>0){
+            Command init=myCommands.get(parsedList.get(0));
+            if(init==null){throw new IllegalArgumentException("Invalid input");}
+            parsedList.remove(0);
+            out+=init.execute(parsedList);
+            System.out.println(parsedList.size());
+        }
 
-
-        return output;
+        return out;
+    }
+    private String executeControlStructure(String userInput){
+        //Command controlStructure=
+        return "";
     }
 
 //_________________________________________MIDDLEWARE___________________________________________________________________
