@@ -1,5 +1,7 @@
 package Backend;
 
+//import Backend.Commands.ControlStructure;
+
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -44,40 +46,29 @@ public class TextParser {
     /**
      *
      * @param userInput
-     * @param availibleCommands
      * @return Array of 2 Stacks: Stack 1: contains commands, Stack 2 contains parameters neeeded for those commands
      * @throws IllegalArgumentException
      */
-    public Stack<String>[] parse(String userInput,Map<String, Command> availibleCommands) throws IllegalArgumentException{
+    public List<String> parse(String userInput) throws IllegalArgumentException{
         String[] input = userInput.split(WHITESPACE);
+        List<String>out=new ArrayList<>();
         Stack<String> functions = new Stack<>();
         Stack<String> arguments = new Stack<>();
-
+        if(input[0].equals("[")){throw new IllegalArgumentException("Brackets can be used to group commands only when preceded by a Control Structures");}
         for (int i=0;i<input.length;i+=1) {
             try {
                 String symbol=getSymbol(input[i]);
-                if(i<input.length-1){
-                    try {
-                        String symbol2=getSymbol(input[i+1]);
-                        if(availibleCommands.get(symbol2).returnValueAsParam()){
-                            functions.push(symbol);
-                            System.out.println("HAS RETURN VALUE");
-                        }else{
-                            throw new RuntimeException(symbol2 + "is not a valid command because it does not have a return value");
-                        }
-
-                    } catch (IllegalArgumentException e){functions.push(symbol);}
-                }
+                out.add(symbol);
 
             } catch (IllegalArgumentException e) {
                 if (functions.empty()) {
-                    throw e;
-                }//cannot have parameter before a function
+                   out.add(input[i]);
+                }
                 arguments.push(input[i]);
             }
         }
 
-        return new Stack[]{functions, arguments};
+        return out;
     }
 
     /**
