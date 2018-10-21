@@ -17,10 +17,7 @@ public abstract class TurtleCommands extends Command {
         super();
     }
 
-    @Override
-    public int getParamNumber() {
-        return 1;
-    }
+    public abstract int getParamNumber();
 
     @Override
     public abstract String getDescription();
