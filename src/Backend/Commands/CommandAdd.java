@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class CommandAdd extends MathCommand{
     private Double d1,d2;
-    public CommandAdd(VariableTracker tracker) {
-        super(tracker);
+    public CommandAdd() {
+        super();
     }
 
     @Override
@@ -28,11 +28,8 @@ public class CommandAdd extends MathCommand{
         d1=parseParameters(params);
         double temp=d1;
         System.out.println("d1: "+d1+" d2: "+d2);
-        List params2=new ArrayList(params);
         d2=parseParameters(params);
-//        params=params2;
         System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
-        d1=temp;
         return ""+(d1+d2);
     }
 }

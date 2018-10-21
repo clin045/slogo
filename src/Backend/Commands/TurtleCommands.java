@@ -13,8 +13,8 @@ import java.util.List;
 public abstract class TurtleCommands extends Command {
 
 
-    TurtleCommands(VariableTracker tracker){
-        super(tracker) ;
+    TurtleCommands(){
+        super();
     }
 
     @Override

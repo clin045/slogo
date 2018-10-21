@@ -9,8 +9,8 @@ public abstract class MathCommand extends Command {
     protected double d1, d2;
 
 
-    public MathCommand(VariableTracker tracker) {
-        super(tracker);
+    public MathCommand() {
+        super();
     }
 
 
