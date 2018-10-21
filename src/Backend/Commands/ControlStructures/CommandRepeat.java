@@ -1,6 +1,7 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
+import Backend.CommandManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,10 @@ public class CommandRepeat extends Command {
         String out="";
         double d1=0;
         List<String>temp=new ArrayList<>();
-        for (int i=0;i<repeatNumber;i+=1){
+        for (int i=1;i<=repeatNumber;i+=1){
+            CommandManager.myTracker.put("repcount",(double)i);
             System.out.println("LOOP: "+i+"/"+repeatNumber);
+           // System.out.println("REPCOUNT: "+CommandManager.myTracker.get("repcount"));
             temp=new ArrayList<>(params);
             temp.remove("[");
             while(temp.size()>0){
@@ -37,7 +40,7 @@ public class CommandRepeat extends Command {
                 String loop=loopCmd.execute(temp);
                 System.out.println("executed: "+loop);
                 out+="|"+loop;
-                d1+=Double.parseDouble(loop);
+                d1=Double.parseDouble(loop);
             }
 
         }
