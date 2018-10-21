@@ -4,6 +4,7 @@ import Backend.CommandManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public abstract class Command {
@@ -39,6 +40,12 @@ public abstract class Command {
 
             }catch (NumberFormatException e2){
                 throw new IllegalArgumentException("Incompatible return types: "+params.get(0));
+            }catch (MissingResourceException me){
+                Double temp=(Double)CommandManager.myTracker.get(params.get(0));
+                if(temp==null){throw new IllegalArgumentException("Variable not defined: "+params.get(0));}
+                System.out.println("Got: x="+temp);
+                params.remove(0);
+                param=temp;
             }
         }
         return param;
