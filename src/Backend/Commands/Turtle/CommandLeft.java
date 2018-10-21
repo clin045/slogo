@@ -1,26 +1,21 @@
 package Backend.Commands.Turtle;
 
+import Backend.Command;
 import Backend.CommandManager;
 
 import java.util.List;
 
-public class CommandLeft extends TurtleCommands{
+public class CommandLeft extends Command {
     private double leftAmt;
    public CommandLeft(){
         super();
     }
 
-    @Override
-    public int getParamNumber() {
-        return 1;
-    }
 
     @Override
     public String getDescription() {
         return "LEFT: Turns the turtle left by some number of degrees";
     }
-
-
 
 
     @Override

@@ -5,22 +5,20 @@ import Backend.CommandManager;
 
 import java.util.List;
 
-public class CommandShowTurtle extends Command {
-    public CommandShowTurtle(){
+public class CommandHome extends Command {
+    public CommandHome(){
         super();
     }
 
 
+
     @Override
     public String getDescription() {
-        return "SHOWTURTLE: makes turtle visible";
+        return null;
     }
-
-
 
     @Override
     public String execute(List<String> params) {
-        CommandManager.myTracker.getTurtle().show();
-        return "1";
+        return Double.toString(CommandManager.myTracker.getTurtle().home());
     }
 }

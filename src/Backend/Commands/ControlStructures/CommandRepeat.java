@@ -9,6 +9,14 @@ public class CommandRepeat extends Command {
     private String[] input;
     private int repeatNumber;
     public CommandRepeat(){super();}
+
+    @Override
+    public String getDescription() {
+        return "runs command(s) given in the list the value of expr number of times\n" +
+                "returns the value of the final command executed (or 0 if no commands are executed)\n" +
+                "note, the value of the current iteration, starting at 1, is automatically assigned to the variable :repcount so that it can be accessed by the command(s)";
+    }
+
     @Override
     public String execute(List<String> params) {
         System.out.println(params.size());

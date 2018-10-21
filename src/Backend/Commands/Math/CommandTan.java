@@ -5,6 +5,12 @@ import java.util.List;
 public class CommandTan extends MathCommand{
 private double d1;
 public CommandTan(){super();}
+
+    @Override
+    public String getDescription() {
+        return "returns tangent of degrees";
+    }
+
     @Override
     public String execute(List<String> params) {
         d1=parseParameters(params);
