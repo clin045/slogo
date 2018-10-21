@@ -1,28 +1,29 @@
-//package Backend.Commands;
-//
-//import Backend.VariableTracker;
-//
-//public class CommandDiv extends MathCommand {
-//    private double d1,d2;
-//    public CommandDiv(VariableTracker tracker){super(tracker);}
-//    @Override
-//    public String getDescription() {
-//        return "QUOTIENT: returns quotient of the parameters";
-//    }
-//
-//    @Override
-//    public void parseParameters(String[] params) throws IllegalArgumentException {
-//        try{
-//            d1=Double.parseDouble(params[1]);
-//            d2=Double.parseDouble(params[0]);
-//        }catch (Exception e){
-//            throw new IllegalArgumentException("Could not parse input "+params[0]+","+params[1]);
-//        }
-//        if(d2==0){throw new IllegalArgumentException("CANNOT DIVIDE BY 0");}
-//    }
-//
-//    @Override
-//    public String execute() {
-//        return ""+(d1/d2);
-//    }
-//}
+package Backend.Commands;
+
+import Backend.VariableTracker;
+
+import java.util.List;
+
+public class CommandDiv extends MathCommand {
+    private double d1,d2;
+    public CommandDiv(){super();}
+    @Override
+    public String getDescription() {
+        return "QUOTIENT: returns quotient of the parameters";
+    }
+
+
+
+    @Override
+    public String execute(List<String> params) {
+        System.out.println("PARAMS: "+params.size());
+        for(String s:params){System.out.println(s);}
+        d1=parseParameters(params);
+        double temp=d1;
+        System.out.println("d1: "+d1+" d2: "+d2);
+        d2=parseParameters(params);
+        System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
+        if(d2==0){throw new IllegalArgumentException("Cannot divide by 0");}
+        return ""+(d1/d2);
+    }
+}
