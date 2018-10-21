@@ -1,4 +1,4 @@
-package Backend.Commands;
+package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 
