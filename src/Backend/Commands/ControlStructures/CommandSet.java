@@ -10,6 +10,11 @@ import java.util.ResourceBundle;
 public class CommandSet extends Command {
     public CommandSet(){super();}
 
+
+    @Override
+    public String getDescription() {
+        return "Sets a value of a variable";
+    }
     @Override
     public String execute(List<String> params) {
         String key=params.get(0);
