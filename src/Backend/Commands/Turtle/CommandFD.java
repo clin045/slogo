@@ -1,10 +1,7 @@
-package Backend.Commands;
+package Backend.Commands.Turtle;
 
 import Backend.CommandManager;
-import Backend.VariableTracker;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 public class CommandFD extends TurtleCommands {
@@ -28,6 +25,7 @@ public class CommandFD extends TurtleCommands {
         System.out.println("Executing");
         var turtle = CommandManager.myTracker.getTurtle();
         amountFD=parseParameters(params);
+        System.out.println("MOVING" +amountFD);
         turtle.forward(amountFD);
         return Double.toString(amountFD);
     }
