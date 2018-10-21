@@ -1,5 +1,6 @@
 package Backend.Commands;
 
+import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.lang.reflect.Array;

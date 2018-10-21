@@ -1,20 +1,10 @@
 package Backend.Commands;
 
-import Backend.Command;
-import Backend.VariableTracker;
-
 import java.util.List;
 
-public class CommandMult extends MathCommand {
+public class CommandRemainder extends MathCommand{
     private double d1,d2;
-    public CommandMult(){super();}
-
-    @Override
-    public String getDescription() {
-        return "PRODUCT: returns product of the arguments";
-    }
-
-
+    public CommandRemainder(){super();}
     @Override
     public String execute(List<String> params) {
         System.out.println("PARAMS: "+params.size());
@@ -24,6 +14,7 @@ public class CommandMult extends MathCommand {
         System.out.println("d1: "+d1+" d2: "+d2);
         d2=parseParameters(params);
         System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
-        return ""+(d1*d2);
+        if(d2==0){throw new IllegalArgumentException("Cannot divide by 0");}
+        return ""+(d1%d2);
     }
 }

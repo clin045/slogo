@@ -1,6 +1,6 @@
 package Backend;
 
-import Backend.Commands.CommandManager;
+import Backend.CommandManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
