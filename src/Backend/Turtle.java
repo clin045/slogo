@@ -169,6 +169,7 @@ public class Turtle {
             heading %= 360;
         }
         this.heading = heading;
+        controller.rotateTurtle(heading);
         return heading;
     }
 

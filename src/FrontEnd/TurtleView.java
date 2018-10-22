@@ -8,6 +8,7 @@ public class TurtleView {
     private ImageView turtleImageView;
     private static final String TURTLE_IMAGE = "turtle_green.png";
     private static final int SIZE = 50;
+    private static double heading = 90;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 
     public TurtleView(){
@@ -32,7 +33,7 @@ public class TurtleView {
     // update the position of the turtle to a new position
     public void update(double x, double y){
         turtleImageView.setLayoutX(getX()+x);
-        turtleImageView.setLayoutY(getY()+y);
+        turtleImageView.setLayoutY(getY()-y);
     }
 
     public double getWidth(){
@@ -43,9 +44,14 @@ public class TurtleView {
         return turtleImageView.getBoundsInLocal().getHeight();
     }
 
-    // turn the turtle by a certain degree
-    public void turn(double degrees){
-        turtleImageView.setRotate(turtleImageView.getRotate() + degrees);
+    // turn the turtle by a certain degree counterclockwise
+//    public void turn(double degrees){
+//        turtleImageView.setRotate(turtleImageView.getRotate() - degrees);
+//    }
+
+    public void rotate(double newHeading){
+        turtleImageView.setRotate(turtleImageView.getRotate()-(newHeading-heading));
+        heading = newHeading;
     }
 
     public void setTurtleImage(String fileName){

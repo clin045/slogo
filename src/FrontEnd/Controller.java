@@ -36,8 +36,12 @@ public class Controller {
     }
 
     // turn the turtle clockwise by certain degrees
-    public void turnTurtle(double degrees){
-        turtleView.turn(degrees);
+//    public void turnTurtle(double degrees){
+//        turtleView.turn(degrees);
+//    }
+
+    public void rotateTurtle(double heading){
+        turtleView.rotate(heading);
     }
 
     public void setPenDown(boolean isPenDown){

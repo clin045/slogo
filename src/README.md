@@ -1,3 +1,12 @@
 # slogo
 
 Put your source code, modules, resources, and property files here.
+
+
+Turtle Commands:
+    PENDOWN
+    PENUP
+    SHOWTURTLE
+    HIDETURTLE
+    LEFT
+    RIGHT
