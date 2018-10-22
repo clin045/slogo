@@ -14,6 +14,10 @@ import java.util.ResourceBundle;
  */
 public class CommandManager {
 
+    public static Map<String, Command> getCommands() {
+        return myCommands;
+    }
+
     private static final Map<String, Command>myCommands= new HashMap<>();
     private TextParser myParser;
     public static final VariableTracker myTracker=new VariableTracker();
@@ -24,6 +28,7 @@ public class CommandManager {
      */
     public CommandManager(){
         myParser=new TextParser();
+        preloadCommands();
 
     };
 
@@ -34,6 +39,7 @@ public class CommandManager {
     public CommandManager(String path){
 
        myParser=new TextParser(path);
+       preloadCommands();
 
     }
     public void setLanguage(String path){
@@ -75,6 +81,37 @@ public class CommandManager {
     }
     public Map<String, List<String>> getUserCommands(){
         return myTracker.getCommandMap();
+    }
+
+    private void preloadCommands(){
+        try{
+            ResourceBundle commandBundle = ResourceBundle.getBundle("resources/config/Commands");
+            for(String key: Collections.list(commandBundle.getKeys())){
+                try{
+                    Class commandStr= Class.forName(commandBundle.getString(key));
+                    Command command= (Command) commandStr.getDeclaredConstructor().newInstance();
+                    myCommands.put(key,command);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could Not Load Command String: "+e.getMessage());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could not Create Command Object");
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }catch (MissingResourceException e){
+            e.printStackTrace();
+        }
+
     }
 
 }
