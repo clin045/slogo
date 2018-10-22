@@ -113,7 +113,7 @@ public class Turtle {
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
         this.coordinates.add(dx, dy);
 //        System.out.println(dx+":"+dy);
-        controller.update(getX()+dx, getY()+dy);
+        controller.update(dx, dy);
         return distance;
     }
 
@@ -217,6 +217,7 @@ public class Turtle {
      */
     public int show() {
         setVisibility(true);
+        controller.showTurtle();
         return 1;
     }
 
@@ -226,6 +227,7 @@ public class Turtle {
      */
     public int hide() {
         setVisibility(false);
+        controller.hideTurtle();
         return 0;
     }
 

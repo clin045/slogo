@@ -44,4 +44,12 @@ public class Controller {
         turtlePlayground.setPenDown(isPenDown);
     }
 
+    public void hideTurtle(){
+        turtleView.hide();
+    }
+
+    public void showTurtle(){
+        turtleView.show();
+    }
+
 }
