@@ -85,7 +85,7 @@ public class CommandManager {
 
     private void preloadCommands(){
         try{
-            ResourceBundle commandBundle = ResourceBundle.getBundle("resources/config/Commands");
+            ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
             for(String key: Collections.list(commandBundle.getKeys())){
                 try{
                     Class commandStr= Class.forName(commandBundle.getString(key));
