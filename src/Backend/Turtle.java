@@ -86,6 +86,7 @@ public class Turtle {
      */
     private void setPenDown(boolean penDown) {
         this.penDown = penDown;
+        controller.setPenDown(penDown);
     }
 
     /**
