@@ -62,6 +62,16 @@ public class TurtlePlayground extends Pane {
         this.heightProperty().addListener(e -> element.setLayoutY(this.getHeight() / 2.0 - turtleView.getHeight()/2));
     }
 
+    // setTurtleToHome turtles to its original position and
+    public void setTurtleToHome(){
+        turtleView.getTurtleImageView().setLayoutX(this.getWidth()/2);
+        turtleView.getTurtleImageView().setLayoutY(this.getHeight()/2);
+    }
+
+    public void reset(){
+        this.getChildren().clear();
+    }
+
     public void setPenColor(Color color){
         pen.setColor(color);
     }

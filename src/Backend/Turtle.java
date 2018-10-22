@@ -180,6 +180,7 @@ public class Turtle {
      * @return angle between coordinates and (x, y)
      */
     public double towards(double x, double y) {
+        System.out.println(coordinates.angle(x,y));
         return setHeading(coordinates.angle(x, y));
     }
 
@@ -238,6 +239,7 @@ public class Turtle {
      * @return distance from current point to (0, 0)
      */
     public double home() {
+        controller.setTurtleToHome();
         return setXY(0, 0);
     }
 

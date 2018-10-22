@@ -56,4 +56,11 @@ public class Controller {
         turtleView.show();
     }
 
+    public void setTurtleToHome(){
+        turtlePlayground.setTurtleToHome();
+    }
+
+    public void reset(){
+        turtlePlayground.reset();
+    }
 }
