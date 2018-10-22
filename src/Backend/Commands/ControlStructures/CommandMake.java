@@ -24,7 +24,7 @@ public class CommandMake extends Command {
             throw new IllegalArgumentException("Illegal variable name");
         }catch(MissingResourceException e){
             //Make can override exising values, set cannot create values;
-//            if(CommandManager.myTracker.get(key)!=null){throw new IllegalArgumentException("Variable with this name already exists, please use Set to reset the value of this variable");}
+//            if(CommandManager.myTracker.get(key)!=null){throw new IllegalArgumentException("Variable with this name already exists, please use Set to setTurtleToHome the value of this variable");}
             params.remove(0);
             Double value= parseParameters(params);
             CommandManager.myTracker.put(key,value);

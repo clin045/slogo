@@ -9,25 +9,28 @@ import javafx.scene.shape.Line;
 
 /*
     Represents the area where turtle moves
+    May be included in the turtle.java class
     @author xp19
  */
 
 public class TurtlePlayground extends Pane {
 
-    TurtleView turtleView;
+    private static final int INIT_STROKE_WIDTH = 10;
+    TurtleView turtleView; // possibly extend it to contain multiple turtles
     Pen pen;
 
+    // create a default white playground with one turtle
     public TurtlePlayground(TurtleView turtleView){
         setBgColor(Color.WHITE);
         this.turtleView = turtleView;
-        addTurtle(turtleView.getTurtleImageView());
-        pen = new Pen(this, true, Color.BLACK, 10);
+        addTurtleToCenter(turtleView.getTurtleImageView());
+        pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
     public TurtlePlayground(TurtleView turtleView, Color color){
         setBgColor(color);
         this.turtleView = turtleView;
-        addTurtle(turtleView.getTurtleImageView());
+        addTurtleToCenter(turtleView.getTurtleImageView());
         pen = new Pen(this, true, Color.BLACK, 10);
     }
 
@@ -40,18 +43,33 @@ public class TurtlePlayground extends Pane {
 
     // update the turtle's position and leave trail if pen is down
     public void update(double x, double y){
+        double originX = turtleView.getX();
+        double originY = turtleView.getY();
+        double xpadding = turtleView.getWidth()/2;
+        double ypadding = turtleView.getHeight()/2;
+        turtleView.update(x,y);
         if(pen.isDown()){
-            Line trail = pen.drawLine(new Point2D(turtleView.getX(), turtleView.getY()), new Point2D(x,y));
+            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
         }
-        turtleView.update(x,y);
+
     }
 
     // put an additional turtle to the center of pane
-    private void addTurtle(Node element){
+    private void addTurtleToCenter(Node element){
         this.getChildren().add(element);
         this.widthProperty().addListener(e -> element.setLayoutX(this.getWidth() / 2.0 - turtleView.getWidth()/2));
         this.heightProperty().addListener(e -> element.setLayoutY(this.getHeight() / 2.0 - turtleView.getHeight()/2));
+    }
+
+    // setTurtleToHome turtles to its original position and
+    public void setTurtleToHome(){
+        turtleView.getTurtleImageView().setLayoutX(this.getWidth()/2);
+        turtleView.getTurtleImageView().setLayoutY(this.getHeight()/2);
+    }
+
+    public void reset(){
+        this.getChildren().clear();
     }
 
     public void setPenColor(Color color){

@@ -36,6 +36,7 @@ public class UIFactory {
         return new Text(text);
     }
 
+    // create a file chooser which starts from the project's root directory
     public static FileChooser createFileChooser(String extension){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));

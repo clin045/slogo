@@ -42,6 +42,10 @@ public class ControlPanelView {
         workspace.setRight(vBox);
     }
 
+    public CommandInputHandler getCommandInputHandler(){
+        return commandInputHandler;
+    }
+
     private void setUpWorkspaceSetting(){
         // add bg color picker
         ColorPicker bgColorPicker = new ColorPicker();
