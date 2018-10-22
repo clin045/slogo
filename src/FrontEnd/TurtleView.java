@@ -67,4 +67,9 @@ public class TurtleView {
         turtleImageView.setVisible(false);
     }
 
+    public void setTurtlePosition(double x, double y){
+        turtleImageView.setLayoutX(x);
+        turtleImageView.setLayoutY(y);
+    }
+
 }
