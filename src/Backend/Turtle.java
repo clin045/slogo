@@ -222,6 +222,9 @@ public class Turtle {
         setVisibility(false);
         return 0;
     }
+    public void clearScreen(){
+        
+    }
 
     /**
      * sets x and y to 0
