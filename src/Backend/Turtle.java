@@ -234,7 +234,7 @@ public class Turtle {
         return 0;
     }
     public void clearScreen(){
-        
+        controller.reset();
     }
 
     /**
