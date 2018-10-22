@@ -4,6 +4,7 @@
 
 package Backend;
 
+import FrontEnd.Controller;
 import javafx.geometry.Point2D;
 import java.lang.Math;
 
@@ -12,10 +13,11 @@ public class Turtle {
     private double heading; //in degrees
     private boolean penDown;
     private boolean visibility;
+    private Controller controller;
 
     public static final int DEFAULT_X = 0;
     public static final int DEFAULT_Y = 0;
-    public static final int DEFAULT_HEADING = 0; //default is facing right
+    public static final int DEFAULT_HEADING = 90; //default is facing right
     public static final boolean DEFAULT_PENDOWN = true;
     public static final boolean DEFAULT_VISIBILITY = true;
 
@@ -84,6 +86,7 @@ public class Turtle {
      */
     private void setPenDown(boolean penDown) {
         this.penDown = penDown;
+        controller.setPenDown(penDown);
     }
 
     /**
@@ -110,6 +113,8 @@ public class Turtle {
         int dx = (int) Math.floor(distance * Math.cos(Math.toRadians(heading)));
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
         this.coordinates.add(dx, dy);
+//        System.out.println(dx+":"+dy);
+        controller.update(dx, dy);
         return distance;
     }
 
@@ -118,7 +123,9 @@ public class Turtle {
      * @param distance distance to move coordinates
      * @return distance
      */
-    public double forward(double distance) { return move(distance); }
+    public double forward(double distance) {
+        return move(distance);
+    }
 
     /**
      * moves coordinates a given distance in the opposite direction of heading
@@ -162,6 +169,7 @@ public class Turtle {
             heading %= 360;
         }
         this.heading = heading;
+        controller.rotateTurtle(heading);
         return heading;
     }
 
@@ -172,6 +180,7 @@ public class Turtle {
      * @return angle between coordinates and (x, y)
      */
     public double towards(double x, double y) {
+        System.out.println(coordinates.angle(x,y));
         return setHeading(coordinates.angle(x, y));
     }
 
@@ -211,6 +220,7 @@ public class Turtle {
      */
     public int show() {
         setVisibility(true);
+        controller.showTurtle();
         return 1;
     }
 
@@ -220,6 +230,7 @@ public class Turtle {
      */
     public int hide() {
         setVisibility(false);
+        controller.hideTurtle();
         return 0;
     }
 
@@ -228,6 +239,13 @@ public class Turtle {
      * @return distance from current point to (0, 0)
      */
     public double home() {
+        controller.setTurtleToHome();
         return setXY(0, 0);
     }
+
+    public void setController(Controller controller){
+        this.controller = controller;
+    }
+
+
 }
