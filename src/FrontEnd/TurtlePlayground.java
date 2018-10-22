@@ -82,4 +82,9 @@ public class TurtlePlayground extends Pane {
         pen.setDown(isPenDown);
     }
 
+    public void setTurtlePosition(double x, double y){
+        turtleView.getTurtleImageView().setLayoutX(x+this.getWidth()/2-turtleView.getWidth()/2);
+        turtleView.getTurtleImageView().setLayoutY(y+this.getHeight()/2-turtleView.getHeight()/2);
+    }
+
 }

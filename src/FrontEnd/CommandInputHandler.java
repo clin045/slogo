@@ -30,6 +30,8 @@ public class CommandInputHandler extends TextArea {
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
 
+
+
         return this.getText();
     }
 

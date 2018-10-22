@@ -65,6 +65,6 @@ public class Controller {
     }
 
     public void setTurtlePosition(double x, double y){
-        turtleView.setTurtlePosition(x,y);
+        turtlePlayground.setTurtlePosition(x,y);
     }
 }
