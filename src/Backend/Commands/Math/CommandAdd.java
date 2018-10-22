@@ -23,7 +23,7 @@ public class CommandAdd extends Command {
     @Override
     public String execute(List<String>params) {
 //        System.out.println("PARAMS: "+params.size());
-        for(String s:params){System.out.println(s);}
+//        for(String s:params){System.out.println(s);}
         d1=parseParameters(params);
         double temp=d1;
 //        System.out.println("d1: "+d1+" d2: "+d2);
