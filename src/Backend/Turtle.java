@@ -180,8 +180,8 @@ public class Turtle {
      * @return angle between coordinates and (x, y)
      */
     public double towards(double x, double y) {
-        System.out.println(coordinates.angle(x,y));
-        return setHeading(coordinates.angle(x, y));
+        double angle = Math.toDegrees(Math.atan2(y - coordinates.getY(), x - coordinates.getX()));
+        return setHeading(angle);
     }
 
     /**
