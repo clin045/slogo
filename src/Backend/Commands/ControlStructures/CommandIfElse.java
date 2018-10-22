@@ -1,13 +1,14 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
+
 import java.util.List;
 import java.util.MissingResourceException;
 
-public class CommandIf extends Command {
+public class CommandIfElse extends Command {
     @Override
     public String getDescription() {
-        return "if expr is not 0, runs the command(s) given in the list\n" +
+        return "if expr is not 0, runs the trueCommands given in the first list, otherwise runs the falseCommands given in the second list\n" +
                 "returns the value of the final command executed (or 0 if no commands are executed)";
     }
 
@@ -35,11 +36,11 @@ public class CommandIf extends Command {
         }
 
         if(expressionValue == 0){
-            return "0";
-        }
-        else{
-            System.out.println(params);
-            //var commandParams = params.subList(1, closeBracket);
+            closeBracket = params.indexOf("]");
+            for(int i = 0; i <= closeBracket;i++){
+                params.remove(0);
+            }
+
             params.remove("[");
             var firstCommandStr = params.get(0);
             Command firstCommand = Command.getCommand(firstCommandStr);
@@ -49,6 +50,21 @@ public class CommandIf extends Command {
             params.remove("]");
             return str;
         }
+        else{
 
+            //var commandParams = params.subList(1, closeBracket);
+            params.remove("[");
+            var firstCommandStr = params.get(0);
+            Command firstCommand = Command.getCommand(firstCommandStr);
+            params.remove(0);
+            String str=firstCommand.execute(params);
+            closeBracket = params.indexOf("]");
+            for(int i = closeBracket; i < params.size(); i++){
+                params.remove(i);
+            }
+            return str;
+        }
     }
+
+
 }
