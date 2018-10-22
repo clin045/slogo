@@ -56,6 +56,7 @@ public class Turtle {
      * @return x coordinate
      */
     public int getX() {
+        System.out.println(coordinates.getX());
         return (int) coordinates.getX();
     }
 
@@ -193,6 +194,7 @@ public class Turtle {
     public double setXY(double x, double y) {
         double distance = coordinates.distance(x, y);
         this.coordinates = new Point2D(x, y);
+        controller.setTurtlePosition(x,y);
         return distance;
     }
 
