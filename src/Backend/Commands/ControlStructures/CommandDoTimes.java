@@ -24,6 +24,7 @@ public class CommandDoTimes extends Command {
 //        System.out.println("DOTIMES limit: "+limit);
 //        System.out.println("param size: "+params.size());
         double temp=1;
+        double out=0;
         while((int)temp<=limit){
             CommandManager.myTracker.put(varName,(double)temp);
             tempList=new ArrayList<>(params);
@@ -34,7 +35,8 @@ public class CommandDoTimes extends Command {
                 if(tempList.get(0).equals("[")){break;}
                 Command loopCmd=Command.getCommand(tempList.get(0));
                 tempList.remove(0);
-                temp=Double.parseDouble(loopCmd.execute(tempList));
+                out=Double.parseDouble(loopCmd.execute(tempList));
+                temp+=1;
             }
         }
         return ""+temp;
