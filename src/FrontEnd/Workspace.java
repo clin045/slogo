@@ -21,10 +21,12 @@ public class Workspace extends BorderPane {
         Controller controller = new Controller(area, turtleView);
 //        variableTracker = new VariableTracker(controller); // possibly pass in the a reference to controller here
         CommandManager commandManager = new CommandManager("languages.English");
-        commandManager.myTracker.getTurtle().setController(controller);
+        CommandManager.myTracker.getTurtle().setController(controller);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
         CommandInputHandler commandInputHandler = controlPanelView.getCommandInputHandler();
         commandInputHandler.setCommandManager(commandManager);
+        commandInputHandler.setVariableHistory(controlPanelView.definedVariables);
+        commandInputHandler.setCommandHistory(controlPanelView.commandHistory);
     }
 
     // initialize the playground in the border pane
