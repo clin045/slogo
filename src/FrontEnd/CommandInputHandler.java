@@ -1,7 +1,6 @@
 package FrontEnd;
 
 import Backend.CommandManager;
-import Backend.TextParser;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 
@@ -31,7 +30,6 @@ public class CommandInputHandler extends TextArea {
         catch(IllegalArgumentException e){
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
-
 
         return this.getText();
     }
