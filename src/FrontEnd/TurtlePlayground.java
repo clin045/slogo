@@ -64,12 +64,14 @@ public class TurtlePlayground extends Pane {
 
     // setTurtleToHome turtles to its original position and
     public void setTurtleToHome(){
-        turtleView.getTurtleImageView().setLayoutX(this.getWidth()/2);
-        turtleView.getTurtleImageView().setLayoutY(this.getHeight()/2);
+        turtleView.getTurtleImageView().setLayoutX(this.getWidth()/2-turtleView.getWidth()/2);
+        turtleView.getTurtleImageView().setLayoutY(this.getHeight()/2-turtleView.getHeight()/2);
     }
 
     public void reset(){
         this.getChildren().clear();
+        addTurtleToCenter(turtleView.getTurtleImageView());
+        setTurtleToHome();
     }
 
     public void setPenColor(Color color){

@@ -63,4 +63,8 @@ public class Controller {
     public void reset(){
         turtlePlayground.reset();
     }
+
+    public void setTurtlePosition(double x, double y){
+        turtleView.setTurtlePosition(x,y);
+    }
 }

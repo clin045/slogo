@@ -1,7 +1,6 @@
 package FrontEnd;
 
 import Backend.CommandManager;
-import Backend.TextParser;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 
@@ -14,7 +13,6 @@ public class CommandInputHandler extends TextArea {
 
     public CommandInputHandler(Controller controller){
         this.controller = controller;
-//        TextParser parser = new TextParser();
     }
 
     /*
@@ -32,7 +30,6 @@ public class CommandInputHandler extends TextArea {
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
 
-
         return this.getText();
     }
 
@@ -43,6 +40,24 @@ public class CommandInputHandler extends TextArea {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    @Override
+    public void replaceText(int start, int end, String text) {
+        String current = getText();
+        // only insert if no new lines after insert position:
+        if (! current.substring(start).contains("\n")) {
+            super.replaceText(start, end, text);
+        }
+    }
+    @Override
+    public void replaceSelection(String text) {
+        String current = getText();
+        int selectionStart = getSelection().getStart();
+        if (! current.substring(selectionStart).contains("\n")) {
+            super.replaceSelection(text);
+        }
+    }
+
 
     public void setLanguage(String lan){
         this.language = lan;

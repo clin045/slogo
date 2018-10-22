@@ -4,6 +4,7 @@ import Backend.Command;
 import Backend.TextParser;
 import Backend.VariableTracker;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
