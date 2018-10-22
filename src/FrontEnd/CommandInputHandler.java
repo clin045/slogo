@@ -25,7 +25,14 @@ public class CommandInputHandler extends TextArea {
         if(commandManager==null){
             System.out.println("CommandManager has not been set yet");
         }
-        commandManager.execute(this.getText());
+        try{
+            commandManager.execute(this.getText());
+        }
+        catch(IllegalArgumentException e){
+            showWarningDialog("Error", "Illegal argument error", e.getMessage());
+        }
+
+
         return this.getText();
     }
 
@@ -39,6 +46,7 @@ public class CommandInputHandler extends TextArea {
 
     public void setLanguage(String lan){
         this.language = lan;
+        commandManager.setLanguage("Languages."+lan);
     }
 
     public void setCommandManager(CommandManager manager){
