@@ -180,7 +180,7 @@ public class Turtle {
      * @return angle between coordinates and (x, y)
      */
     public double towards(double x, double y) {
-        System.out.println(coordinates.angle(x,y));
+//        System.out.println(coordinates.angle(x,y));
         return setHeading(coordinates.angle(x, y));
     }
 
@@ -234,7 +234,7 @@ public class Turtle {
         return 0;
     }
     public void clearScreen(){
-        
+        controller.reset();
     }
 
     /**

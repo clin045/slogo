@@ -20,10 +20,10 @@ public class CommandFD extends Command {
 
 
     public String execute(List<String> params) {
-        System.out.println("Executing");
+//        System.out.println("Executing");
         var turtle = CommandManager.myTracker.getTurtle();
         amountFD=parseParameters(params);
-        System.out.println("MOVING" +amountFD);
+//        System.out.println("MOVING" +amountFD);
         turtle.forward(amountFD);
         return Double.toString(amountFD);
     }

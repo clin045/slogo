@@ -1,8 +1,10 @@
 package Backend.Commands.Math;
 
+import Backend.Command;
+
 import java.util.List;
 
-public class CommandLog extends MathCommand {
+public class CommandLog extends Command {
     private double d1;
     public CommandLog(){super();}
 

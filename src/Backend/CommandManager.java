@@ -43,7 +43,7 @@ public class CommandManager {
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
-            System.out.println(parsedList.size());
+//            System.out.println(parsedList.size());
             if(parsedList.get(0).equals("[")){return out;}
             try{  Command init=Command.getCommand(parsedList.get(0));
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
@@ -54,7 +54,7 @@ public class CommandManager {
                 if(val==null){
                     List<String>userCommand=myTracker.getCommand(parsedList.get(0));
                     if(userCommand!=null){
-                        System.out.println("user command");
+//                        System.out.println("user command");
                         for(String str:userCommand){
                             parsedList.add(str);
                         }
@@ -68,6 +68,12 @@ public class CommandManager {
         }
 
         return out;
+    }
+    public Map<String, Object> getUserVariables(){
+        return myTracker.getVarMap();
+    }
+    public Map<String, List<String>> getUserCommands(){
+        return myTracker.getCommandMap();
     }
 
 }

@@ -26,7 +26,7 @@ public abstract class Command {
         double param;
         if(params.size()==0){throw new IllegalArgumentException("Not enough arguments");}
         try {
-            System.out.println("PARAM: "+ params.get(0));
+//            System.out.println("PARAM: "+ params.get(0));
             param=Double.parseDouble(params.get(0));
             params.remove(0);
 
@@ -43,7 +43,7 @@ public abstract class Command {
             }catch (MissingResourceException me){
                 Double temp=(Double)CommandManager.myTracker.get(params.get(0));
                 if(temp==null){throw new IllegalArgumentException("Variable not defined: "+params.get(0));}
-                System.out.println("Got: x="+temp);
+//                System.out.println("Got: x="+temp);
                 params.remove(0);
                 param=temp;
             }
@@ -55,7 +55,7 @@ public abstract class Command {
     public static Command getCommand(String str){
         ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
         try{
-            System.out.println(str);
+//            System.out.println(str);
             Class commandStr= Class.forName(commandBundle.getString(str));
             Command command= (Command) commandStr.getDeclaredConstructor().newInstance();
             return command;

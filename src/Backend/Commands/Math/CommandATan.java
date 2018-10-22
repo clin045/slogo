@@ -1,10 +1,10 @@
 package Backend.Commands.Math;
 
-import Backend.Commands.Math.MathCommand;
+import Backend.Command;
 
 import java.util.List;
 
-public class CommandATan extends MathCommand {
+public class CommandATan extends Command {
     private double d1;
     public CommandATan(){super();}
 

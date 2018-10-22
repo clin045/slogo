@@ -1,8 +1,10 @@
 package Backend.Commands.Math;
 
+import Backend.Command;
+
 import java.util.List;
 
-public class CommandPi extends MathCommand{
+public class CommandPi extends Command {
     public CommandPi(){super();}
 
     @Override

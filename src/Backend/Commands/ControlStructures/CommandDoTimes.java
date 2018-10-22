@@ -21,8 +21,8 @@ public class CommandDoTimes extends Command {
         if(!params.remove(2).equals("]")){throw new IllegalArgumentException("DOTIMES only takes one limit argument");}
         varName=params.remove(0);
         limit=(int)parseParameters(params);
-        System.out.println("DOTIMES limit: "+limit);
-        System.out.println("param size: "+params.size());
+//        System.out.println("DOTIMES limit: "+limit);
+//        System.out.println("param size: "+params.size());
         double temp=1;
         while((int)temp<=limit){
             CommandManager.myTracker.put(varName,(double)temp);
