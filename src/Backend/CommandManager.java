@@ -4,6 +4,7 @@ import Backend.Command;
 import Backend.TextParser;
 import Backend.VariableTracker;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -12,6 +13,10 @@ import java.util.ResourceBundle;
  * @author Michael Glushakov (mg367)
  */
 public class CommandManager {
+
+    public static Map<String, Command> getCommands() {
+        return myCommands;
+    }
 
     private static final Map<String, Command>myCommands= new HashMap<>();
     private TextParser myParser;
@@ -23,6 +28,7 @@ public class CommandManager {
      */
     public CommandManager(){
         myParser=new TextParser();
+        preloadCommands();
 
     };
 
@@ -33,6 +39,7 @@ public class CommandManager {
     public CommandManager(String path){
 
        myParser=new TextParser(path);
+       preloadCommands();
 
     }
     public void setLanguage(String path){
@@ -43,7 +50,7 @@ public class CommandManager {
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
-            System.out.println(parsedList.size());
+//            System.out.println(parsedList.size());
             if(parsedList.get(0).equals("[")){return out;}
             try{  Command init=Command.getCommand(parsedList.get(0));
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
@@ -54,7 +61,7 @@ public class CommandManager {
                 if(val==null){
                     List<String>userCommand=myTracker.getCommand(parsedList.get(0));
                     if(userCommand!=null){
-                        System.out.println("user command");
+//                        System.out.println("user command");
                         for(String str:userCommand){
                             parsedList.add(str);
                         }
@@ -68,6 +75,43 @@ public class CommandManager {
         }
 
         return out;
+    }
+    public Map<String, Object> getUserVariables(){
+        return myTracker.getVarMap();
+    }
+    public Map<String, List<String>> getUserCommands(){
+        return myTracker.getCommandMap();
+    }
+
+    private void preloadCommands(){
+        try{
+            ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+            for(String key: Collections.list(commandBundle.getKeys())){
+                try{
+                    Class commandStr= Class.forName(commandBundle.getString(key));
+                    Command command= (Command) commandStr.getDeclaredConstructor().newInstance();
+                    myCommands.put(key,command);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could Not Load Command String: "+e.getMessage());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could not Create Command Object");
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }catch (MissingResourceException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

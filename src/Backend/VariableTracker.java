@@ -75,8 +75,8 @@ public class VariableTracker {
 
     public void putCommand(String key, List<String>commandSequence){
         commandMap.put(key,commandSequence);
-        for(String str:commandSequence){System.out.print(str+" ");}
-        System.out.println(" ");
+//        for(String str:commandSequence){System.out.print(str+" ");}
+//        System.out.println(" ");
     }
     public List<String> getCommand(String key){
         return commandMap.get(key);
@@ -85,8 +85,15 @@ public class VariableTracker {
         commandMap.clear();
     }
     public String executeCommand(String key){
-        System.out.println("done");
+//        System.out.println("done");
         return "done";
     }
 
+    public Map<String, List<String>> getCommandMap() {
+        return commandMap;
+    }
+
+    public Map<String, Object> getVarMap() {
+        return varMap;
+    }
 }

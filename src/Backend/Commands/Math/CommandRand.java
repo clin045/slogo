@@ -1,9 +1,11 @@
 package Backend.Commands.Math;
 
+import Backend.Command;
+
 import java.util.List;
 
 
-public class CommandRand extends MathCommand {
+public class CommandRand extends Command {
     private double d1;
     public CommandRand(){super();}
 

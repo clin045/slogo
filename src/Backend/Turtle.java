@@ -56,7 +56,7 @@ public class Turtle {
      * @return x coordinate
      */
     public int getX() {
-        System.out.println(coordinates.getX());
+        //System.out.println(coordinates.getX());
         return (int) coordinates.getX();
     }
 
@@ -181,8 +181,11 @@ public class Turtle {
      * @return angle between coordinates and (x, y)
      */
     public double towards(double x, double y) {
+
+
         double angle = Math.toDegrees(Math.atan2(y - coordinates.getY(), x - coordinates.getX()));
         return setHeading(angle);
+
     }
 
     /**

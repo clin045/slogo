@@ -1,8 +1,10 @@
 package Backend.Commands.Math;
 
+import Backend.Command;
+
 import java.util.List;
 
-public class CommandCos extends MathCommand{
+public class CommandCos extends Command {
 private double d1;
     public CommandCos(){super();}
 
