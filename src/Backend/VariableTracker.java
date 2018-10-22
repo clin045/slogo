@@ -4,13 +4,12 @@
 
 package Backend;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class VariableTracker {
     private Turtle turtle;
     private Map<String, Object> varMap;
+    private Map<String, List<String>>commandMap;
 
     /**
      * Default constructor initializes Turtle() and HashMap()
@@ -18,6 +17,7 @@ public class VariableTracker {
     public VariableTracker(){
         turtle = new Turtle();
         varMap = new HashMap<>();
+        commandMap=new HashMap<>();
     }
 
     /**
@@ -67,6 +67,22 @@ public class VariableTracker {
      */
     public void clear() {
         varMap.clear();
+    }
+
+    public void putCommand(String key, List<String>commandSequence){
+        commandMap.put(key,commandSequence);
+        for(String str:commandSequence){System.out.print(str+" ");}
+        System.out.println(" ");
+    }
+    public List<String> getCommand(String key){
+        return commandMap.get(key);
+    }
+    public void clearCommands(){
+        commandMap.clear();
+    }
+    public String executeCommand(String key){
+        System.out.println("done");
+        return "done";
     }
 
 }
