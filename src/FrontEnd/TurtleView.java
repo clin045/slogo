@@ -2,15 +2,14 @@ package FrontEnd;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 public class TurtleView {
+    private int id; // each turtle view will have to have a unique ID
     private ImageView turtleImageView;
     private static final String TURTLE_IMAGE = "turtle_green.png";
     private static final int SIZE = 50;
+    private static double heading = 90;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
-    private Color penColor = Color.BLACK;
-    private boolean isPenUp = false;
 
     public TurtleView(){
         turtleImageView = new ImageView(turtleImage);
@@ -22,6 +21,7 @@ public class TurtleView {
         return turtleImageView;
     }
 
+    // gives the x position of the turtle in the playground
     public double getX(){
         return turtleImageView.getLayoutX();
     }
@@ -30,13 +30,10 @@ public class TurtleView {
         return turtleImageView.getLayoutY();
     }
 
-    // update the position of the turtle
+    // update the position of the turtle to a new position
     public void update(double x, double y){
-        turtleImageView.setLayoutX(x);
-        turtleImageView.setLayoutY(y);
-        if(!isPenUp){
-
-        }
+        turtleImageView.setLayoutX(getX()+x);
+        turtleImageView.setLayoutY(getY()-y);
     }
 
     public double getWidth(){
@@ -47,9 +44,14 @@ public class TurtleView {
         return turtleImageView.getBoundsInLocal().getHeight();
     }
 
-    // turnTurtle the turtle by a certain degree
-    public void turn(double degrees){
-        turtleImageView.setRotate(turtleImageView.getRotate() + degrees);
+    // turn the turtle by a certain degree counterclockwise
+//    public void turn(double degrees){
+//        turtleImageView.setRotate(turtleImageView.getRotate() - degrees);
+//    }
+
+    public void rotate(double newHeading){
+        turtleImageView.setRotate(turtleImageView.getRotate()-(newHeading-heading));
+        heading = newHeading;
     }
 
     public void setTurtleImage(String fileName){
@@ -57,5 +59,17 @@ public class TurtleView {
         turtleImageView.setImage(turtleImage);
     }
 
+    public void show(){
+        turtleImageView.setVisible(true);
+    }
+
+    public void hide(){
+        turtleImageView.setVisible(false);
+    }
+
+    public void setTurtlePosition(double x, double y){
+        turtleImageView.setLayoutX(x);
+        turtleImageView.setLayoutY(y);
+    }
 
 }

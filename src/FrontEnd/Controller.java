@@ -3,8 +3,9 @@ package FrontEnd;
 import javafx.scene.paint.Color;
 
 /*
-    Controller serves as a middleground for
-    Each workspace has its own controller
+    Controller serves as a middle ground between frontend and backend to exchange information.
+    It contains a reference to turtle playground and turtle view.
+    It will be included in the turtle class.
     @author xp19
  */
 
@@ -35,12 +36,35 @@ public class Controller {
     }
 
     // turn the turtle clockwise by certain degrees
-    public void turnTurtle(double degress){
-        turtleView.turn(degress);
+//    public void turnTurtle(double degrees){
+//        turtleView.turn(degrees);
+//    }
+
+    public void rotateTurtle(double heading){
+        turtleView.rotate(heading);
     }
 
     public void setPenDown(boolean isPenDown){
         turtlePlayground.setPenDown(isPenDown);
     }
 
+    public void hideTurtle(){
+        turtleView.hide();
+    }
+
+    public void showTurtle(){
+        turtleView.show();
+    }
+
+    public void setTurtleToHome(){
+        turtlePlayground.setTurtleToHome();
+    }
+
+    public void reset(){
+        turtlePlayground.reset();
+    }
+
+    public void setTurtlePosition(double x, double y){
+        turtleView.setTurtlePosition(x,y);
+    }
 }

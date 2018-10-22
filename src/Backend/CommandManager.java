@@ -36,25 +36,33 @@ public class CommandManager {
        myParser=new TextParser(path);
 
     }
+    public void setLanguage(String path){
+        myParser.setLanguage(path);
+    }
 
     public String execute(String userInput){
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
             System.out.println(parsedList.size());
-            for(String str:parsedList){
-                System.out.println(str);
-            }
             if(parsedList.get(0).equals("[")){return out;}
             try{  Command init=Command.getCommand(parsedList.get(0));
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
                 parsedList.remove(0);
-                out+=init.execute(parsedList);
+                out=init.execute(parsedList);
             }catch (MissingResourceException e){
                 Double val=(Double) myTracker.get(parsedList.get(0));
-                if(val==null){throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}
-                System.out.println("Variable: "+parsedList.get(0)+"="+val);
-                out+=val;
+                if(val==null){
+                    List<String>userCommand=myTracker.getCommand(parsedList.get(0));
+                    if(userCommand!=null){
+                        System.out.println("user command");
+                        for(String str:userCommand){
+                            parsedList.add(str);
+                        }
+                    }
+                    else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
+                //System.out.println("Variable: "+parsedList.get(0)+"="+val);
+                out=""+val;
                 parsedList.remove(0);
             }
 

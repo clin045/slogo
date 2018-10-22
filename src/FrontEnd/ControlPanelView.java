@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -42,21 +43,23 @@ public class ControlPanelView {
         workspace.setRight(vBox);
     }
 
+    public CommandInputHandler getCommandInputHandler(){
+        return commandInputHandler;
+    }
+
     private void setUpWorkspaceSetting(){
         // add bg color picker
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
             controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
-//            controller.turnTurtle(60);
-//            controller.update(30,30);
+//            controller.reset();
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
 
         // add pen color picker
-        ColorPicker penColorPicker = new ColorPicker();
+        ColorPicker penColorPicker = new ColorPicker(Color.BLACK);
         penColorPicker.setOnAction(event -> {
             controller.setPenColor(penColorPicker.getValue());
-//            controller.update(100,100);
         });
 
         HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
