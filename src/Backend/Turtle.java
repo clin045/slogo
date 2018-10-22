@@ -56,7 +56,7 @@ public class Turtle {
      * @return x coordinate
      */
     public int getX() {
-        System.out.println(coordinates.getX());
+        //System.out.println(coordinates.getX());
         return (int) coordinates.getX();
     }
 
