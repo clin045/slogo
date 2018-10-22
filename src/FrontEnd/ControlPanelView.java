@@ -40,7 +40,9 @@ public class ControlPanelView {
         userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
+//        vBox.setMaxWidth(10);
         workspace.setRight(vBox);
+//        workspace.getRight().
     }
 
     public CommandInputHandler getCommandInputHandler(){
@@ -116,6 +118,10 @@ public class ControlPanelView {
     private void clearCommandHistory(){
         VBox history = ((VBox) commandHistory.getContent());
         history.getChildren().clear();
+    }
+
+    public VBox getRightMenu(){
+        return vBox;
     }
 
 }

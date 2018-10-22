@@ -33,7 +33,9 @@ public class UIFactory {
     }
 
     public static Text createText(String text){
-        return new Text(text);
+        Text ret = new Text(text);
+        ret.setWrappingWidth(250);
+        return ret;
     }
 
     // create a file chooser which starts from the project's root directory
