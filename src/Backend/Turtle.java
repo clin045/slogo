@@ -233,6 +233,9 @@ public class Turtle {
         controller.hideTurtle();
         return 0;
     }
+    public void clearScreen(){
+        
+    }
 
     /**
      * sets x and y to 0
