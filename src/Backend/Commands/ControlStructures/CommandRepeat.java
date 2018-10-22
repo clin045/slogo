@@ -41,7 +41,7 @@ public class CommandRepeat extends Command {
                 if(temp.get(0).equals("]")){break;}
                 if(temp.get(0).equals("[")){break;}
 //                System.out.println("Temp: ");
-                for(String str:temp){System.out.println(str);}
+                //for(String str:temp){System.out.println(str);}
                 Command loopCmd=Command.getCommand(temp.get(0));
 //                System.out.println("got commands");
                 temp.remove(0);
