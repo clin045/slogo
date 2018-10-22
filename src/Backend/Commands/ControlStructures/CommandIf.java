@@ -38,7 +38,6 @@ public class CommandIf extends Command {
             return "0";
         }
         else{
-            System.out.println(params);
             //var commandParams = params.subList(1, closeBracket);
             params.remove("[");
             var firstCommandStr = params.get(0);
