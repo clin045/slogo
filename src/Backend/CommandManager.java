@@ -4,6 +4,7 @@ import Backend.Command;
 import Backend.TextParser;
 import Backend.VariableTracker;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -40,6 +41,10 @@ public class CommandManager {
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
+            System.out.println(parsedList.size());
+            for(String str:parsedList){
+                System.out.println(str);
+            }
             if(parsedList.get(0).equals("[")){return out;}
             try{  Command init=Command.getCommand(parsedList.get(0));
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
