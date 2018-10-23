@@ -20,6 +20,7 @@ public class ControlPanelView {
     private static final String DEFINED_COMMANDS_TITLE = "Defined Commands";
     private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
     private static final String COMMAND_HISTORY_TITLE = "Command History";
+    private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
 
@@ -29,6 +30,7 @@ public class ControlPanelView {
     TitledPane commandHistory;
     TitledPane userDefinedCommands;
     TitledPane definedVariables;
+    TitledPane turtleStatus;
     Controller controller;
     CommandInputHandler commandInputHandler;
 
@@ -39,6 +41,7 @@ public class ControlPanelView {
         setUpTextInputArea(workspace);// add text input field
         setUpWorkspaceSetting();
         setUpCommandHistoryPane();
+        setUpTurtleStatus();
         userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
@@ -116,6 +119,10 @@ public class ControlPanelView {
 
     private void setUpCommandHistoryPane(){
         commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, new VBox());
+    }
+
+    private void setUpTurtleStatus(){
+        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox());
     }
 
     private void clearCommandHistory(){

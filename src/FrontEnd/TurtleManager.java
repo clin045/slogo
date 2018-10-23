@@ -21,6 +21,6 @@ public class TurtleManager implements Iterable<TurtleView> {
 
     @Override
     public Iterator<TurtleView> iterator() {
-        return null;
+        return turtleList.iterator();
     }
 }

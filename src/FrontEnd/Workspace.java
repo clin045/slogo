@@ -42,8 +42,6 @@ public class Workspace extends BorderPane {
         this.tabPane = tabPane;
     }
 
-
-
     // initialize the playground in the border pane
     // TODO: do the initialization inside the turtle class
     private void setUpTurtleDisplayArea(){
