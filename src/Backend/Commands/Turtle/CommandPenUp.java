@@ -17,10 +17,7 @@ public class CommandPenUp extends Command {
         return "PENUP: puts pen up such that when the turtle moves, it does not leave a trail";
     }
 
-
-
     public String execute(List<String> params) {
-        CommandManager.myTracker.getTurtle().penUp();
-        return "0";
+        return Integer.toString(CommandManager.myTracker.getTurtle().penUp());
     }
 }

@@ -10,18 +10,13 @@ public class CommandHideTurtle extends Command {
         super();
     }
 
-
-
     @Override
     public String getDescription() {
         return "HIDETURTLE: makes turtle invisible";
     }
 
-
-
     @Override
     public String execute(List<String> params) {
-        CommandManager.myTracker.getTurtle().hide();
-        return "0";
+        return Double.toString(CommandManager.myTracker.getTurtle().hide());
     }
 }

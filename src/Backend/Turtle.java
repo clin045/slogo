@@ -9,15 +9,18 @@ import javafx.geometry.Point2D;
 import java.lang.Math;
 
 public class Turtle {
+    private Controller controller;
     private Point2D coordinates;
+
+    private int ID;
     private double heading; //in degrees
     private boolean penDown;
     private boolean visibility;
-    private Controller controller;
 
-    public static final int DEFAULT_X = 0;
-    public static final int DEFAULT_Y = 0;
-    public static final int DEFAULT_HEADING = 90; //default is facing right
+    public static final int DEFAULT_ID = 1;
+    public static final double DEFAULT_X = 0;
+    public static final double DEFAULT_Y = 0;
+    public static final int DEFAULT_HEADING = 90; //default is facing up
     public static final boolean DEFAULT_PENDOWN = true;
     public static final boolean DEFAULT_VISIBILITY = true;
 
@@ -29,7 +32,8 @@ public class Turtle {
      * @param penDown initial penDown
      * @param visibility initial visibility
      */
-    private Turtle(int x, int y, int heading, boolean penDown, boolean visibility) {
+    private Turtle(int ID, double x, double y, int heading, boolean penDown, boolean visibility) {
+        this.ID = ID;
         coordinates = new Point2D(x, y);
         this.heading = heading;
         this.penDown = penDown;
@@ -41,22 +45,36 @@ public class Turtle {
      * @param x initial x coordinate
      * @param y initial y coordinate
      */
-    public Turtle(int x, int y) {
-        this(x, y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
+    public Turtle(int ID, double x, double y) {
+        this(ID, x, y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
     }
 
     /**
      * constructs a Turtle object with default parameters
      */
     public Turtle() {
-        this(DEFAULT_X, DEFAULT_Y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
+        this(DEFAULT_ID, DEFAULT_X, DEFAULT_Y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
+    }
+
+    /**
+     * @return ID
+     */
+    public int getID() {
+        return ID;
+    }
+
+    /**
+     * sets ID
+     * @param ID new ID
+     */
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     /**
      * @return x coordinate
      */
     public int getX() {
-        //System.out.println(coordinates.getX());
         return (int) coordinates.getX();
     }
 
@@ -160,7 +178,7 @@ public class Turtle {
     /**
      * sets heading to heading
      * @param heading new heading value
-     * @return heading
+     * @return number of degrees moved
      */
     public double setHeading(double heading) {
         if (heading < 0 || heading > 360) {
@@ -169,9 +187,10 @@ public class Turtle {
             }
             heading %= 360;
         }
+        double degreesMoved = Math.abs(this.heading - heading);
         this.heading = heading;
         controller.rotateTurtle(heading);
-        return heading;
+        return degreesMoved;
     }
 
     /**
@@ -181,11 +200,9 @@ public class Turtle {
      * @return angle between coordinates and (x, y)
      */
     public double towards(double x, double y) {
-
-
         double angle = Math.toDegrees(Math.atan2(y - coordinates.getY(), x - coordinates.getX()));
-        return setHeading(angle);
-
+        setHeading(angle);
+        return angle;
     }
 
     /**
@@ -254,6 +271,8 @@ public class Turtle {
     public void setController(Controller controller){
         this.controller = controller;
     }
+
+
 
 
 }

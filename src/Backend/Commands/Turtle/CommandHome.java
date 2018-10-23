@@ -10,8 +10,6 @@ public class CommandHome extends Command {
         super();
     }
 
-
-
     @Override
     public String getDescription() {
         return null;

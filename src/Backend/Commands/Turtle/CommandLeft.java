@@ -11,18 +11,15 @@ public class CommandLeft extends Command {
         super();
     }
 
-
     @Override
     public String getDescription() {
         return "LEFT: Turns the turtle left by some number of degrees";
     }
 
-
     @Override
     public String execute(List<String> params) {
         var turtle = CommandManager.myTracker.getTurtle();
         leftAmt=parseParameters(params);
-        turtle.left(leftAmt);
-        return Double.toString(leftAmt);
+        return Double.toString(turtle.left(leftAmt));
     }
 }

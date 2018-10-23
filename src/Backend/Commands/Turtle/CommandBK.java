@@ -27,8 +27,7 @@ public class CommandBK extends Command {
     public String execute(List<String> params) {
         var turtle = myTracker.getTurtle();
         amountBack=parseParameters(params);
-        turtle.back(amountBack);
-        return ""+amountBack;
+        return Double.toString(turtle.back(amountBack));
     }
 
 

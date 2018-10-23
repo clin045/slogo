@@ -10,17 +10,13 @@ public class CommandShowTurtle extends Command {
         super();
     }
 
-
     @Override
     public String getDescription() {
         return "SHOWTURTLE: makes turtle visible";
     }
 
-
-
     @Override
     public String execute(List<String> params) {
-        CommandManager.myTracker.getTurtle().show();
-        return "1";
+        return Integer.toString(CommandManager.myTracker.getTurtle().show());
     }
 }

@@ -12,16 +12,13 @@ public class CommandPenDown extends Command {
         super();
     }
 
-
     @Override
     public String getDescription() {
         return "PENDOWN: puts pen down such that when the turtle moves, it leaves a trail";
     }
 
-
     @Override
     public String execute(List<String> params) {
-        CommandManager.myTracker.getTurtle().penDown();
-        return "0";
+        return String.valueOf(CommandManager.myTracker.getTurtle().penDown());
     }
 }

@@ -19,8 +19,6 @@ public class CommandSetXY extends Command {
                 "returns the distance turtle moved";
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         pointX = (int) parseParameters(params);
