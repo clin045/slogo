@@ -9,6 +9,7 @@ import Backend.CommandManager;
 import Backend.VariableTracker;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -18,6 +19,7 @@ public class Workspace extends BorderPane {
     TurtlePlayground area;
     TurtleView turtleView;
     VariableTracker variableTracker;
+    TabPane tabPane;
 
     // create a new workspace
     public Workspace(){
@@ -27,16 +29,20 @@ public class Workspace extends BorderPane {
         CommandManager commandManager = new CommandManager("languages.English");
         CommandManager.myTracker.getTurtle().setController(controller);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
-        controlPanelView.getRightMenu().getChildren().add(addHelperMenu());
-//        controlPanelView.getRightMenu().setMaxWidth(50);
-//        this.setMaxWidth(50);
-//        controlPanelView.getRightMenu().prefWidthProperty().bind(this.widthProperty().multiply(0.30));
+        controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
+
         CommandInputHandler commandInputHandler = controlPanelView.getCommandInputHandler();
         commandInputHandler.setCommandManager(commandManager);
         commandInputHandler.setVariableHistory(controlPanelView.definedVariables);
         commandInputHandler.setCommandHistory(controlPanelView.commandHistory);
-
     }
+
+    public Workspace(TabPane tabPane){
+        this();
+        this.tabPane = tabPane;
+    }
+
+
 
     // initialize the playground in the border pane
     // TODO: do the initialization inside the turtle class
@@ -46,7 +52,7 @@ public class Workspace extends BorderPane {
         this.setCenter(area);
     }
 
-    private TitledPane addHelperMenu(){
+    private TitledPane getHelperMenu(){
         VBox allCommands = new VBox();
         ScrollPane sp = new ScrollPane();
         sp.setContent(allCommands);
@@ -55,12 +61,8 @@ public class Workspace extends BorderPane {
         }
         TitledPane helperMenu = new TitledPane("User Guide", sp);
         sp.setPadding(new Insets(10));
-//        helperMenu.setPrefWidth(50.0);
         helperMenu.setExpanded(false);
-//        helperMenu.setMaxHeight(50);
         return helperMenu;
-//        helperMenu.s
-//        vBox.getChildren().add()
     }
 
 }

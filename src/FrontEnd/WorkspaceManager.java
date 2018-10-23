@@ -13,7 +13,7 @@ public class WorkspaceManager {
 
     public WorkspaceManager(Scene scene){
         tabPane = new TabPane();
-        workspace = new Workspace();
+        workspace = new Workspace(tabPane);
 
         // add a new tab
         Tab tab = new Tab();
@@ -31,5 +31,10 @@ public class WorkspaceManager {
     StackPane getWorkspace(){
         return stackPane;
     }
+
+    TabPane getTabPane(){
+        return tabPane;
+    }
+
 
 }

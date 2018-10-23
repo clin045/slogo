@@ -24,6 +24,7 @@ public class ControlPanelView {
     private static final String IMAGE_FILE_EXTENSION = "*.png";
 
     VBox vBox;
+    Workspace workspace;
     TitledPane workspaceSetting;
     TitledPane commandHistory;
     TitledPane userDefinedCommands;
@@ -32,6 +33,7 @@ public class ControlPanelView {
     CommandInputHandler commandInputHandler;
 
     public ControlPanelView(Workspace workspace, Controller controller){
+        this.workspace = workspace;
         this.controller = controller;
         //set up UI
         setUpTextInputArea(workspace);// add text input field
@@ -40,9 +42,7 @@ public class ControlPanelView {
         userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
-//        vBox.setMaxWidth(10);
         workspace.setRight(vBox);
-//        workspace.getRight().
     }
 
     public CommandInputHandler getCommandInputHandler(){
@@ -105,8 +105,11 @@ public class ControlPanelView {
             history.getChildren().add(UIFactory.createText(command));
         });
         Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearCommandHistory());
+        Button newTabButton = UIFactory.createButton("New Tab", event -> {
+            addNewTab();
+        });
 
-        HBox buttonsGroup = new HBox(runButton, clearHistoryButton);
+        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton);
         VBox textInput= new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
     }
@@ -119,6 +122,13 @@ public class ControlPanelView {
         VBox history = ((VBox) commandHistory.getContent());
         history.getChildren().clear();
     }
+
+    private void addNewTab(){
+        Tab newTab = new Tab("New Tab");
+        newTab.setContent(new Workspace(workspace.tabPane));
+        workspace.tabPane.getTabs().add(newTab);
+    }
+
 
     public VBox getRightMenu(){
         return vBox;
