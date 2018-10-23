@@ -2,14 +2,15 @@ package FrontEnd;
 
 import Backend.Command;
 import Backend.CommandManager;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.HashMap;
 
 
 public class CommandInputHandler extends TextArea {
@@ -19,7 +20,10 @@ public class CommandInputHandler extends TextArea {
     private CommandManager commandManager;
     private TitledPane variableHistory;
     private TitledPane commandHistory;
-    private int keySize = 0;
+    private HashMap<String, Object> variables;
+    private HashMap<String, Object> commands;
+//    private ObservableMap<String, Object> observableMap;
+    private boolean first = true;
 
     public CommandInputHandler(Controller controller){
         this.controller = controller;
@@ -39,35 +43,24 @@ public class CommandInputHandler extends TextArea {
         catch(IllegalArgumentException e){
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
-
-        if(keySize!=CommandManager.myTracker.keySet().size()){
+        if(first){
+            ObservableMap<String, Object> map = CommandManager.myTracker.getVarMap();
             VBox definedVariable = (VBox) variableHistory.getContent();
-//            String lastKey = new String();
-//            Iterator<String> itr = CommandManager.myTracker.keySet().iterator();
-//            while(itr.hasNext()) {
-//                System.out.println(itr.next());
-//                lastKey = itr.next();
-//            }
-            String lastKey = getLastKey(CommandManager.myTracker.keySet());
-            System.out.println("Last key:" + lastKey);
-            definedVariable.getChildren().add(UIFactory.createText(lastKey + ": " + CommandManager.myTracker.get(lastKey)));
-            keySize = CommandManager.myTracker.keySet().size();
+
+            map.addListener(new MapChangeListener<String, Object>() {
+                @Override
+                public void onChanged(Change<? extends String, ?> change) {
+                    definedVariable.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
+                }
+            });
+
+            for(String s: map.keySet()){
+                definedVariable.getChildren().add(UIFactory.createText(s+": "+map.get(s)));
+            }
+            first = false;
         }
 
         return this.getText();
-    }
-
-    private String getLastKey(Set<String> set){
-//        Collections.sort(set);
-        int index = 0;
-        for(String s: set){
-            System.out.println("Index:"+s);
-            if(index==set.size()-1){
-                return s;
-            }
-            index++;
-        }
-        return new String();
     }
 
     private void showWarningDialog(String title, String header, String content){

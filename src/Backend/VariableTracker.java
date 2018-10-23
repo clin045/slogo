@@ -5,6 +5,9 @@
 package Backend;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +15,7 @@ import java.util.*;
 
 public class VariableTracker {
     private Turtle turtle;
-    private Map<String, Object> varMap;
+    private ObservableMap<String, Object> varMap;
     private Map<String, List<String>>commandMap;
 
     /**
@@ -20,7 +23,7 @@ public class VariableTracker {
      */
     public VariableTracker(){
         turtle = new Turtle();
-        varMap = new HashMap<>();
+        varMap = FXCollections.observableMap(new HashMap<>());
         commandMap=new HashMap<>();
     }
 
@@ -93,7 +96,7 @@ public class VariableTracker {
         return commandMap;
     }
 
-    public Map<String, Object> getVarMap() {
+    public ObservableMap<String, Object> getVarMap() {
         return varMap;
     }
 }
