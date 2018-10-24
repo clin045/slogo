@@ -111,8 +111,15 @@ public class ControlPanelView {
         Button newTabButton = UIFactory.createButton("New Tab", event -> {
             addNewTab();
         });
+        Button loadButton = UIFactory.createButton("Load", event -> {
+           // load file
+        });
 
-        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton);
+        Button saveButton = UIFactory.createButton("Save", event -> {
+
+        });
+
+        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton);
         VBox textInput= new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
     }

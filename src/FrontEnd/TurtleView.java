@@ -1,10 +1,14 @@
 package FrontEnd;
 
 import javafx.animation.Animation;
+import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class TurtleView {
@@ -36,6 +40,16 @@ public class TurtleView {
 
     // update the position of the turtle to a new position
     public void update(double x, double y){
+
+//        Path path = new Path();
+//        path.getElements().add(new MoveTo(getX(),getY()));
+//        path.getElements().add(new LineTo(getX()+x, getY()-y));
+//
+//        PathTransition pt = new PathTransition(Duration.seconds(2), path, turtleImageView);
+//
+//        Animation animation = new SequentialTransition(pt);
+//        animation.play();
+
         turtleImageView.setLayoutX(getX()+x);
         turtleImageView.setLayoutY(getY()-y);
     }

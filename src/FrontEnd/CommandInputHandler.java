@@ -43,6 +43,7 @@ public class CommandInputHandler extends TextArea {
         catch(IllegalArgumentException e){
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
+
         if(first){
             ObservableMap<String, Object> map = CommandManager.myTracker.getVarMap();
             VBox definedVariable = (VBox) variableHistory.getContent();
@@ -50,12 +51,17 @@ public class CommandInputHandler extends TextArea {
             map.addListener(new MapChangeListener<String, Object>() {
                 @Override
                 public void onChanged(Change<? extends String, ?> change) {
-                    definedVariable.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
+                    if(!map.containsKey(change.getKey())){
+                        definedVariable.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
+                    }
                 }
             });
 
             for(String s: map.keySet()){
-                definedVariable.getChildren().add(UIFactory.createText(s+": "+map.get(s)));
+                definedVariable.getChildren().add(
+                        UIFactory.createTextFieldWithLabel(s, map.get(s).toString(), CommandManager.myTracker.getVarMap())
+                );
+//                definedVariable.getChildren().add(UIFactory.createText(s+": "+map.get(s)));
             }
             first = false;
         }
@@ -70,23 +76,6 @@ public class CommandInputHandler extends TextArea {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
-//    @Override
-//    public void replaceText(int start, int end, String text) {
-//        String current = getText();
-//        // only insert if no new lines after insert position:
-//        if (! current.substring(start).contains("\n")) {
-//            super.replaceText(start, end, text);
-//        }
-//    }
-//    @Override
-//    public void replaceSelection(String text) {
-//        String current = getText();
-//        int selectionStart = getSelection().getStart();
-//        if (! current.substring(selectionStart).contains("\n")) {
-//            super.replaceSelection(text);
-//        }
-//    }
 
 
     public void setLanguage(String lan){
