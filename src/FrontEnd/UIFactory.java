@@ -43,6 +43,16 @@ public class UIFactory {
         return ret;
     }
 
+    public static HBox createTextFieldWithLabel(String label, String value, EventHandler<ActionEvent> handler){
+        Text lab = new Text(label);
+        TextField textField = new TextField();
+        textField.setText(value);
+        textField.setOnAction(handler);
+        HBox ret = new HBox(lab, textField);
+        ret.setAlignment(Pos.CENTER);
+        return ret;
+    }
+
     public static HBox createTextFieldWithLabel(String label, String value, ObservableMap<String, Object> map){
         Text lab = new Text(label);
         TextField textField = new TextField();

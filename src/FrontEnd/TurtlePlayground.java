@@ -15,7 +15,7 @@ import javafx.scene.shape.Line;
 
 public class TurtlePlayground extends Pane {
 
-    private static final int INIT_STROKE_WIDTH = 10;
+    public static final double INIT_STROKE_WIDTH = 10;
     TurtleView turtleView; // possibly extend it to contain multiple turtles
     Pen pen;
 
@@ -80,6 +80,14 @@ public class TurtlePlayground extends Pane {
 
     public void setPenDown(boolean isPenDown){
         pen.setDown(isPenDown);
+    }
+
+    public void setPenThickNess(double width){
+        pen.setThickness(width);
+    }
+
+    public void togglePenDown(){
+        pen.togglePenDown();
     }
 
     public void setTurtlePosition(double x, double y){
