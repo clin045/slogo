@@ -1,5 +1,8 @@
 package Backend;
 
+
+import Backend.Exceptions.InvalidInputException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -73,8 +76,12 @@ public class CommandManager {
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
             if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init= getCommand(parsedList.get(0));
+\            try{  Command init= getCommand(parsedList.get(0));
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
+
+            try{  Command init=getCommand(parsedList.get(0));
+                if(init==null){throw new InvalidInputException();}
+
                 parsedList.remove(0);
                 out=init.execute(parsedList);
             }catch (MissingResourceException e){
@@ -88,7 +95,7 @@ public class CommandManager {
 
                             parsedList.remove(commandName);
                         }
-                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
+                        else{throw new InvalidInputException(parsedList.get(0));}}
                     else{
                     out=""+val;
                     parsedList.remove(0);

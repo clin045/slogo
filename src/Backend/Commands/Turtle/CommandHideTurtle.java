@@ -18,6 +18,6 @@ public class CommandHideTurtle extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Double.toString(CommandManager.myTracker.getActiveTurtle().hide());
+        return Double.toString(myTracker.getActiveTurtle().hide());
     }
 }
