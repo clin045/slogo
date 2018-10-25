@@ -34,10 +34,21 @@ public class VariableTracker {
     }
 
     /**
+     * Returns active turtle, creates a new one if it does not exist
      * @return turtle
      */
     public Turtle getActiveTurtle() {
-        return turtle;
+        if(turtleMap.containsKey(activeTurtle)){
+            return turtleMap.get(activeTurtle);
+        }
+        else{
+            createTurtle(activeTurtle);
+            return turtleMap.get(activeTurtle);
+        }
+    }
+
+    public void setActiveTurtle(int id){
+        activeTurtle = id;
     }
 
     /**
