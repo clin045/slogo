@@ -23,6 +23,8 @@ public class CommandManager {
     private VariableTracker myTracker;
 
 
+
+
     /**
      * default constructor
      */
@@ -46,7 +48,9 @@ public class CommandManager {
     public void setLanguage(String path){
         myParser.setLanguage(path);
     }
-
+    public static boolean isCommand(String cmd){
+        return myCommands.containsKey(cmd);
+    }
 
     public String execute(String userInput){
         String out="";

@@ -1,6 +1,7 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
+import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class CommandIf extends Command {
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
+
         try{
             firstExpressionCommand = Command.getCommand(firstExpressionString,super.myTracker);
         }
