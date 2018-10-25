@@ -41,57 +41,64 @@ public class CommandInputHandler extends TextArea {
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
 
+        // only runs once when this method is called the first time
         if(first){
-            ObservableMap<String, Object> varMap = commandManager.getMyTracker().getVarMap();
-            VBox definedVariable = (VBox) variableHistory.getContent();
-            ObservableMap<String, List<String>> commandMap = commandManager.getMyTracker().getCommandMap();
-            ScrollPane definedCommandsScrollPane = (ScrollPane) userDefinedCommands.getContent();
-            VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
-
-            varMap.addListener(new MapChangeListener<String, Object>() {
-                @Override
-                public void onChanged(Change<? extends String, ?> change) {
-                    if(change.wasAdded()){
-                        definedVariable.getChildren().add(
-                                UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), commandManager.getMyTracker().getVarMap()
-                        ));
-                    }
-                }
-            });
-
-            for(String s: varMap.keySet()){
-                definedVariable.getChildren().add(
-                        UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap())
-                );
-            }
-
-            commandMap.addListener(new MapChangeListener<String, Object>() {
-                @Override
-                public void onChanged(Change<? extends String, ?> change) {
-                    if(change.wasAdded()){
-                        definedCommands.getChildren().add(
-                                UIFactory.createTextFieldWithLabel(change.getKey(), commandMap.get(change.getKey()).toString(), event -> {
-                                    System.out.println(commandMap.get(change.getKey()).toString());
-                                    commandManager.execute(commandMap.get(change.getKey()).toString());
-                                        }
-                                ));
-                    }
-                }
-            });
-
-            for(String s: commandMap.keySet()){
-                definedCommands.getChildren().add(
-                        UIFactory.createTextFieldWithLabel(s, commandMap.get(s).toString(), event -> {
-                            commandManager.execute(commandMap.get(s).toString());
-                        })
-                );
-            }
-
-
+            // connect backend to frontend
+            varMap();
+            definedCommandMap();
             first = false;
         }
 
         return this.getText();
+    }
+
+    private void varMap(){
+        ObservableMap<String, Object> varMap = commandManager.getMyTracker().getVarMap();
+        VBox definedVariable = (VBox) variableHistory.getContent();
+        varMap.addListener(new MapChangeListener<String, Object>() {
+            @Override
+            public void onChanged(Change<? extends String, ?> change) {
+                if(change.wasAdded()){
+                    definedVariable.getChildren().add(
+                            UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), commandManager.getMyTracker().getVarMap()
+                            ));
+                }
+            }
+        });
+
+        for(String s: varMap.keySet()){
+            definedVariable.getChildren().add(
+                    UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap())
+            );
+        }
+    }
+
+    private void definedCommandMap(){
+        ObservableMap<String, List<String>> commandMap = commandManager.getMyTracker().getCommandMap();
+        ScrollPane definedCommandsScrollPane = (ScrollPane) userDefinedCommands.getContent();
+        VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
+
+        commandMap.addListener(new MapChangeListener<String, Object>() {
+            @Override
+            public void onChanged(Change<? extends String, ?> change) {
+                if(change.wasAdded()){
+                    definedCommands.getChildren().add(
+                            UIFactory.createTextFieldWithLabel(change.getKey(), commandMap.get(change.getKey()).toString(), event -> {
+                                        System.out.println(commandMap.get(change.getKey()).toString());
+                                        commandManager.execute(commandMap.get(change.getKey()).toString());
+                                    }
+                            ));
+                }
+            }
+        });
+
+        for(String s: commandMap.keySet()){
+            definedCommands.getChildren().add(
+                    UIFactory.createTextFieldWithLabel(s, commandMap.get(s).toString(), event -> {
+                        commandManager.execute(commandMap.get(s).toString());
+                    })
+            );
+        }
     }
 
     private void showWarningDialog(String title, String header, String content){

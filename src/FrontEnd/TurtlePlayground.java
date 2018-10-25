@@ -15,7 +15,7 @@ import javafx.scene.shape.Line;
 
 public class TurtlePlayground extends Pane {
 
-    public static final double INIT_STROKE_WIDTH = 10;
+    public static final double INIT_STROKE_WIDTH = 5;
     TurtleView turtleView; // possibly extend it to contain multiple turtles
     Pen pen;
 
@@ -27,11 +27,12 @@ public class TurtlePlayground extends Pane {
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
+    // create a colored playground with one turtle
     public TurtlePlayground(TurtleView turtleView, Color color){
         setBgColor(color);
         this.turtleView = turtleView;
         addTurtleToCenter(turtleView.getTurtleImageView());
-        pen = new Pen(this, true, Color.BLACK, 10);
+        pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
     // set the background color of this pane
@@ -52,7 +53,6 @@ public class TurtlePlayground extends Pane {
             Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
         }
-
     }
 
     // put an additional turtle to the center of pane

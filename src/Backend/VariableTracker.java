@@ -25,10 +25,9 @@ public class VariableTracker {
      * Default constructor initializes Turtle() and HashMap()
      */
     public VariableTracker(){
-        turtle = new Turtle();
+        turtleMap = new HashMap<>();
         varMap = FXCollections.observableMap(new HashMap<>());
         commandMap=FXCollections.observableMap(new HashMap<>());
-        turtleMap = new HashMap<>();
 
         activeTurtle = 0;
         createTurtle(0);

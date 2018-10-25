@@ -76,8 +76,6 @@ public class ControlPanelView {
         // add pen up/down
         final ToggleGroup group = new ToggleGroup();
 
-        ToggleButton tb1 = new ToggleButton("Up");
-        tb1.setToggleGroup(group);
         ToggleButton tb2 = new ToggleButton("Down");
         tb2.setToggleGroup(group);
         tb2.setSelected(true);
@@ -88,7 +86,7 @@ public class ControlPanelView {
             }
         });
 
-        HBox upDown = new HBox(tb1, tb2);
+        HBox upDown = new HBox(tb2);
         upDown.setAlignment(Pos.CENTER_RIGHT);
 
         // add pen thickness
