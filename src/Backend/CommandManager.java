@@ -52,11 +52,6 @@ public class CommandManager {
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
-//            System.out.println("______LOOP________");
-//            for(String s: parsedList){
-//                System.out.println(s);
-//            }
-//            System.out.println(parsedList.size());
             if(parsedList.get(0).equals("[")){return out;}
             try{  Command init=Command.getCommand(parsedList.get(0),myTracker);
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
@@ -72,9 +67,6 @@ public class CommandManager {
                             parsedList.addAll(0,userCommand);
 
                             parsedList.remove(commandName);
-//                            for(String s: parsedList){
-//                                System.out.println(s);
-//                            }
                         }
                         else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
                     else{

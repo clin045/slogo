@@ -46,10 +46,21 @@ public abstract class Command {
             }catch (MissingResourceException me){
                 if(params.get(0).charAt(0)==':'){
                     Double temp=(Double)myTracker.get(params.get(0).substring(1));
-                    if(temp==null){throw new IllegalArgumentException("Variable not defined: "+params.get(0));}
-//                System.out.println("Got: x="+temp);
-                    params.remove(0);
-                    param=temp;
+                    if(temp==null){
+                        List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
+                        String commandName=params.get(0);
+                        if(userCommand!=null){
+                            params.addAll(0,userCommand);
+                            params.remove(commandName);
+                            return parseParameters(params);
+                        }
+                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
+                      }
+                        else{
+                        params.remove(0);
+                        param=temp;
+                        }
+
                 }
                 else{throw new IllegalArgumentException("Variable calls must be preceeded by :");}
 
