@@ -24,16 +24,9 @@ public abstract class Command {
     public double parseParameters(List<String> params) throws IllegalArgumentException{
         double param;
         if(params.size()==0){throw new IllegalArgumentException("Not enough arguments");}
-        try {
-//            System.out.println("PARAM: "+ params.get(0));
-            param=Double.parseDouble(params.get(0));
-            params.remove(0);
-
-        }catch (NumberFormatException e){
+        if(CommandManager.isCommand(params.get(0))){
             try{
-
-                Command nextCmd= CommandManager.getCommand(params.get(0),myTracker);
-                if(nextCmd==null){throw new IllegalArgumentException("Can't parse input"+params.get(0));}
+                Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
                 params.remove(0);
                 param=Double.parseDouble(nextCmd.execute(params));
 
@@ -51,17 +44,24 @@ public abstract class Command {
                             return parseParameters(params);
                         }
                         else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
-                      }
-                        else{
+                    }
+                    else{
                         params.remove(0);
                         param=temp;
-                        }
+                    }
 
                 }
                 else{throw new IllegalArgumentException("Variable calls must be preceeded by :");}
 
             }
         }
+        else {
+//            System.out.println("PARAM: "+ params.get(0));
+            param=Double.parseDouble(params.get(0));
+            params.remove(0);
+        }
+
+
         return param;
     }
     public abstract String execute(List <String>params);
