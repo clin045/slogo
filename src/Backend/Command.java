@@ -1,5 +1,9 @@
 package Backend;
 
+import Backend.Exceptions.InvalidInputException;
+import Backend.Exceptions.InvalidVariableCallException;
+import Backend.Exceptions.ParameterAmountException;
+
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -21,8 +25,9 @@ public abstract class Command {
      */
     public double parseParameters(List<String> params) throws IllegalArgumentException{
         double param;
-        if(params.size()==0){throw new IllegalArgumentException("Not enough arguments");}
+        if(params.size()==0){throw new ParameterAmountException();}
         if(CommandManager.isCommand(params.get(0))){
+
             Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
             params.remove(0);
             param=Double.parseDouble(nextCmd.execute(params));
@@ -38,9 +43,11 @@ public abstract class Command {
                         params.addAll(0,userCommand);
                         params.remove(commandName);
                         return parseParameters(params);
+
                     }
-                    else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
+                    else{throw new InvalidInputException(params.get(0));}
                 }
+
                 else{
                     params.remove(0);
                     param=temp;
@@ -51,7 +58,8 @@ public abstract class Command {
                 param = Double.parseDouble(params.get(0));
             }
             catch(NumberFormatException e){
-                throw new IllegalArgumentException("Invalid parameter");
+                throw new InvalidInputException(params.get(0));
+
             }
             params.remove(0);
         }
