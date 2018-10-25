@@ -45,7 +45,7 @@ public class UIFactory {
 
     public static HBox createTextFieldWithLabel(String label, String value, EventHandler<ActionEvent> handler){
         Text lab = new Text(label);
-        TextField textField = new TextField();
+        Button textField = new Button();
         textField.setText(value);
         textField.setOnAction(handler);
         HBox ret = new HBox(lab, textField);

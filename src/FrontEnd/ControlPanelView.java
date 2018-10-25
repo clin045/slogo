@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import Backend.CommandManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,12 +10,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-
-import static FrontEnd.TurtlePlayground.INIT_STROKE_WIDTH;
 
 /*
     This class represents the view for setting
@@ -48,11 +44,12 @@ public class ControlPanelView {
         //set up UI
         setUpTextInputArea(workspace);// add text input field
         setUpWorkspaceSetting();
-        setUpCommandHistoryPane();
+//        setUpCommandHistoryPane();
+        commandHistory = setUpScrollingTitlePane(COMMAND_HISTORY_TITLE, commandHistory);
         setUpTurtleStatus();
-        userDefinedCommands = new TitledPane(DEFINED_COMMANDS_TITLE, new VBox());
+        userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE, userDefinedCommands);
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
-        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables);
+        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables, turtleStatus);
         workspace.setRight(vBox);
     }
 
@@ -65,7 +62,6 @@ public class ControlPanelView {
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
             controller.setTurtleDisplayAreaColor(bgColorPicker.getValue());
-//            controller.reset();
         });
         HBox bgColorBox = UIFactory.createInputFieldWithLabel("Background color: ", bgColorPicker);
 
@@ -96,17 +92,11 @@ public class ControlPanelView {
         upDown.setAlignment(Pos.CENTER_RIGHT);
 
         // add pen thickness
-        Text label = UIFactory.createText("Pen Thickness: ");
         TextField textField = new TextField(String.valueOf(TurtlePlayground.INIT_STROKE_WIDTH));
         textField.setOnAction(event -> {
             controller.setPenThickness(Double.parseDouble(textField.getText()));
         });
         HBox penThicknessBox = UIFactory.createInputFieldWithLabel("Pen Thickness: ", textField);
-//
-//        HBox penThick = UIFactory.createTextFieldWithLabel("Pen Thickness: ", String.valueOf(TurtlePlayground.INIT_STROKE_WIDTH), event -> {
-//            controller.setPenThickness();
-//                });
-
 
         // add turtle image setter
         Button button = UIFactory.createButton("Choose..", event -> {
@@ -138,6 +128,7 @@ public class ControlPanelView {
         workspaceSetting = new TitledPane(WORKSPACE_SETTING_TITLE, setting);
     }
 
+
     // add text input field and related buttons
     private void setUpTextInputArea(Workspace workspace){
         commandInputHandler = new CommandInputHandler(controller);
@@ -163,21 +154,23 @@ public class ControlPanelView {
         workspace.setBottom(textInput);
     }
 
-    private void setUpCommandHistoryPane(){
+    private TitledPane setUpScrollingTitlePane(String title, TitledPane titledPane){
         VBox allCommands = new VBox();
         ScrollPane sp = new ScrollPane();
         sp.setContent(allCommands);
-        commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, sp);
+        titledPane = new TitledPane(title, sp);
         sp.setPadding(new Insets(10));
-        commandHistory.setExpanded(false);
+        titledPane.setExpanded(false);
+        return titledPane;
     }
 
     private void setUpTurtleStatus(){
         turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox());
+
     }
 
     private void clearCommandHistory(){
-        VBox history = ((VBox) commandHistory.getContent());
+        VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
         history.getChildren().clear();
     }
 

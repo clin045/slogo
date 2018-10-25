@@ -35,6 +35,7 @@ public class Workspace extends BorderPane {
         commandInputHandler.setCommandManager(commandManager);
         commandInputHandler.setVariableHistory(controlPanelView.definedVariables);
         commandInputHandler.setCommandHistory(controlPanelView.commandHistory);
+        commandInputHandler.setUserDefinedCommands(controlPanelView.userDefinedCommands);
     }
 
     public Workspace(TabPane tabPane){

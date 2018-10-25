@@ -1,9 +1,7 @@
 package FrontEnd;
 
-import Backend.Command;
 import Backend.CommandManager;
 import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
@@ -11,7 +9,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -22,7 +19,7 @@ public class CommandInputHandler extends TextArea {
     private CommandManager commandManager;
     private TitledPane variableHistory;
     private TitledPane commandHistory;
-//    private ObservableMap<String, Object> observableMap;
+    private TitledPane userDefinedCommands;
     private boolean first = true;
 
     public CommandInputHandler(Controller controller){
@@ -48,14 +45,16 @@ public class CommandInputHandler extends TextArea {
             ObservableMap<String, Object> varMap = CommandManager.myTracker.getVarMap();
             VBox definedVariable = (VBox) variableHistory.getContent();
             ObservableMap<String, List<String>> commandMap = CommandManager.myTracker.getCommandMap();
-            ScrollPane definedCommandsScrollPane = (ScrollPane) commandHistory.getContent();
+            ScrollPane definedCommandsScrollPane = (ScrollPane) userDefinedCommands.getContent();
             VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
 
             varMap.addListener(new MapChangeListener<String, Object>() {
                 @Override
                 public void onChanged(Change<? extends String, ?> change) {
-                    if(!varMap.containsKey(change.getKey())){
-                        definedVariable.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
+                    if(change.wasAdded()){
+                        definedVariable.getChildren().add(
+                                UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), CommandManager.myTracker.getVarMap()
+                        ));
                     }
                 }
             });
@@ -66,11 +65,16 @@ public class CommandInputHandler extends TextArea {
                 );
             }
 
-            commandMap.addListener(new MapChangeListener<String, List<String>>() {
+            commandMap.addListener(new MapChangeListener<String, Object>() {
                 @Override
-                public void onChanged(Change<? extends String, ? extends List<String>> change) {
-                    if(!commandMap.containsKey(change.getKey())){
-                        definedCommands.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
+                public void onChanged(Change<? extends String, ?> change) {
+                    if(change.wasAdded()){
+                        definedCommands.getChildren().add(
+                                UIFactory.createTextFieldWithLabel(change.getKey(), commandMap.get(change.getKey()).toString(), event -> {
+                                    System.out.println(commandMap.get(change.getKey()).toString());
+                                    commandManager.execute(commandMap.get(change.getKey()).toString());
+                                        }
+                                ));
                     }
                 }
             });
@@ -114,5 +118,9 @@ public class CommandInputHandler extends TextArea {
 
     public void setCommandHistory(TitledPane commandHistory) {
         this.commandHistory = commandHistory;
+    }
+
+    public void setUserDefinedCommands(TitledPane userDefinedCommands){
+        this.userDefinedCommands = userDefinedCommands;
     }
 }
