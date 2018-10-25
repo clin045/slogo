@@ -76,37 +76,34 @@ public class CommandManager {
 
     public String execute(String userInput){
         String out="";
-        List<String>parsedList = myParser.parse(userInput);
-        while(parsedList.size()>0){
-            if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init=getCommand(parsedList.get(0), myTracker);
-                if(init==null){throw new InvalidInputException();}
-
-                parsedList.remove(0);
-                out=init.execute(parsedList);
-            }catch (MissingResourceException e){
-                if(parsedList.get(0).charAt(0)==':'){
-                    Double val=(Double) myTracker.get(parsedList.get(0).substring(1));
+        List<String> masterList = myParser.parse(userInput);
+        while(masterList.size()>0){
+            if(masterList.get(0).equals("[")){return out;}
+            if(isCommand(masterList.get(0))){
+                Command init=getCommand(masterList.get(0), myTracker);
+                masterList.remove(0);
+                out=init.execute(masterList);
+            }
+            else {
+                if(masterList.get(0).charAt(0)==':'){
+                    Double val=(Double) myTracker.get(masterList.get(0).substring(1));
                     if(val==null){
-                        List<String>userCommand=myTracker.getCommand(parsedList.get(0).substring(1));
-                        String commandName=parsedList.get(0);
+                        List<String>userCommand=myTracker.getCommand(masterList.get(0).substring(1));
+                        String commandName=masterList.get(0);
                         if(userCommand!=null){
-                            parsedList.addAll(0,userCommand);
-
-                            parsedList.remove(commandName);
+                            masterList.addAll(0,userCommand);
+                            masterList.remove(commandName);
                         }
-                        else{throw new InvalidInputException(parsedList.get(0));}}
+                        else{throw new InvalidInputException(masterList.get(0));}}
                     else{
-                    out=""+val;
-                    parsedList.remove(0);
+                        out=""+val;
+                        masterList.remove(0);
                     }
                 }
                 else{
                     throw new InvalidVariableCallException();
                 }
-
             }
-
         }
 
         return out;
