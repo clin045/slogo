@@ -2,13 +2,14 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandLeft extends Command {
     private double leftAmt;
-   public CommandLeft(){
-        super();
+   public CommandLeft(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

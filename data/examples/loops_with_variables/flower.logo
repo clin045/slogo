@@ -1,7 +1,7 @@
 repeat 11 [
-   dotimes [ :t 360 ] 
+   dotimes [ t 360 ]
    [
-      fd 1
-      rt / sin :t 2
+      fd 20
+      rt Quotient sin t 2
    ]
 ]

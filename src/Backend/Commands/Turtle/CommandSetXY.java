@@ -8,8 +8,8 @@ import java.util.List;
 public class CommandSetXY extends Command {
     int pointX;
     int pointY;
-    public CommandSetXY(){
-        super();
+    public CommandSetXY(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

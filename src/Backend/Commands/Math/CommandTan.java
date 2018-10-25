@@ -1,12 +1,13 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandTan extends Command {
 private double d1;
-public CommandTan(){super();}
+public CommandTan(VariableTracker tracker){super(tracker);}
 
     @Override
     public String getDescription() {

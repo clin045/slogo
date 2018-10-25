@@ -6,8 +6,8 @@ import Backend.CommandManager;
 import java.util.List;
 
 public class CommandYCor extends Command {
-    public CommandYCor(){
-        super();
+    public CommandYCor(VariableTracker tracker){
+        super(tracker);
     }
     @Override
     public String getDescription() {

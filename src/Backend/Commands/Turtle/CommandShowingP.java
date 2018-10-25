@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CommandShowingP extends Command {
 
-    public CommandShowingP(){
-        super();
+    public CommandShowingP(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

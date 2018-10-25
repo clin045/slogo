@@ -7,8 +7,8 @@ import java.util.List;
 
 
 public class CommandXCor extends Command{
-    public CommandXCor(){
-        super();
+    public CommandXCor(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

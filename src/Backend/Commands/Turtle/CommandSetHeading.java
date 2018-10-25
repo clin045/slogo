@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CommandSetHeading extends Command {
     private double heading;
-    public CommandSetHeading(){
-        super();
+    public CommandSetHeading(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

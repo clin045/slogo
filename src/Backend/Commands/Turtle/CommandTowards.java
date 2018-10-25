@@ -10,8 +10,8 @@ public class CommandTowards extends Command {
     int pointX;
     int pointY;
 
-    public CommandTowards(){
-        super();
+    public CommandTowards(VariableTracker tracker){
+        super(tracker);
     }
 
 

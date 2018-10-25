@@ -1,5 +1,5 @@
 repeat 200 
 [
-  fd :repcount
+  fd repcount
   rt 89
 ]

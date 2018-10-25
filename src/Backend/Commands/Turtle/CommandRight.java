@@ -1,15 +1,16 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
-import static Backend.CommandManager.myTracker;
+
 
 public class CommandRight extends Command {
     private double rightAmt;
-  public CommandRight(){
-        super();
+  public CommandRight(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

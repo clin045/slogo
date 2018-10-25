@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CommandPenDown extends Command {
 
-    public CommandPenDown(){
-        super();
+    public CommandPenDown(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override

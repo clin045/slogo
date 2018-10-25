@@ -20,7 +20,7 @@ public class CommandManager {
 
     private static final Map<String, Command>myCommands= new HashMap<>();
     private TextParser myParser;
-    public static final VariableTracker myTracker=new VariableTracker();
+    private VariableTracker myTracker;
 
 
     /**
@@ -39,6 +39,7 @@ public class CommandManager {
     public CommandManager(String path){
 
        myParser=new TextParser(path);
+       myTracker=new VariableTracker();
        preloadCommands();
 
     }
@@ -46,30 +47,37 @@ public class CommandManager {
         myParser.setLanguage(path);
     }
 
+
     public String execute(String userInput){
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
-//            System.out.println(parsedList.size());
             if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init=Command.getCommand(parsedList.get(0));
+            try{  Command init=Command.getCommand(parsedList.get(0),myTracker);
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
                 parsedList.remove(0);
                 out=init.execute(parsedList);
             }catch (MissingResourceException e){
-                Double val=(Double) myTracker.get(parsedList.get(0));
-                if(val==null){
-                    List<String>userCommand=myTracker.getCommand(parsedList.get(0));
-                    if(userCommand!=null){
-//                        System.out.println("user command");
-                        for(String str:userCommand){
-                            parsedList.add(str);
+                if(parsedList.get(0).charAt(0)==':'){
+                    Double val=(Double) myTracker.get(parsedList.get(0).substring(1));
+                    if(val==null){
+                        List<String>userCommand=myTracker.getCommand(parsedList.get(0).substring(1));
+                        String commandName=parsedList.get(0);
+                        if(userCommand!=null){
+                            parsedList.addAll(0,userCommand);
+
+                            parsedList.remove(commandName);
                         }
+                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
+                    else{
+                    out=""+val;
+                    parsedList.remove(0);
                     }
-                    else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
-                //System.out.println("Variable: "+parsedList.get(0)+"="+val);
-                out=""+val;
-                parsedList.remove(0);
+                }
+                else{
+                    throw new IllegalArgumentException("Variable and custom command calls must be preceeded by a semicolon");
+                }
+
             }
 
         }
@@ -89,7 +97,7 @@ public class CommandManager {
             for(String key: Collections.list(commandBundle.getKeys())){
                 try{
                     Class commandStr= Class.forName(commandBundle.getString(key));
-                    Command command= (Command) commandStr.getDeclaredConstructor().newInstance();
+                    Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(myTracker);
                     myCommands.put(key,command);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -113,5 +121,6 @@ public class CommandManager {
         }
 
     }
+    public VariableTracker getMyTracker(){return myTracker;}
 
 }

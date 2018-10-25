@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CommandHeading extends Command {
 
-    public CommandHeading(){
-        super();
+    public CommandHeading(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
