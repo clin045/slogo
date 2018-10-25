@@ -2,6 +2,7 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
@@ -18,6 +19,6 @@ public class CommandPenDown extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return String.valueOf(CommandManager.myTracker.getActiveTurtle().penDown());
+        return String.valueOf(myTracker.getActiveTurtle().penDown());
     }
 }

@@ -3,6 +3,7 @@ package Backend.Commands.Turtle;
 import Backend.Command;
 import Backend.CommandManager;
 import Backend.Turtle;
+import Backend.VariableTracker;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CommandSetHeading extends Command {
     @Override
     public String execute(List<String> params) {
         heading = parseParameters(params);
-        Turtle myTurtle = CommandManager.myTracker.getActiveTurtle();
+        Turtle myTurtle = myTracker.getActiveTurtle();
         return Double.toString(myTurtle.setHeading(heading));
     }
 }
