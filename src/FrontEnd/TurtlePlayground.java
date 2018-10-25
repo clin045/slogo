@@ -72,6 +72,7 @@ public class TurtlePlayground extends Pane {
         this.getChildren().clear();
         addTurtleToCenter(turtleView.getTurtleImageView());
         setTurtleToHome();
+        turtleView.resetTurtleHeading();
     }
 
     public void setPenColor(Color color){

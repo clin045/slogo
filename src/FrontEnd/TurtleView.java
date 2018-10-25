@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Backend.Turtle;
 import javafx.animation.Animation;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
@@ -77,6 +78,11 @@ public class TurtleView {
     public void setTurtleImage(String fileName){
         turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(fileName));
         turtleImageView.setImage(turtleImage);
+    }
+
+    public void resetTurtleHeading(){
+        turtleImageView.setRotate(0);
+        heading = Turtle.DEFAULT_HEADING;
     }
 
     public void show(){

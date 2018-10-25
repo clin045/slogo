@@ -6,11 +6,13 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 public class CommandInputHandler extends TextArea {
@@ -20,8 +22,6 @@ public class CommandInputHandler extends TextArea {
     private CommandManager commandManager;
     private TitledPane variableHistory;
     private TitledPane commandHistory;
-    private HashMap<String, Object> variables;
-    private HashMap<String, Object> commands;
 //    private ObservableMap<String, Object> observableMap;
     private boolean first = true;
 
@@ -45,24 +45,45 @@ public class CommandInputHandler extends TextArea {
         }
 
         if(first){
-            ObservableMap<String, Object> map = CommandManager.myTracker.getVarMap();
+            ObservableMap<String, Object> varMap = CommandManager.myTracker.getVarMap();
             VBox definedVariable = (VBox) variableHistory.getContent();
+            ObservableMap<String, List<String>> commandMap = CommandManager.myTracker.getCommandMap();
+            ScrollPane definedCommandsScrollPane = (ScrollPane) commandHistory.getContent();
+            VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
 
-            map.addListener(new MapChangeListener<String, Object>() {
+            varMap.addListener(new MapChangeListener<String, Object>() {
                 @Override
                 public void onChanged(Change<? extends String, ?> change) {
-                    if(!map.containsKey(change.getKey())){
+                    if(!varMap.containsKey(change.getKey())){
                         definedVariable.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
                     }
                 }
             });
 
-            for(String s: map.keySet()){
+            for(String s: varMap.keySet()){
                 definedVariable.getChildren().add(
-                        UIFactory.createTextFieldWithLabel(s, map.get(s).toString(), CommandManager.myTracker.getVarMap())
+                        UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), CommandManager.myTracker.getVarMap())
                 );
-//                definedVariable.getChildren().add(UIFactory.createText(s+": "+map.get(s)));
             }
+
+            commandMap.addListener(new MapChangeListener<String, List<String>>() {
+                @Override
+                public void onChanged(Change<? extends String, ? extends List<String>> change) {
+                    if(!commandMap.containsKey(change.getKey())){
+                        definedCommands.getChildren().add(UIFactory.createText(change.getKey()+": "+change.getValueAdded()));
+                    }
+                }
+            });
+
+            for(String s: commandMap.keySet()){
+                definedCommands.getChildren().add(
+                        UIFactory.createTextFieldWithLabel(s, commandMap.get(s).toString(), event -> {
+                            commandManager.execute(commandMap.get(s).toString());
+                        })
+                );
+            }
+
+
             first = false;
         }
 

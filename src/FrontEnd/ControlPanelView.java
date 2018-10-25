@@ -1,9 +1,11 @@
 package FrontEnd;
 
+import Backend.CommandManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -141,7 +143,7 @@ public class ControlPanelView {
         commandInputHandler = new CommandInputHandler(controller);
         Button runButton = UIFactory.createButton("Run", event -> {
             String command = commandInputHandler.run();
-            VBox history = ((VBox) commandHistory.getContent());
+            VBox history = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
             history.getChildren().add(UIFactory.createText(command));
         });
         Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearCommandHistory());
@@ -162,7 +164,12 @@ public class ControlPanelView {
     }
 
     private void setUpCommandHistoryPane(){
-        commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, new VBox());
+        VBox allCommands = new VBox();
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(allCommands);
+        commandHistory = new TitledPane(COMMAND_HISTORY_TITLE, sp);
+        sp.setPadding(new Insets(10));
+        commandHistory.setExpanded(false);
     }
 
     private void setUpTurtleStatus(){

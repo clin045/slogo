@@ -16,7 +16,7 @@ import java.util.*;
 public class VariableTracker {
     private Turtle turtle;
     private ObservableMap<String, Object> varMap;
-    private Map<String, List<String>>commandMap;
+    private ObservableMap<String, List<String>>commandMap;
 
     /**
      * Default constructor initializes Turtle() and HashMap()
@@ -24,7 +24,7 @@ public class VariableTracker {
     public VariableTracker(){
         turtle = new Turtle();
         varMap = FXCollections.observableMap(new HashMap<>());
-        commandMap=new HashMap<>();
+        commandMap=FXCollections.observableMap(new HashMap<>());
     }
 
     /**
@@ -92,7 +92,7 @@ public class VariableTracker {
         return "done";
     }
 
-    public Map<String, List<String>> getCommandMap() {
+    public ObservableMap<String, List<String>> getCommandMap() {
         return commandMap;
     }
 
