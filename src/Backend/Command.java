@@ -2,6 +2,7 @@ package Backend;
 
 import Backend.Exceptions.InvalidInputException;
 import Backend.Exceptions.InvalidVariableCallException;
+import Backend.Exceptions.ParameterAmountException;
 
 import java.util.List;
 import java.util.MissingResourceException;
@@ -26,7 +27,7 @@ public abstract class Command {
      */
     public double parseParameters(List<String> params) throws IllegalArgumentException{
         double param;
-        if(params.size()==0){throw new IllegalArgumentException("Not enough arguments");}
+        if(params.size()==0){throw new ParameterAmountException();}
         if(CommandManager.isCommand(params.get(0))){
 
             Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
