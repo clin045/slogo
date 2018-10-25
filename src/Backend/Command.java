@@ -28,43 +28,42 @@ public abstract class Command {
         double param;
         if(params.size()==0){throw new IllegalArgumentException("Not enough arguments");}
         if(CommandManager.isCommand(params.get(0))){
-            try{
-                Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
-                params.remove(0);
-                param=Double.parseDouble(nextCmd.execute(params));
 
-            }catch (NumberFormatException e2){
-                throw new IllegalArgumentException("Incompatible return types: "+params.get(0));
-            }catch (MissingResourceException me){
-                if(params.get(0).charAt(0)==':'){
-                    Double temp=(Double)myTracker.get(params.get(0).substring(1));
-                    if(temp==null){
-                        List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
-                        String commandName=params.get(0);
-                        if(userCommand!=null){
-                            params.addAll(0,userCommand);
-                            params.remove(commandName);
-                            return parseParameters(params);
-                        }
-                        else{throw new InvalidInputException(params.get(0));}
-                    }
-                    else{
-                        params.remove(0);
-                        param=temp;
-                    }
-
-                }
-                else{throw new InvalidVariableCallException();}
-
-            }
+            Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
+            params.remove(0);
+            param=Double.parseDouble(nextCmd.execute(params));
         }
         else {
-//            System.out.println("PARAM: "+ params.get(0));
-            param=Double.parseDouble(params.get(0));
+            //handle user-defined variables
+            if(params.get(0).charAt(0)==':'){
+                Double temp=(Double)myTracker.get(params.get(0).substring(1));
+                if(temp==null){
+                    List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
+                    String commandName=params.get(0);
+                    if(userCommand!=null){
+                        params.addAll(0,userCommand);
+                        params.remove(commandName);
+                        return parseParameters(params);
+
+                    }
+                    else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
+                }
+
+                else{
+                    params.remove(0);
+                    param=temp;
+                }
+                return param;
+            }
+            try {
+                param = Double.parseDouble(params.get(0));
+            }
+            catch(NumberFormatException e){
+                throw new IllegalArgumentException("Invalid parameter");
+
+            }
             params.remove(0);
         }
-
-
         return param;
     }
     public abstract String execute(List <String>params);
