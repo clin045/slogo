@@ -19,7 +19,7 @@ public class CommandRight extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle = myTracker.getTurtle();
+        var turtle = myTracker.getActiveTurtle();
         rightAmt = parseParameters(params);
         return Double.toString(turtle.right(rightAmt));
     }

@@ -17,6 +17,6 @@ public class CommandShowTurtle extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(CommandManager.myTracker.getTurtle().show());
+        return Integer.toString(CommandManager.myTracker.getActiveTurtle().show());
     }
 }
