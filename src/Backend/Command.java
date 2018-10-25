@@ -45,7 +45,7 @@ public abstract class Command {
                         return parseParameters(params);
 
                     }
-                    else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
+                    else{throw new InvalidInputException(params.get(0));}
                 }
 
                 else{
@@ -58,7 +58,7 @@ public abstract class Command {
                 param = Double.parseDouble(params.get(0));
             }
             catch(NumberFormatException e){
-                throw new IllegalArgumentException("Invalid parameter");
+                throw new InvalidInputException(params.get(0));
 
             }
             params.remove(0);
