@@ -18,7 +18,7 @@ public class CommandManager {
 
     private static final Map<String, Command>myCommands= new HashMap<>();
     private TextParser myParser;
-    private static VariableTracker myTracker;
+    private VariableTracker myTracker;
 
 
 
@@ -44,12 +44,12 @@ public class CommandManager {
 
     }
 
-    public static Command getCommand(String str){
+    public static Command getCommand(String str, VariableTracker tracker){
         ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
         try{
 //            System.out.println(str);
             Class commandStr= Class.forName(commandBundle.getString(str));
-            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(myTracker);
+            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
             return command;
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException("Could not parse command"+str);
@@ -76,7 +76,7 @@ public class CommandManager {
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
             if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init=getCommand(parsedList.get(0));
+            try{  Command init=getCommand(parsedList.get(0), myTracker);
                 if(init==null){throw new InvalidInputException();}
 
                 parsedList.remove(0);
