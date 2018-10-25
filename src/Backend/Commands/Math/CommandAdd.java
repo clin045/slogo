@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ import java.util.List;
  */
 public class CommandAdd extends Command {
     private Double d1,d2;
-    public CommandAdd() {
-        super();
+    public CommandAdd(VariableTracker tracker) {
+        super(tracker);
     }
 
     @Override

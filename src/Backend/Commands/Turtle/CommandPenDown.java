@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CommandPenDown extends Command {
 
-    public CommandPenDown(){
-        super();
+    public CommandPenDown(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class CommandPenDown extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return String.valueOf(CommandManager.myTracker.getTurtle().penDown());
+        return String.valueOf(super.myTracker.getTurtle().penDown());
     }
 }

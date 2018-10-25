@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
@@ -10,8 +11,8 @@ import java.util.List;
 public class CommandDiff extends Command {
     private double d1,d2;
 
-    public CommandDiff(){
-        super();
+    public CommandDiff(VariableTracker tracker){
+        super(tracker);
 
     }
     @Override

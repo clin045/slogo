@@ -11,8 +11,8 @@ public class CommandTowards extends Command {
     int pointX;
     int pointY;
 
-    public CommandTowards(){
-        super();
+    public CommandTowards(VariableTracker tracker){
+        super(tracker);
     }
 
 
@@ -28,7 +28,7 @@ public class CommandTowards extends Command {
     public String execute(List<String> params) {
         pointX = (int) parseParameters(params);
         pointY = (int) parseParameters(params);
-        var myTurtle = CommandManager.myTracker.getTurtle();
+        var myTurtle = myTracker.getTurtle();
         return Double.toString(myTurtle.towards(pointX,pointY));
     }
 }

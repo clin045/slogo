@@ -9,7 +9,10 @@ import java.util.ResourceBundle;
 
 public abstract class Command {
 
-    public Command(){}
+    protected VariableTracker myTracker;
+    public Command(VariableTracker tracker){
+        myTracker=tracker;
+    }
 
 
     /**
@@ -33,7 +36,7 @@ public abstract class Command {
         }catch (NumberFormatException e){
             try{
 
-                Command nextCmd= getCommand(params.get(0));
+                Command nextCmd= getCommand(params.get(0),myTracker);
                 if(nextCmd==null){throw new IllegalArgumentException("Can't parse input"+params.get(0));}
                 params.remove(0);
                 param=Double.parseDouble(nextCmd.execute(params));
@@ -41,23 +44,27 @@ public abstract class Command {
             }catch (NumberFormatException e2){
                 throw new IllegalArgumentException("Incompatible return types: "+params.get(0));
             }catch (MissingResourceException me){
-                Double temp=(Double)CommandManager.myTracker.get(params.get(0));
-                if(temp==null){throw new IllegalArgumentException("Variable not defined: "+params.get(0));}
+                if(params.get(0).charAt(0)==':'){
+                    Double temp=(Double)myTracker.get(params.get(0).substring(1));
+                    if(temp==null){throw new IllegalArgumentException("Variable not defined: "+params.get(0));}
 //                System.out.println("Got: x="+temp);
-                params.remove(0);
-                param=temp;
+                    params.remove(0);
+                    param=temp;
+                }
+                else{throw new IllegalArgumentException("Variable calls must be preceeded by :");}
+
             }
         }
         return param;
     }
     public abstract String execute(List <String>params);
 
-    public static Command getCommand(String str){
+    public static Command getCommand(String str, VariableTracker tracker){
         ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
         try{
 //            System.out.println(str);
             Class commandStr= Class.forName(commandBundle.getString(str));
-            Command command= (Command) commandStr.getDeclaredConstructor().newInstance();
+            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
             return command;
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException("Could not parse command"+str);

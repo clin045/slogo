@@ -1,12 +1,13 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandPow extends Command {
     private double d1,d2;
-    public CommandPow(){super();}
+    public CommandPow(VariableTracker tracker){super(tracker);}
 
     @Override
     public String getDescription() {

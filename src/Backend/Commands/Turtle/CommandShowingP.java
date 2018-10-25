@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CommandShowingP extends Command {
 
-    public CommandShowingP(){
-        super();
+    public CommandShowingP(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class CommandShowingP extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return CommandManager.myTracker.getTurtle().getVisibility() ? "1" : "0";
+        return myTracker.getTurtle().getVisibility() ? "1" : "0";
     }
 }

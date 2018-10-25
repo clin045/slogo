@@ -8,8 +8,8 @@ import java.util.List;
 
 
 public class CommandXCor extends Command{
-    public CommandXCor(){
-        super();
+    public CommandXCor(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class CommandXCor extends Command{
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(CommandManager.myTracker.getTurtle().getX());
+        return Integer.toString(myTracker.getTurtle().getX());
     }
 }

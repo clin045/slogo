@@ -2,12 +2,13 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandShowTurtle extends Command {
-    public CommandShowTurtle(){
-        super();
+    public CommandShowTurtle(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -17,6 +18,6 @@ public class CommandShowTurtle extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(CommandManager.myTracker.getTurtle().show());
+        return Integer.toString(myTracker.getTurtle().show());
     }
 }

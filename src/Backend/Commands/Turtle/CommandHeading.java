@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CommandHeading extends Command {
 
-    public CommandHeading(){
-        super();
+    public CommandHeading(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class CommandHeading extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Double.toString(CommandManager.myTracker.getTurtle().getHeading());
+        return Double.toString(super.myTracker.getTurtle().getHeading());
     }
 }

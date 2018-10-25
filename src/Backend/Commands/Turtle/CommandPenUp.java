@@ -2,13 +2,14 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandPenUp extends Command {
 
-    public CommandPenUp(){
-        super();
+    public CommandPenUp(VariableTracker tracker){
+        super(tracker);
     }
 
 
@@ -18,6 +19,6 @@ public class CommandPenUp extends Command {
     }
 
     public String execute(List<String> params) {
-        return Integer.toString(CommandManager.myTracker.getTurtle().penUp());
+        return Integer.toString(super.myTracker.getTurtle().penUp());
     }
 }

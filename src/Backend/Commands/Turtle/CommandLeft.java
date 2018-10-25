@@ -2,13 +2,14 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandLeft extends Command {
     private double leftAmt;
-   public CommandLeft(){
-        super();
+   public CommandLeft(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -18,7 +19,7 @@ public class CommandLeft extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle = CommandManager.myTracker.getTurtle();
+        var turtle = super.myTracker.getTurtle();
         leftAmt=parseParameters(params);
         return Double.toString(turtle.left(leftAmt));
     }

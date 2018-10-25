@@ -40,7 +40,7 @@ public class CommandInputHandler extends TextArea {
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
 
-        if(keySize!=CommandManager.myTracker.keySet().size()){
+        if(keySize!=commandManager.getMyTracker().keySet().size()){
             VBox definedVariable = (VBox) variableHistory.getContent();
 //            String lastKey = new String();
 //            Iterator<String> itr = CommandManager.myTracker.keySet().iterator();
@@ -48,10 +48,10 @@ public class CommandInputHandler extends TextArea {
 //                System.out.println(itr.next());
 //                lastKey = itr.next();
 //            }
-            String lastKey = getLastKey(CommandManager.myTracker.keySet());
+            String lastKey = getLastKey(commandManager.getMyTracker().keySet());
             System.out.println("Last key:" + lastKey);
-            definedVariable.getChildren().add(UIFactory.createText(lastKey + ": " + CommandManager.myTracker.get(lastKey)));
-            keySize = CommandManager.myTracker.keySet().size();
+            definedVariable.getChildren().add(UIFactory.createText(lastKey + ": " + commandManager.getMyTracker().get(lastKey)));
+            keySize = commandManager.getMyTracker().keySet().size();
         }
 
         return this.getText();

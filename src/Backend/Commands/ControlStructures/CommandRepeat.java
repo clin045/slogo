@@ -2,6 +2,7 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class CommandRepeat extends Command {
     private String[] input;
     private int repeatNumber;
-    public CommandRepeat(){super();}
+    public CommandRepeat(VariableTracker tracker){super(tracker);}
 
     @Override
     public String getDescription() {
@@ -32,7 +33,7 @@ public class CommandRepeat extends Command {
         double d1=0;
         List<String>temp=new ArrayList<>();
         for (int i=1;i<=repeatNumber;i+=1){
-            CommandManager.myTracker.put("repcount",(double)i);
+            super.myTracker.put("repcount",(double)i);
 //            System.out.println("LOOP: "+i+"/"+repeatNumber);
            // System.out.println("REPCOUNT: "+CommandManager.myTracker.get("repcount"));
             temp=new ArrayList<>(params);
@@ -42,7 +43,7 @@ public class CommandRepeat extends Command {
                 if(temp.get(0).equals("[")){break;}
 //                System.out.println("Temp: ");
                 //for(String str:temp){System.out.println(str);}
-                Command loopCmd=Command.getCommand(temp.get(0));
+                Command loopCmd=Command.getCommand(temp.get(0),super.myTracker);
 //                System.out.println("got commands");
                 temp.remove(0);
                 String loop=loopCmd.execute(temp);

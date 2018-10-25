@@ -2,13 +2,14 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandCS extends Command {
 
-    public CommandCS(){
-        super();
+    public CommandCS(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -18,7 +19,7 @@ public class CommandCS extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle= CommandManager.myTracker.getTurtle();
+        var turtle= super.myTracker.getTurtle();
         turtle.clearScreen();
         return "0.0";
     }

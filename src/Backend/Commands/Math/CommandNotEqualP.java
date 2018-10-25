@@ -1,10 +1,12 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandNotEqualP extends Command {
+    public CommandNotEqualP(VariableTracker tracker){super(tracker);}
     @Override
     public String getDescription() {
         return "returns 1 if the value of expr1 and the value of expr2 are not equal, otherwise 0";
