@@ -1,6 +1,7 @@
 package Backend;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidInputException;
 import Backend.TextParser;
 import Backend.VariableTracker;
 
@@ -54,7 +55,7 @@ public class CommandManager {
         while(parsedList.size()>0){
             if(parsedList.get(0).equals("[")){return out;}
             try{  Command init=Command.getCommand(parsedList.get(0),myTracker);
-                if(init==null){throw new IllegalArgumentException("Invalid input");}
+                if(init==null){throw new InvalidInputException();}
                 parsedList.remove(0);
                 out=init.execute(parsedList);
             }catch (MissingResourceException e){
@@ -68,7 +69,7 @@ public class CommandManager {
 
                             parsedList.remove(commandName);
                         }
-                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
+                        else{throw new InvalidInputException(parsedList.get(0));}}
                     else{
                     out=""+val;
                     parsedList.remove(0);
