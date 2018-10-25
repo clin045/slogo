@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -28,6 +27,9 @@ public class ControlPanelView {
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
+    private static final String DEFAULT_HEADING = "90";
+    private static final String DEFAULT_POSITION = "0,0";
+    private static final String DEFAULT_ID = "0";
 
     VBox vBox;
     Workspace workspace;
@@ -45,7 +47,6 @@ public class ControlPanelView {
         //set up UI
         setUpTextInputArea(workspace);// add text input field
         setUpWorkspaceSetting();
-//        setUpCommandHistoryPane();
         commandHistory = setUpScrollingTitlePane(COMMAND_HISTORY_TITLE, commandHistory);
         setUpTurtleStatus();
         userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE, userDefinedCommands);
@@ -74,20 +75,8 @@ public class ControlPanelView {
 
         HBox penColorBox = UIFactory.createInputFieldWithLabel("Pen's color: ", penColorPicker);
 
-        // add pen up/down
-        final ToggleGroup group = new ToggleGroup();
-
-        ToggleButton tb2 = new ToggleButton("Down");
-        tb2.setToggleGroup(group);
-        tb2.setSelected(true);
-        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                controller.togglePenDown();
-            }
-        });
-
-        HBox upDown = new HBox(tb2);
+        // add pen down button
+        HBox upDown = addPenDownButton();
         upDown.setAlignment(Pos.CENTER_RIGHT);
 
         // add pen thickness
@@ -108,18 +97,7 @@ public class ControlPanelView {
         HBox imageSetter = UIFactory.createInputFieldWithLabel("Change turtle image: ", button);
 
         // add language setting
-        ObservableList<String> options =
-                FXCollections.observableArrayList(
-                        "English", "Chinese", "French", "German",
-                        "Italian", "Portuguese", "Russian", "Spanish"
-                );
-        final ComboBox comboBox = new ComboBox(options);
-        comboBox.getSelectionModel().selectFirst();
-        comboBox.setOnAction(event -> {
-            String s = comboBox.getSelectionModel().getSelectedItem().toString();
-            commandInputHandler.setLanguage(s);
-        });
-        HBox languageSetter = UIFactory.createInputFieldWithLabel("Language: ", comboBox);
+        HBox languageSetter = UIFactory.createInputFieldWithLabel("Language: ", addLanguageComboBox());
 
         // put everything inside a vbox
         VBox setting = new VBox(bgColorBox, penColorBox,  upDown, penThicknessBox, imageSetter, languageSetter);
@@ -127,6 +105,35 @@ public class ControlPanelView {
         workspaceSetting = new TitledPane(WORKSPACE_SETTING_TITLE, setting);
     }
 
+    private HBox addPenDownButton(){
+        final ToggleGroup group = new ToggleGroup();
+
+        ToggleButton tb2 = new ToggleButton("Down");
+        tb2.setToggleGroup(group);
+        tb2.setSelected(true);
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                controller.togglePenDown();
+            }
+        });
+        return new HBox(tb2);
+    }
+
+    private ComboBox addLanguageComboBox(){
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "English", "Chinese", "French", "German",
+                        "Italian", "Portuguese", "Russian", "Spanish"
+                );
+        ComboBox comboBox = new ComboBox(options);
+        comboBox.getSelectionModel().selectFirst();
+        comboBox.setOnAction(event -> {
+            String s = comboBox.getSelectionModel().getSelectedItem().toString();
+            commandInputHandler.setLanguage(s);
+        });
+        return comboBox;
+    }
 
     // add text input field and related buttons
     private void setUpTextInputArea(Workspace workspace){
@@ -141,11 +148,11 @@ public class ControlPanelView {
             addNewTab();
         });
         Button loadButton = UIFactory.createButton("Load", event -> {
-           // load file
+           // load file here
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
-            // save file
+            // save file here
         });
 
         HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton);
@@ -158,17 +165,16 @@ public class ControlPanelView {
         ScrollPane sp = new ScrollPane();
         sp.setContent(allCommands);
         titledPane = new TitledPane(title, sp);
-        sp.setPadding(new Insets(10));
+        sp.setPadding(new Insets(Workspace.PADDING));
         titledPane.setExpanded(false);
         return titledPane;
     }
 
     private void setUpTurtleStatus(){
-        HBox ID = UIFactory.createTextLabelWithValue("ID: ", "0");
-        HBox position = UIFactory.createTextLabelWithValue("Position: ", "0,0");
-        HBox heading = UIFactory.createTextLabelWithValue("Heading: ", "90");
+        HBox ID = UIFactory.createTextLabelWithValue("ID: ", DEFAULT_ID);
+        HBox position = UIFactory.createTextLabelWithValue("Position: ", DEFAULT_POSITION);
+        HBox heading = UIFactory.createTextLabelWithValue("Heading: ", DEFAULT_HEADING);
         turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox(ID, position, heading));
-
     }
 
     private void clearCommandHistory(){
