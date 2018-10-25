@@ -29,10 +29,10 @@ public class CommandIf extends Command {
         Command firstExpressionCommand = null;
         double expressionValue = -1;
 
-        try{
+        if(CommandManager.isCommand(firstExpressionString)){
             firstExpressionCommand = Command.getCommand(firstExpressionString,super.myTracker);
         }
-        catch(MissingResourceException e){
+        else{
             //indicates that first expression is a value, not a command
             expressionValue = Double.parseDouble(firstExpressionString);
         }
