@@ -2,6 +2,7 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class CommandTowards extends Command {
     public String execute(List<String> params) {
         pointX = (int) parseParameters(params);
         pointY = (int) parseParameters(params);
-        var myTurtle = CommandManager.myTracker.getActiveTurtle();
+        var myTurtle = myTracker.getActiveTurtle();
         return Double.toString(myTurtle.towards(pointX,pointY));
     }
 }
