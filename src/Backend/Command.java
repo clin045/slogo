@@ -9,8 +9,6 @@ public abstract class Command {
     public Command(VariableTracker tracker){
         myTracker=tracker;
     }
-
-
     /**
      *
      * @return description of what the command does to the user
