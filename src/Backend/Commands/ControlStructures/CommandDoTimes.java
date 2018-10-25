@@ -35,7 +35,7 @@ public class CommandDoTimes extends Command {
             while(tempList.size()>0){
                 if(tempList.get(0).equals("]")){break;}
                 if(tempList.get(0).equals("[")){break;}
-                Command loopCmd= CommandManager.getCommand(tempList.get(0), );
+                Command loopCmd= CommandManager.getCommand(tempList.get(0), myTracker);
                 tempList.remove(0);
                 out=Double.parseDouble(loopCmd.execute(tempList));
                 temp+=1;
