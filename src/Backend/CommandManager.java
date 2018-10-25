@@ -1,11 +1,8 @@
 package Backend;
 
-import Backend.Command;
-import Backend.Exceptions.InvalidInputException;
-import Backend.TextParser;
-import Backend.VariableTracker;
 
-import java.awt.desktop.SystemSleepEvent;
+import Backend.Exceptions.InvalidInputException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -22,6 +19,8 @@ public class CommandManager {
     private static final Map<String, Command>myCommands= new HashMap<>();
     private TextParser myParser;
     private VariableTracker myTracker;
+
+
 
 
     /**
@@ -44,18 +43,43 @@ public class CommandManager {
        preloadCommands();
 
     }
+
+    public static Command getCommand(String str, VariableTracker tracker){
+        ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+        try{
+//            System.out.println(str);
+            Class commandStr= Class.forName(commandBundle.getString(str));
+            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
+            return command;
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (InvocationTargetException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        }
+    }
+
     public void setLanguage(String path){
         myParser.setLanguage(path);
     }
-
+    public static boolean isCommand(String cmd){
+        return myCommands.containsKey(cmd);
+    }
 
     public String execute(String userInput){
         String out="";
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
             if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init=Command.getCommand(parsedList.get(0),myTracker);
+
+            try{  Command init=getCommand(parsedList.get(0),myTracker);
                 if(init==null){throw new InvalidInputException();}
+
                 parsedList.remove(0);
                 out=init.execute(parsedList);
             }catch (MissingResourceException e){

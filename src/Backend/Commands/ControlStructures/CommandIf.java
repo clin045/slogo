@@ -1,10 +1,10 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
+import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
-import java.util.MissingResourceException;
 
 public class CommandIf extends Command {
     public CommandIf(VariableTracker tracker){
@@ -27,10 +27,11 @@ public class CommandIf extends Command {
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
-        try{
-            firstExpressionCommand = Command.getCommand(firstExpressionString,super.myTracker);
+
+        if(CommandManager.isCommand(firstExpressionString)){
+            firstExpressionCommand = CommandManager.getCommand(firstExpressionString,super.myTracker);
         }
-        catch(MissingResourceException e){
+        else{
             //indicates that first expression is a value, not a command
             expressionValue = Double.parseDouble(firstExpressionString);
         }
@@ -43,10 +44,9 @@ public class CommandIf extends Command {
             return "0";
         }
         else{
-            //var commandParams = params.subList(1, closeBracket);
             params.remove("[");
             var firstCommandStr = params.get(0);
-            Command firstCommand = Command.getCommand(firstCommandStr,super.myTracker);
+            Command firstCommand = CommandManager.getCommand(firstCommandStr,super.myTracker);
             params.remove(0);
             String str=firstCommand.execute(params);
 

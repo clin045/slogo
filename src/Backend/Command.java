@@ -1,11 +1,7 @@
 package Backend;
 
-import Backend.CommandManager;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 public abstract class Command {
 
@@ -36,7 +32,7 @@ public abstract class Command {
         }catch (NumberFormatException e){
             try{
 
-                Command nextCmd= getCommand(params.get(0),myTracker);
+                Command nextCmd= CommandManager.getCommand(params.get(0),myTracker);
                 if(nextCmd==null){throw new IllegalArgumentException("Can't parse input"+params.get(0));}
                 params.remove(0);
                 param=Double.parseDouble(nextCmd.execute(params));
@@ -69,26 +65,6 @@ public abstract class Command {
         return param;
     }
     public abstract String execute(List <String>params);
-
-    public static Command getCommand(String str, VariableTracker tracker){
-        ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
-        try{
-//            System.out.println(str);
-            Class commandStr= Class.forName(commandBundle.getString(str));
-            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
-            return command;
-        } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
-        } catch (InstantiationException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
-        } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
-        } catch (InvocationTargetException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
-        }
-    }
 
 
 }
