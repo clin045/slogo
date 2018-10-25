@@ -20,12 +20,12 @@ public class Workspace extends BorderPane {
     TurtleView turtleView;
     VariableTracker variableTracker;
     TabPane tabPane;
+    public static final int PADDING = 10;
 
     // create a new workspace
     public Workspace(){
         setUpTurtleDisplayArea();
         Controller controller = new Controller(area, turtleView);
-//        variableTracker = new VariableTracker(controller); // possibly pass in the a reference to controller here
         CommandManager commandManager = new CommandManager("languages.English");
         commandManager.getMyTracker().getActiveTurtle().setController(controller);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
@@ -59,7 +59,7 @@ public class Workspace extends BorderPane {
             allCommands.getChildren().add(UIFactory.createText(command+": "+CommandManager.getCommands().get(command).getDescription()));
         }
         TitledPane helperMenu = new TitledPane("User Guide", sp);
-        sp.setPadding(new Insets(10));
+        sp.setPadding(new Insets(PADDING));
         helperMenu.setExpanded(false);
         return helperMenu;
     }

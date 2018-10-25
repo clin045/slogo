@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -163,7 +164,10 @@ public class ControlPanelView {
     }
 
     private void setUpTurtleStatus(){
-        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox());
+        HBox ID = UIFactory.createTextLabelWithValue("ID: ", "0");
+        HBox position = UIFactory.createTextLabelWithValue("Position: ", "0,0");
+        HBox heading = UIFactory.createTextLabelWithValue("Heading: ", "90");
+        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox(ID, position, heading));
 
     }
 

@@ -22,6 +22,11 @@ public class TurtleView {
         turtleImageView.setFitHeight(SIZE);
     }
 
+    public TurtleView(int id){
+        this();
+        this.id = id;
+    }
+
     public ImageView getTurtleImageView(){
         return turtleImageView;
     }
@@ -37,16 +42,6 @@ public class TurtleView {
 
     // update the position of the turtle to a new position
     public void update(double x, double y){
-
-//        Path path = new Path();
-//        path.getElements().add(new MoveTo(getX(),getY()));
-//        path.getElements().add(new LineTo(getX()+x, getY()-y));
-//
-//        PathTransition pt = new PathTransition(Duration.seconds(2), path, turtleImageView);
-//
-//        Animation animation = new SequentialTransition(pt);
-//        animation.play();
-
         turtleImageView.setLayoutX(getX()+x);
         turtleImageView.setLayoutY(getY()-y);
     }
