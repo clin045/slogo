@@ -76,9 +76,6 @@ public class CommandManager {
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
             if(parsedList.get(0).equals("[")){return out;}
-\            try{  Command init= getCommand(parsedList.get(0));
-                if(init==null){throw new IllegalArgumentException("Invalid input");}
-
             try{  Command init=getCommand(parsedList.get(0));
                 if(init==null){throw new InvalidInputException();}
 
