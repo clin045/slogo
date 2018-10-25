@@ -48,6 +48,9 @@ public class Turtle {
     public Turtle(int ID, double x, double y) {
         this(ID, x, y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
     }
+    public Turtle(int ID){
+        this(ID, DEFAULT_X, DEFAULT_Y);
+    }
 
     /**
      * constructs a Turtle object with default parameters

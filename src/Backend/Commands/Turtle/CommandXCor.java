@@ -2,7 +2,6 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
-import Backend.VariableTracker;
 
 import java.util.List;
 
@@ -19,6 +18,6 @@ public class CommandXCor extends Command{
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(CommandManager.myTracker.getTurtle().getX());
+        return Integer.toString(CommandManager.myTracker.getActiveTurtle().getX());
     }
 }

@@ -18,7 +18,7 @@ public class CommandCS extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle= CommandManager.myTracker.getTurtle();
+        var turtle= CommandManager.myTracker.getActiveTurtle();
         turtle.clearScreen();
         return "0.0";
     }
