@@ -5,7 +5,6 @@ import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
-import java.util.MissingResourceException;
 
 public class CommandIfElse extends Command {
     public CommandIfElse(VariableTracker tracker){
@@ -29,7 +28,7 @@ public class CommandIfElse extends Command {
         Command firstExpressionCommand = null;
         double expressionValue = -1;
         if(CommandManager.isCommand(firstExpressionString)){
-            firstExpressionCommand = Command.getCommand(firstExpressionString,super.myTracker);
+            firstExpressionCommand = CommandManager.getCommand(firstExpressionString,super.myTracker);
         }
         else{
          //indicates that first expression is a value, not a command
@@ -48,7 +47,7 @@ public class CommandIfElse extends Command {
 
             params.remove("[");
             var firstCommandStr = params.get(0);
-            Command firstCommand = Command.getCommand(firstCommandStr,super.myTracker);
+            Command firstCommand = CommandManager.getCommand(firstCommandStr,super.myTracker);
             params.remove(0);
             String str=firstCommand.execute(params);
 
@@ -60,7 +59,7 @@ public class CommandIfElse extends Command {
             //var commandParams = params.subList(1, closeBracket);
             params.remove("[");
             var firstCommandStr = params.get(0);
-            Command firstCommand = Command.getCommand(firstCommandStr,super.myTracker);
+            Command firstCommand = CommandManager.getCommand(firstCommandStr,super.myTracker);
             params.remove(0);
             String str=firstCommand.execute(params);
             closeBracket = params.indexOf("]");

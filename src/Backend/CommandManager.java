@@ -1,10 +1,5 @@
 package Backend;
 
-import Backend.Command;
-import Backend.TextParser;
-import Backend.VariableTracker;
-
-import java.awt.desktop.SystemSleepEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -45,6 +40,27 @@ public class CommandManager {
        preloadCommands();
 
     }
+
+    public static Command getCommand(String str, VariableTracker tracker){
+        ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+        try{
+//            System.out.println(str);
+            Class commandStr= Class.forName(commandBundle.getString(str));
+            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
+            return command;
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        } catch (InvocationTargetException e) {
+            throw new IllegalArgumentException("Could not parse command"+str);
+        }
+    }
+
     public void setLanguage(String path){
         myParser.setLanguage(path);
     }
@@ -57,7 +73,7 @@ public class CommandManager {
         List<String>parsedList = myParser.parse(userInput);
         while(parsedList.size()>0){
             if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init=Command.getCommand(parsedList.get(0),myTracker);
+            try{  Command init= getCommand(parsedList.get(0),myTracker);
                 if(init==null){throw new IllegalArgumentException("Invalid input");}
                 parsedList.remove(0);
                 out=init.execute(parsedList);
