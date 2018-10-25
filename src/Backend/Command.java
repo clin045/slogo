@@ -28,11 +28,9 @@ public abstract class Command {
 //            System.out.println("PARAM: "+ params.get(0));
             param=Double.parseDouble(params.get(0));
             params.remove(0);
-
         }catch (NumberFormatException e){
             try{
-
-                Command nextCmd= CommandManager.getCommand(params.get(0),myTracker);
+                Command nextCmd= CommandManager.getCommand(params.get(0));
                 if(nextCmd==null){throw new IllegalArgumentException("Can't parse input"+params.get(0));}
                 params.remove(0);
                 param=Double.parseDouble(nextCmd.execute(params));
