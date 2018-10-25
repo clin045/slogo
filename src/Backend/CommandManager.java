@@ -1,7 +1,9 @@
 package Backend;
 
 
+import Backend.Exceptions.CommandParsingException;
 import Backend.Exceptions.InvalidInputException;
+import Backend.Exceptions.InvalidVariableCallException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -11,6 +13,8 @@ import java.util.ResourceBundle;
  * @author Michael Glushakov (mg367)
  */
 public class CommandManager {
+    public static final String ERROR_PATH="config.Errors";
+    public static final String COMMAND_PATH="config.Commands";
 
     public static Map<String, Command> getCommands() {
         return myCommands;
@@ -45,22 +49,21 @@ public class CommandManager {
     }
 
     public static Command getCommand(String str, VariableTracker tracker){
-        ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+        ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
         try{
-//            System.out.println(str);
             Class commandStr= Class.forName(commandBundle.getString(str));
             Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
             return command;
         } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
+            throw new CommandParsingException(str);
         } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
+            throw new CommandParsingException(str);
         } catch (InstantiationException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
+            throw new CommandParsingException(str);
         } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
+            throw new CommandParsingException(str);
         } catch (InvocationTargetException e) {
-            throw new IllegalArgumentException("Could not parse command"+str);
+            throw new CommandParsingException(str);
         }
     }
 
@@ -100,7 +103,7 @@ public class CommandManager {
                     }
                 }
                 else{
-                    throw new IllegalArgumentException("Variable and custom command calls must be preceeded by a semicolon");
+                    throw new InvalidVariableCallException();
                 }
 
             }
@@ -118,7 +121,7 @@ public class CommandManager {
 
     private void preloadCommands(){
         try{
-            ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+            ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
             for(String key: Collections.list(commandBundle.getKeys())){
                 try{
                     Class commandStr= Class.forName(commandBundle.getString(key));
@@ -126,23 +129,23 @@ public class CommandManager {
                     myCommands.put(key,command);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Could Not Load Command String: "+e.getMessage());
+                    throw new CommandParsingException(key);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                    throw new CommandParsingException(key);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
+                    throw new CommandParsingException(key);
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Could not Create Command Object");
+                    throw new CommandParsingException(key);
                 } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                    throw new CommandParsingException(key);
                 }
 
             }
         }catch (MissingResourceException e){
-            e.printStackTrace();
+            throw new CommandParsingException("");
         }
 
     }
