@@ -36,7 +36,7 @@ public class CommandFor extends Command {
                 if(tempList.get(0).equals("]")){break;}
                 if(tempList.get(0).equals("[")){break;}
 
-                Command loopCmd= CommandManager.getCommand(tempList.get(0),super.myTracker);
+                Command loopCmd= CommandManager.getCommand(tempList.get(0), myTracker);
                 tempList.remove(0);
                 out=Double.parseDouble(loopCmd.execute(tempList));
             }

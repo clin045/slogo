@@ -1,12 +1,15 @@
 package Backend.Exceptions;
 
+import Backend.CommandManager;
+
 import java.util.ResourceBundle;
 
-public class InvalidInputException extends IllegalArgumentException {
+public class InvalidInputException extends CustomException {
+    private static String MY_KEY="InvalidInputException";
     public InvalidInputException(){
-        super(ResourceBundle.getBundle("config.Errors").getString("InvalidInputException"));
+        super(MY_KEY);
     }
     public InvalidInputException(String str){
-        super(ResourceBundle.getBundle("config.Errors").getString("InvalidInputException")+":"+str);
+        super(MY_KEY,str);
     }
 }

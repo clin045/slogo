@@ -1,5 +1,9 @@
 package Backend;
 
+import Backend.Exceptions.InvalidInputException;
+import Backend.Exceptions.InvalidVariableCallException;
+import Backend.Exceptions.ParameterAmountException;
+
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -9,8 +13,6 @@ public abstract class Command {
     public Command(VariableTracker tracker){
         myTracker=tracker;
     }
-
-
     /**
      *
      * @return description of what the command does to the user
@@ -23,44 +25,43 @@ public abstract class Command {
      */
     public double parseParameters(List<String> params) throws IllegalArgumentException{
         double param;
-        if(params.size()==0){throw new IllegalArgumentException("Not enough arguments");}
-        try {
-//            System.out.println("PARAM: "+ params.get(0));
-            param=Double.parseDouble(params.get(0));
+        if(params.size()==0){throw new ParameterAmountException();}
+        if(CommandManager.isCommand(params.get(0))){
+
+            Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
             params.remove(0);
+            param=Double.parseDouble(nextCmd.execute(params));
+        }
+        else {
+            //handle user-defined variables
+            if(params.get(0).charAt(0)==':'){
+                Double temp=(Double)myTracker.get(params.get(0).substring(1));
+                if(temp==null){
+                    List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
+                    String commandName=params.get(0);
+                    if(userCommand!=null){
+                        params.addAll(0,userCommand);
+                        params.remove(commandName);
+                        return parseParameters(params);
 
-        }catch (NumberFormatException e){
-            try{
-
-                Command nextCmd= CommandManager.getCommand(params.get(0),myTracker);
-                if(nextCmd==null){throw new IllegalArgumentException("Can't parse input"+params.get(0));}
-                params.remove(0);
-                param=Double.parseDouble(nextCmd.execute(params));
-
-            }catch (NumberFormatException e2){
-                throw new IllegalArgumentException("Incompatible return types: "+params.get(0));
-            }catch (MissingResourceException me){
-                if(params.get(0).charAt(0)==':'){
-                    Double temp=(Double)myTracker.get(params.get(0).substring(1));
-                    if(temp==null){
-                        List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
-                        String commandName=params.get(0);
-                        if(userCommand!=null){
-                            params.addAll(0,userCommand);
-                            params.remove(commandName);
-                            return parseParameters(params);
-                        }
-                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
-                      }
-                        else{
-                        params.remove(0);
-                        param=temp;
-                        }
-
+                    }
+                    else{throw new InvalidInputException(params.get(0));}
                 }
-                else{throw new IllegalArgumentException("Variable calls must be preceeded by :");}
+
+                else{
+                    params.remove(0);
+                    param=temp;
+                }
+                return param;
+            }
+            try {
+                param = Double.parseDouble(params.get(0));
+            }
+            catch(NumberFormatException e){
+                throw new InvalidInputException(params.get(0));
 
             }
+            params.remove(0);
         }
         return param;
     }
