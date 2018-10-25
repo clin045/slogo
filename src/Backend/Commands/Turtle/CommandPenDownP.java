@@ -2,14 +2,13 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
-import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandPenDownP extends Command {
 
-    public CommandPenDownP(){
-        super();
+    public CommandPenDownP(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,6 +18,6 @@ public class CommandPenDownP extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Boolean.toString(CommandManager.myTracker.getTurtle().getPenDown());
+        return CommandManager.myTracker.getActiveTurtle().getPenDown() ? "1" : "0";
     }
 }

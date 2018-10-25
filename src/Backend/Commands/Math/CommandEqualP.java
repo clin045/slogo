@@ -1,10 +1,15 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
+import javax.xml.validation.Validator;
 import java.util.List;
 
 public class CommandEqualP extends Command {
+    public CommandEqualP(VariableTracker tracker){
+        super(tracker);
+    }
     @Override
     public String getDescription() {
         return "returns 1 if the value of expr1 and the value of expr2 are equal, otherwise 0";

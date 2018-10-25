@@ -2,14 +2,13 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
-import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandShowingP extends Command {
 
-    public CommandShowingP(){
-        super();
+    public CommandShowingP(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,6 +18,6 @@ public class CommandShowingP extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Boolean.toString(CommandManager.myTracker.getTurtle().getVisibility());
+        return CommandManager.myTracker.getActiveTurtle().getVisibility() ? "1" : "0";
     }
 }

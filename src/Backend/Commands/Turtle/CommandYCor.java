@@ -2,13 +2,12 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
-import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandYCor extends Command {
-    public CommandYCor(){
-        super();
+    public CommandYCor(VariableTracker tracker){
+        super(tracker);
     }
     @Override
     public String getDescription() {
@@ -17,6 +16,6 @@ public class CommandYCor extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(CommandManager.myTracker.getTurtle().getY());
+        return Integer.toString(CommandManager.myTracker.getActiveTurtle().getY());
     }
 }

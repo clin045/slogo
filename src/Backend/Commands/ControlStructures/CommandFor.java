@@ -2,12 +2,16 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.VariableTracker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandFor extends Command {
     private String varName;
+    public CommandFor(VariableTracker tracker){
+        super(tracker);
+    }
     @Override
     public String getDescription() {
         return "runs command(s) for each value specified in the range, i.e., from (start - end), going by increment";
@@ -24,7 +28,7 @@ public class CommandFor extends Command {
         int end=(int)parseParameters(params);
         int increment=(int)parseParameters(params);
         for(int i=start;i<=end;i+=increment){
-            CommandManager.myTracker.put(varName,(double)i);
+            super.myTracker.put(varName,(double)i);
             tempList=new ArrayList<>(params);
             if(!tempList.get(0).equals("[")){throw new IllegalArgumentException("FOR commands must be surrounded by square brackets");}
             tempList.remove("[");
@@ -32,7 +36,7 @@ public class CommandFor extends Command {
                 if(tempList.get(0).equals("]")){break;}
                 if(tempList.get(0).equals("[")){break;}
 
-                Command loopCmd=Command.getCommand(tempList.get(0));
+                Command loopCmd=Command.getCommand(tempList.get(0),super.myTracker);
                 tempList.remove(0);
                 out=Double.parseDouble(loopCmd.execute(tempList));
             }

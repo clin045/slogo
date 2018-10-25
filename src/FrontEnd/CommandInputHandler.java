@@ -42,9 +42,9 @@ public class CommandInputHandler extends TextArea {
         }
 
         if(first){
-            ObservableMap<String, Object> varMap = CommandManager.myTracker.getVarMap();
+            ObservableMap<String, Object> varMap = commandManager.getMyTracker().getVarMap();
             VBox definedVariable = (VBox) variableHistory.getContent();
-            ObservableMap<String, List<String>> commandMap = CommandManager.myTracker.getCommandMap();
+            ObservableMap<String, List<String>> commandMap = commandManager.getMyTracker().getCommandMap();
             ScrollPane definedCommandsScrollPane = (ScrollPane) userDefinedCommands.getContent();
             VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
 
@@ -53,7 +53,7 @@ public class CommandInputHandler extends TextArea {
                 public void onChanged(Change<? extends String, ?> change) {
                     if(change.wasAdded()){
                         definedVariable.getChildren().add(
-                                UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), CommandManager.myTracker.getVarMap()
+                                UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), commandManager.getMyTracker().getVarMap()
                         ));
                     }
                 }
@@ -61,7 +61,7 @@ public class CommandInputHandler extends TextArea {
 
             for(String s: varMap.keySet()){
                 definedVariable.getChildren().add(
-                        UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), CommandManager.myTracker.getVarMap())
+                        UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap())
                 );
             }
 

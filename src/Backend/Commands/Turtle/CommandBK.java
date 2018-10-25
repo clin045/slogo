@@ -1,10 +1,11 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
-import static Backend.CommandManager.myTracker;
+
 
 /**
  * @author Christopher Lin cl349
@@ -13,8 +14,8 @@ import static Backend.CommandManager.myTracker;
 public class CommandBK extends Command {
     private double amountBack;
     public static final int NUM_PARAMS = 1;
-    public CommandBK(){
-        super();
+    public CommandBK(VariableTracker tracker){
+        super(tracker);
     }
 
 
@@ -25,10 +26,9 @@ public class CommandBK extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle = myTracker.getTurtle();
+        var turtle = myTracker.getActiveTurtle();
         amountBack=parseParameters(params);
-        turtle.back(amountBack);
-        return ""+amountBack;
+        return Double.toString(turtle.back(amountBack));
     }
 
 

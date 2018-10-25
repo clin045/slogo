@@ -1,12 +1,13 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandDiv extends Command {
     private double d1,d2;
-    public CommandDiv(){super();}
+    public CommandDiv(VariableTracker tracker){super(tracker);}
     @Override
     public String getDescription() {
         return "QUOTIENT: returns quotient of the parameters";

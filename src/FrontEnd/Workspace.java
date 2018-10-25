@@ -27,7 +27,7 @@ public class Workspace extends BorderPane {
         Controller controller = new Controller(area, turtleView);
 //        variableTracker = new VariableTracker(controller); // possibly pass in the a reference to controller here
         CommandManager commandManager = new CommandManager("languages.English");
-        CommandManager.myTracker.getTurtle().setController(controller);
+        CommandManager.myTracker.getActiveTurtle().setController(controller);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
         controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
 

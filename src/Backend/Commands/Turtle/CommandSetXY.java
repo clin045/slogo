@@ -2,15 +2,14 @@ package Backend.Commands.Turtle;
 
 import Backend.Command;
 import Backend.CommandManager;
-import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandSetXY extends Command {
     int pointX;
     int pointY;
-    public CommandSetXY(){
-        super();
+    public CommandSetXY(VariableTracker tracker){
+        super(tracker);
     }
 
     @Override
@@ -19,13 +18,11 @@ public class CommandSetXY extends Command {
                 "returns the distance turtle moved";
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         pointX = (int) parseParameters(params);
         pointY = (int) parseParameters(params);
-        var myTurtle = CommandManager.myTracker.getTurtle();
+        var myTurtle = CommandManager.myTracker.getActiveTurtle();
         return Double.toString(myTurtle.setXY(pointX,pointY));
     }
 }

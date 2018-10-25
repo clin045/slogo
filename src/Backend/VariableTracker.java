@@ -18,6 +18,9 @@ public class VariableTracker {
     private ObservableMap<String, Object> varMap;
     private ObservableMap<String, List<String>>commandMap;
 
+    private Map<Integer, Turtle> turtleMap;
+    private int activeTurtle;
+
     /**
      * Default constructor initializes Turtle() and HashMap()
      */
@@ -25,13 +28,32 @@ public class VariableTracker {
         turtle = new Turtle();
         varMap = FXCollections.observableMap(new HashMap<>());
         commandMap=FXCollections.observableMap(new HashMap<>());
+        turtleMap = new HashMap<>();
+
+        activeTurtle = 0;
+        createTurtle(0);
+    }
+
+    public void createTurtle(int id){
+        turtleMap.put(id, new Turtle(id));
     }
 
     /**
+     * Returns active turtle, creates a new one if it does not exist
      * @return turtle
      */
-    public Turtle getTurtle() {
-        return turtle;
+    public Turtle getActiveTurtle() {
+        if(turtleMap.containsKey(activeTurtle)){
+            return turtleMap.get(activeTurtle);
+        }
+        else{
+            createTurtle(activeTurtle);
+            return turtleMap.get(activeTurtle);
+        }
+    }
+
+    public void setActiveTurtle(int id){
+        activeTurtle = id;
     }
 
     /**
