@@ -1,5 +1,8 @@
 package Backend;
 
+import Backend.Exceptions.InvalidInputException;
+import Backend.Exceptions.InvalidVariableCallException;
+
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -43,7 +46,7 @@ public abstract class Command {
                             params.remove(commandName);
                             return parseParameters(params);
                         }
-                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+params.get(0));}
+                        else{throw new InvalidInputException(params.get(0));}
                     }
                     else{
                         params.remove(0);
@@ -51,7 +54,7 @@ public abstract class Command {
                     }
 
                 }
-                else{throw new IllegalArgumentException("Variable calls must be preceeded by :");}
+                else{throw new InvalidVariableCallException();}
 
             }
         }
