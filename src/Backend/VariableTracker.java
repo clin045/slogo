@@ -14,21 +14,41 @@ public class VariableTracker {
     private Turtle turtle;
     private Map<String, Object> varMap;
     private Map<String, List<String>>commandMap;
+    private Map<Integer, Turtle> turtleMap;
+    private int activeTurtle;
 
     /**
      * Default constructor initializes Turtle() and HashMap()
      */
     public VariableTracker(){
-        turtle = new Turtle();
+        turtleMap = new HashMap<>();
         varMap = new HashMap<>();
         commandMap=new HashMap<>();
+
+        activeTurtle = 0;
+        createTurtle(0);
+    }
+
+    public void createTurtle(int id){
+        turtleMap.put(id, new Turtle(id));
     }
 
     /**
+     * Returns active turtle, creates a new one if it does not exist
      * @return turtle
      */
-    public Turtle getTurtle() {
-        return turtle;
+    public Turtle getActiveTurtle() {
+        if(turtleMap.containsKey(activeTurtle)){
+            return turtleMap.get(activeTurtle);
+        }
+        else{
+            createTurtle(activeTurtle);
+            return turtleMap.get(activeTurtle);
+        }
+    }
+
+    public void setActiveTurtle(int id){
+        activeTurtle = id;
     }
 
     /**

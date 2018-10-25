@@ -19,6 +19,6 @@ public class CommandHome extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Double.toString(super.myTracker.getTurtle().home());
+        return Double.toString(CommandManager.myTracker.getActiveTurtle().home());
     }
 }

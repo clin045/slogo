@@ -26,7 +26,7 @@ public class CommandBK extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle = myTracker.getTurtle();
+        var turtle = myTracker.getActiveTurtle();
         amountBack=parseParameters(params);
         return Double.toString(turtle.back(amountBack));
     }
