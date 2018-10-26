@@ -46,6 +46,8 @@ public class Workspace extends BorderPane {
         this.setCenter(area);
     }
 
+
+
     private TitledPane addHelperMenu(){
         VBox allCommands = new VBox();
         ScrollPane sp = new ScrollPane();
