@@ -19,8 +19,8 @@ public class CommandFD extends Command {
     }
 
     public String execute(List<String> params) {
-        var turtle = myTracker.getActiveTurtle();
+        var turtleMan = myTracker.getTurtleManager();
         amountFD=parseParameters(params);
-        return Double.toString(turtle.forward(amountFD));
+        return Double.toString(turtleMan.forward(amountFD));
     }
 }

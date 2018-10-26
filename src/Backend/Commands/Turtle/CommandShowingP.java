@@ -19,6 +19,6 @@ public class CommandShowingP extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return myTracker.getActiveTurtle().getVisibility() ? "1" : "0";
+        return myTracker.getTurtleManager().getVisibility() ? "1" : "0";
     }
 }

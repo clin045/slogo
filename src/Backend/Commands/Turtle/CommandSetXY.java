@@ -23,7 +23,7 @@ public class CommandSetXY extends Command {
     public String execute(List<String> params) {
         pointX = (int) parseParameters(params);
         pointY = (int) parseParameters(params);
-        var myTurtle = myTracker.getActiveTurtle();
+        var myTurtle = myTracker.getTurtleManager();
         return Double.toString(myTurtle.setXY(pointX,pointY));
     }
 }
