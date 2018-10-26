@@ -19,8 +19,10 @@ public class CommandSetHeading extends Command {
 
     @Override
     public String execute(List<String> params) {
+
         heading = parseParameter(params);
-        Turtle myTurtle = myTracker.getActiveTurtle();
-        return Double.toString(myTurtle.setHeading(heading));
+        var turtleMan = myTracker.getTurtleManager();
+        return Double.toString(turtleMan.setHeading(heading));
+
     }
 }

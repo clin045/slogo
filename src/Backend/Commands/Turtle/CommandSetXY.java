@@ -20,9 +20,11 @@ public class CommandSetXY extends Command {
 
     @Override
     public String execute(List<String> params) {
+
         pointX = (int) parseParameter(params);
         pointY = (int) parseParameter(params);
-        var myTurtle = myTracker.getActiveTurtle();
+        var myTurtle = myTracker.getTurtleManager();
+
         return Double.toString(myTurtle.setXY(pointX,pointY));
     }
 }

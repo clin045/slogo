@@ -18,8 +18,8 @@ public class CommandLeft extends Command {
 
     @Override
     public String execute(List<String> params) {
-        var turtle = myTracker.getActiveTurtle();
-        leftAmt= parseParameter(params);
-        return Double.toString(turtle.left(leftAmt));
+        var turtleMan = myTracker.getTurtleManager();
+        leftAmt=parseParameter(params);
+        return Double.toString(turtleMan.left(leftAmt));
     }
 }

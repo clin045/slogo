@@ -19,6 +19,6 @@ public class CommandPenDown extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return String.valueOf(myTracker.getActiveTurtle().penDown());
+        return Double.toString(myTracker.getTurtleManager().penDown());
     }
 }

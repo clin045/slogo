@@ -25,9 +25,11 @@ public class CommandTowards extends Command {
 
     //TODO: Check graphically that this works properly
     public String execute(List<String> params) {
+
         pointX = (int) parseParameter(params);
         pointY = (int) parseParameter(params);
-        var myTurtle = myTracker.getActiveTurtle();
-        return Double.toString(myTurtle.towards(pointX,pointY));
+        var turtleMan = myTracker.getTurtleManager();
+        return Double.toString(turtleMan.towards(pointX,pointY));
+
     }
 }
