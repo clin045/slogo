@@ -43,82 +43,106 @@ public class TurtleManager {
         return (activeTurtles.get(activeTurtles.size()-1).getPenDown());
     }
 
-    public void penDown() {
+    public double penDown() {
         for(Turtle t : activeTurtles){
             t.penDown();
         }
+        return 0;
     }
 
-    public void penUp() {
+    public double penUp() {
         for(Turtle t : activeTurtles){
             t.penUp();
         }
+        return 1;
     }
 
     public boolean getVisibility() {
         return (activeTurtles.get(activeTurtles.size()-1).getVisibility());
     }
 
-    public void forward(int dist) {
+    public double forward(double dist) {
+        double last = 0;
         for(Turtle t : activeTurtles){
-            t.forward(dist);
+            last = t.forward(dist);
         }
+        return last;
     }
 
-    public void back(int dist){
+    public double back(double dist){
+        double last = 0;
         for(Turtle t : activeTurtles){
-            t.back(dist);
+            last = t.back(dist);
         }
+        return last;
     }
-    public void left(double degrees){
+    public double left(double degrees){
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.left(degrees);
         }
+        return last;
     }
 
-    public void right(double degrees){
+    public double right(double degrees){
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.right(degrees);
         }
+        return last;
     }
-    public void setHeading(double heading){
+    public double setHeading(double heading){
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.setHeading(heading);
         }
+        return last;
     }
 
-    public void towards(double x, double y){
+    public double towards(double x, double y){
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.towards(x, y);
         }
+        return last;
     }
-    public void setXY(double x, double y){
+    public double setXY(double x, double y){
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.setXY(x,y);
         }
+        return last;
     }
 
-    public void show() {
+    public double show() {
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.show();
         }
+        return last;
     }
-    public void hide() {
+    public double hide() {
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.hide();
         }
+        return last;
     }
 
-    public void clearScreen() {
+    public double clearScreen() {
+        double last = 0;
         for(Turtle t : activeTurtles){
             t.clearScreen();
         }
+        return last;
     }
 
-    public void home() {
+    public double home() {
+        double last = 0;
         for(Turtle t : activeTurtles){
-            t.home();
+            last = t.home();
         }
+        return last;
     }
 
 

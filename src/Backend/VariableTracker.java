@@ -24,7 +24,9 @@ public class VariableTracker {
         turtleManager = new TurtleManager();
     }
 
-
+    public TurtleManager getTurtleManager(){
+        return turtleManager;
+    }
 
 
 

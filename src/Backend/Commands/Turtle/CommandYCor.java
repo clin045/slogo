@@ -17,6 +17,6 @@ public class CommandYCor extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(myTracker.getActiveTurtle().getY());
+        return Integer.toString(myTracker.getTurtleManager().getY());
     }
 }
