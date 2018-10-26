@@ -22,7 +22,7 @@ public class CommandRepeat extends Command {
     @Override
     public String execute(List<String> params) {
 //        System.out.println(params.size());
-        repeatNumber=(int)parseParameters(params);
+        repeatNumber=(int) parseParameter(params);
 //        System.out.println("Repeat num: "+repeatNumber);
 //        System.out.println("param size: "+params.size());
 //        System.out.println(params.get(0));

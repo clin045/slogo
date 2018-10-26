@@ -16,7 +16,7 @@ public CommandTan(VariableTracker tracker){super(tracker);}
 
     @Override
     public String execute(List<String> params) {
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         if(d1%180==0){throw new IllegalArgumentException("tan of multiples of 180 is undefined");}
         return ""+(Math.tan(d1));
     }

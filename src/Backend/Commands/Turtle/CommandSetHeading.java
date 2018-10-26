@@ -1,7 +1,6 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
-import Backend.CommandManager;
 import Backend.Turtle;
 import Backend.VariableTracker;
 
@@ -20,7 +19,7 @@ public class CommandSetHeading extends Command {
 
     @Override
     public String execute(List<String> params) {
-        heading = parseParameters(params);
+        heading = parseParameter(params);
         Turtle myTurtle = myTracker.getActiveTurtle();
         return Double.toString(myTurtle.setHeading(heading));
     }

@@ -19,7 +19,7 @@ public class CommandATan extends Command {
     @Override
     public String execute(List<String> params) {
 
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         return ""+(Math.atan(d1));
     }
 }

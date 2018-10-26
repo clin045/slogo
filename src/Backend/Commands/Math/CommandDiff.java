@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author Michael Glushakov mg367
  */
-public class CommandDiff extends Command {
+public class CommandDiff extends MultiInputCommand {
     private double d1,d2;
 
     public CommandDiff(VariableTracker tracker){
@@ -23,13 +23,11 @@ public class CommandDiff extends Command {
 
     @Override
     public String execute(List<String> params) {
-//        System.out.println("PARAMS: "+params.size());
-//        for(String s:params){System.out.println(s);}
-        d1=parseParameters(params);
-        double temp=d1;
-//        System.out.println("d1: "+d1+" d2: "+d2);
-        d2=parseParameters(params);
-//        System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
-        return ""+(d1-d2);
+        parseAllParameters(params);
+        double out =myVals.remove(0);
+        for(double d:myVals) {
+            out -= d;
+        }
+        return ""+out;
     }
 }
