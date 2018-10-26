@@ -119,26 +119,7 @@ public class CommandManager {
         try{
             ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
             for(String key: Collections.list(commandBundle.getKeys())){
-                try{
-                    Class commandStr= Class.forName(commandBundle.getString(key));
-                    Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(myTracker);
-                    myCommands.put(key,command);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                    throw new CommandParsingException(key);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                    throw new CommandParsingException(key);
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                    throw new CommandParsingException(key);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                    throw new CommandParsingException(key);
-                } catch (InvocationTargetException e) {
-                    throw new CommandParsingException(key);
-                }
-
+                    myCommands.put(key,getCommand(key,myTracker));
             }
         }catch (MissingResourceException e){
             throw new CommandParsingException("");
