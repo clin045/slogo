@@ -29,6 +29,10 @@ public class VariableTracker {
         createTurtle(0);
     }
 
+    public int getNumTurtles(){
+        return turtleMap.size();
+    }
+
     public void createTurtle(int id){
         turtleMap.put(id, new Turtle(id));
     }
