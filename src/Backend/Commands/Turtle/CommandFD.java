@@ -1,7 +1,6 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
-import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class CommandFD extends Command {
 
     public String execute(List<String> params) {
         var turtleMan = myTracker.getTurtleManager();
-        amountFD=parseParameters(params);
+        amountFD=parseParameter(params);
         return Double.toString(turtleMan.forward(amountFD));
     }
 }

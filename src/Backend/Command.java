@@ -1,11 +1,9 @@
 package Backend;
 
 import Backend.Exceptions.InvalidInputException;
-import Backend.Exceptions.InvalidVariableCallException;
 import Backend.Exceptions.ParameterAmountException;
 
 import java.util.List;
-import java.util.MissingResourceException;
 
 public abstract class Command {
 
@@ -23,7 +21,7 @@ public abstract class Command {
      * @apiNote parses the parameters needed for command to execute
      * @throws IllegalArgumentException
      */
-    public double parseParameters(List<String> params) throws IllegalArgumentException{
+    public double parseParameter(List<String> params) throws IllegalArgumentException{
         double param;
         if(params.size()==0){throw new ParameterAmountException();}
         if(CommandManager.isCommand(params.get(0))){
@@ -42,7 +40,7 @@ public abstract class Command {
                     if(userCommand!=null){
                         params.addAll(0,userCommand);
                         params.remove(commandName);
-                        return parseParameters(params);
+                        return parseParameter(params);
 
                     }
                     else{throw new InvalidInputException(params.get(0));}

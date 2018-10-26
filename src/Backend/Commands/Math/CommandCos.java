@@ -16,7 +16,7 @@ private double d1;
 
     @Override
     public String execute(List<String> params) {
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         return ""+(Math.cos(d1));
     }
 }

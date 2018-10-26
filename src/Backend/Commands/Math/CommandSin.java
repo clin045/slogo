@@ -3,7 +3,6 @@ package Backend.Commands.Math;
 import Backend.Command;
 import Backend.VariableTracker;
 
-import javax.xml.validation.Validator;
 import java.util.List;
 
 public class CommandSin extends Command {
@@ -17,7 +16,7 @@ public class CommandSin extends Command {
 
     @Override
     public String execute(List<String> params) {
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         return ""+ (Math.sin(d1));
     }
 }

@@ -5,7 +5,7 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-public class CommandLessP extends Command {
+public class CommandLessP extends MultiInputCommand {
     public CommandLessP(VariableTracker tracker){
         super(tracker);
     }
@@ -16,13 +16,11 @@ public class CommandLessP extends Command {
 
     @Override
     public String execute(List<String> params) {
-        double exp1 = parseParameters(params);
-        double exp2 = parseParameters(params);
-        if(exp1 < exp2){
-            return "1";
+        parseAllParameters(params);
+        double check=myVals.remove(0);
+        for(double d: myVals){
+            if(d<=check){return "0";}
         }
-        else{
-            return "0";
-        }
+        return "1";
     }
 }

@@ -1,10 +1,8 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
-import Backend.CommandManager;
 import Backend.VariableTracker;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -27,7 +25,7 @@ public class CommandMake extends Command {
             //Make can override exising values, set cannot create values;
 //            if(CommandManager.myTracker.get(key)!=null){throw new IllegalArgumentException("Variable with this name already exists, please use Set to setTurtleToHome the value of this variable");}
             params.remove(0);
-            Double value= parseParameters(params);
+            Double value= parseParameter(params);
             super.myTracker.put(key,value);
             return ""+value;
         }

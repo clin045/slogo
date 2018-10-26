@@ -3,7 +3,6 @@ package Backend.Commands.Math;
 import Backend.Command;
 import Backend.VariableTracker;
 
-import java.lang.invoke.VarHandle;
 import java.util.List;
 
 public class CommandMinus extends Command {
@@ -18,7 +17,7 @@ public class CommandMinus extends Command {
 
     @Override
     public String execute(List<String> params) {
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         return ""+(-1*d1);
     }
 }

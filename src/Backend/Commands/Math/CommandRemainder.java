@@ -18,10 +18,10 @@ public class CommandRemainder extends Command {
     public String execute(List<String> params) {
 //        System.out.println("PARAMS: "+params.size());
 //        for(String s:params){System.out.println(s);}
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         double temp=d1;
 //        System.out.println("d1: "+d1+" d2: "+d2);
-        d2=parseParameters(params);
+        d2= parseParameter(params);
 //        System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
         if(d2==0){throw new IllegalArgumentException("Cannot divide by 0");}
         return ""+(d1%d2);

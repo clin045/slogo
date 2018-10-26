@@ -22,7 +22,7 @@ public class CommandDoTimes extends Command {
         if(!params.remove(0).equals("[")){throw new IllegalArgumentException("Limit must be enclosed by brackets []");}
         if(!params.remove(2).equals("]")){throw new IllegalArgumentException("DOTIMES only takes one limit argument");}
         varName=params.remove(0);
-        limit=(int)parseParameters(params);
+        limit=(int) parseParameter(params);
 //        System.out.println("DOTIMES limit: "+limit);
 //        System.out.println("param size: "+params.size());
         double temp=1;

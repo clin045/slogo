@@ -1,7 +1,6 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
-import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class CommandSet extends Command {
             //Make can override exising values, set cannot create values;
             if(super.myTracker.get(key)==null){throw new IllegalArgumentException("Variable not found, please use MAKE to create new variable");}
             params.remove(0);
-            Double value= parseParameters(params);
+            Double value= parseParameter(params);
             super.myTracker.put(key,value);
             return ""+value;
     }

@@ -26,8 +26,9 @@ public class CommandBK extends Command {
 
     @Override
     public String execute(List<String> params) {
-        amountBack=parseParameters(params);
+        amountBack=parseParameter(params);
         return Double.toString(myTracker.getTurtleManager().back(amountBack));
+
     }
 
 

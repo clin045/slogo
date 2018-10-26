@@ -5,7 +5,7 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-public class CommandAnd extends Command {
+public class CommandAnd extends MultiInputCommand {
     public CommandAnd(VariableTracker tracker){super(tracker);}
     @Override
     public String getDescription() {
@@ -14,13 +14,13 @@ public class CommandAnd extends Command {
 
     @Override
     public String execute(List<String> params) {
-        double test1 = parseParameters(params);
-        double test2 = parseParameters(params);
-        if(test1 != 0 && test2 != 0){
-            return "1";
+        parseAllParameters(params);
+        for(double d: myVals){
+          if(d==0){
+              return "0.0";
+          }
         }
-        else{
-            return "0";
-        }
+
+       return "1.0";
     }
 }
