@@ -43,7 +43,7 @@ public class TurtleManager {
         return (activeTurtles.get(activeTurtles.size()-1).getPenDown());
     }
 
-    public void setTurtlesByID(List<Integer> turtlesIDs){
+    public void setActiveTurtlesByID(List<Integer> turtlesIDs){
         activeTurtles.clear();
         for(Integer id : turtlesIDs){
             activeTurtles.add(turtleMap.get(id));
