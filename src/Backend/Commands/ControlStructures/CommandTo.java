@@ -39,7 +39,6 @@ public class CommandTo extends Command {
                 try {
                     varName = params.get(i);
                     varValue = Double.parseDouble(params.get(i+1));
-//                    System.out.println("Storing: "+ varName+" = "+varValue);
                     super.myTracker.put(varName,varValue);
                 }catch(NumberFormatException ne){
                     throw new IllegalArgumentException("Variable assignments must be doubles");
