@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Backend.CommandManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -39,8 +41,10 @@ public class ControlPanelView {
     TitledPane userDefinedCommands;
     TitledPane definedVariables;
     TitledPane turtleStatus;
+    TitledPane turtleAction;
     Controller controller;
     CommandInputHandler commandInputHandler;
+    CommandManager commandManager;
 
     public ControlPanelView(Workspace workspace, Controller controller){
         this.workspace = workspace;
@@ -48,11 +52,14 @@ public class ControlPanelView {
         //set up UI
         setUpTextInputArea(workspace);// add text input field
         setUpWorkspaceSetting();
-        commandHistory = setUpScrollingTitlePane(COMMAND_HISTORY_TITLE, commandHistory);
+        workspaceSetting.setExpanded(false);
+        commandHistory = setUpScrollingTitlePane(COMMAND_HISTORY_TITLE);
         setUpTurtleStatus();
-        userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE, userDefinedCommands);
+        setUpTurtleAction();
+        userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE);
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
-        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables, turtleStatus);
+        definedVariables.setExpanded(false);
+        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables, turtleStatus, turtleAction);
         workspace.setRight(vBox);
     }
 
@@ -161,11 +168,11 @@ public class ControlPanelView {
         workspace.setBottom(textInput);
     }
 
-    private TitledPane setUpScrollingTitlePane(String title, TitledPane titledPane){
+    private TitledPane setUpScrollingTitlePane(String title){
         VBox allCommands = new VBox();
         ScrollPane sp = new ScrollPane();
         sp.setContent(allCommands);
-        titledPane = new TitledPane(title, sp);
+        TitledPane titledPane = new TitledPane(title, sp);
         sp.setPadding(new Insets(Workspace.PADDING));
         titledPane.setExpanded(false);
         return titledPane;
@@ -176,6 +183,44 @@ public class ControlPanelView {
         HBox position = UIFactory.createTextLabelWithValue("Position: ", DEFAULT_POSITION);
         HBox heading = UIFactory.createTextLabelWithValue("Heading: ", DEFAULT_HEADING);
         turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox(ID, position, heading));
+        turtleStatus.setExpanded(false);
+    }
+
+    private void setUpTurtleAction(){
+        if(commandManager==null){
+            System.out.println("Command Manager is not set.");
+        }
+        Button forward = new Button("Forward");
+        TextField fdText = new TextField("50.0");
+        forward.setOnAction(event -> {
+            commandManager.execute("fd "+fdText.getText());
+        });
+        HBox fd = new HBox(forward, fdText);
+        Button back = new Button("Back");
+        TextField backText = new TextField("50.0");
+        back.setOnAction(event -> {
+            commandManager.execute("bk " + backText.getText());
+        });
+        HBox bk = new HBox(back, backText);
+        Button left = new Button("Left");
+        TextField leftText = new TextField("90.0");
+        left.setOnAction(event -> {
+            commandManager.execute("left " + leftText.getText());
+        });
+        HBox lft = new HBox(left, leftText);
+        Button right = new Button("Right");
+        TextField rightText = new TextField("90.0");
+        right.setOnAction(event -> {
+            commandManager.execute("right " + rightText.getText());
+        });
+        HBox rght = new HBox(right, rightText);
+        VBox xbox = new VBox(fd, bk, lft, rght);
+        turtleAction = new TitledPane("Turtle Action", xbox);
+        turtleAction.setExpanded(false);
+    }
+
+    public void setCommandManager(CommandManager commandManager){
+        this.commandManager = commandManager;
     }
 
     private void clearCommandHistory(){

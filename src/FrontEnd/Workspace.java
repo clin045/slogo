@@ -36,6 +36,7 @@ public class Workspace extends BorderPane {
 //        commandManager.getMyTracker().getTurtleManager().getActiveTurtles().setController(controller);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
         controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
+        controlPanelView.setCommandManager(commandManager);
 
         CommandInputHandler commandInputHandler = controlPanelView.getCommandInputHandler();
         commandInputHandler.setCommandManager(commandManager);
