@@ -105,7 +105,7 @@ public class CommandManager {
                 }
             }
         }
-        System.out.println(out);
+       // System.out.println(out);
 
         return out;
     }
