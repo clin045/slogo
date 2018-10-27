@@ -23,6 +23,14 @@ public class TurtleManager {
         return turtleMap.size();
     }
 
+    public List<Turtle> getAllTurtles(){
+        var allTurtles = new ArrayList<Turtle>();
+        for(Integer i : turtleMap.keySet()){
+            allTurtles.add(turtleMap.get(i));
+        }
+        return allTurtles;
+    }
+
     public List<Turtle> getActiveTurtles() {
         return activeTurtles;
     }
@@ -49,9 +57,19 @@ public class TurtleManager {
     public void setActiveTurtlesByID(List<Integer> turtlesIDs){
         activeTurtles.clear();
         for(Integer id : turtlesIDs){
-            activeTurtles.add(turtleMap.get(id));
-
+            if(turtleMap.containsKey(id)){
+                activeTurtles.add(turtleMap.get(id));
+            }
+            else{
+                turtleMap.put(id, new Turtle(id));
+                activeTurtles.add(turtleMap.get(id));
+            }
         }
+    }
+
+    public void setActiveTurtles(List<Turtle> turtles){
+        activeTurtles.clear();
+        activeTurtles.addAll(turtles);
     }
 
     public double penDown() {

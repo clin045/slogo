@@ -6,7 +6,7 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandID extends Command {
-    CommandID(VariableTracker tracker){
+    public CommandID(VariableTracker tracker){
         super(tracker);
     }
     @Override

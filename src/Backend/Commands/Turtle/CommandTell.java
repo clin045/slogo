@@ -8,7 +8,7 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandTell extends Command {
+public class CommandTell extends BracketedCommand {
 
     public CommandTell(VariableTracker tracker){
         super(tracker);
@@ -27,7 +27,7 @@ public class CommandTell extends Command {
             throw new IllegalArgumentException("Invalid brackets");
         }
 
-        var idExp = params;
+        var idExp = params.subList(openBracket+1, closeBracket);
         ArrayList<Double> idListDouble = evaluateBrackets(idExp);
         ArrayList<Integer> idList = new ArrayList<>();
         for(Double d : idListDouble){
