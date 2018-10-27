@@ -60,10 +60,14 @@ public class CommandInputHandler extends TextArea {
         varMap.addListener(new MapChangeListener<String, Object>() {
             @Override
             public void onChanged(Change<? extends String, ?> change) {
-                if(change.wasAdded()){
+                definedVariable.getChildren().clear();
+                for(String s: change.getMap().keySet()){
                     definedVariable.getChildren().add(
-                            UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), commandManager.getMyTracker().getVarMap()
+                            UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap()
                             ));
+                }
+                if(change.wasAdded()){
+
                 }
             }
         });
