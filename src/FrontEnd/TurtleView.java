@@ -17,7 +17,7 @@ public class TurtleView {
     private static final String TURTLE_IMAGE = "turtle_green.png";
     private static final int SIZE = 50;
     private static double heading = 90;
-    private boolean isActive;
+    private boolean isActive = true;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 
     public TurtleView(){
@@ -27,10 +27,16 @@ public class TurtleView {
         turtleImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                ColorAdjust colorAdjustGrayscale = new ColorAdjust();
-                colorAdjustGrayscale.setSaturation(-1);
-                turtleImageView.setEffect(colorAdjustGrayscale);
-                turtleImageView.setEffect(null);
+                if(isActive){
+                    ColorAdjust colorAdjustGrayscale = new ColorAdjust();
+                    colorAdjustGrayscale.setSaturation(-1);
+                    turtleImageView.setEffect(colorAdjustGrayscale);
+                    isActive = false;
+                }
+                else{
+                    turtleImageView.setEffect(null);
+                    isActive = true;
+                }
                 System.out.println("Clicked");
             }
         });
