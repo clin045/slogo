@@ -57,8 +57,13 @@ public class TurtleManager {
     public void setActiveTurtlesByID(List<Integer> turtlesIDs){
         activeTurtles.clear();
         for(Integer id : turtlesIDs){
-            activeTurtles.add(turtleMap.get(id));
-
+            if(turtleMap.containsKey(id)){
+                activeTurtles.add(turtleMap.get(id));
+            }
+            else{
+                turtleMap.put(id, new Turtle(id));
+                activeTurtles.add(turtleMap.get(id));
+            }
         }
     }
 

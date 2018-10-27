@@ -42,10 +42,13 @@ public class CommandAskWith extends BracketedCommand {
             }
         }
         myTracker.getTurtleManager().setActiveTurtles(validTurtles);
-        var commandOuput = evaluateBrackets(params.subList(closeBracket,params.size()-1));
+        if(validTurtles.size() < 1){
+            return "";
+        }
+        var commandOutput = evaluateBrackets(params.subList(closeBracket,params.size()-1));
 
         myTracker.getTurtleManager().setActiveTurtles(oldActiveTurtles);
 
-        return Double.toString(commandOuput.get(commandOuput.size()-1));
+        return Double.toString(commandOutput.get(commandOutput.size()-1));
     }
 }

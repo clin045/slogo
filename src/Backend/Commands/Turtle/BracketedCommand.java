@@ -29,10 +29,10 @@ public abstract class BracketedCommand extends Command {
                 try{
                     var doubVal = Double.parseDouble(cmd.execute(exp.subList(0, exp.size())));
                     retList.add(doubVal);
-
                 }
                 catch(Exception e){
-                    throw new IllegalArgumentException("Invalid params for Tell");
+                    System.out.println(e);
+                    throw new IllegalArgumentException("Invalid params for bracketed expression");
                 }
             }
             else{
@@ -41,7 +41,8 @@ public abstract class BracketedCommand extends Command {
                     exp.remove(0);
                 }
                 catch(Exception e){
-                    throw new IllegalArgumentException("Invalid params for Tell");
+                    System.out.println(e);
+                    throw new IllegalArgumentException("Invalid params for bracketed expression");
                 }
             }
         }
