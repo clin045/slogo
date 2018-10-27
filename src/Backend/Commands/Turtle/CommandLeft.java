@@ -7,13 +7,10 @@ import java.util.List;
 
 public class CommandLeft extends Command {
     private double leftAmt;
+    private static final String key="Left";
    public CommandLeft(VariableTracker tracker){
         super(tracker);
-    }
-
-    @Override
-    public String getDescription() {
-        return "LEFT: Turns the turtle left by some number of degrees";
+        setKey(key);
     }
 
     @Override

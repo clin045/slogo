@@ -8,14 +8,10 @@ import java.util.List;
 public class CommandSetXY extends Command {
     int pointX;
     int pointY;
+    private static final String key="SetPosition";
     public CommandSetXY(VariableTracker tracker){
         super(tracker);
-    }
-
-    @Override
-    public String getDescription() {
-        return "SETXY: moves turtle to an absolute screen position, where (0, 0) is the center of the screen\n" +
-                "returns the distance turtle moved";
+        setKey(key);
     }
 
     @Override

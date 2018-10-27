@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandAskWith extends BracketedCommand {
+    private static final String key="AskWith";
 
     public CommandAskWith(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
-    @Override
-    public String getDescription() {
-        return null;
-    }
+
 
     @Override
     public String execute(List<String> params) {

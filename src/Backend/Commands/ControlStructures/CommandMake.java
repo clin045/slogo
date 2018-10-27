@@ -8,12 +8,13 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class CommandMake extends Command {
-    public CommandMake(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "Creates a new variable or overrides value of the last one";
+    private static final String key="MakeVariable";
+    public CommandMake(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
+
+
     @Override
     public String execute(List<String> params) {
         String key=params.get(0);

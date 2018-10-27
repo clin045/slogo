@@ -8,14 +8,13 @@ import java.lang.invoke.VarHandle;
 import java.util.List;
 
 public class CommandHome extends Command {
+    public static final String key="Home";
     public CommandHome(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return null;
-    }
+
 
     @Override
     public String execute(List<String> params) {

@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandDoTimes extends LoopCommand{
+    private static final String myKey="DoTimes";
+    public CommandDoTimes(VariableTracker tracker){
+        super(tracker);
+        setKey(myKey);
+        }
 
-    public CommandDoTimes(VariableTracker tracker){super(tracker);}
-    @Override
-    public String getDescription() {
-        return "runs command(s) for each value specified in the range, i.e., from (1 - limit) inclusive";
-    }
 
     @Override
     public String execute(List<String> params) {

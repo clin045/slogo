@@ -8,13 +8,14 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class CommandSet extends Command {
-    public CommandSet(VariableTracker tracker){super(tracker);}
-
-
-    @Override
-    public String getDescription() {
-        return "Sets a value of a variable";
+    private static final String key="SetVariable";
+    public CommandSet(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
+
+
+
     @Override
     public String execute(List<String> params) {
         String key=params.get(0);

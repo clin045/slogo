@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandFor extends LoopCommand{
-
+    private static final String myKey="For";
     public CommandFor(VariableTracker tracker){
         super(tracker);
+        setKey(myKey);
     }
     @Override
     public String getDescription() {

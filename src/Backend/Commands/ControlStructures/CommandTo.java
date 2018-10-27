@@ -12,13 +12,12 @@ import java.util.ResourceBundle;
 public class CommandTo extends Command {
     private final String END_DELIMETER="]";
     private final String START_DELIMETER="[";
+    private static final String myKey="MakeUserInstruction";
     public CommandTo(VariableTracker tracker){
         super(tracker);
+        setKey(myKey);
     }
-    @Override
-    public String getDescription() {
-        return "assigns command(s) given in the second list to commandName using parameters given in first list as variables";
-    }
+
 
     @Override
     public String execute(List<String> params) {

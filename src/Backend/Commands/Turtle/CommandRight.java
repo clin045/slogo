@@ -9,14 +9,13 @@ import java.util.List;
 
 public class CommandRight extends Command {
     private double rightAmt;
+    private static String key="Right";
   public CommandRight(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return "RIGHT: Turns the turtle right by some number of degrees";
-    }
+
 
     @Override
     public String execute(List<String> params) {

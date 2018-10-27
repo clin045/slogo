@@ -8,13 +8,10 @@ import java.util.List;
 
 public class CommandSetHeading extends Command {
     private double heading;
+    private static final String key="SetHeading";
     public CommandSetHeading(VariableTracker tracker){
         super(tracker);
-    }
-
-    @Override
-    public String getDescription() {
-        return "SETHEADING: Sets the turtle's heading";
+        setKey(key);
     }
 
     @Override

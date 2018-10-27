@@ -6,13 +6,12 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandID extends Command {
+    public static final String key="ID";
     public CommandID(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
-    @Override
-    public String getDescription() {
-        return "returns current active turtle's ID number";
-    }
+
 
     @Override
     public String execute(List<String> params) {

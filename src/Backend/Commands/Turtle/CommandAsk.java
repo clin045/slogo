@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandAsk extends BracketedCommand {
+    private static final String key="Ask";
 
     public CommandAsk(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
-                      @Override
-    public String getDescription() {
-        return "only the turtles given in first list all run commands given in the second list";
-    }
+
 
     @Override
     public String execute(List<String> params) {

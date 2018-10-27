@@ -7,15 +7,14 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandPenDown extends Command {
+    private static final String key="PenDown";
 
     public CommandPenDown(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return "PENDOWN: puts pen down such that when the turtle moves, it leaves a trail";
-    }
+
 
     @Override
     public String execute(List<String> params) {

@@ -8,14 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandRepeat extends LoopCommand {
-    public CommandRepeat(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "runs command(s) given in the list the value of expr number of times\n" +
-                "returns the value of the final command executed (or 0 if no commands are executed)\n" +
-                "note, the value of the current iteration, starting at 1, is automatically assigned to the variable :repcount so that it can be accessed by the command(s)";
+   private static final String mykey="Repeat";
+    public CommandRepeat(VariableTracker tracker){super(tracker);
+    setKey(mykey);
     }
+
 
     @Override
     public String execute(List<String> params) {

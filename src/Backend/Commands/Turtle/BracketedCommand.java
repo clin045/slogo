@@ -11,8 +11,7 @@ public abstract class BracketedCommand extends Command {
     BracketedCommand(VariableTracker tracker){
         super(tracker);
     }
-    @Override
-    public abstract String getDescription();
+
 
     @Override
     public abstract String execute(List<String> params);

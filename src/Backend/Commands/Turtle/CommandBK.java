@@ -13,15 +13,10 @@ import java.util.List;
 
 public class CommandBK extends Command {
     private double amountBack;
-    public static final int NUM_PARAMS = 1;
+    public static final String key= "Backward";
     public CommandBK(VariableTracker tracker){
         super(tracker);
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "BACK: Moves Turtle backward by a set amount of pixels";
+        setKey(key);
     }
 
     @Override

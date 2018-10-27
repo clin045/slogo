@@ -7,14 +7,10 @@ import java.util.List;
 
 public class CommandFD extends Command {
     private double amountFD;
-    private final int PARAM_NUMBER=1;
+    private static final String key="Forward";
     public CommandFD(VariableTracker tracker){
         super(tracker);
-    }
-
-    @Override
-    public String getDescription(){
-        return "FORWARD: Moves Turtle forward by a set amount of pixels";
+        setKey(key);
     }
 
     public String execute(List<String> params) {

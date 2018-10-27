@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandTell extends BracketedCommand {
+    private static final String key="Tell";
 
     public CommandTell(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return "sets turtles that will follow commands hereafter";
-    }
 
     @Override
     public String execute(List<String> params) {

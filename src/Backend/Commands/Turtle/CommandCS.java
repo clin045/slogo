@@ -8,14 +8,12 @@ import java.util.List;
 
 public class CommandCS extends Command {
 
+    private static final String key="ClearScreen";
     public CommandCS(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return "CLEARS Screen";
-    }
 
     @Override
     public String execute(List<String> params) {

@@ -7,16 +7,15 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandPenUp extends Command {
+    private static final String key ="PenUp";
 
     public CommandPenUp(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
 
-    @Override
-    public String getDescription() {
-        return "PENUP: puts pen up such that when the turtle moves, it does not leave a trail";
-    }
+
 
     public String execute(List<String> params) {
         return Double.toString(myTracker.getTurtleManager().penUp());

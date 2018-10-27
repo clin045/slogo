@@ -7,20 +7,14 @@ import java.util.List;
 
 
 public class CommandTowards extends Command {
+    private static final String key="SetTowards";
     int pointX;
     int pointY;
 
     public CommandTowards(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
-
-
-
-    @Override
-    public String getDescription() {
-        return "TOWARDS: Sets heading towards a point";
-    }
-
 
 
     //TODO: Check graphically that this works properly
