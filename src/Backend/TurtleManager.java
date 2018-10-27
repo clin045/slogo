@@ -23,6 +23,14 @@ public class TurtleManager {
         return turtleMap.size();
     }
 
+    public List<Turtle> getAllTurtles(){
+        var allTurtles = new ArrayList<Turtle>();
+        for(Integer i : turtleMap.keySet()){
+            allTurtles.add(turtleMap.get(i));
+        }
+        return allTurtles;
+    }
+
     public List<Turtle> getActiveTurtles() {
         return activeTurtles;
     }
