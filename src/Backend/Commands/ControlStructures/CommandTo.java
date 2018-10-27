@@ -44,17 +44,17 @@ public class CommandTo extends Command {
                 params.remove(0);
             }
             params.remove(0);
-            for(String s: params){System.out.println(s);}
+
             commandList=new ArrayList<>(params.subList(params.indexOf(START_DELIMETER)+1,params.indexOf(END_DELIMETER)));
             myTracker.putCommand(key,commandList);
             int end = params.indexOf(END_DELIMETER);
-            System.out.println("PARAMS:"+params.size());
+
             for(int i=0;i<=end;i+=1){
-                System .out.println("Removing");
+
                 params.remove(0);
             }
 
-            System.out.println("PARAMS:"+params.size());
+
             params.add(0,":"+key);
 
 
