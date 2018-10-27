@@ -8,13 +8,11 @@ import java.util.List;
 
 
 public class CommandXCor extends Command{
+    private static final String key ="XCoordinate";
     public CommandXCor(VariableTracker tracker){
-        super(tracker);
-    }
 
-    @Override
-    public String getDescription() {
-        return "XCOR: returns the turtle's X coordinate from the center of the screen";
+        super(tracker);
+        setKey(key);
     }
 
     @Override

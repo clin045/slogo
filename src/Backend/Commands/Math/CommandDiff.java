@@ -9,16 +9,14 @@ import java.util.List;
  * @author Michael Glushakov mg367
  */
 public class CommandDiff extends MultiInputCommand {
-    private double d1,d2;
+    private static final String key = "Difference";
 
     public CommandDiff(VariableTracker tracker){
         super(tracker);
+        setKey(key);
 
     }
-    @Override
-    public String getDescription() {
-        return "DIFFERENCE: returns difference of the arguments";
-    }
+
 
 
     @Override

@@ -6,13 +6,13 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandGreaterP extends MultiInputCommand {
+    private static final String key="GreaterThan";
     public CommandGreaterP(VariableTracker tracker){
+
         super(tracker);
+        setKey(key);
     }
-    @Override
-    public String getDescription() {
-        return "returns 1 if the value of expr1 is strictly greater than the value of expr2, otherwise 0";
-    }
+
 
     @Override
     public String execute(List<String> params) {

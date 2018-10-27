@@ -7,15 +7,13 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandHeading extends Command {
-
+    private static final String key="Heading";
     public CommandHeading(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return "HEADING: returns the turtle's heading in degrees";
-    }
+
 
     @Override
     public String execute(List<String> params) {

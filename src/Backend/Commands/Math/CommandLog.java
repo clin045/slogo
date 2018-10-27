@@ -7,13 +7,11 @@ import java.util.List;
 
 public class CommandLog extends Command {
     private double d1;
-    public CommandLog(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "LOG: returns natural log of expr";
+    private static String key="NaturalLog";
+    public CommandLog(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
-
     @Override
     public String execute(List<String> params) {
         d1= parseParameter(params);

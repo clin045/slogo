@@ -7,11 +7,10 @@ import java.util.List;
 
 public class CommandSin extends Command {
    private double d1;
-    public CommandSin(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "returns sine of degrees";
+   private static final String key ="Sine";
+    public CommandSin(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
 
     @Override

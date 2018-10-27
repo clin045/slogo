@@ -7,14 +7,10 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandShowingP extends Command {
+    private static final String key= "IsShowing";
 
     public CommandShowingP(VariableTracker tracker){
         super(tracker);
-    }
-
-    @Override
-    public String getDescription() {
-        return "SHOWING?: returns 1 if turtle is showing, 0 if it is hiding";
     }
 
     @Override

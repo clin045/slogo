@@ -6,11 +6,13 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandAnd extends MultiInputCommand {
-    public CommandAnd(VariableTracker tracker){super(tracker);}
-    @Override
-    public String getDescription() {
-        return "returns 1 if test1 and test2 are non-zero, otherwise 0";
+    private static final String key="And";
+    public CommandAnd(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
+
+
 
     @Override
     public String execute(List<String> params) {

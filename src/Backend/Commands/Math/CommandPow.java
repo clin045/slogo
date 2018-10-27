@@ -7,12 +7,13 @@ import java.util.List;
 
 public class CommandPow extends Command {
     private double d1,d2;
-    public CommandPow(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "returns base raised to the power of the exponent";
+    private static final String key="Power";
+    public CommandPow(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
+
+
 
     @Override
     public String execute(List<String> params) {

@@ -7,12 +7,13 @@ import java.util.List;
 
 public class CommandTan extends Command {
 private double d1;
-public CommandTan(VariableTracker tracker){super(tracker);}
+private static final String key="Tangent";
+public CommandTan(VariableTracker tracker){
+    super(tracker);
+    setKey(key);
+}
 
-    @Override
-    public String getDescription() {
-        return "returns tangent of degrees";
-    }
+
 
     @Override
     public String execute(List<String> params) {

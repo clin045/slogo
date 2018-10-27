@@ -7,11 +7,10 @@ import java.lang.invoke.VarHandle;
 import java.util.List;
 
 public class CommandPi extends Command {
-    public CommandPi(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return null;
+    public static final String key="Pi";
+    public CommandPi(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
 
     @Override

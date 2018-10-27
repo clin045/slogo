@@ -9,15 +9,14 @@ import java.util.List;
  * @author Michael Glushakov (mg367)
  */
 public class CommandAdd extends MultiInputCommand {
-    private Double d1,d2;
+   private static final String key="Sum";
     public CommandAdd(VariableTracker tracker) {
+
         super(tracker);
+        setKey(key);
     }
 
-    @Override
-    public String getDescription() {
-        return "SUM returns the sum of 2 numbers";
-    }
+
 
 
 

@@ -7,12 +7,10 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandYCor extends Command {
+    private static final String key ="YCoordinate";
     public CommandYCor(VariableTracker tracker){
         super(tracker);
-    }
-    @Override
-    public String getDescription() {
-        return "YCOR: returns the turtle's Y coordinate from the center of the screen";
+        setKey(key);
     }
 
     @Override

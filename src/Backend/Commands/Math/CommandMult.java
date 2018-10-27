@@ -4,16 +4,14 @@ import Backend.Command;
 import Backend.VariableTracker;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class CommandMult extends MultiInputCommand {
-
-    public CommandMult(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "PRODUCT: returns product of the arguments";
+    private static final String key="Product";
+    public CommandMult(VariableTracker tracker){
+        super(tracker);
+        super.setKey(key);
     }
-
 
     @Override
     public String execute(List<String> params) {

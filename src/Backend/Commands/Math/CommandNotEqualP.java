@@ -6,12 +6,12 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandNotEqualP extends MultiInputCommand {
-
-    public CommandNotEqualP(VariableTracker tracker){super(tracker);}
-    @Override
-    public String getDescription() {
-        return "returns 1 if the value of expr1 and the value of expr2 are not equal, otherwise 0";
+    private static final String key="NotEqual";
+    public CommandNotEqualP(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
+
 
     @Override
     public String execute(List<String> params) {

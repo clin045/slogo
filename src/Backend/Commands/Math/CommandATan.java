@@ -7,13 +7,9 @@ import java.util.List;
 
 public class CommandATan extends Command {
     private double d1;
-    public CommandATan(VariableTracker tracker){super(tracker);}
-
-
-
-    @Override
-    public String getDescription() {
-        return "ATAN: returns arctangent of degrees";
+    private static final String key="ArcTangent";
+    public CommandATan(VariableTracker tracker){super(tracker);
+    setKey(key);
     }
 
     @Override

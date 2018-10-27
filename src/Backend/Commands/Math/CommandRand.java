@@ -8,11 +8,10 @@ import java.util.List;
 
 public class CommandRand extends Command {
     private double d1;
-    public CommandRand(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "returns random non-negative number strictly less than max";
+    private static final String key="Random";
+    public CommandRand(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
 
     @Override

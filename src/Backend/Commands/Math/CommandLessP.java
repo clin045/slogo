@@ -6,13 +6,13 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandLessP extends MultiInputCommand {
+    private static final String key="LessThan";
     public CommandLessP(VariableTracker tracker){
+
         super(tracker);
+        setKey(key);
     }
-    @Override
-    public String getDescription() {
-        return "returns 1 if the value of expr1 is strictly less than the value of expr2, otherwise 0";
-    }
+
 
     @Override
     public String execute(List<String> params) {

@@ -6,12 +6,11 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandOr extends MultiInputCommand {
+    private static final String key="Or";
     public CommandOr(VariableTracker tracker){
+
         super(tracker);
-    }
-    @Override
-    public String getDescription() {
-        return "returns 1 if test1 or test2 are non-zero, otherwise 0";
+        setKey(key);
     }
 
     @Override

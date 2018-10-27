@@ -6,13 +6,12 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandNot extends Command {
+    public static final String key ="Not";
     public CommandNot(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
-    @Override
-    public String getDescription() {
-        return "returns 1 if test is 0 and 0 if test is non-zero";
-    }
+
 
     @Override
     public String execute(List<String> params) {

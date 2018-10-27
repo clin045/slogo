@@ -5,10 +5,13 @@ import Backend.Exceptions.ParameterAmountException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public abstract class Command {
 
     protected VariableTracker myTracker;
+    public static final String DESCRIPTION_PATH="Config.CommandDescriptions";
+    private String myKey="Default";
     public Command(VariableTracker tracker){
         myTracker=tracker;
     }
@@ -16,7 +19,10 @@ public abstract class Command {
      *
      * @return description of what the command does to the user
      */
-    public abstract String getDescription();
+    protected void setKey(String key){myKey=key;}
+    public String getDescription(){
+        return ResourceBundle.getBundle(DESCRIPTION_PATH).getString(myKey);
+    }
 
     /**
      * @apiNote parses the parameters needed for command to execute

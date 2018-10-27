@@ -7,13 +7,13 @@ import java.util.List;
 
 public class CommandMinus extends Command {
     double d1;
-
-    public CommandMinus(VariableTracker tracker){super(tracker);}
-
-    @Override
-    public String getDescription() {
-        return "returns negative of the values of expr";
+    private static final String key="Minus";
+    public CommandMinus(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
+
+
 
     @Override
     public String execute(List<String> params) {

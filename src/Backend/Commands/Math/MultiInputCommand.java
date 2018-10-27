@@ -14,10 +14,7 @@ public class MultiInputCommand extends Command{
         myVals= new ArrayList<>();
     }
 
-    @Override
-    public String getDescription() {
-        return null;
-    }
+
 
     protected void parseAllParameters(List<String>params){
         if(params.get(0).equals("(")){
