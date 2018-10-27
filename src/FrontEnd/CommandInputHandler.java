@@ -48,8 +48,10 @@ public class CommandInputHandler extends TextArea {
             definedCommandMap();
             first = false;
         }
+        String ret = this.getText();
+        this.clear();
 
-        return this.getText();
+        return ret;
     }
 
     private void varMap(){

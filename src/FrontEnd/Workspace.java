@@ -27,7 +27,7 @@ public class Workspace extends BorderPane {
     // create a new workspace
     public Workspace(){
         setUpTurtleDisplayArea();
-        Controller controller = new Controller(area, turtleView);
+        Controller controller = new Controller(area, turtleViewManager.turtleList.get(0));
         CommandManager commandManager = new CommandManager("languages.English");
         for(Turtle turtle: commandManager.getMyTracker().getTurtleManager().getActiveTurtles()){
             turtle.setController(controller);
@@ -54,6 +54,7 @@ public class Workspace extends BorderPane {
     private void setUpTurtleDisplayArea(){
 //        turtleView = new TurtleView();
         turtleViewManager = new TurtleViewManager(variableTracker);
+
         area = new TurtlePlayground(turtleViewManager);
 
         this.setCenter(area);

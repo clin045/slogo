@@ -16,10 +16,14 @@ public class TurtleViewManager implements Iterable<TurtleView> {
 
     public TurtleViewManager(VariableTracker variableTracker){
         this.variableTracker = variableTracker;
+        turtleList = new ArrayList<>();
+        ids = new HashSet<>();
+        addTurtle(1);
 //        this.turtlePlayground = turtlePlayground;
     }
 
     public void addTurtle(int id){
+        turtleList.add(new TurtleView());
         if(ids.contains(id)){
             throw new IllegalArgumentException(String.format("Duplicated Turtle ID: %d", id));
         }
