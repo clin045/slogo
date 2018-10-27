@@ -17,12 +17,21 @@ public class TurtlePlayground extends Pane {
 
     public static final double INIT_STROKE_WIDTH = 5;
     TurtleView turtleView; // possibly extend it to contain multiple turtles
+    TurtleViewManager turtleViewManager;
     Pen pen;
 
     // create a default white playground with one turtle
     public TurtlePlayground(TurtleView turtleView){
         setBgColor(Color.WHITE);
         this.turtleView = turtleView;
+        addTurtleToCenter(turtleView.getTurtleImageView());
+        pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
+    }
+
+    public TurtlePlayground(TurtleViewManager turtleViewManager){
+        setBgColor(Color.WHITE);
+        turtleViewManager = this.turtleViewManager;
+         turtleView = new TurtleView();
         addTurtleToCenter(turtleView.getTurtleImageView());
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }

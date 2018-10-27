@@ -6,6 +6,7 @@ package FrontEnd;
  */
 
 import Backend.CommandManager;
+import Backend.Turtle;
 import Backend.VariableTracker;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
@@ -18,6 +19,7 @@ public class Workspace extends BorderPane {
 
     TurtlePlayground area;
     TurtleView turtleView;
+    TurtleViewManager turtleViewManager;
     VariableTracker variableTracker;
     TabPane tabPane;
     public static final int PADDING = 10;
@@ -27,7 +29,11 @@ public class Workspace extends BorderPane {
         setUpTurtleDisplayArea();
         Controller controller = new Controller(area, turtleView);
         CommandManager commandManager = new CommandManager("languages.English");
-        commandManager.getMyTracker().getActiveTurtle().setController(controller);
+        for(Turtle turtle: commandManager.getMyTracker().getTurtleManager().getActiveTurtles()){
+            turtle.setController(controller);
+        }
+
+//        commandManager.getMyTracker().getTurtleManager().getActiveTurtles().setController(controller);
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
         controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
 
@@ -46,8 +52,10 @@ public class Workspace extends BorderPane {
     // initialize the playground in the border pane
     // TODO: do the initialization inside the turtle class
     private void setUpTurtleDisplayArea(){
-        turtleView = new TurtleView();
-        area = new TurtlePlayground(turtleView);
+//        turtleView = new TurtleView();
+        turtleViewManager = new TurtleViewManager(variableTracker);
+        area = new TurtlePlayground(turtleViewManager);
+
         this.setCenter(area);
     }
 

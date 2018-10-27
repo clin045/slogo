@@ -9,17 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.*;
 
 public class VariableTracker {
-    private Turtle turtle;
     private ObservableMap<String, Object> varMap;
     private ObservableMap<String, List<String>>commandMap;
-
-    private Map<Integer, Turtle> turtleMap;
-    private int activeTurtle;
     private TurtleManager turtleManager;
 
 
@@ -27,12 +22,8 @@ public class VariableTracker {
      * Default constructor initializes Turtle() and HashMap()
      */
     public VariableTracker(){
-        turtleMap = new HashMap<>();
         varMap = FXCollections.observableMap(new HashMap<>());
         commandMap=FXCollections.observableMap(new HashMap<>());
-
-        activeTurtle = 0;
-        turtleManager.createTurtle(0);
         turtleManager = new TurtleManager();
     }
 
