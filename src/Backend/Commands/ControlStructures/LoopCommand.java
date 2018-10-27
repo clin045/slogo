@@ -2,6 +2,7 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Exceptions.InvalidInputException;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -29,6 +30,22 @@ public abstract class LoopCommand extends Command {
                 if(tempList.get(0).equals(END_DELIMETER)){
                     tempList.remove(0);
                     break;}
+                if(!CommandManager.isCommand(tempList.get(0))){
+                    if(tempList.get(0).charAt(0)==':'){
+                        List<String>userCommand=myTracker.getCommand(tempList.get(0).substring(1));
+                        String current=tempList.get(0);
+                        if(userCommand!=null){
+                            tempList.addAll(0,userCommand);
+                            tempList.remove(current);
+                        }
+                        else{
+                            throw new InvalidInputException(current);
+                        }
+                    }
+                    else{
+                        throw new InvalidInputException(tempList.get(0));
+                    }
+                }
                 Command loopCmd= CommandManager.getCommand(tempList.get(0), myTracker);
                 tempList.remove(0);
                 out=Double.parseDouble(loopCmd.execute(tempList));

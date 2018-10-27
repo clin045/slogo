@@ -94,10 +94,7 @@ public class VariableTracker {
     public void clearCommands(){
         commandMap.clear();
     }
-    public String executeCommand(String key){
-//        System.out.println("done");
-        return "done";
-    }
+
 
     public ObservableMap<String, List<String>> getCommandMap() {
         return commandMap;
