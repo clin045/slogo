@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CommandTurtles extends Command {
 
-    CommandTurtles(VariableTracker tracker){
+    public CommandTurtles(VariableTracker tracker){
         super(tracker);
     }
                    @Override

@@ -8,7 +8,7 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandTell extends Command {
+public class CommandTell extends BracketedCommand {
 
     public CommandTell(VariableTracker tracker){
         super(tracker);

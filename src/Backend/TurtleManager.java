@@ -54,6 +54,11 @@ public class TurtleManager {
         }
     }
 
+    public void setActiveTurtles(List<Turtle> turtles){
+        activeTurtles.clear();
+        activeTurtles.addAll(turtles);
+    }
+
     public double penDown() {
         for(Turtle t : activeTurtles){
             t.penDown();
