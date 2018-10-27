@@ -90,7 +90,7 @@ public class TurtleManager {
     public double left(double degrees){
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.left(degrees);
+            last = t.left(degrees);
         }
         return last;
     }
@@ -98,14 +98,14 @@ public class TurtleManager {
     public double right(double degrees){
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.right(degrees);
+            last = t.right(degrees);
         }
         return last;
     }
     public double setHeading(double heading){
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.setHeading(heading);
+            last = t.setHeading(heading);
         }
         return last;
     }
@@ -113,14 +113,14 @@ public class TurtleManager {
     public double towards(double x, double y){
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.towards(x, y);
+            last = t.towards(x, y);
         }
         return last;
     }
     public double setXY(double x, double y){
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.setXY(x,y);
+            last = t.setXY(x,y);
         }
         return last;
     }
@@ -128,14 +128,14 @@ public class TurtleManager {
     public double show() {
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.show();
+            last = t.show();
         }
         return last;
     }
     public double hide() {
         double last = 0;
         for(Turtle t : activeTurtles){
-            t.hide();
+            last = t.hide();
         }
         return last;
     }
@@ -151,7 +151,7 @@ public class TurtleManager {
     public double home() {
         double last = 0;
         for(Turtle t : activeTurtles){
-            last = t.home();
+            last = last = t.home();
         }
         return last;
     }

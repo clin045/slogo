@@ -28,37 +28,16 @@ public class CommandTell extends Command {
         }
 
         var idExp = params;
-        idExp.remove("[");
-        idExp.remove("]");
-        //check if each param is a command, if so, evaluate it
-        var idList = new ArrayList<Integer>();
-        while(idExp.size() > 0){
-            if(CommandManager.isCommand(idExp.get(0))){
-                var cmd = CommandManager.getCommand(idExp.get(0), myTracker);
-                idExp.remove(0);
-                try{
-                    var doubVal = Double.parseDouble(cmd.execute(idExp.subList(0, idExp.size())));
-                    var intVal = (int) doubVal;
-                    idList.add(intVal);
-
-                }
-                catch(Exception e){
-                    throw new IllegalArgumentException("Invalid params for Tell");
-                }
-            }
-            else{
-                try{
-                    idList.add(Integer.parseInt(idExp.get(0)));
-                    idExp.remove(0);
-                }
-                catch(Exception e){
-                    throw new IllegalArgumentException("Invalid params for Tell");
-                }
-            }
+        ArrayList<Double> idListDouble = evaluateBrackets(idExp);
+        ArrayList<Integer> idList = new ArrayList<>();
+        for(Double d : idListDouble){
+            idList.add(d.intValue());
         }
         myTracker.getTurtleManager().setActiveTurtlesByID(idList);
         return Integer.toString(idList.get(idList.size()-1));
     }
+
+
 
 
 }
