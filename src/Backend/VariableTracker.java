@@ -5,22 +5,25 @@
 package Backend;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.*;
 
 public class VariableTracker {
-    private Map<String, Object> varMap;
-    private Map<String, List<String>>commandMap;
+    private ObservableMap<String, Object> varMap;
+    private ObservableMap<String, List<String>>commandMap;
     private TurtleManager turtleManager;
+
 
     /**
      * Default constructor initializes Turtle() and HashMap()
      */
     public VariableTracker(){
-        varMap = new HashMap<>();
-        commandMap=new HashMap<>();
+        varMap = FXCollections.observableMap(new HashMap<>());
+        commandMap=FXCollections.observableMap(new HashMap<>());
         turtleManager = new TurtleManager();
     }
 
@@ -96,11 +99,11 @@ public class VariableTracker {
         return "done";
     }
 
-    public Map<String, List<String>> getCommandMap() {
+    public ObservableMap<String, List<String>> getCommandMap() {
         return commandMap;
     }
 
-    public Map<String, Object> getVarMap() {
+    public ObservableMap<String, Object> getVarMap() {
         return varMap;
     }
 }

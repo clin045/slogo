@@ -1,16 +1,22 @@
 package FrontEnd;
 
+import Backend.VariableTracker;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class TurtleManager implements Iterable<TurtleView> {
+public class TurtleViewManager implements Iterable<TurtleView> {
 
     HashSet<Integer> ids;
     ArrayList<TurtleView> turtleList;
 
-    public TurtleManager(){
-        turtleList = new ArrayList<>();
+    VariableTracker variableTracker; // track the state of each turtle
+//    TurtlePlayground turtlePlayground;
+
+    public TurtleViewManager(VariableTracker variableTracker){
+        this.variableTracker = variableTracker;
+//        this.turtlePlayground = turtlePlayground;
     }
 
     public void addTurtle(int id){
@@ -21,6 +27,6 @@ public class TurtleManager implements Iterable<TurtleView> {
 
     @Override
     public Iterator<TurtleView> iterator() {
-        return null;
+        return turtleList.iterator();
     }
 }

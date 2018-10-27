@@ -1,15 +1,15 @@
 package FrontEnd;
 
-import Backend.Command;
 import Backend.CommandManager;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 
 public class CommandInputHandler extends TextArea {
@@ -19,7 +19,8 @@ public class CommandInputHandler extends TextArea {
     private CommandManager commandManager;
     private TitledPane variableHistory;
     private TitledPane commandHistory;
-    private int keySize = 0;
+    private TitledPane userDefinedCommands;
+    private boolean first = true;
 
     public CommandInputHandler(Controller controller){
         this.controller = controller;
@@ -40,34 +41,64 @@ public class CommandInputHandler extends TextArea {
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
 
-        if(keySize!=commandManager.getMyTracker().keySet().size()){
-            VBox definedVariable = (VBox) variableHistory.getContent();
-//            String lastKey = new String();
-//            Iterator<String> itr = CommandManager.myTracker.keySet().iterator();
-//            while(itr.hasNext()) {
-//                System.out.println(itr.next());
-//                lastKey = itr.next();
-//            }
-            String lastKey = getLastKey(commandManager.getMyTracker().keySet());
-            System.out.println("Last key:" + lastKey);
-            definedVariable.getChildren().add(UIFactory.createText(lastKey + ": " + commandManager.getMyTracker().get(lastKey)));
-            keySize = commandManager.getMyTracker().keySet().size();
+        // only runs once when this method is called the first time
+        if(first){
+            // connect backend to frontend
+            varMap();
+            definedCommandMap();
+            first = false;
         }
 
         return this.getText();
     }
 
-    private String getLastKey(Set<String> set){
-//        Collections.sort(set);
-        int index = 0;
-        for(String s: set){
-            System.out.println("Index:"+s);
-            if(index==set.size()-1){
-                return s;
+    private void varMap(){
+        ObservableMap<String, Object> varMap = commandManager.getMyTracker().getVarMap();
+        VBox definedVariable = (VBox) variableHistory.getContent();
+        varMap.addListener(new MapChangeListener<String, Object>() {
+            @Override
+            public void onChanged(Change<? extends String, ?> change) {
+                if(change.wasAdded()){
+                    definedVariable.getChildren().add(
+                            UIFactory.createTextFieldWithLabel(change.getKey(), varMap.get(change.getKey()).toString(), commandManager.getMyTracker().getVarMap()
+                            ));
+                }
             }
-            index++;
+        });
+
+        for(String s: varMap.keySet()){
+            definedVariable.getChildren().add(
+                    UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap())
+            );
         }
-        return new String();
+    }
+
+    private void definedCommandMap(){
+        ObservableMap<String, List<String>> commandMap = commandManager.getMyTracker().getCommandMap();
+        ScrollPane definedCommandsScrollPane = (ScrollPane) userDefinedCommands.getContent();
+        VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
+
+        commandMap.addListener(new MapChangeListener<String, Object>() {
+            @Override
+            public void onChanged(Change<? extends String, ?> change) {
+                if(change.wasAdded()){
+                    definedCommands.getChildren().add(
+                            UIFactory.createTextFieldWithLabel(change.getKey(), commandMap.get(change.getKey()).toString(), event -> {
+                                        System.out.println(commandMap.get(change.getKey()).toString());
+                                        commandManager.execute(commandMap.get(change.getKey()).toString());
+                                    }
+                            ));
+                }
+            }
+        });
+
+        for(String s: commandMap.keySet()){
+            definedCommands.getChildren().add(
+                    UIFactory.createTextFieldWithLabel(s, commandMap.get(s).toString(), event -> {
+                        commandManager.execute(commandMap.get(s).toString());
+                    })
+            );
+        }
     }
 
     private void showWarningDialog(String title, String header, String content){
@@ -76,23 +107,6 @@ public class CommandInputHandler extends TextArea {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
-    }
-
-    @Override
-    public void replaceText(int start, int end, String text) {
-        String current = getText();
-        // only insert if no new lines after insert position:
-        if (! current.substring(start).contains("\n")) {
-            super.replaceText(start, end, text);
-        }
-    }
-    @Override
-    public void replaceSelection(String text) {
-        String current = getText();
-        int selectionStart = getSelection().getStart();
-        if (! current.substring(selectionStart).contains("\n")) {
-            super.replaceSelection(text);
-        }
     }
 
 
@@ -111,5 +125,9 @@ public class CommandInputHandler extends TextArea {
 
     public void setCommandHistory(TitledPane commandHistory) {
         this.commandHistory = commandHistory;
+    }
+
+    public void setUserDefinedCommands(TitledPane userDefinedCommands){
+        this.userDefinedCommands = userDefinedCommands;
     }
 }

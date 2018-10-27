@@ -48,6 +48,15 @@ public class Controller {
         turtlePlayground.setPenDown(isPenDown);
     }
 
+    public void togglePenDown(){
+        turtlePlayground.togglePenDown();
+    }
+
+    public void setPenThickness(double width){
+        turtlePlayground.setPenThickNess(width);
+    }
+
+
     public void hideTurtle(){
         turtleView.hide();
     }

@@ -276,6 +276,8 @@ public class Turtle {
     }
 
 
-
+    public Controller getController(){
+        return controller;
+    }
 
 }

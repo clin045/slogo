@@ -14,6 +14,9 @@ public class TurtleManager {
     TurtleManager(){
         turtleMap = new HashMap<>();
         activeTurtles = new ArrayList<>();
+        Turtle turtle1=new Turtle();
+        activeTurtles.add(turtle1);
+        turtleMap.put(1,turtle1);
     }
 
     public int getNumTurtles(){

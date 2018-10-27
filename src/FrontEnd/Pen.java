@@ -39,8 +39,8 @@ public class Pen {
         isDownProperty.set(down);
     }
 
-    protected Color getColor() {
-        return color;
+    protected void togglePenDown(){
+        isDownProperty.set(!isDown());
     }
 
     protected void setColor(Color c) {
