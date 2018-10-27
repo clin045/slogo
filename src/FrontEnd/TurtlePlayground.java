@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+
 /*
     Represents the area where turtle moves
     May be included in the turtle.java class
@@ -28,11 +29,15 @@ public class TurtlePlayground extends Pane {
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
+    // create a default white
     public TurtlePlayground(TurtleViewManager turtleViewManager){
         setBgColor(Color.WHITE);
-        turtleViewManager = this.turtleViewManager;
-         turtleView = new TurtleView();
-        addTurtleToCenter(turtleView.getTurtleImageView());
+        this.turtleViewManager = turtleViewManager;
+        for(TurtleView view: turtleViewManager){
+            this.turtleView = view;
+            addTurtleToCenter(view.getTurtleImageView());
+        }
+//        addTurtleToCenter(turtleView.getTurtleImageView());
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
