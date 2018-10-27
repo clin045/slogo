@@ -16,7 +16,7 @@ public class CommandNot extends Command {
 
     @Override
     public String execute(List<String> params) {
-        double test = parseParameters(params);
+        double test = parseParameter(params);
         if(test == 0){
             return "1";
         }

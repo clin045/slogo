@@ -16,8 +16,8 @@ public class CommandPow extends Command {
 
     @Override
     public String execute(List<String> params) {
-        d1=parseParameters(params);
-        d2=parseParameters(params);
+        d1= parseParameter(params);
+        d2= parseParameter(params);
         return ""+Math.pow(d1,d2);
     }
 }

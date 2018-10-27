@@ -1,11 +1,12 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidInputException;
 import Backend.VariableTracker;
 
 import java.util.List;
 
-public class CommandDiv extends Command {
+public class CommandDiv extends MultiInputCommand {
     private double d1,d2;
     public CommandDiv(VariableTracker tracker){super(tracker);}
     @Override
@@ -17,14 +18,12 @@ public class CommandDiv extends Command {
 
     @Override
     public String execute(List<String> params) {
-//        System.out.println("PARAMS: "+params.size());
-//        for(String s:params){System.out.println(s);}
-        d1=parseParameters(params);
-        double temp=d1;
-//        System.out.println("d1: "+d1+" d2: "+d2);
-        d2=parseParameters(params);
-//        System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
-        if(d2==0){throw new IllegalArgumentException("Cannot divide by 0");}
-        return ""+(d1/d2);
+        parseAllParameters(params);
+        double out = myVals.remove(0);
+        if(myVals.contains(0)){throw new InvalidInputException("0");}
+        for (double d:myVals){
+            out/=d;
+        }
+        return ""+out;
     }
 }

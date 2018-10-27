@@ -1,10 +1,10 @@
 package Backend;
 
-import Backend.Command;
-import Backend.TextParser;
-import Backend.VariableTracker;
 
-import java.awt.desktop.SystemSleepEvent;
+import Backend.Exceptions.CommandParsingException;
+import Backend.Exceptions.InvalidInputException;
+import Backend.Exceptions.InvalidVariableCallException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.ResourceBundle;
@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
  * @author Michael Glushakov (mg367)
  */
 public class CommandManager {
+    public static final String ERROR_PATH="config.Errors";
+    public static final String COMMAND_PATH="config.Commands";
 
     public static Map<String, Command> getCommands() {
         return myCommands;
@@ -21,6 +23,8 @@ public class CommandManager {
     private static final Map<String, Command>myCommands= new HashMap<>();
     private TextParser myParser;
     private VariableTracker myTracker;
+
+
 
 
     /**
@@ -43,44 +47,65 @@ public class CommandManager {
        preloadCommands();
 
     }
+
+    public static Command getCommand(String str, VariableTracker tracker){
+        ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
+        try{
+            Class commandStr= Class.forName(commandBundle.getString(str));
+            Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
+            return command;
+        } catch (ClassNotFoundException e) {
+            throw new CommandParsingException(str);
+        } catch (IllegalAccessException e) {
+            throw new CommandParsingException(str);
+        } catch (InstantiationException e) {
+            throw new CommandParsingException(str);
+        } catch (NoSuchMethodException e) {
+            throw new CommandParsingException(str);
+        } catch (InvocationTargetException e) {
+            throw new CommandParsingException(str);
+        }
+    }
+
     public void setLanguage(String path){
         myParser.setLanguage(path);
     }
-
+    public static boolean isCommand(String cmd){
+        return myCommands.containsKey(cmd);
+    }
 
     public String execute(String userInput){
         String out="";
-        List<String>parsedList = myParser.parse(userInput);
-        while(parsedList.size()>0){
-            if(parsedList.get(0).equals("[")){return out;}
-            try{  Command init=Command.getCommand(parsedList.get(0),myTracker);
-                if(init==null){throw new IllegalArgumentException("Invalid input");}
-                parsedList.remove(0);
-                out=init.execute(parsedList);
-            }catch (MissingResourceException e){
-                if(parsedList.get(0).charAt(0)==':'){
-                    Double val=(Double) myTracker.get(parsedList.get(0).substring(1));
+        List<String> masterList = myParser.parse(userInput);
+        while(masterList.size()>0){
+            if(masterList.get(0).equals("[")){return out;}
+            if(isCommand(masterList.get(0))){
+                Command init=getCommand(masterList.get(0), myTracker);
+                masterList.remove(0);
+                out=init.execute(masterList);
+            }
+            else {
+                if(masterList.get(0).charAt(0)==':'){
+                    Double val=(Double) myTracker.get(masterList.get(0).substring(1));
                     if(val==null){
-                        List<String>userCommand=myTracker.getCommand(parsedList.get(0).substring(1));
-                        String commandName=parsedList.get(0);
+                        List<String>userCommand=myTracker.getCommand(masterList.get(0).substring(1));
+                        String commandName=masterList.get(0);
                         if(userCommand!=null){
-                            parsedList.addAll(0,userCommand);
-
-                            parsedList.remove(commandName);
+                            masterList.addAll(0,userCommand);
+                            masterList.remove(commandName);
                         }
-                        else{throw new IllegalArgumentException("UNKNOWN EXPRESSION: "+parsedList.get(0));}}
+                        else{throw new InvalidInputException(masterList.get(0));}}
                     else{
-                    out=""+val;
-                    parsedList.remove(0);
+                        out=""+val;
+                        masterList.remove(0);
                     }
                 }
                 else{
-                    throw new IllegalArgumentException("Variable and custom command calls must be preceeded by a semicolon");
+                    throw new InvalidVariableCallException();
                 }
-
             }
-
         }
+        System.out.println(out);
 
         return out;
     }
@@ -93,31 +118,12 @@ public class CommandManager {
 
     private void preloadCommands(){
         try{
-            ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
+            ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
             for(String key: Collections.list(commandBundle.getKeys())){
-                try{
-                    Class commandStr= Class.forName(commandBundle.getString(key));
-                    Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(myTracker);
-                    myCommands.put(key,command);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("Could Not Load Command String: "+e.getMessage());
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("Could Not Create Command Object: "+e.getMessage());
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("Could not Create Command Object");
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-
+                    myCommands.put(key,getCommand(key,myTracker));
             }
         }catch (MissingResourceException e){
-            e.printStackTrace();
+            throw new CommandParsingException("");
         }
 
     }

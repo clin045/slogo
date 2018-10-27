@@ -3,10 +3,9 @@ package Backend.Commands.Math;
 import Backend.Command;
 import Backend.VariableTracker;
 
-import javax.xml.validation.Validator;
 import java.util.List;
 
-public class CommandEqualP extends Command {
+public class CommandEqualP extends MultiInputCommand {
     public CommandEqualP(VariableTracker tracker){
         super(tracker);
     }
@@ -17,13 +16,11 @@ public class CommandEqualP extends Command {
 
     @Override
     public String execute(List<String> params) {
-        double exp1 = parseParameters(params);
-        double exp2 = parseParameters(params);
-        if(exp1 == exp2){
-            return "1";
+        parseAllParameters(params);
+        double check=myVals.remove(0);
+        for(double d: myVals){
+            if(d!=check){return "0";}
         }
-        else{
-            return "0";
-        }
+       return "1";
     }
 }

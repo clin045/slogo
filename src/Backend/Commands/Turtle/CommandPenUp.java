@@ -19,6 +19,6 @@ public class CommandPenUp extends Command {
     }
 
     public String execute(List<String> params) {
-        return Integer.toString(myTracker.getActiveTurtle().penUp());
+        return Double.toString(myTracker.getTurtleManager().penUp());
     }
 }

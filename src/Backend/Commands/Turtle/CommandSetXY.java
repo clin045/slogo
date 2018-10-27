@@ -1,7 +1,6 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
-import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -21,9 +20,11 @@ public class CommandSetXY extends Command {
 
     @Override
     public String execute(List<String> params) {
-        pointX = (int) parseParameters(params);
-        pointY = (int) parseParameters(params);
-        var myTurtle = myTracker.getActiveTurtle();
+
+        pointX = (int) parseParameter(params);
+        pointY = (int) parseParameter(params);
+        var myTurtle = myTracker.getTurtleManager();
+
         return Double.toString(myTurtle.setXY(pointX,pointY));
     }
 }

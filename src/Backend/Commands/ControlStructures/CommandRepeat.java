@@ -22,7 +22,7 @@ public class CommandRepeat extends Command {
     @Override
     public String execute(List<String> params) {
 //        System.out.println(params.size());
-        repeatNumber=(int)parseParameters(params);
+        repeatNumber=(int) parseParameter(params);
 //        System.out.println("Repeat num: "+repeatNumber);
 //        System.out.println("param size: "+params.size());
 //        System.out.println(params.get(0));
@@ -43,7 +43,7 @@ public class CommandRepeat extends Command {
                 if(temp.get(0).equals("[")){break;}
 //                System.out.println("Temp: ");
                 //for(String str:temp){System.out.println(str);}
-                Command loopCmd=Command.getCommand(temp.get(0),super.myTracker);
+                Command loopCmd= CommandManager.getCommand(temp.get(0), myTracker);
 //                System.out.println("got commands");
                 temp.remove(0);
                 String loop=loopCmd.execute(temp);

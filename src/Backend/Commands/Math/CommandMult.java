@@ -5,8 +5,8 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-public class CommandMult extends Command {
-    private double d1,d2;
+public class CommandMult extends MultiInputCommand {
+
     public CommandMult(VariableTracker tracker){super(tracker);}
 
     @Override
@@ -17,13 +17,11 @@ public class CommandMult extends Command {
 
     @Override
     public String execute(List<String> params) {
-//        System.out.println("PARAMS: "+params.size());
-//        for(String s:params){System.out.println(s);}
-        d1=parseParameters(params);
-        double temp=d1;
-//        System.out.println("d1: "+d1+" d2: "+d2);
-        d2=parseParameters(params);
-//        System.out.println("d1: "+d1+" d2: "+d2+"temp: "+temp);
-        return ""+(d1*d2);
+        parseAllParameters(params);
+        double out=1;
+        for(double d: myVals){
+            out*=d;
+        }
+        return ""+out;
     }
 }

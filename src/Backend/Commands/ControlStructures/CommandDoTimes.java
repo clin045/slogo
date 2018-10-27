@@ -1,6 +1,7 @@
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
+import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class CommandDoTimes extends Command {
         if(!params.remove(0).equals("[")){throw new IllegalArgumentException("Limit must be enclosed by brackets []");}
         if(!params.remove(2).equals("]")){throw new IllegalArgumentException("DOTIMES only takes one limit argument");}
         varName=params.remove(0);
-        limit=(int)parseParameters(params);
+        limit=(int) parseParameter(params);
 //        System.out.println("DOTIMES limit: "+limit);
 //        System.out.println("param size: "+params.size());
         double temp=1;
@@ -34,7 +35,7 @@ public class CommandDoTimes extends Command {
             while(tempList.size()>0){
                 if(tempList.get(0).equals("]")){break;}
                 if(tempList.get(0).equals("[")){break;}
-                Command loopCmd=Command.getCommand(tempList.get(0),super.myTracker);
+                Command loopCmd= CommandManager.getCommand(tempList.get(0), myTracker);
                 tempList.remove(0);
                 out=Double.parseDouble(loopCmd.execute(tempList));
                 temp+=1;

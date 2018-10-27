@@ -16,7 +16,7 @@ public class CommandLog extends Command {
 
     @Override
     public String execute(List<String> params) {
-        d1=parseParameters(params);
+        d1= parseParameter(params);
         if(d1<0){throw new IllegalArgumentException("Log input must be positive");}
         return ""+(Math.log(d1));
     }
