@@ -75,6 +75,7 @@ public class CommandManager {
     }
 
     public String execute(String userInput){
+        if (userInput.length()==0){return "";}
         String out="";
         List<String> masterList = myParser.parse(userInput);
         while(masterList.size()>0){

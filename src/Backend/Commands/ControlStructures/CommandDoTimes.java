@@ -7,9 +7,8 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandDoTimes extends Command {
-    private int limit;
-    private String varName;
+public class CommandDoTimes extends LoopCommand{
+
     public CommandDoTimes(VariableTracker tracker){super(tracker);}
     @Override
     public String getDescription() {
@@ -18,29 +17,12 @@ public class CommandDoTimes extends Command {
 
     @Override
     public String execute(List<String> params) {
-        List<String>tempList;
-        if(!params.remove(0).equals("[")){throw new IllegalArgumentException("Limit must be enclosed by brackets []");}
-        if(!params.remove(2).equals("]")){throw new IllegalArgumentException("DOTIMES only takes one limit argument");}
-        varName=params.remove(0);
-        limit=(int) parseParameter(params);
-//        System.out.println("DOTIMES limit: "+limit);
-//        System.out.println("param size: "+params.size());
-        double temp=1;
-        double out=0;
-        while((int)temp<=limit){
-            super.myTracker.put(varName,(double)temp);
-            tempList=new ArrayList<>(params);
-            if(!tempList.get(0).equals("[")){throw new IllegalArgumentException("DOTIMES commands must be surrounded by square brackets");}
-            tempList.remove("[");
-            while(tempList.size()>0){
-                if(tempList.get(0).equals("]")){break;}
-                if(tempList.get(0).equals("[")){break;}
-                Command loopCmd= CommandManager.getCommand(tempList.get(0), myTracker);
-                tempList.remove(0);
-                out=Double.parseDouble(loopCmd.execute(tempList));
-                temp+=1;
-            }
-        }
-        return ""+temp;
+        if(!params.remove(0).equals(START_DELIMETER)){throw new IllegalArgumentException("Limit must be enclosed by brackets []");}
+        if(!params.remove(2).equals(END_DELIMETER)){throw new IllegalArgumentException("DOTIMES only takes one limit argument");}
+        key=params.remove(0);
+        start=1;
+        end=(int) parseParameter(params);
+        increment=1;
+        return super.execute(params);
     }
 }

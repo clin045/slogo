@@ -1,4 +1,4 @@
-set :distance 50
+set distance 50
 
 repeat 4
 [
