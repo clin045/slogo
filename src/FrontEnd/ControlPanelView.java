@@ -6,13 +6,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -162,8 +162,15 @@ public class ControlPanelView {
         Button saveButton = UIFactory.createButton("Save", event -> {
             // save file here
         });
+        Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
+            Point2D position = UIFactory.createDialogBox();
+            if(position!=null){
+                controller.addNewTurtle(position);
+            }
+            System.out.println(position);
+        });
 
-        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton);
+        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton, addNewTurtleButton);
         VBox textInput= new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
     }

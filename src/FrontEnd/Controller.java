@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 /*
@@ -35,10 +36,6 @@ public class Controller {
         turtleView.setTurtleImage(fileName);
     }
 
-    // turn the turtle clockwise by certain degrees
-//    public void turnTurtle(double degrees){
-//        turtleView.turn(degrees);
-//    }
 
     public void rotateTurtle(double heading){
         turtleView.rotate(heading);
@@ -75,5 +72,9 @@ public class Controller {
 
     public void setTurtlePosition(double x, double y){
         turtlePlayground.setTurtlePosition(x,y);
+    }
+
+    public void addNewTurtle(Point2D position){
+        turtlePlayground.addNewTurtleToPlayground(position);
     }
 }

@@ -69,6 +69,15 @@ public class TurtlePlayground extends Pane {
         }
     }
 
+    public void addNewTurtleToPlayground(Point2D position){
+//        turtleViewManager.addTurtle();
+        TurtleView view = new TurtleView();
+        this.getChildren().add(view.getTurtleImageView());
+        view.getTurtleImageView().setLayoutX(position.getX());
+        view.getTurtleImageView().setLayoutY(position.getY());
+    }
+
+
     // put an additional turtle to the center of pane
     private void addTurtleToCenter(Node element){
         this.getChildren().add(element);
