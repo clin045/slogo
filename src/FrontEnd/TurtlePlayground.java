@@ -15,8 +15,9 @@ import javafx.scene.shape.Line;
 
 public class TurtlePlayground extends Pane {
 
-    private static final int INIT_STROKE_WIDTH = 10;
+    public static final double INIT_STROKE_WIDTH = 5;
     TurtleView turtleView; // possibly extend it to contain multiple turtles
+    TurtleViewManager turtleViewManager;
     Pen pen;
 
     // create a default white playground with one turtle
@@ -27,11 +28,20 @@ public class TurtlePlayground extends Pane {
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
+    public TurtlePlayground(TurtleViewManager turtleViewManager){
+        setBgColor(Color.WHITE);
+        turtleViewManager = this.turtleViewManager;
+         turtleView = new TurtleView();
+        addTurtleToCenter(turtleView.getTurtleImageView());
+        pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
+    }
+
+    // create a colored playground with one turtle
     public TurtlePlayground(TurtleView turtleView, Color color){
         setBgColor(color);
         this.turtleView = turtleView;
         addTurtleToCenter(turtleView.getTurtleImageView());
-        pen = new Pen(this, true, Color.BLACK, 10);
+        pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
     // set the background color of this pane
@@ -52,7 +62,6 @@ public class TurtlePlayground extends Pane {
             Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
         }
-
     }
 
     // put an additional turtle to the center of pane
@@ -72,6 +81,7 @@ public class TurtlePlayground extends Pane {
         this.getChildren().clear();
         addTurtleToCenter(turtleView.getTurtleImageView());
         setTurtleToHome();
+        turtleView.resetTurtleHeading();
     }
 
     public void setPenColor(Color color){
@@ -80,6 +90,14 @@ public class TurtlePlayground extends Pane {
 
     public void setPenDown(boolean isPenDown){
         pen.setDown(isPenDown);
+    }
+
+    public void setPenThickNess(double width){
+        pen.setThickness(width);
+    }
+
+    public void togglePenDown(){
+        pen.togglePenDown();
     }
 
     public void setTurtlePosition(double x, double y){
