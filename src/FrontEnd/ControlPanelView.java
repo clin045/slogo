@@ -15,7 +15,8 @@ import javafx.stage.FileChooser;
 import java.io.File;
 
 /*
-    This class represents the view for setting
+    This class represents the UI view for all the settings like workspace setting,
+    defined variables and commands, command history that appear in the right side of
     @author xp19
  */
 public class ControlPanelView {
