@@ -1,6 +1,9 @@
 package FrontEnd;
 
 import Backend.CommandManager;
+
+import java.io.*;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,7 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /*
@@ -134,7 +136,7 @@ public class ControlPanelView {
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "English", "Chinese", "French", "German",
-                        "Italian", "Portuguese", "Russian", "Spanish"
+                        "Italian", "Portuguese", "Russian", "Spanish", "Urdu"
                 );
         ComboBox comboBox = new ComboBox(options);
         comboBox.getSelectionModel().selectFirst();
@@ -158,12 +160,25 @@ public class ControlPanelView {
             addNewTab();
         });
         Button loadButton = UIFactory.createButton("Load", event -> {
-           // load file here
+            FileChooser chooser = UIFactory.createFileChooser("*.txt");
+            File file = chooser.showOpenDialog(null);
+            if(file != null) {
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        controller.commandManager.execute(line);
+                    }
+                } catch (IOException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
+                    alert.showAndWait();
+                    e.printStackTrace();
+                }
+            }
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
-            // save file here
         });
+
         Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
             Point2D position = UIFactory.createDialogBox();
             if(position!=null){
@@ -241,7 +256,6 @@ public class ControlPanelView {
     public void setTurtlePlayground(TurtlePlayground turtlePlayground){
         this.turtlePlayground = turtlePlayground;
     }
-
 
     private void clearCommandHistory(){
         VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
