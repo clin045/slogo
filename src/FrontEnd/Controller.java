@@ -31,9 +31,6 @@ public class Controller {
     }
 
     public void update(double x, double y){
-//        turtlePlayground.update(x,y);
-        System.out.println("X:" + x);
-        System.out.println("Y:" + y);
         double originX = turtleView.getX();
         double originY = turtleView.getY();
         turtleView.update(x,y);

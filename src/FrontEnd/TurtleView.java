@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
+import java.util.stream.StreamSupport;
+
 public class TurtleView {
     private int id; // each turtle view will have to have a unique ID
     private ImageView turtleImageView;
@@ -24,6 +26,7 @@ public class TurtleView {
     private TurtleManager turtleManager;
 
     public TurtleView(){
+        this.turtleManager = turtleManager;
         turtleImageView = new ImageView(turtleImage);
         turtleImageView.setFitWidth(SIZE);
         turtleImageView.setFitHeight(SIZE);
@@ -35,11 +38,14 @@ public class TurtleView {
                     colorAdjustGrayscale.setSaturation(-1);
                     turtleImageView.setEffect(colorAdjustGrayscale);
                     isActive = false;
-
+                    System.out.println(turtleManager.getActiveTurtles());
+                    System.out.println(turtleManager.getTurtleByID(id));
+                    turtleManager.getActiveTurtles().remove(turtleManager.getTurtleByID(id));
                 }
                 else{
                     turtleImageView.setEffect(null);
                     isActive = true;
+                    turtleManager.getActiveTurtles().add(turtleManager.getTurtleByID(id));
                 }
                 System.out.println("Clicked");
             }
@@ -54,6 +60,22 @@ public class TurtleView {
     public TurtleView(int id){
         this();
         this.id = id;
+    }
+
+    public TurtleView(VariableTracker variableTracker, int id){
+        this();
+        this.id = id;
+        this.turtleManager = variableTracker.getTurtleManager();
+    }
+
+    public TurtleView(TurtleManager turtleManager, int id){
+        this();
+        this.turtleManager = turtleManager;
+        this.id = id;
+    }
+
+    public void setTurtleManager(TurtleManager turtleManager){
+        this.turtleManager = turtleManager;
     }
 
     public ImageView getTurtleImageView(){
@@ -113,6 +135,8 @@ public class TurtleView {
         turtleImageView.setVisible(false);
     }
 
-
+    public int getId(){
+        return id;
+    }
 
 }

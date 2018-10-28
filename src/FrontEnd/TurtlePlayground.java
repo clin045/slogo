@@ -35,7 +35,7 @@ public class TurtlePlayground extends Pane {
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
-    // create a default white
+    // create a default white playground with many turtles
     public TurtlePlayground(TurtleViewManager turtleViewManager){
         setBgColor(Color.WHITE);
         turtleView = new TurtleView();
@@ -67,15 +67,11 @@ public class TurtlePlayground extends Pane {
 
     // update the turtle's position and leave trail if pen is down
     public void update(double x, double y, int id){
-//        Turtle turtleView = turtleManager.getTurtleByID(id);
-//        turtleView.setXY(x,y);
         double originX = turtleView.getX();
         double originY = turtleView.getY();
         double xpadding = turtleView.getWidth()/2;
         double ypadding = turtleView.getHeight()/2;
         turtleView.update(x,y);
-        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
-        System.out.println(pint);
         if(pen.isDown()){
             Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
@@ -85,7 +81,6 @@ public class TurtlePlayground extends Pane {
     public void leaveTrail(double originX, double originY, TurtleView view){
         double xpadding = turtleView.getWidth()/2;
         double ypadding = turtleView.getHeight()/2;
-//        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
         if(pen.isDown()){
             Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(view.getX()+xpadding,view.getY()+ypadding));
             this.getChildren().add(trail);
@@ -95,7 +90,9 @@ public class TurtlePlayground extends Pane {
 
     public TurtleView addNewTurtleToPlayground(Point2D position){
 //        turtleViewManager.addTurtle();
-        TurtleView view = new TurtleView();
+        TurtleView view = new TurtleView(turtleManager, TurtleViewManager.ID);
+        TurtleViewManager.ID++;
+        turtleViewManager.addTurtleView(view);
         this.getChildren().add(view.getTurtleImageView());
         view.getTurtleImageView().setLayoutX(position.getX());
         view.getTurtleImageView().setLayoutY(position.getY());
