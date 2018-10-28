@@ -8,15 +8,10 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandIf extends Command {
-    private static final String key = "if";
+    private static final String key = "If";
     public CommandIf(VariableTracker tracker){
         super(tracker);
         setKey(key);
-    }
-    @Override
-    public String getDescription() {
-        return "if expr is not 0, runs the command(s) given in the list\n" +
-                "returns the value of the final command executed (or 0 if no commands are executed)";
     }
 
     @Override

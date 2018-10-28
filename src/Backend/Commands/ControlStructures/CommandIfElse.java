@@ -8,16 +8,12 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandIfElse extends Command {
-    private static final String key = "ifelse";
+    private static final String key = "Ifelse";
     public CommandIfElse(VariableTracker tracker){
         super(tracker);
         setKey(key);
     }
-    @Override
-    public String getDescription() {
-        return "if expr is not 0, runs the trueCommands given in the first list, otherwise runs the falseCommands given in the second list\n" +
-                "returns the value of the final command executed (or 0 if no commands are executed)";
-    }
+
 
     @Override
     public String execute(List<String> params) {

@@ -14,10 +14,6 @@ public class CommandFor extends LoopCommand{
         super(tracker);
         setKey(myKey);
     }
-    @Override
-    public String getDescription() {
-        return "runs command(s) for each value specified in the range, i.e., from (start - end), going by increment";
-    }
 
     @Override
     public String execute(List<String> params) {
