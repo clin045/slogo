@@ -146,7 +146,6 @@ public class Turtle {
      * @return distance
      */
     public double forward(double distance) {
-        System.out.println("ID: " + getID());
         return move(distance);
     }
 

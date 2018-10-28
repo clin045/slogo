@@ -102,7 +102,7 @@ public class TurtleManager {
         double last = 0;
         System.out.println("forward called");
         for(Turtle t : activeTurtles){
-            System.out.println("loop");
+            System.out.println(t);
             last = t.forward(dist);
         }
         return last;
