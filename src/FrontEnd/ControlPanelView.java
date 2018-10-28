@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.util.ArrayList;
@@ -159,6 +160,7 @@ public class ControlPanelView {
         Button newTabButton = UIFactory.createButton("New Tab", event -> {
             addNewTab();
         });
+
         Button loadButton = UIFactory.createButton("Load", event -> {
             FileChooser chooser = UIFactory.createFileChooser("*.txt");
             File file = chooser.showOpenDialog(null);
@@ -177,6 +179,24 @@ public class ControlPanelView {
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
+            FileChooser chooser = UIFactory.createFileChooser("*.txt");
+            File file = chooser.showSaveDialog(null);
+            FileOutputStream fos;
+            BufferedWriter bw;
+            try {
+                fos = new FileOutputStream(file);
+                bw = new BufferedWriter(new OutputStreamWriter(fos));
+                ObservableList commandHistoryNodes = ((VBox) ((ScrollPane) commandHistory.getContent()).getContent()).getChildren();
+                for(Object node : commandHistoryNodes) {
+                    bw.write(((Text) node).getText());
+                    bw.newLine();
+                }
+                bw.close();
+            } catch(IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
+                alert.showAndWait();
+                e.printStackTrace();
+            }
         });
 
         Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {

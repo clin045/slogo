@@ -80,7 +80,7 @@ public class UIFactory {
     public static FileChooser createFileChooser(String extension){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("Choose a " + extension + " file",extension));
+        fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("Choose a " + extension + " file", extension));
         return fileChooser;
     }
 
