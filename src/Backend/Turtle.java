@@ -260,6 +260,7 @@ public class Turtle {
     }
     public void clearScreen(){
         this.coordinates = new Point2D(DEFAULT_X, DEFAULT_Y);
+        setHeading(DEFAULT_HEADING);
         controller.reset();
     }
 
