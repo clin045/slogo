@@ -16,7 +16,6 @@ public class CommandIf extends Command {
 
     @Override
     public String execute(List<String> params) {
-        System.out.println("enter");
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
         if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
@@ -26,7 +25,7 @@ public class CommandIf extends Command {
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
-        System.out.println(firstExpressionString);
+
         if(CommandManager.isCommand(firstExpressionString)){
             firstExpressionCommand = CommandManager.getCommand(firstExpressionString, myTracker);
         }
