@@ -1,6 +1,7 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -17,11 +18,14 @@ public class CommandTowards extends Command {
     }
 
 
-    //TODO: Check graphically that this works properly
     public String execute(List<String> params) {
-
-        pointX = (int) parseParameter(params);
-        pointY = (int) parseParameter(params);
+        try{
+            pointX = (int) parseParameter(params);
+            pointY = (int) parseParameter(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         var turtleMan = myTracker.getTurtleManager();
         return Double.toString(turtleMan.towards(pointX,pointY));
 

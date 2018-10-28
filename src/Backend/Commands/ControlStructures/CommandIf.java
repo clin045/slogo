@@ -2,13 +2,16 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandIf extends Command {
+    private static final String key = "if";
     public CommandIf(VariableTracker tracker){
         super(tracker);
+        setKey(key);
     }
     @Override
     public String getDescription() {
@@ -21,7 +24,7 @@ public class CommandIf extends Command {
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
         if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
-            throw new IllegalArgumentException("Invalid brackets");
+            throw new InvalidSyntaxException(key);
         }
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);

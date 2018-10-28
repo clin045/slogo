@@ -1,6 +1,7 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.Turtle;
 import Backend.VariableTracker;
 
@@ -16,8 +17,12 @@ public class CommandSetHeading extends Command {
 
     @Override
     public String execute(List<String> params) {
-
-        heading = parseParameter(params);
+        try{
+            heading = parseParameter(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         var turtleMan = myTracker.getTurtleManager();
         return Double.toString(turtleMan.setHeading(heading));
 

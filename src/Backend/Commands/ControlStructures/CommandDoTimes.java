@@ -2,6 +2,7 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -21,7 +22,12 @@ public class CommandDoTimes extends LoopCommand{
         if(!params.remove(2).equals(END_DELIMETER)){throw new IllegalArgumentException("DOTIMES only takes one limit argument");}
         key=params.remove(0);
         start=1;
-        end=(int) parseParameter(params);
+        try{
+            end=(int) parseParameter(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         increment=1;
         return super.execute(params);
     }

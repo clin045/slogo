@@ -6,7 +6,7 @@ public class Tester {//Make into Junits
         CommandManager manager = new CommandManager("languages.English");
 
         String line1="tell [ 1 2 3 ]";
-        String line2 = "askwith [ equal? id 2 ] [ id ]";
+        String line2 = "bk";
         String out1 = manager.execute(line1);
         System.out.println("OUT1:"+out1);
         String out2 = manager.execute(line2);

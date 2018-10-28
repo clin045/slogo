@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -16,7 +17,12 @@ public class CommandAnd extends MultiInputCommand {
 
     @Override
     public String execute(List<String> params) {
-        parseAllParameters(params);
+        try{
+            parseAllParameters(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         for(double d: myVals){
           if(d==0){
               return "0.0";
