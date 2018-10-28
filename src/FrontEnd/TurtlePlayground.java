@@ -1,11 +1,15 @@
 package FrontEnd;
 
+import Backend.Turtle;
+import Backend.TurtleManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+
+import java.util.ArrayList;
 
 
 /*
@@ -18,7 +22,9 @@ public class TurtlePlayground extends Pane {
 
     public static final double INIT_STROKE_WIDTH = 5;
     TurtleView turtleView; // possibly extend it to contain multiple turtles
+    ArrayList<TurtleView> turtleViews;
     TurtleViewManager turtleViewManager;
+    TurtleManager turtleManager;
     Pen pen;
 
     // create a default white playground with one turtle
@@ -32,9 +38,12 @@ public class TurtlePlayground extends Pane {
     // create a default white
     public TurtlePlayground(TurtleViewManager turtleViewManager){
         setBgColor(Color.WHITE);
+        turtleView = new TurtleView();
         this.turtleViewManager = turtleViewManager;
+        this.turtleManager = turtleViewManager.getTurtleManager();
+        turtleViews = new ArrayList<>();
         for(TurtleView view: turtleViewManager){
-            this.turtleView = view;
+            turtleViews.add(view);
             addTurtleToCenter(view.getTurtleImageView());
         }
 //        addTurtleToCenter(turtleView.getTurtleImageView());
@@ -57,17 +66,42 @@ public class TurtlePlayground extends Pane {
     }
 
     // update the turtle's position and leave trail if pen is down
-    public void update(double x, double y){
+    public void update(double x, double y, int id){
+//        Turtle turtleView = turtleManager.getTurtleByID(id);
+//        turtleView.setXY(x,y);
         double originX = turtleView.getX();
         double originY = turtleView.getY();
         double xpadding = turtleView.getWidth()/2;
         double ypadding = turtleView.getHeight()/2;
         turtleView.update(x,y);
+        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
+        System.out.println(pint);
         if(pen.isDown()){
             Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
         }
     }
+
+    public void leaveTrail(double originX, double originY, double x, double y, TurtleView view){
+        double xpadding = turtleView.getWidth()/2;
+        double ypadding = turtleView.getHeight()/2;
+//        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
+        if(pen.isDown()){
+            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(view.getX()+xpadding,view.getY()-ypadding));
+            this.getChildren().add(trail);
+        }
+    }
+
+
+    public TurtleView addNewTurtleToPlayground(Point2D position){
+//        turtleViewManager.addTurtle();
+        TurtleView view = new TurtleView();
+        this.getChildren().add(view.getTurtleImageView());
+        view.getTurtleImageView().setLayoutX(position.getX());
+        view.getTurtleImageView().setLayoutY(position.getY());
+        return view;
+    }
+
 
     // put an additional turtle to the center of pane
     private void addTurtleToCenter(Node element){

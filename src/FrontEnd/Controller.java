@@ -1,5 +1,10 @@
 package FrontEnd;
 
+import Backend.Command;
+import Backend.CommandManager;
+import Backend.TurtleManager;
+import Backend.VariableTracker;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 /*
@@ -13,10 +18,12 @@ public class Controller {
 
     TurtlePlayground turtlePlayground;
     TurtleView turtleView;
+    CommandManager commandManager;
 
-    public Controller(TurtlePlayground turtlePlayground, TurtleView turtleView){
+    public Controller(TurtlePlayground turtlePlayground, TurtleView turtleView, CommandManager commandManager){
         this.turtlePlayground = turtlePlayground;
         this.turtleView = turtleView;
+        this.commandManager = commandManager;
     }
 
     public void setTurtleDisplayAreaColor(Color color){
@@ -24,7 +31,11 @@ public class Controller {
     }
 
     public void update(double x, double y){
-        turtlePlayground.update(x,y);
+//        turtlePlayground.update(x,y);
+        System.out.println("X:" + x);
+        System.out.println("Y:" + y);
+        turtlePlayground.leaveTrail(turtleView.getX(), turtleView.getY(), x, y, turtleView);
+        turtleView.update(x,y);
     }
 
     public void setPenColor(Color color){
@@ -35,10 +46,6 @@ public class Controller {
         turtleView.setTurtleImage(fileName);
     }
 
-    // turn the turtle clockwise by certain degrees
-//    public void turnTurtle(double degrees){
-//        turtleView.turn(degrees);
-//    }
 
     public void rotateTurtle(double heading){
         turtleView.rotate(heading);
@@ -76,4 +83,17 @@ public class Controller {
     public void setTurtlePosition(double x, double y){
         turtlePlayground.setTurtlePosition(x,y);
     }
+
+    public TurtleView addNewTurtle(Point2D position){
+        return turtlePlayground.addNewTurtleToPlayground(position);
+    }
+
+    public VariableTracker getVariableTracker(){
+        return commandManager.getMyTracker();
+    }
+
+    public TurtleManager getTurtleManager(){
+        return getVariableTracker().getTurtleManager();
+    }
+
 }

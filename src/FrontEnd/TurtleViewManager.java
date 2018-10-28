@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Backend.TurtleManager;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -10,23 +11,29 @@ public class TurtleViewManager implements Iterable<TurtleView> {
 
     HashSet<Integer> ids;
     ArrayList<TurtleView> turtleList;
-
+    public static int ID = 1;
     VariableTracker variableTracker; // track the state of each turtle
+    TurtleManager turtleManager;
 //    TurtlePlayground turtlePlayground;
 
     public TurtleViewManager(VariableTracker variableTracker){
         this.variableTracker = variableTracker;
+        this.turtleManager = variableTracker.getTurtleManager();
         turtleList = new ArrayList<>();
         ids = new HashSet<>();
-        addTurtle(1);
+        addTurtle();
 //        this.turtlePlayground = turtlePlayground;
     }
 
-    public void addTurtle(int id){
+    public void addTurtle(){
         turtleList.add(new TurtleView());
-        if(ids.contains(id)){
-            throw new IllegalArgumentException(String.format("Duplicated Turtle ID: %d", id));
-        }
+//        variableTracker.getTurtleManager().createTurtle(ID);
+//        variableTracker.getTurtleManager().setActiveTurtlesByID(new ArrayList<>(ID));
+//        ID++;
+    }
+
+    public TurtleManager getTurtleManager(){
+        return turtleManager;
     }
 
     @Override

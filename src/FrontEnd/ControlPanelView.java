@@ -6,15 +6,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import org.w3c.dom.Text;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /*
     This class represents the UI view for all the settings like workspace setting,
@@ -45,6 +46,7 @@ public class ControlPanelView {
     Controller controller;
     CommandInputHandler commandInputHandler;
     CommandManager commandManager;
+    TurtlePlayground turtlePlayground;
 
     public ControlPanelView(Workspace workspace, Controller controller){
         this.workspace = workspace;
@@ -162,8 +164,21 @@ public class ControlPanelView {
         Button saveButton = UIFactory.createButton("Save", event -> {
             // save file here
         });
+        Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
+            Point2D position = UIFactory.createDialogBox();
+            if(position!=null){
+                TurtleView newTurtle = controller.addNewTurtle(position);
+                controller.getTurtleManager().createTurtle(TurtleViewManager.ID+1, new Controller(turtlePlayground, newTurtle, commandManager));
+                ArrayList<Integer> list = new ArrayList<>();
+                list.add(TurtleViewManager.ID+1);
+                list.add(1);
+                controller.getTurtleManager().setActiveTurtlesByID(list);
+                System.out.println(controller.getTurtleManager().getActiveTurtles());
+            }
+            System.out.println(position);
+        });
 
-        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton);
+        HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton, addNewTurtleButton);
         VBox textInput= new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
     }
@@ -222,6 +237,11 @@ public class ControlPanelView {
     public void setCommandManager(CommandManager commandManager){
         this.commandManager = commandManager;
     }
+
+    public void setTurtlePlayground(TurtlePlayground turtlePlayground){
+        this.turtlePlayground = turtlePlayground;
+    }
+
 
     private void clearCommandHistory(){
         VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();

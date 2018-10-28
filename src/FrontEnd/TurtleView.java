@@ -1,6 +1,8 @@
 package FrontEnd;
 
 import Backend.Turtle;
+import Backend.TurtleManager;
+import Backend.VariableTracker;
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
@@ -19,6 +21,7 @@ public class TurtleView {
     private static double heading = 90;
     private boolean isActive = true;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
+    private TurtleManager turtleManager;
 
     public TurtleView(){
         turtleImageView = new ImageView(turtleImage);
@@ -32,6 +35,7 @@ public class TurtleView {
                     colorAdjustGrayscale.setSaturation(-1);
                     turtleImageView.setEffect(colorAdjustGrayscale);
                     isActive = false;
+
                 }
                 else{
                     turtleImageView.setEffect(null);
@@ -40,6 +44,11 @@ public class TurtleView {
                 System.out.println("Clicked");
             }
         });
+    }
+
+    public TurtleView(VariableTracker variableTracker){
+        this();
+        this.turtleManager = variableTracker.getTurtleManager();
     }
 
     public TurtleView(int id){
@@ -62,6 +71,8 @@ public class TurtleView {
 
     // update the position of the turtle to a new position
     public void update(double x, double y){
+        System.out.println(getX());
+        System.out.println(getY());
         turtleImageView.setLayoutX(getX()+x);
         turtleImageView.setLayoutY(getY()-y);
     }

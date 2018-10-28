@@ -66,9 +66,6 @@ public class CommandInputHandler extends TextArea {
                             UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap()
                             ));
                 }
-                if(change.wasAdded()){
-
-                }
             }
         });
 

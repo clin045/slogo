@@ -146,6 +146,7 @@ public class Turtle {
      * @return distance
      */
     public double forward(double distance) {
+        System.out.println("ID: " + getID());
         return move(distance);
     }
 
@@ -278,6 +279,11 @@ public class Turtle {
 
     public Controller getController(){
         return controller;
+    }
+
+    @Override
+    public String toString(){
+        return "Turtle with ID: " + getID();
     }
 
 }
