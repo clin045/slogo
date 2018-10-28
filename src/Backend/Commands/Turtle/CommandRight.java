@@ -1,6 +1,7 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -20,7 +21,12 @@ public class CommandRight extends Command {
     @Override
     public String execute(List<String> params) {
         var turtle = myTracker.getTurtleManager();
-        rightAmt = parseParameter(params);
+        try{
+            rightAmt = parseParameter(params);
+        }
+        catch (Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         return Double.toString(turtle.right(rightAmt));
     }
 }

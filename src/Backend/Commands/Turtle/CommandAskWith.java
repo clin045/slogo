@@ -1,5 +1,6 @@
 package Backend.Commands.Turtle;
 
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.Turtle;
 import Backend.VariableTracker;
 
@@ -21,7 +22,7 @@ public class CommandAskWith extends BracketedCommand {
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
         if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
-            throw new IllegalArgumentException("Invalid brackets");
+            throw new InvalidSyntaxException(key);
         }
         List<String> conditionExp = new ArrayList<>();
 
