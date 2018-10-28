@@ -28,7 +28,7 @@ public class CommandIf extends Command {
         double expressionValue = -1;
         System.out.println(firstExpressionString);
         if(CommandManager.isCommand(firstExpressionString)){
-            firstExpressionCommand = CommandManager.getCommand(firstExpressionString, myTracker);
+            firstExpressionCommand = CommandManager.getCommand(expressionParams, myTracker);
         }
         else{
             //indicates that first expression is a value, not a command
@@ -45,7 +45,8 @@ public class CommandIf extends Command {
         else{
             params.remove("[");
             var firstCommandStr = params.get(0);
-            Command firstCommand = CommandManager.getCommand(firstCommandStr, myTracker);
+            System.out.println("IF: "+firstCommandStr+"PARAMS: "+expressionParams.size());
+            Command firstCommand = CommandManager.getCommand(expressionParams, myTracker);
             params.remove(0);
             String str=firstCommand.execute(params);
 

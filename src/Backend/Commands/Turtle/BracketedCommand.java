@@ -23,7 +23,7 @@ public abstract class BracketedCommand extends Command {
         var retList = new ArrayList<Double>();
         while(exp.size() > 0){
             if(CommandManager.isCommand(exp.get(0))){
-                var cmd = CommandManager.getCommand(exp.get(0), myTracker);
+                var cmd = CommandManager.getCommand(exp, myTracker);
                 exp.remove(0);
                 try{
                     var doubVal = Double.parseDouble(cmd.execute(exp.subList(0, exp.size())));

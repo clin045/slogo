@@ -49,22 +49,33 @@ public class CommandManager {
 
     }
 
-    public static Command getCommand(String str, VariableTracker tracker){
+    public static Command getCommand(List<String>tempList, VariableTracker tracker){
         ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
+        if(tempList.get(0).charAt(0)==':'){
+            List<String>userCommand=tracker.getCommand(tempList.get(0).substring(1));
+            String current=tempList.get(0);
+            if(userCommand!=null){
+                tempList.addAll(0,userCommand);
+                tempList.remove(current);
+            }
+            else{
+                throw new InvalidInputException(current);
+            }
+        }
         try{
-            Class commandStr= Class.forName(commandBundle.getString(str));
+            Class commandStr= Class.forName(commandBundle.getString(tempList.get(0)));
             Command command= (Command) commandStr.getDeclaredConstructor(VariableTracker.class).newInstance(tracker);
             return command;
         } catch (ClassNotFoundException e) {
-            throw new CommandParsingException(str);
+            throw new CommandParsingException(tempList.get(0));
         } catch (IllegalAccessException e) {
-            throw new CommandParsingException(str);
+            throw new CommandParsingException(tempList.get(0));
         } catch (InstantiationException e) {
-            throw new CommandParsingException(str);
+            throw new CommandParsingException(tempList.get(0));
         } catch (NoSuchMethodException e) {
-            throw new CommandParsingException(str);
+            throw new CommandParsingException(tempList.get(0));
         } catch (InvocationTargetException e) {
-            throw new CommandParsingException(str);
+            throw new CommandParsingException(tempList.get(0));
         }
     }
 
@@ -84,7 +95,7 @@ public class CommandManager {
 //            for(String s:masterList){System.out.println(s);}
             if(masterList.get(0).equals("[")){return out;}
             if(isCommand(masterList.get(0))){
-                Command init=getCommand(masterList.get(0), myTracker);
+                Command init=getCommand(masterList, myTracker);
                 masterList.remove(0);
                 out=init.execute(masterList);
             }
@@ -124,7 +135,9 @@ public class CommandManager {
         try{
             ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
             for(String key: Collections.list(commandBundle.getKeys())){
-                    myCommands.put(key,getCommand(key,myTracker));
+                    List<String>myList=new ArrayList<>();
+                    myList.add(key);
+                    myCommands.put(key,getCommand(myList,myTracker));
             }
         }catch (MissingResourceException e){
             throw new CommandParsingException("");
