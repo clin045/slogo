@@ -17,7 +17,6 @@ public class CommandIf extends BracketedCommand {
 
     @Override
     public String execute(List<String> params) {
-        System.out.println("enter");
         int openBracket = params.indexOf("[");
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);

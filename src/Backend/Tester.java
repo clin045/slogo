@@ -9,8 +9,8 @@ public class Tester {//Make into Junits
  //       String line2 = "bk";
         String out1 = manager.execute(line1);
         System.out.println("OUT1:"+out1);
-   //     String out2 = manager.execute(line2);
-//        System.out.println("OUT2:"+out2);
+        String out2 = manager.execute(line2);
+        System.out.println("OUT2:"+out2);
 
     }
 }
