@@ -82,8 +82,21 @@ public class CommandManager {
     public void setLanguage(String path){
         myParser.setLanguage(path);
     }
-    public static boolean isCommand(String cmd){
-        return myCommands.containsKey(cmd);
+    public static boolean isCommand(String cmd, VariableTracker tracker){
+        if(myCommands.containsKey(cmd)){
+            return true;
+        }
+        if(cmd.charAt(0)==':'){
+            List<String>userCommand= tracker.getCommand(cmd.substring(1));
+            String current=cmd;
+            if(userCommand!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
     }
 
     public String execute(String userInput){
@@ -94,7 +107,7 @@ public class CommandManager {
 //            System.out.println("executing with:");
 //            for(String s:masterList){System.out.println(s);}
             if(masterList.get(0).equals("[")){return out;}
-            if(isCommand(masterList.get(0))){
+            if(isCommand(masterList.get(0), myTracker)){
                 Command init=getCommand(masterList, myTracker);
                 masterList.remove(0);
                 out=init.execute(masterList);
