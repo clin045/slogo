@@ -71,8 +71,8 @@ public class TurtleView {
 
     // update the position of the turtle to a new position
     public void update(double x, double y){
-        System.out.println(getX());
-        System.out.println(getY());
+//        System.out.println(getX());
+//        System.out.println(getY());
         turtleImageView.setLayoutX(getX()+x);
         turtleImageView.setLayoutY(getY()-y);
     }

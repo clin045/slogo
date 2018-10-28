@@ -82,12 +82,12 @@ public class TurtlePlayground extends Pane {
         }
     }
 
-    public void leaveTrail(double originX, double originY, double x, double y, TurtleView view){
+    public void leaveTrail(double originX, double originY, TurtleView view){
         double xpadding = turtleView.getWidth()/2;
         double ypadding = turtleView.getHeight()/2;
 //        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
         if(pen.isDown()){
-            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(view.getX()+xpadding,view.getY()-ypadding));
+            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(view.getX()+xpadding,view.getY()+ypadding));
             this.getChildren().add(trail);
         }
     }
@@ -112,13 +112,13 @@ public class TurtlePlayground extends Pane {
 
     // setTurtleToHome turtles to its original position and
     public void setTurtleToHome(){
-        turtleView.getTurtleImageView().setLayoutX(this.getWidth()/2-turtleView.getWidth()/2);
-        turtleView.getTurtleImageView().setLayoutY(this.getHeight()/2-turtleView.getHeight()/2);
+        turtleViews.get(0).getTurtleImageView().setLayoutX(this.getWidth()/2-turtleView.getWidth()/2);
+        turtleViews.get(0).getTurtleImageView().setLayoutY(this.getHeight()/2-turtleView.getHeight()/2);
     }
 
     public void reset(){
         this.getChildren().clear();
-        addTurtleToCenter(turtleView.getTurtleImageView());
+        addTurtleToCenter(turtleViews.get(0).getTurtleImageView());
         setTurtleToHome();
         turtleView.resetTurtleHeading();
     }

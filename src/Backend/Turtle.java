@@ -136,7 +136,7 @@ public class Turtle {
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
         this.coordinates.add(dx, dy);
 //        System.out.println(dx+":"+dy);
-        controller.update(dx, dy);
+        controller.update(distance * Math.cos(Math.toRadians(heading)), distance * Math.sin(Math.toRadians(heading)));
         return distance;
     }
 
@@ -259,6 +259,7 @@ public class Turtle {
         return 0;
     }
     public void clearScreen(){
+        this.coordinates = new Point2D(DEFAULT_X, DEFAULT_Y);
         controller.reset();
     }
 
