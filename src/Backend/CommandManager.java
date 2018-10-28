@@ -79,7 +79,7 @@ public class CommandManager {
         String out="";
         List<String> masterList = myParser.parse(userInput);
         while(masterList.size()>0){
-//            System.out.println("exexuting with:");
+//            System.out.println("executing with:");
 //            for(String s:masterList){System.out.println(s);}
             if(masterList.get(0).equals("[")){return out;}
             if(isCommand(masterList.get(0))){
