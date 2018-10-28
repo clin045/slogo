@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -16,7 +17,12 @@ public class CommandGreaterP extends MultiInputCommand {
 
     @Override
     public String execute(List<String> params) {
-        parseAllParameters(params);
+        try{
+            parseAllParameters(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         double check=myVals.remove(0);
         for(double d: myVals){
             if(d>=check){

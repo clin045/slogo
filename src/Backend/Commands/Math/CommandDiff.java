@@ -21,7 +21,12 @@ public class CommandDiff extends MultiInputCommand {
 
     @Override
     public String execute(List<String> params) {
-        parseAllParameters(params);
+        try{
+            parseAllParameters(params);
+        }
+        catch(Exception e){
+            throw new IllegalArgumentException(key);
+        }
         double out =myVals.remove(0);
         for(double d:myVals) {
             out -= d;

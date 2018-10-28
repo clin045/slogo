@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -17,7 +18,12 @@ public CommandTan(VariableTracker tracker){
 
     @Override
     public String execute(List<String> params) {
-        d1= parseParameter(params);
+        try{
+            d1= parseParameter(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         if(d1%180==0){throw new IllegalArgumentException("tan of multiples of 180 is undefined");}
         return ""+(Math.tan(d1));
     }

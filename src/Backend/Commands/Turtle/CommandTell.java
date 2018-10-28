@@ -3,6 +3,7 @@ package Backend.Commands.Turtle;
 import Backend.Command;
 import Backend.CommandManager;
 import Backend.Commands.Math.MultiInputCommand;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -22,11 +23,17 @@ public class CommandTell extends BracketedCommand {
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
         if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
-            throw new IllegalArgumentException("Invalid brackets");
+            throw new InvalidSyntaxException(key);
         }
 
         var idExp = params.subList(openBracket+1, closeBracket);
-        ArrayList<Double> idListDouble = evaluateBrackets(idExp);
+        ArrayList<Double> idListDouble = new ArrayList<>();
+        try{
+            idListDouble = evaluateBrackets(idExp);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         ArrayList<Integer> idList = new ArrayList<>();
         for(Double d : idListDouble){
             idList.add(d.intValue());

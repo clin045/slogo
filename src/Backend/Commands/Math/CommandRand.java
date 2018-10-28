@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -16,7 +17,13 @@ public class CommandRand extends Command {
 
     @Override
     public String execute(List<String> params) {
-        d1= parseParameter(params);
+        try{
+            d1= parseParameter(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
+
         if(d1<0){throw new IllegalArgumentException("Random ceiling mus be positive");}
         return ""+ (d1*Math.random());
     }

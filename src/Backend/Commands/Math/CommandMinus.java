@@ -1,6 +1,7 @@
 package Backend.Commands.Math;
 
 import Backend.Command;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -17,7 +18,12 @@ public class CommandMinus extends Command {
 
     @Override
     public String execute(List<String> params) {
-        d1= parseParameter(params);
+        try{
+            d1= parseParameter(params);
+        }
+        catch(Exception e){
+            throw new InvalidSyntaxException(key);
+        }
         return ""+(-1*d1);
     }
 }
