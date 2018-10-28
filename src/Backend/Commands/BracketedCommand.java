@@ -1,4 +1,4 @@
-package Backend.Commands.Turtle;
+package Backend.Commands;
 
 import Backend.Command;
 import Backend.CommandManager;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BracketedCommand extends Command {
-    BracketedCommand(VariableTracker tracker){
+    public BracketedCommand(VariableTracker tracker){
         super(tracker);
     }
 
@@ -17,6 +17,8 @@ public abstract class BracketedCommand extends Command {
     public abstract String execute(List<String> params);
 
     protected ArrayList<Double> evaluateBrackets(List<String> exp) {
+        System.out.println("---");
+        System.out.println(exp);
         exp.remove("[");
         exp.remove("]");
         //check if each param is a command, if so, evaluate it
@@ -26,7 +28,8 @@ public abstract class BracketedCommand extends Command {
                 var cmd = CommandManager.getCommand(exp, myTracker);
                 exp.remove(0);
                 try{
-                    var doubVal = Double.parseDouble(cmd.execute(exp.subList(0, exp.size())));
+                    System.out.println(exp);
+                    var doubVal = Double.parseDouble(cmd.execute(exp));
                     retList.add(doubVal);
                 }
                 catch(Exception e){

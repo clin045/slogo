@@ -2,12 +2,13 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Commands.BracketedCommand;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
 
-public class CommandIf extends Command {
+public class CommandIf extends BracketedCommand {
     private static final String key = "If";
     public CommandIf(VariableTracker tracker){
         super(tracker);
@@ -18,15 +19,10 @@ public class CommandIf extends Command {
     public String execute(List<String> params) {
         System.out.println("enter");
         int openBracket = params.indexOf("[");
-        int closeBracket = params.indexOf("]");
-        if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
-            throw new InvalidSyntaxException(key);
-        }
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
-        System.out.println(firstExpressionString);
         if(CommandManager.isCommand(firstExpressionString)){
             firstExpressionCommand = CommandManager.getCommand(expressionParams, myTracker);
         }
@@ -43,15 +39,16 @@ public class CommandIf extends Command {
             return "0";
         }
         else{
-            params.remove("[");
-            var firstCommandStr = params.get(0);
-            System.out.println("IF: "+firstCommandStr+"PARAMS: "+expressionParams.size());
-            Command firstCommand = CommandManager.getCommand(expressionParams, myTracker);
-            params.remove(0);
-            String str=firstCommand.execute(params);
 
-            params.remove("]");
-            return str;
+            openBracket = params.indexOf("[");
+            int closeBracket = params.indexOf("]");
+            if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
+                throw new InvalidSyntaxException(key);
+            }
+
+           List<String> bracketExp = params.subList(openBracket+1, closeBracket);
+            List<Double> returnVals = evaluateBrackets(bracketExp);
+            return Double.toString(returnVals.get(0));
         }
 
     }
