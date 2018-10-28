@@ -5,7 +5,7 @@ public class Tester {//Make into Junits
     public static void main (String[]args){
         CommandManager manager = new CommandManager("languages.English");
 
-        String line1="to test [ x 10 ] [ fd :x set :x sum :x 10 if notequalp  :x 100 [ :test ] ]";
+        String line1="ifelse 0 [ sum 1 2 ] [ sum 3 4 ]";
  //       String line2 = "bk";
         String out1 = manager.execute(line1);
         System.out.println("OUT1:"+out1);
