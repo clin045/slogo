@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class CommandManager {
     public static final String ERROR_PATH="config.Errors";
     public static final String COMMAND_PATH="config.Commands";
+    public static final String SYNTAX_PATH = "config.Syntax";
 
     public static Map<String, Command> getCommands() {
         return myCommands;
