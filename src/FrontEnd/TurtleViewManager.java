@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Backend.TurtleManager;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -12,10 +13,12 @@ public class TurtleViewManager implements Iterable<TurtleView> {
     ArrayList<TurtleView> turtleList;
     public static int ID = 1;
     VariableTracker variableTracker; // track the state of each turtle
+    TurtleManager turtleManager;
 //    TurtlePlayground turtlePlayground;
 
     public TurtleViewManager(VariableTracker variableTracker){
         this.variableTracker = variableTracker;
+        this.turtleManager = variableTracker.getTurtleManager();
         turtleList = new ArrayList<>();
         ids = new HashSet<>();
         addTurtle();
@@ -24,10 +27,13 @@ public class TurtleViewManager implements Iterable<TurtleView> {
 
     public void addTurtle(){
         turtleList.add(new TurtleView());
+//        variableTracker.getTurtleManager().createTurtle(ID);
+//        variableTracker.getTurtleManager().setActiveTurtlesByID(new ArrayList<>(ID));
+//        ID++;
+    }
 
-        variableTracker.getTurtleManager().createTurtle(ID);
-        variableTracker.getTurtleManager().setActiveTurtlesByID(new ArrayList<>(ID));
-        ID++;
+    public TurtleManager getTurtleManager(){
+        return turtleManager;
     }
 
     @Override

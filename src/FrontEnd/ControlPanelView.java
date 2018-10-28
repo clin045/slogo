@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /*
     This class represents the UI view for all the settings like workspace setting,
@@ -45,6 +46,7 @@ public class ControlPanelView {
     Controller controller;
     CommandInputHandler commandInputHandler;
     CommandManager commandManager;
+    TurtlePlayground turtlePlayground;
 
     public ControlPanelView(Workspace workspace, Controller controller){
         this.workspace = workspace;
@@ -165,7 +167,13 @@ public class ControlPanelView {
         Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
             Point2D position = UIFactory.createDialogBox();
             if(position!=null){
-                controller.addNewTurtle(position);
+                TurtleView newTurtle = controller.addNewTurtle(position);
+                controller.getTurtleManager().createTurtle(TurtleViewManager.ID+1, new Controller(turtlePlayground, newTurtle, commandManager));
+                ArrayList<Integer> list = new ArrayList<>();
+                list.add(TurtleViewManager.ID+1);
+                list.add(1);
+                controller.getTurtleManager().setActiveTurtlesByID(list);
+                System.out.println(controller.getTurtleManager().getActiveTurtles());
             }
             System.out.println(position);
         });
@@ -229,6 +237,11 @@ public class ControlPanelView {
     public void setCommandManager(CommandManager commandManager){
         this.commandManager = commandManager;
     }
+
+    public void setTurtlePlayground(TurtlePlayground turtlePlayground){
+        this.turtlePlayground = turtlePlayground;
+    }
+
 
     private void clearCommandHistory(){
         VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();

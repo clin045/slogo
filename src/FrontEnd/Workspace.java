@@ -29,9 +29,10 @@ public class Workspace extends BorderPane {
         CommandManager commandManager = new CommandManager("languages.English");
         variableTracker = commandManager.getMyTracker();
         setUpTurtleDisplayArea();
-        Controller controller = new Controller(area, turtleViewManager.turtleList.get(0));
+        Controller controller = new Controller(area, turtleViewManager.turtleList.get(0), commandManager);
 
         for(Turtle turtle: commandManager.getMyTracker().getTurtleManager().getActiveTurtles()){
+            System.out.println("Controller set");
             turtle.setController(controller);
         }
 
@@ -39,6 +40,7 @@ public class Workspace extends BorderPane {
         ControlPanelView controlPanelView = new ControlPanelView(this, controller);
         controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
         controlPanelView.setCommandManager(commandManager);
+        controlPanelView.setTurtlePlayground(area);
 
         CommandInputHandler commandInputHandler = controlPanelView.getCommandInputHandler();
         commandInputHandler.setCommandManager(commandManager);

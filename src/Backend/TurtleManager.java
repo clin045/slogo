@@ -1,5 +1,8 @@
 package Backend;
 
+import FrontEnd.Controller;
+
+import javax.sound.sampled.Control;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,11 @@ public class TurtleManager {
     public List<Turtle> getActiveTurtles() {
         return activeTurtles;
     }
+
+    public Turtle getTurtleByID(int id){
+        return turtleMap.get(id);
+    }
+
 
     public int getID(){
         return(activeTurtles.get(activeTurtles.size()-1).getID());
@@ -74,7 +82,9 @@ public class TurtleManager {
 
     public double forward(double dist) {
         double last = 0;
+        System.out.println("forward called");
         for(Turtle t : activeTurtles){
+            System.out.println("loop");
             last = t.forward(dist);
         }
         return last;
@@ -156,11 +166,14 @@ public class TurtleManager {
         return last;
     }
 
-
-
-
-
     public void createTurtle(int id){
-        turtleMap.put(id, new Turtle(id));
+        Turtle newTurtle = new Turtle(id);
+        turtleMap.put(id, newTurtle);
+    }
+
+    public void createTurtle(int id, Controller controller){
+        Turtle newTurtle = new Turtle(id);
+        newTurtle.setController(controller);
+        turtleMap.put(id, newTurtle);
     }
 }
