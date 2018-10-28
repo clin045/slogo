@@ -177,8 +177,6 @@ public class ControlPanelView {
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
-            VBox a = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
-            System.out.println(a.getAccessibleText());
         });
 
         Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
