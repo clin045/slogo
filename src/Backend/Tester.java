@@ -5,7 +5,7 @@ public class Tester {//Make into Junits
     public static void main (String[]args){
         CommandManager manager = new CommandManager("languages.English");
 
-        String line1="fd 10";
+        String line1="ifelse 0 [ 1 ] [ 2 ]";
  //       String line2 = "bk";
         String out1 = manager.execute(line1);
         System.out.println("OUT1:"+out1);
