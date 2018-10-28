@@ -32,7 +32,9 @@ public class Controller {
 
     public void update(double x, double y){
 //        turtlePlayground.update(x,y);
-        turtlePlayground.leaveTrail(turtleView.getX(), turtleView.getY(), x, y);
+        System.out.println("X:" + x);
+        System.out.println("Y:" + y);
+        turtlePlayground.leaveTrail(turtleView.getX(), turtleView.getY(), x, y, turtleView);
         turtleView.update(x,y);
     }
 

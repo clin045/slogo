@@ -74,17 +74,20 @@ public class TurtlePlayground extends Pane {
         double xpadding = turtleView.getWidth()/2;
         double ypadding = turtleView.getHeight()/2;
         turtleView.update(x,y);
+        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
+        System.out.println(pint);
         if(pen.isDown()){
             Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding));
             this.getChildren().add(trail);
         }
     }
 
-    public void leaveTrail(double originX, double originY, double x, double y){
+    public void leaveTrail(double originX, double originY, double x, double y, TurtleView view){
         double xpadding = turtleView.getWidth()/2;
         double ypadding = turtleView.getHeight()/2;
+//        Point2D pint = new Point2D(turtleView.getX()+xpadding,turtleView.getY()+ypadding);
         if(pen.isDown()){
-            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(x+xpadding,y+ypadding));
+            Line trail = pen.drawLine(new Point2D(originX+xpadding, originY+ypadding), new Point2D(view.getX()+xpadding,view.getY()-ypadding));
             this.getChildren().add(trail);
         }
     }
