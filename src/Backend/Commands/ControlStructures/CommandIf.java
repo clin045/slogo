@@ -20,9 +20,11 @@ public class CommandIf extends BracketedCommand {
         int openBracket = params.indexOf("[");
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
+        System.out.println("===");
+        System.out.println(params);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
-        if(CommandManager.isCommand(firstExpressionString)){
+        if(CommandManager.isCommand(firstExpressionString, myTracker)){
             firstExpressionCommand = CommandManager.getCommand(expressionParams, myTracker);
         }
         else{
@@ -38,7 +40,6 @@ public class CommandIf extends BracketedCommand {
             return "0";
         }
         else{
-
             openBracket = params.indexOf("[");
             int closeBracket = params.indexOf("]");
             if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){

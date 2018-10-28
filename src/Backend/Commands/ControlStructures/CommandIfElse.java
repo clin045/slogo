@@ -24,7 +24,7 @@ public class CommandIfElse extends BracketedCommand {
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
-        if(CommandManager.isCommand(firstExpressionString)){
+        if(CommandManager.isCommand(firstExpressionString, myTracker)){
             firstExpressionCommand = CommandManager.getCommand(expressionParams, myTracker);
         }
         else{
