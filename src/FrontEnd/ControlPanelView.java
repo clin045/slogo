@@ -259,12 +259,12 @@ public class ControlPanelView {
         ImageView dimage = new ImageView(turtleImage);
         dimage.setFitHeight(30);
         dimage.setFitWidth(30);
-        HBox defaultImage = new HBox(new Label("001"), dimage);
+        HBox defaultImage = new HBox(new Label("111"), dimage);
 
         ImageView aimage = new ImageView(alTurtleImage);
         aimage.setFitHeight(30);
         aimage.setFitWidth(30);
-        HBox alterImage = new HBox(new Label("002"), aimage);
+        HBox alterImage = new HBox(new Label("222"), aimage);
 
         VBox vBox = new VBox(red, blue, yellow, defaultImage, alterImage);
         colorIndexes = new TitledPane("UI Indexes", vBox);
