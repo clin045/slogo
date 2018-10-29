@@ -36,9 +36,9 @@ public class ControlPanelView {
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
-    private static final String DEFAULT_HEADING = "90";
-    private static final String DEFAULT_POSITION = "0,0";
-    private static final String DEFAULT_ID = "0";
+    public static final String DEFAULT_HEADING = "90";
+    public static final String DEFAULT_POSITION = "0,0";
+    public static final String DEFAULT_ID = "1";
 
     VBox vBox;
     Workspace workspace;
@@ -234,10 +234,7 @@ public class ControlPanelView {
     }
 
     private void setUpTurtleStatus(){
-        HBox ID = UIFactory.createTextLabelWithValue("ID: ", DEFAULT_ID);
-        HBox position = UIFactory.createTextLabelWithValue("Position: ", DEFAULT_POSITION);
-        HBox heading = UIFactory.createTextLabelWithValue("Heading: ", DEFAULT_HEADING);
-        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox(ID, position, heading));
+        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, UIFactory.createTurtleStatusVBox());
         turtleStatus.setExpanded(false);
     }
 
@@ -295,5 +292,9 @@ public class ControlPanelView {
 
     public VBox getRightMenu(){
         return vBox;
+    }
+
+    public TitledPane getTurtleStatus(){
+        return turtleStatus;
     }
 }

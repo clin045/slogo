@@ -3,17 +3,12 @@ package FrontEnd;
 import Backend.Turtle;
 import Backend.TurtleManager;
 import Backend.VariableTracker;
-import javafx.animation.Animation;
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.event.EventHandler;
+import javafx.scene.control.TitledPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
-
-import java.util.stream.StreamSupport;
 
 public class TurtleView {
     private int id; // each turtle view will have to have a unique ID
@@ -24,6 +19,7 @@ public class TurtleView {
     private boolean isActive = true;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
     private TurtleManager turtleManager;
+    private static TitledPane turtleStatusPane;
 
     public TurtleView(){
         this.turtleManager = turtleManager;
@@ -47,6 +43,8 @@ public class TurtleView {
                     isActive = true;
                     turtleManager.getActiveTurtles().add(turtleManager.getTurtleByID(id));
                 }
+                turtleStatusPane.setContent(UIFactory.createTurtleStatusVBox(id, turtleManager.getTurtleByID(id).getX(),
+                        turtleManager.getTurtleByID(id).getY(), turtleManager.getTurtleByID(id).getHeading()));
                 System.out.println("Clicked");
             }
         });
@@ -106,20 +104,25 @@ public class TurtleView {
     }
 
 
-    public void rotate(double newHeading){
-//        turtleImageView.setRotate(turtleImageView.getRotate()-(newHeading-heading));
-        RotateTransition rt = new RotateTransition(Duration.seconds(2));
+    public void rotate(double oldHeading, double newHeading){
+        turtleImageView.setRotate(turtleImageView.getRotate()-(newHeading-oldHeading));
+//        RotateTransition rt = new RotateTransition(Duration.seconds(2));
 //        rt.setToAngle(90);
-        rt.setByAngle(heading-newHeading);
+//        rt.setByAngle(heading-newHeading);
         // put them together in order
-        Animation animation = new SequentialTransition(turtleImageView, rt);
-        animation.play();
-        heading = newHeading;
+        System.out.println(this + "is rotated");
+//        Animation animation = new ParallelTransition(turtleImageView, rt);
+//        animation.play();
+//        heading = newHeading;
     }
 
     public void setTurtleImage(String fileName){
         turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(fileName));
         turtleImageView.setImage(turtleImage);
+    }
+
+    public void setTurtleStatusPane(TitledPane turtleStatusPane){
+        this.turtleStatusPane = turtleStatusPane;
     }
 
     public void resetTurtleHeading(){
@@ -138,5 +141,11 @@ public class TurtleView {
     public int getId(){
         return id;
     }
+
+    @Override
+    public String toString(){
+        return "Turtleview with id: " + id;
+    }
+
 
 }

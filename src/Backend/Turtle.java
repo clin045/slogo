@@ -6,6 +6,8 @@ package Backend;
 
 import FrontEnd.Controller;
 import javafx.geometry.Point2D;
+
+import java.awt.*;
 import java.lang.Math;
 
 public class Turtle {
@@ -135,7 +137,6 @@ public class Turtle {
         int dx = (int) Math.floor(distance * Math.cos(Math.toRadians(heading)));
         int dy = (int) Math.floor(distance * Math.sin(Math.toRadians(heading)));
         this.coordinates.add(dx, dy);
-//        System.out.println(dx+":"+dy);
         controller.update(distance * Math.cos(Math.toRadians(heading)), distance * Math.sin(Math.toRadians(heading)));
         return distance;
     }
@@ -191,8 +192,9 @@ public class Turtle {
             heading %= 360;
         }
         double degreesMoved = Math.abs(this.heading - heading);
+        controller.rotateTurtle(this.heading, heading);
         this.heading = heading;
-        controller.rotateTurtle(heading);
+        System.out.println(this.toString() + heading);
         return degreesMoved;
     }
 

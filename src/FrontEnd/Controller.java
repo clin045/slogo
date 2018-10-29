@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import Backend.Command;
 import Backend.CommandManager;
 import Backend.TurtleManager;
 import Backend.VariableTracker;
@@ -45,9 +44,8 @@ public class Controller {
         turtleView.setTurtleImage(fileName);
     }
 
-
-    public void rotateTurtle(double heading){
-        turtleView.rotate(heading);
+    public void rotateTurtle(double oldHeading, double heading){
+        turtleView.rotate(oldHeading, heading);
     }
 
     public void setPenDown(boolean isPenDown){
