@@ -164,14 +164,19 @@ public class ControlPanelView {
         });
 
         Button loadButton = UIFactory.createButton("Load", event -> {
-            FileChooser chooser = UIFactory.createFileChooser("*.txt");
+            FileChooser chooser = UIFactory.createFileChooser("*.logo");
             File file = chooser.showOpenDialog(null);
             if(file != null) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String input = "";
                     String line;
                     while ((line = br.readLine()) != null) {
-                        controller.commandManager.execute(line);
+                        input+=line;
+                        input+="\n";
+//                        controller.commandManager.execute(line);
                     }
+                    System.out.println(input);
+                    controller.commandManager.execute(input);
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
                     alert.showAndWait();
@@ -181,7 +186,7 @@ public class ControlPanelView {
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
-            FileChooser chooser = UIFactory.createFileChooser("*.txt");
+            FileChooser chooser = UIFactory.createFileChooser("*.logo");
             File file = chooser.showSaveDialog(null);
             FileOutputStream fos;
             BufferedWriter bw;

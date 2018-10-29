@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import Backend.Turtle;
 import Backend.TurtleManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -118,6 +117,12 @@ public class TurtlePlayground extends Pane {
         addTurtleToCenter(turtleViews.get(0).getTurtleImageView());
         setTurtleToHome();
         turtleView.resetTurtleHeading();
+        ArrayList<Integer> list = new ArrayList<>();
+//        if(turtleManager.getActiveTurtles().contains(turtleManager.getTurtleByID(1))){
+            list.add(1);
+//        }
+        turtleManager.getActiveTurtles().clear();
+        turtleManager.setActiveTurtlesByID(list);
     }
 
     public void setPenColor(Color color){

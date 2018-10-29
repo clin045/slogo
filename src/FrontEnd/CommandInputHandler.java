@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-
 public class CommandInputHandler extends TextArea {
 
     private Controller controller;
@@ -87,8 +86,8 @@ public class CommandInputHandler extends TextArea {
                 if(change.wasAdded()){
                     definedCommands.getChildren().add(
                             UIFactory.createTextFieldWithLabel(change.getKey(), commandMap.get(change.getKey()).toString(), event -> {
-                                        System.out.println(commandMap.get(change.getKey()).toString());
-                                        commandManager.execute(commandMap.get(change.getKey()).toString());
+                                        System.out.println(buildCommand(commandMap, change.getKey()));
+                                        commandManager.execute(commandMap.get(change.getKey()).toString().substring(1));
                                     }
                             ));
                 }
@@ -98,10 +97,23 @@ public class CommandInputHandler extends TextArea {
         for(String s: commandMap.keySet()){
             definedCommands.getChildren().add(
                     UIFactory.createTextFieldWithLabel(s, commandMap.get(s).toString(), event -> {
-                        commandManager.execute(commandMap.get(s).toString());
+//                        System.out.println(commandMap.get(s).toString().substring(1));
+                        System.out.println(buildCommand(commandMap, s));
+                        commandManager.execute(buildCommand(commandMap, s));
                     })
             );
         }
+    }
+
+    private String buildCommand(ObservableMap<String, List<String>> commandMap,  String key){
+        StringBuilder command = new StringBuilder();
+        for(String s: commandMap.get(key)){
+            command.append(s);
+            command.append(" ");
+        }
+        command.append("]");
+        return command.toString();
+
     }
 
     private void showWarningDialog(String title, String header, String content){
