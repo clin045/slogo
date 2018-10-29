@@ -24,7 +24,7 @@ public class TurtlePlayground extends Pane {
 
     public static final double INIT_STROKE_WIDTH = 5;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_green.png"));
-    private Image alTurtleImage = new Image(this.getClip().getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
+    private Image alTurtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
     TurtleView turtleView; // possibly extend it to contain multiple turtles
     ArrayList<TurtleView> turtleViews;
     TurtleViewManager turtleViewManager;
