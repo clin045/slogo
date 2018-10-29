@@ -2,6 +2,7 @@ package Backend.Commands;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Exceptions.InvalidInputException;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -17,7 +18,24 @@ public abstract class BracketedCommand extends Command {
     public abstract String execute(List<String> params);
 
     protected int getCloseIndex(List<String> str){
-        return 0;
+        int startIndex=str.indexOf("[");
+        if(startIndex<=-1||str.indexOf("]")<startIndex){
+            throw new IllegalArgumentException("Need [");
+        }
+        int numOpen=1;
+        int numClosed=0;
+        for(int index =startIndex+1;index<str.size();index+=1){
+            if(str.get(index).equals("[")){
+                numOpen+=1;
+            }
+            if(str.get(index).equals("]")){
+                numClosed+=1;
+            }
+            if(numOpen==numClosed){
+                return index;
+            }
+        }
+        throw new IllegalArgumentException("Brackets don't match");
     }
 
 
