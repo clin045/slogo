@@ -39,24 +39,7 @@ public abstract class Command {
         else {
             //handle user-defined variables
             if(params.get(0).charAt(0)==':'){
-                Double temp=(Double)myTracker.get(params.get(0).substring(1));
-                if(temp==null){
-                    List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
-                    String commandName=params.get(0);
-                    if(userCommand!=null){
-                        params.addAll(0,userCommand);
-                        params.remove(commandName);
-                        return parseParameter(params);
-
-                    }
-                    else{throw new InvalidInputException(params.get(0));}
-                }
-
-                else{
-                    params.remove(0);
-                    param=temp;
-                }
-                return param;
+                return handleCustomInput(params);
             }
             try {
                 param = Double.parseDouble(params.get(0));
@@ -66,6 +49,28 @@ public abstract class Command {
 
             }
             params.remove(0);
+        }
+        return param;
+    }
+
+    private double handleCustomInput(List<String> params) {
+        double param;
+        Double temp=(Double)myTracker.get(params.get(0).substring(1));
+        if(temp==null){
+            List<String>userCommand=myTracker.getCommand(params.get(0).substring(1));
+            String commandName=params.get(0);
+            if(userCommand!=null){
+                params.addAll(0,userCommand);
+                params.remove(commandName);
+                return parseParameter(params);
+
+            }
+            else{throw new InvalidInputException(params.get(0));}
+        }
+
+        else{
+            params.remove(0);
+            param=temp;
         }
         return param;
     }

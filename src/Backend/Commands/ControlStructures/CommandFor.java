@@ -17,8 +17,8 @@ public class CommandFor extends LoopCommand{
 
     @Override
     public String execute(List<String> params) {
-        if(!params.remove(0).equals(START_DELIMETER)){throw new IllegalArgumentException("Limit must be enclosed by brackets []");}//[ v s e i ]
-        if(!params.remove(4).equals(END_DELIMETER)){throw new IllegalArgumentException("FOR only takes 3 limit argument");}//0 1 2 3 4 5
+        if(!params.remove(0).equals(START_DELIMETER)){throw new InvalidSyntaxException(myKey);}//[ v s e i ]
+        if(!params.remove(4).equals(END_DELIMETER)){throw new InvalidSyntaxException(myKey);}//0 1 2 3 4 5
         key =params.remove(0);
         try{
             start=(int) parseParameter(params);
