@@ -2,7 +2,6 @@ package FrontEnd;
 
 import Backend.TurtleManager;
 import Backend.VariableTracker;
-import javafx.scene.control.TitledPane;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,8 +14,6 @@ public class TurtleViewManager implements Iterable<TurtleView> {
     public static int ID = 1;
     VariableTracker variableTracker; // track the state of each turtle
     TurtleManager turtleManager;
-//    TitledPane turtleStatusTitledPane;
-//    TurtlePlayground turtlePlayground;
 
     public TurtleViewManager(VariableTracker variableTracker){
         this.variableTracker = variableTracker;
@@ -33,11 +30,6 @@ public class TurtleViewManager implements Iterable<TurtleView> {
         turtleList.add(turtleView);
         ID++;
     }
-
-//    public void setTurtleStatusTitlePane(TitledPane turtleStatusTitlePane){
-//        this.turtleStatusTitledPane = turtleStatusTitlePane;
-//    }
-
 
     public TurtleManager getTurtleManager(){
         return turtleManager;

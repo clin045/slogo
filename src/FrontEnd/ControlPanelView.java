@@ -13,6 +13,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -29,6 +31,8 @@ import java.util.List;
  */
 public class ControlPanelView {
 
+    private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_green.png"));
+    private Image alTurtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
     private static final String WORKSPACE_SETTING_TITLE = "Workspace Setting";
     private static final String DEFINED_COMMANDS_TITLE = "Defined Commands";
     private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
@@ -50,6 +54,7 @@ public class ControlPanelView {
     TitledPane definedVariables;
     TitledPane turtleStatus;
     TitledPane turtleAction;
+    TitledPane colorIndexes;
     Controller controller;
     CommandInputHandler commandInputHandler;
     CommandManager commandManager;
@@ -65,11 +70,12 @@ public class ControlPanelView {
         commandHistory = setUpScrollingTitlePane(COMMAND_HISTORY_TITLE);
         setUpTurtleStatus();
         setUpTurtleAction();
-        commandOutput = setUpScrollingTitlePane(COMMAND_OUTPUT_TITLE);
+        setUpColorIndexes();
         userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE);
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         definedVariables.setExpanded(false);
-        vBox = new VBox(workspaceSetting, commandHistory, commandOutput, userDefinedCommands, definedVariables, turtleStatus, turtleAction);
+        commandOutput = setUpScrollingTitlePane(COMMAND_OUTPUT_TITLE);
+        vBox = new VBox(workspaceSetting, commandHistory, commandOutput, userDefinedCommands, definedVariables, turtleStatus, turtleAction, colorIndexes);
         workspace.setRight(vBox);
     }
 
@@ -165,14 +171,19 @@ public class ControlPanelView {
         });
 
         Button loadButton = UIFactory.createButton("Load", event -> {
-            FileChooser chooser = UIFactory.createFileChooser("*.txt");
+            FileChooser chooser = UIFactory.createFileChooser("*.logo");
             File file = chooser.showOpenDialog(null);
             if(file != null) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String input = "";
                     String line;
                     while ((line = br.readLine()) != null) {
-                        run(line);
+                        input+=line;
+                        input+="\n";
+//                        controller.commandManager.execute(line);
                     }
+                    System.out.println(input);
+                    controller.commandManager.execute(input);
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
                     alert.showAndWait();
@@ -182,7 +193,7 @@ public class ControlPanelView {
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
-            FileChooser chooser = UIFactory.createFileChooser("*.txt");
+            FileChooser chooser = UIFactory.createFileChooser("*.logo");
             File file = chooser.showSaveDialog(null);
             FileOutputStream fos;
             BufferedWriter bw;
@@ -237,6 +248,26 @@ public class ControlPanelView {
     private void setUpTurtleStatus(){
         turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, UIFactory.createTurtleStatusVBox());
         turtleStatus.setExpanded(false);
+    }
+
+    private void setUpColorIndexes(){
+
+        HBox red = new HBox(new Label("Red: 123"));
+        HBox blue = new HBox(new Label("Blue: 456"));
+        HBox yellow = new HBox(new Label("Yellow: 789"));
+        ImageView dimage = new ImageView(turtleImage);
+        dimage.setFitHeight(30);
+        dimage.setFitWidth(30);
+        HBox defaultImage = new HBox(new Label("001"), dimage);
+
+        ImageView aimage = new ImageView(alTurtleImage);
+        aimage.setFitHeight(30);
+        aimage.setFitWidth(30);
+        HBox alterImage = new HBox(new Label("002"), aimage);
+
+        VBox vBox = new VBox(red, blue, yellow, defaultImage, alterImage);
+        colorIndexes = new TitledPane("UI Indexes", vBox);
+
     }
 
     private void setUpTurtleAction(){

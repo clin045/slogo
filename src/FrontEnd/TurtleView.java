@@ -20,6 +20,7 @@ public class TurtleView {
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
     private TurtleManager turtleManager;
     private static TitledPane turtleStatusPane;
+    private boolean isCurrentlySelected;
 
     public TurtleView(){
         this.turtleManager = turtleManager;
@@ -43,6 +44,7 @@ public class TurtleView {
                     isActive = true;
                     turtleManager.getActiveTurtles().add(turtleManager.getTurtleByID(id));
                 }
+                isCurrentlySelected = true;
                 turtleStatusPane.setContent(UIFactory.createTurtleStatusVBox(id, turtleManager.getTurtleByID(id).getX(),
                         turtleManager.getTurtleByID(id).getY(), turtleManager.getTurtleByID(id).getHeading()));
                 System.out.println("Clicked");
