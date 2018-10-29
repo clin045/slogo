@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class CommandRand extends Command {
-    private double d1;
+    private int upperBound;
     private static final String key="Random";
     public CommandRand(VariableTracker tracker){
         super(tracker);
@@ -17,14 +17,17 @@ public class CommandRand extends Command {
 
     @Override
     public String execute(List<String> params) {
-        try{
-            d1= parseParameter(params);
+        try {
+            upperBound = (int) parseParameter(params);
         }
-        catch(Exception e){
+        catch(Exception e) {
             throw new InvalidSyntaxException(key);
         }
 
-        if(d1<0){throw new IllegalArgumentException("Random ceiling mus be positive");}
-        return ""+ (d1*Math.random());
+        if(upperBound <= 0) {
+            throw new IllegalArgumentException("Random ceiling must be positive");
+        }
+        int random = (int) (Math.random() * upperBound;
+        return Integer.toString(random);
     }
 }
