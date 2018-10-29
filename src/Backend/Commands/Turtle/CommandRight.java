@@ -7,24 +7,21 @@ import Backend.VariableTracker;
 import java.util.List;
 
 
-
 public class CommandRight extends Command {
+    private static String key = "Right";
     private double rightAmt;
-    private static String key="Right";
-  public CommandRight(VariableTracker tracker){
+
+    public CommandRight(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         var turtle = myTracker.getTurtleManager();
-        try{
+        try {
             rightAmt = parseParameter(params);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         return String.valueOf(turtle.right(rightAmt));

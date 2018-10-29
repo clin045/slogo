@@ -18,6 +18,6 @@ public CommandSetBackground(VariableTracker tracker){
     @Override
     public String execute(List<String> params) {
         int index = (int)parseParameter(params);
-        return ""+myTracker.getTurtleManager().changeBG(index);
+        return String.valueOf(myTracker.getTurtleManager().changeBG(index));
     }
 }

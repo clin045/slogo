@@ -3,7 +3,6 @@
  */
 package Backend.Commands.Math;
 
-import Backend.Command;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 public class CommandDiff extends MultiInputCommand {
     private static final String key = "Difference";
 
-    public CommandDiff(VariableTracker tracker){
+    public CommandDiff(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
@@ -20,8 +19,7 @@ public class CommandDiff extends MultiInputCommand {
     public String execute(List<String> params) {
         try {
             parseAllParameters(params);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException(key);
         }
         return String.valueOf(myVals.stream().mapToDouble(d -> d).reduce((a, b) -> a - b).getAsDouble());

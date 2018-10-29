@@ -15,6 +15,6 @@ public class CommandSetShape extends Command {
     public String execute(List<String> params) {
         double index = parseParameter(params);
         myTracker.getTurtleManager().setShape(index);
-        return Double.toString(index);
+        return String.valueOf(index);
     }
 }

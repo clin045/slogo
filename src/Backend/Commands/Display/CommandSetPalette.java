@@ -26,6 +26,6 @@ public class CommandSetPalette extends Command {
         catch (Exception e){
             throw new InvalidSyntaxException(key);
         }
-        return Double.toString(index);
+        return String.valueOf(index);
     }
 }

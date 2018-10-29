@@ -6,8 +6,9 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandID extends Command {
-    public static final String key="ID";
-    public CommandID(VariableTracker tracker){
+    public static final String key = "ID";
+
+    public CommandID(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }

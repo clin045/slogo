@@ -1,9 +1,6 @@
 package FrontEnd;
 
 import Backend.CommandManager;
-
-import java.io.*;
-
 import Backend.Turtle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +29,9 @@ import java.util.List;
  */
 public class ControlPanelView {
 
-    private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_green.png"));
-    private Image alTurtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
+    public static final String DEFAULT_HEADING = "90";
+    public static final String DEFAULT_POSITION = "0,0";
+    public static final String DEFAULT_ID = "1";
     private static final String WORKSPACE_SETTING_TITLE = "Workspace Setting";
     private static final String DEFINED_COMMANDS_TITLE = "Defined Commands";
     private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
@@ -41,10 +40,6 @@ public class ControlPanelView {
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
-    public static final String DEFAULT_HEADING = "90";
-    public static final String DEFAULT_POSITION = "0,0";
-    public static final String DEFAULT_ID = "1";
-
     VBox vBox;
     Workspace workspace;
     TitledPane workspaceSetting;
@@ -59,8 +54,10 @@ public class ControlPanelView {
     CommandInputHandler commandInputHandler;
     CommandManager commandManager;
     TurtlePlayground turtlePlayground;
+    private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_green.png"));
+    private Image alTurtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
 
-    public ControlPanelView(Workspace workspace, Controller controller){
+    public ControlPanelView(Workspace workspace, Controller controller) {
         this.workspace = workspace;
         this.controller = controller;
         //set up UI
@@ -79,11 +76,11 @@ public class ControlPanelView {
         workspace.setRight(vBox);
     }
 
-    public CommandInputHandler getCommandInputHandler(){
+    public CommandInputHandler getCommandInputHandler() {
         return commandInputHandler;
     }
 
-    private void setUpWorkspaceSetting(){
+    private void setUpWorkspaceSetting() {
         // add bg color picker
         ColorPicker bgColorPicker = new ColorPicker();
         bgColorPicker.setOnAction(event -> {
@@ -114,7 +111,7 @@ public class ControlPanelView {
         Button button = UIFactory.createButton("Choose..", event -> {
             FileChooser chooser = UIFactory.createFileChooser(IMAGE_FILE_EXTENSION);
             File file = chooser.showOpenDialog(null);
-            if(file!=null){
+            if (file != null) {
                 controller.setTurtleImage(file.getName());
             }
         });
@@ -124,12 +121,12 @@ public class ControlPanelView {
         HBox languageSetter = UIFactory.createInputFieldWithLabel("Language: ", addLanguageComboBox());
 
         // put everything inside a vbox
-        VBox setting = new VBox(bgColorBox, penColorBox,  upDown, penThicknessBox, imageSetter, languageSetter);
+        VBox setting = new VBox(bgColorBox, penColorBox, upDown, penThicknessBox, imageSetter, languageSetter);
         setting.setSpacing(VERTICAL_SPACING);
         workspaceSetting = new TitledPane(WORKSPACE_SETTING_TITLE, setting);
     }
 
-    private HBox addPenDownButton(){
+    private HBox addPenDownButton() {
         final ToggleGroup group = new ToggleGroup();
 
         ToggleButton tb2 = new ToggleButton("Down");
@@ -144,7 +141,7 @@ public class ControlPanelView {
         return new HBox(tb2);
     }
 
-    private ComboBox addLanguageComboBox(){
+    private ComboBox addLanguageComboBox() {
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "English", "Chinese", "French", "German",
@@ -160,7 +157,7 @@ public class ControlPanelView {
     }
 
     // add text input field and related buttons
-    private void setUpTextInputArea(Workspace workspace){
+    private void setUpTextInputArea(Workspace workspace) {
         commandInputHandler = new CommandInputHandler(controller);
         Button runButton = UIFactory.createButton("Run", event -> {
             run(commandInputHandler.getText());
@@ -173,16 +170,15 @@ public class ControlPanelView {
         Button loadButton = UIFactory.createButton("Load", event -> {
             FileChooser chooser = UIFactory.createFileChooser("*.logo");
             File file = chooser.showOpenDialog(null);
-            if(file != null) {
+            if (file != null) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                     String input = "";
                     String line;
                     while ((line = br.readLine()) != null) {
-                        input+=line;
-                        input+="\n";
+                        input += line;
+                        input += "\n";
 //                        controller.commandManager.execute(line);
                     }
-                    System.out.println(input);
                     controller.commandManager.execute(input);
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
@@ -201,12 +197,12 @@ public class ControlPanelView {
                 fos = new FileOutputStream(file);
                 bw = new BufferedWriter(new OutputStreamWriter(fos));
                 ObservableList commandHistoryNodes = ((VBox) ((ScrollPane) commandHistory.getContent()).getContent()).getChildren();
-                for(Object node : commandHistoryNodes) {
+                for (Object node : commandHistoryNodes) {
                     bw.write(((Text) node).getText());
                     bw.newLine();
                 }
                 bw.close();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
                 alert.showAndWait();
                 e.printStackTrace();
@@ -215,28 +211,26 @@ public class ControlPanelView {
 
         Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
             Point2D position = UIFactory.createDialogBox();
-            if(position!=null){
+            if (position != null) {
                 TurtleView newTurtle = controller.addNewTurtle(position);
                 controller.getTurtleManager().createTurtle(newTurtle.getId(), new Controller(turtlePlayground, newTurtle, commandManager));
                 controller.getTurtleManager().getTurtleByID(newTurtle.getId()).setXY(position.getX(), position.getY());
                 List<Turtle> list = controller.getTurtleManager().getActiveTurtles();
                 List<Integer> activeList = new ArrayList<>();
-                for(Turtle t: list){
+                for (Turtle t : list) {
                     activeList.add(t.getID());
                 }
                 activeList.add(newTurtle.getId());
                 controller.getTurtleManager().setActiveTurtlesByID(activeList);
-                System.out.println(controller.getTurtleManager().getActiveTurtles());
             }
-            System.out.println(position);
         });
 
         HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton, addNewTurtleButton);
-        VBox textInput= new VBox(buttonsGroup, commandInputHandler);
+        VBox textInput = new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
     }
 
-    private TitledPane setUpScrollingTitlePane(String title){
+    private TitledPane setUpScrollingTitlePane(String title) {
         VBox allCommands = new VBox();
         ScrollPane sp = new ScrollPane();
         sp.setContent(allCommands);
@@ -246,12 +240,12 @@ public class ControlPanelView {
         return titledPane;
     }
 
-    private void setUpTurtleStatus(){
+    private void setUpTurtleStatus() {
         turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, UIFactory.createTurtleStatusVBox());
         turtleStatus.setExpanded(false);
     }
 
-    private void setUpColorIndexes(){
+    private void setUpColorIndexes() {
 
         HBox red = new HBox(new Label("Red: 123"));
         HBox blue = new HBox(new Label("Blue: 456"));
@@ -272,14 +266,11 @@ public class ControlPanelView {
 
     }
 
-    private void setUpTurtleAction(){
-        if(commandManager==null){
-            System.out.println("Command Manager is not set.");
-        }
+    private void setUpTurtleAction() {
         Button forward = new Button("Forward");
         TextField fdText = new TextField("50.0");
         forward.setOnAction(event -> {
-            commandManager.execute("fd "+fdText.getText());
+            commandManager.execute("fd " + fdText.getText());
         });
         HBox fd = new HBox(forward, fdText);
         Button back = new Button("Back");
@@ -305,40 +296,40 @@ public class ControlPanelView {
         turtleAction.setExpanded(false);
     }
 
-    public void setCommandManager(CommandManager commandManager){
+    public void setCommandManager(CommandManager commandManager) {
         this.commandManager = commandManager;
     }
 
-    public void setTurtlePlayground(TurtlePlayground turtlePlayground){
+    public void setTurtlePlayground(TurtlePlayground turtlePlayground) {
         this.turtlePlayground = turtlePlayground;
     }
 
-    private void clearHistory(){
+    private void clearHistory() {
         VBox historyBox = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
-        VBox outputBox = (VBox)((ScrollPane) commandOutput.getContent()).getContent();
+        VBox outputBox = (VBox) ((ScrollPane) commandOutput.getContent()).getContent();
         historyBox.getChildren().clear();
         outputBox.getChildren().clear();
     }
 
     public void run(String input) {
         String output = commandInputHandler.run(input);
-        VBox historyBox = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
-        VBox outputBox = (VBox)((ScrollPane) commandOutput.getContent()).getContent();
+        VBox historyBox = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
+        VBox outputBox = (VBox) ((ScrollPane) commandOutput.getContent()).getContent();
         historyBox.getChildren().add(UIFactory.createText(input));
         outputBox.getChildren().add(UIFactory.createText(output));
     }
 
-    private void addNewTab(){
+    private void addNewTab() {
         Tab newTab = new Tab("New Tab");
         newTab.setContent(new Workspace(workspace.tabPane));
         workspace.tabPane.getTabs().add(newTab);
     }
 
-    public VBox getRightMenu(){
+    public VBox getRightMenu() {
         return vBox;
     }
 
-    public TitledPane getTurtleStatus(){
+    public TitledPane getTurtleStatus() {
         return turtleStatus;
     }
 }

@@ -6,14 +6,16 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandGetShape extends Command {
-    private static final String key ="GETSHAPE";
-    public CommandGetShape(VariableTracker tracker){
+    private static final String key = "GETSHAPE";
+
+    public CommandGetShape(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
+
     @Override
     public String execute(List<String> params) {
 
-        return ""+myTracker.getTurtleManager().getShape();
+        return String.valueOf(myTracker.getTurtleManager().getShape());
     }
 }

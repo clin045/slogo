@@ -10,27 +10,29 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiInputCommand extends Command{
+public class MultiInputCommand extends Command {
     protected List<Double> myVals;
-    public MultiInputCommand(VariableTracker tracker){
+
+    public MultiInputCommand(VariableTracker tracker) {
         super(tracker);
-        myVals= new ArrayList<>();
+        myVals = new ArrayList<>();
     }
 
-    protected void parseAllParameters(List<String>params){
-        if(params.get(0).equals("(")){
-            if(!params.contains(")")){throw new InvalidInputException();
+    protected void parseAllParameters(List<String> params) {
+        if (params.get(0).equals("(")) {
+            if (!params.contains(")")) {
+                throw new InvalidInputException();
             }
             params.remove(0);
-            int end=params.indexOf(")");
-            for(int i = 0; i < end; i += 1){
-                if(params.get(0).equals(")")){
+            int end = params.indexOf(")");
+            for (int i = 0; i < end; i += 1) {
+                if (params.get(0).equals(")")) {
                     params.remove(0);
                     break;
                 }
                 myVals.add(parseParameter(params));
             }
-            if(params.size()>0&&params.get(0).equals(")")){
+            if (params.size() > 0 && params.get(0).equals(")")) {
                 params.remove(0);
             }
         } else {

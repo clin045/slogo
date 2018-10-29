@@ -21,24 +21,20 @@ public class CommandInputHandler extends TextArea {
     private TitledPane userDefinedCommands;
     private boolean first = true;
 
-    public CommandInputHandler(Controller controller){
+    public CommandInputHandler(Controller controller) {
         this.controller = controller;
     }
 
-    public String run(String command){
+    public String run(String command) {
         String ret = "";
-        if(commandManager==null){
-            System.out.println("CommandManager has not been set yet");
-        }
-        try{
+        try {
             ret = commandManager.execute(command);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
         }
 
         // only runs once when this method is called the first time
-        if(first){
+        if (first) {
             // connect backend to frontend
             varMap();
             definedCommandMap();
@@ -52,18 +48,18 @@ public class CommandInputHandler extends TextArea {
     this method will be executed when users press run button,
     do all the text parsing and error handling here
  */
-    public String run(){
+    public String run() {
         return run(this.getText());
     }
 
-    private void varMap(){
+    private void varMap() {
         ObservableMap<String, Object> varMap = commandManager.getMyTracker().getVarMap();
         VBox definedVariable = (VBox) variableHistory.getContent();
         varMap.addListener(new MapChangeListener<String, Object>() {
             @Override
             public void onChanged(Change<? extends String, ?> change) {
                 definedVariable.getChildren().clear();
-                for(String s: change.getMap().keySet()){
+                for (String s : change.getMap().keySet()) {
                     definedVariable.getChildren().add(
                             UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap()
                             ));
@@ -71,14 +67,14 @@ public class CommandInputHandler extends TextArea {
             }
         });
 
-        for(String s: varMap.keySet()){
+        for (String s : varMap.keySet()) {
             definedVariable.getChildren().add(
                     UIFactory.createTextFieldWithLabel(s, varMap.get(s).toString(), commandManager.getMyTracker().getVarMap())
             );
         }
     }
 
-    private void definedCommandMap(){
+    private void definedCommandMap() {
         ObservableMap<String, List<String>> commandMap = commandManager.getMyTracker().getCommandMap();
         ScrollPane definedCommandsScrollPane = (ScrollPane) userDefinedCommands.getContent();
         VBox definedCommands = (VBox) definedCommandsScrollPane.getContent();
@@ -86,10 +82,9 @@ public class CommandInputHandler extends TextArea {
         commandMap.addListener(new MapChangeListener<String, Object>() {
             @Override
             public void onChanged(Change<? extends String, ?> change) {
-                if(change.wasAdded()){
+                if (change.wasAdded()) {
                     definedCommands.getChildren().add(
                             UIFactory.createTextFieldWithLabel(change.getKey(), commandMap.get(change.getKey()).toString(), event -> {
-                                        System.out.println(buildCommand(commandMap, change.getKey()));
                                         commandManager.execute(commandMap.get(change.getKey()).toString().substring(1));
                                     }
                             ));
@@ -97,20 +92,18 @@ public class CommandInputHandler extends TextArea {
             }
         });
 
-        for(String s: commandMap.keySet()){
+        for (String s : commandMap.keySet()) {
             definedCommands.getChildren().add(
                     UIFactory.createTextFieldWithLabel(s, commandMap.get(s).toString(), event -> {
-//                        System.out.println(commandMap.get(s).toString().substring(1));
-                        System.out.println(buildCommand(commandMap, s));
                         commandManager.execute(buildCommand(commandMap, s));
                     })
             );
         }
     }
 
-    private String buildCommand(ObservableMap<String, List<String>> commandMap,  String key){
+    private String buildCommand(ObservableMap<String, List<String>> commandMap, String key) {
         StringBuilder command = new StringBuilder();
-        for(String s: commandMap.get(key)){
+        for (String s : commandMap.get(key)) {
             command.append(s);
             command.append(" ");
         }
@@ -119,7 +112,7 @@ public class CommandInputHandler extends TextArea {
 
     }
 
-    private void showWarningDialog(String title, String header, String content){
+    private void showWarningDialog(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
         alert.setHeaderText(header);
@@ -128,12 +121,12 @@ public class CommandInputHandler extends TextArea {
     }
 
 
-    public void setLanguage(String lan){
+    public void setLanguage(String lan) {
         this.language = lan;
-        commandManager.setLanguage("Languages."+lan);
+        commandManager.setLanguage("Languages." + lan);
     }
 
-    public void setCommandManager(CommandManager manager){
+    public void setCommandManager(CommandManager manager) {
         this.commandManager = manager;
     }
 
@@ -145,7 +138,7 @@ public class CommandInputHandler extends TextArea {
         this.commandHistory = commandHistory;
     }
 
-    public void setUserDefinedCommands(TitledPane userDefinedCommands){
+    public void setUserDefinedCommands(TitledPane userDefinedCommands) {
         this.userDefinedCommands = userDefinedCommands;
     }
 }

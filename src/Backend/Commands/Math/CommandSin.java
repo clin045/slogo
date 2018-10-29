@@ -10,19 +10,19 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandSin extends Command {
-   private double d1;
-   private static final String key ="Sine";
-    public CommandSin(VariableTracker tracker){
+    private static final String key = "Sine";
+    private double d1;
+
+    public CommandSin(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
     @Override
     public String execute(List<String> params) {
-        try{
+        try {
             d1 = parseParameter(params);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         return Double.toString(Math.toDegrees(Math.sin(d1)));

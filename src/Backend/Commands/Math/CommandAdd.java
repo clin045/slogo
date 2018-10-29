@@ -3,7 +3,6 @@
  */
 package Backend.Commands.Math;
 
-import Backend.Command;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
@@ -11,7 +10,8 @@ import java.util.List;
 
 
 public class CommandAdd extends MultiInputCommand {
-   private static final String key="Sum";
+    private static final String key = "Sum";
+
     public CommandAdd(VariableTracker tracker) {
 
         super(tracker);
@@ -19,11 +19,10 @@ public class CommandAdd extends MultiInputCommand {
     }
 
     @Override
-    public String execute(List<String>params) {
-        try{
+    public String execute(List<String> params) {
+        try {
             parseAllParameters(params);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         return String.valueOf(myVals.stream().mapToDouble(d -> d.doubleValue()).sum());

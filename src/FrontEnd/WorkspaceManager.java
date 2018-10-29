@@ -17,7 +17,7 @@ public class WorkspaceManager {
     /**
      * @param scene
      */
-    public WorkspaceManager(Scene scene){
+    public WorkspaceManager(Scene scene) {
         tabPane = new TabPane();
         workspace = new Workspace(tabPane);
 
@@ -38,14 +38,14 @@ public class WorkspaceManager {
     /**
      * @return stackPane
      */
-    StackPane getWorkspace(){
+    StackPane getWorkspace() {
         return stackPane;
     }
 
     /**
      * @return tabPane
      */
-    TabPane getTabPane(){
+    TabPane getTabPane() {
         return tabPane;
     }
 }

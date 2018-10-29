@@ -6,28 +6,25 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-
 public class CommandTowards extends Command {
-    private static final String key="SetTowards";
+    private static final String key = "SetTowards";
     int pointX;
     int pointY;
 
-    public CommandTowards(VariableTracker tracker){
+    public CommandTowards(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
-
     public String execute(List<String> params) {
-        try{
+        try {
             pointX = (int) parseParameter(params);
             pointY = (int) parseParameter(params);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         var turtleMan = myTracker.getTurtleManager();
-        return String.valueOf(turtleMan.towards(pointX,pointY));
+        return String.valueOf(turtleMan.towards(pointX, pointY));
 
     }
 }
