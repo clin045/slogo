@@ -53,7 +53,7 @@ public class CommandManager {
         ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
         if(tempList.get(0).charAt(0)==':'){
             List<String>userCommand=tracker.getCommand(tempList.get(0).substring(1));
-            System.out.println("User Command:" + userCommand);
+
             String current=tempList.get(0);
             if(userCommand!=null){
                 tempList.addAll(0,userCommand);
@@ -105,38 +105,42 @@ public class CommandManager {
         String out="";
         List<String> masterList = myParser.parse(userInput);
         while(masterList.size()>0){
-            System.out.println("executing with:");
-            for(String s:masterList){System.out.println(s);}
+
             if(isCommand(masterList.get(0), myTracker)){
                 Command init=getCommand(masterList, myTracker);
                 masterList.remove(0);
                 out=init.execute(masterList);
             }
             else {
-                if(masterList.get(0).charAt(0)==':'){
-                    Double val=(Double) myTracker.get(masterList.get(0).substring(1));
-                    if(val==null){
-                        List<String>userCommand=myTracker.getCommand(masterList.get(0).substring(1));
-                        String commandName=masterList.get(0);
-                        if(userCommand!=null){
-                            masterList.addAll(0,userCommand);
-                            masterList.remove(commandName);
-                        }
-                        else{throw new InvalidInputException(masterList.get(0));}}
-                    else{
-                        out=""+val;
-                        masterList.remove(0);
-                    }
-                }
-                else{
-                    throw new InvalidVariableCallException();
-                }
+                out = getUserDefinedCmd(out, masterList);
             }
         }
-       // System.out.println(out);
 
         return out;
     }
+
+    private String getUserDefinedCmd(String out, List<String> masterList) {
+        if(masterList.get(0).charAt(0)==':'){
+            Double val=(Double) myTracker.get(masterList.get(0).substring(1));
+            if(val==null){
+                List<String>userCommand=myTracker.getCommand(masterList.get(0).substring(1));
+                String commandName=masterList.get(0);
+                if(userCommand!=null){
+                    masterList.addAll(0,userCommand);
+                    masterList.remove(commandName);
+                }
+                else{throw new InvalidInputException(masterList.get(0));}}
+            else{
+                out=""+val;
+                masterList.remove(0);
+            }
+        }
+        else{
+            throw new InvalidVariableCallException();
+        }
+        return out;
+    }
+
     public Map<String, Object> getUserVariables(){
         return myTracker.getVarMap();
     }
