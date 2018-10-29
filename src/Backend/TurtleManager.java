@@ -200,6 +200,25 @@ public class TurtleManager {
         return last;
     }
 
+    public double setShape(double index){
+
+        for(Turtle t: activeTurtles){
+            t.setTurtleShape((int) index);
+        }
+        return index;
+    }
+
+    public double setPalette(int index, int r, int b, int g){
+        for(Turtle t: activeTurtles){
+            t.setPalette(index, r, b, g);
+        }
+        return index;
+    }
+
+//    public double getPenColor(){
+//        return activeTurtles.get(activeTurtles.size()-1);
+//    }
+
     
 
     public void createTurtle(int id){
@@ -209,9 +228,13 @@ public class TurtleManager {
 
 
 
+
+
     public void createTurtle(int id, Controller controller){
         Turtle newTurtle = new Turtle(id);
         newTurtle.setController(controller);
         turtleMap.put(id, newTurtle);
     }
+
+
 }
