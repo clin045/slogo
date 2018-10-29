@@ -85,12 +85,31 @@ public class TurtleManager {
         }
         return 0;
     }
+    public double penSize(int pixels){
 
+        for(Turtle t : activeTurtles){
+            t.setPenStrokeWidth(pixels);
+        }
+        return pixels;
+    }
     public double penUp() {
         for(Turtle t : activeTurtles){
             t.penUp();
         }
         return 1;
+    }
+    public double changeBG(int i){
+        for(Turtle t : activeTurtles){
+            t.changeBgColor(i);
+        }
+        return i;
+    }
+
+    public double penColor(int i) {
+        for(Turtle t : activeTurtles){
+            t.changePenColor(i);
+        }
+        return i;
     }
 
     public boolean getVisibility() {
