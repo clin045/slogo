@@ -208,8 +208,8 @@ public class TurtleManager {
         return index;
     }
 
-    public double getShape(){
-        return activeTurtles.get(activeTurtles.size()-1).;
+    public double getPenColor(){
+        return activeTurtles.get(activeTurtles.size()-1).getPenColorIndex();
     }
 
     public double setPalette(double index, double r, double b, double g){
