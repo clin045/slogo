@@ -176,15 +176,19 @@ public class TurtleManager {
     public double home() {
         double last = 0;
         for(Turtle t : activeTurtles){
-            last = last = t.home();
+            last = t.home();
         }
         return last;
     }
+
+    
 
     public void createTurtle(int id){
         Turtle newTurtle = new Turtle(id);
         turtleMap.put(id, newTurtle);
     }
+
+
 
     public void createTurtle(int id, Controller controller){
         Turtle newTurtle = new Turtle(id);
