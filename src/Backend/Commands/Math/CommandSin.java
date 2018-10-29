@@ -17,11 +17,11 @@ public class CommandSin extends Command {
     @Override
     public String execute(List<String> params) {
         try{
-            d1= parseParameter(params);
+            d1 = parseParameter(params);
         }
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        return ""+ (Math.sin(d1));
+        return Double.toString(Math.toDegrees(Math.sin(d1)));
     }
 }

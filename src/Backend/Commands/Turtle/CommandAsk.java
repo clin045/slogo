@@ -16,7 +16,6 @@ public class CommandAsk extends BracketedCommand {
         setKey(key);
     }
 
-
     @Override
     public String execute(List<String> params) {
         int openBracket = params.indexOf("[");
@@ -24,7 +23,7 @@ public class CommandAsk extends BracketedCommand {
         if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
             throw new InvalidSyntaxException(key);
         }
-        var turtleExp = params.subList(openBracket+1, closeBracket);
+        var turtleExp = params.subList(openBracket + 1, closeBracket);
 
         var turtleIdDoubles = evaluateBrackets(turtleExp);
 
@@ -41,7 +40,7 @@ public class CommandAsk extends BracketedCommand {
         List<String> commandExp = new ArrayList<>();
         var retList = new ArrayList<Double>();
         try{
-            commandExp = params.subList(closeBracket+1, params.size()-1);
+            commandExp = params.subList(closeBracket+1, params.size() - 1);
             commandExp.remove("[");
             commandExp.remove("]");
         }
@@ -54,6 +53,6 @@ public class CommandAsk extends BracketedCommand {
 
         myTracker.getTurtleManager().setActiveTurtles(oldTurtleList);
 
-        return Double.toString(retList.get(retList.size()-1));
+        return String.valueOf(retList.get(retList.size() - 1));
     }
 }

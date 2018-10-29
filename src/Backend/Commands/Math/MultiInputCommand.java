@@ -14,25 +14,23 @@ public class MultiInputCommand extends Command{
         myVals= new ArrayList<>();
     }
 
-
-
     protected void parseAllParameters(List<String>params){
         if(params.get(0).equals("(")){
             if(!params.contains(")")){throw new InvalidInputException();
             }
             params.remove(0);
             int end=params.indexOf(")");
-            for(int i=0;i<end;i+=1){
+            for(int i = 0; i < end; i += 1){
                 if(params.get(0).equals(")")){
                     params.remove(0);
-                    break;}
+                    break;
+                }
                 myVals.add(parseParameter(params));
             }
             if(params.size()>0&&params.get(0).equals(")")){
                 params.remove(0);
             }
-        }
-        else{
+        } else {
             myVals.add(parseParameter(params));
             myVals.add(parseParameter(params));
         }

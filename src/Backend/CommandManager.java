@@ -53,6 +53,7 @@ public class CommandManager {
         ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
         if(tempList.get(0).charAt(0)==':'){
             List<String>userCommand=tracker.getCommand(tempList.get(0).substring(1));
+            System.out.println("User Command:" + userCommand);
             String current=tempList.get(0);
             if(userCommand!=null){
                 tempList.addAll(0,userCommand);
@@ -82,8 +83,21 @@ public class CommandManager {
     public void setLanguage(String path){
         myParser.setLanguage(path);
     }
-    public static boolean isCommand(String cmd){
-        return myCommands.containsKey(cmd);
+    public static boolean isCommand(String cmd, VariableTracker tracker){
+        if(myCommands.containsKey(cmd)){
+            return true;
+        }
+        if(cmd.charAt(0)==':'){
+            List<String>userCommand= tracker.getCommand(cmd.substring(1));
+            String current=cmd;
+            if(userCommand!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
     }
 
     public String execute(String userInput){
@@ -91,10 +105,9 @@ public class CommandManager {
         String out="";
         List<String> masterList = myParser.parse(userInput);
         while(masterList.size()>0){
-//            System.out.println("executing with:");
-//            for(String s:masterList){System.out.println(s);}
-            if(masterList.get(0).equals("[")){return out;}
-            if(isCommand(masterList.get(0))){
+            System.out.println("executing with:");
+            for(String s:masterList){System.out.println(s);}
+            if(isCommand(masterList.get(0), myTracker)){
                 Command init=getCommand(masterList, myTracker);
                 masterList.remove(0);
                 out=init.execute(masterList);

@@ -9,11 +9,9 @@ import java.util.List;
 public class CommandGreaterP extends MultiInputCommand {
     private static final String key="GreaterThan";
     public CommandGreaterP(VariableTracker tracker){
-
         super(tracker);
         setKey(key);
     }
-
 
     @Override
     public String execute(List<String> params) {
@@ -23,12 +21,7 @@ public class CommandGreaterP extends MultiInputCommand {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        double check=myVals.remove(0);
-        for(double d: myVals){
-            if(d>=check){
-                return "0";
-            }
-        }
-        return "1";
+        double check = myVals.remove(0);
+        return myVals.stream().anyMatch(i -> i >= check) ? "0" : "1";
     }
 }

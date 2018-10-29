@@ -23,11 +23,6 @@ public class CommandNot extends Command {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        if(test == 0){
-            return "1";
-        }
-        else{
-            return "0";
-        }
+        return test == 0 ? "1" : "0";
     }
 }

@@ -6,8 +6,8 @@ package Backend;
 
 import FrontEnd.Controller;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.lang.Math;
 
 public class Turtle {
@@ -286,6 +286,16 @@ public class Turtle {
     public void setPenStrokeWidth(double width){
         controller.setPenThickness(width);
     }
+
+    public void setPalette(int index, int r, int g, int b){
+        Color c = Color.rgb(r,g,b);
+        controller.setPalette(index, c);
+    }
+
+    public void setTurtleShape(int index){
+        controller.setTurtleShape(index);
+    }
+
 
     public void setController(Controller controller){
         this.controller = controller;

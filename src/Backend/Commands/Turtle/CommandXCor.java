@@ -17,6 +17,6 @@ public class CommandXCor extends Command{
 
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(myTracker.getTurtleManager().getX());
+        return String.valueOf(myTracker.getTurtleManager().getX());
     }
 }

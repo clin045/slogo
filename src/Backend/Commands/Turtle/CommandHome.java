@@ -14,10 +14,8 @@ public class CommandHome extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
-        return Double.toString(myTracker.getTurtleManager().home());
+        return String.valueOf(myTracker.getTurtleManager().home());
     }
 }

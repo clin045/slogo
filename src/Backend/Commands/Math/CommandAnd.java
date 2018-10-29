@@ -7,13 +7,11 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandAnd extends MultiInputCommand {
-    private static final String key="And";
+    private static final String key = "And";
     public CommandAnd(VariableTracker tracker){
         super(tracker);
         setKey(key);
     }
-
-
 
     @Override
     public String execute(List<String> params) {
@@ -23,12 +21,6 @@ public class CommandAnd extends MultiInputCommand {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        for(double d: myVals){
-          if(d==0){
-              return "0.0";
-          }
-        }
-
-       return "1.0";
+        return myVals.stream().allMatch(d -> d == 0) ? "0" : "1";
     }
 }

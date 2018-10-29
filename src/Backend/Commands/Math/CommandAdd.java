@@ -17,10 +17,6 @@ public class CommandAdd extends MultiInputCommand {
         setKey(key);
     }
 
-
-
-
-
     @Override
     public String execute(List<String>params) {
         try{
@@ -29,11 +25,6 @@ public class CommandAdd extends MultiInputCommand {
         catch (Exception e){
             throw new InvalidSyntaxException(key);
         }
-        double out =0;
-        for (double val:myVals){
-            out+=val;
-        }
-        System.out.println("Done: "+out);
-        return ""+out;
+        return String.valueOf(myVals.stream().mapToDouble(d -> d.doubleValue()).sum());
     }
 }

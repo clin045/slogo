@@ -26,6 +26,6 @@ public class CommandSetXY extends Command {
         }
         var myTurtle = myTracker.getTurtleManager();
 
-        return Double.toString(myTurtle.setXY(pointX,pointY));
+        return String.valueOf(myTurtle.setXY(pointX,pointY));
     }
 }

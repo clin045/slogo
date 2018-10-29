@@ -9,18 +9,20 @@ import java.util.List;
 public class CommandATan extends Command {
     private double d1;
     private static final String key="ArcTangent";
-    public CommandATan(VariableTracker tracker){super(tracker);
-    setKey(key);
+
+    public CommandATan(VariableTracker tracker){
+        super(tracker);
+        setKey(key);
     }
 
     @Override
     public String execute(List<String> params) {
-        try{
-            d1= parseParameter(params);
+        try {
+            d1 = parseParameter(params);
         }
-        catch(Exception e){
+        catch(Exception e) {
             throw new InvalidSyntaxException(key);
         }
-        return ""+(Math.atan(d1));
+        return String.valueOf(Double.toString(Math.toDegrees(Math.atan(d1))));
     }
 }
