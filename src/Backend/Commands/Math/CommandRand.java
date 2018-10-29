@@ -27,7 +27,6 @@ public class CommandRand extends Command {
         if(upperBound <= 0) {
             throw new IllegalArgumentException("Random ceiling must be positive");
         }
-        int random = (int) (Math.random() * upperBound;
-        return Integer.toString(random);
+        return Integer.toString((int) (Math.random() * upperBound));
     }
 }

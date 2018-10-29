@@ -14,5 +14,5 @@ public class CommandHeading extends Command {
     }
 
     @Override
-    public String execute(List<String> params) { return Double.toString(myTracker.getTurtleManager().getHeading()); }
+    public String execute(List<String> params) { return String.valueOf(myTracker.getTurtleManager().getHeading()); }
 }

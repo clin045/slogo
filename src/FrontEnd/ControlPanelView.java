@@ -159,7 +159,7 @@ public class ControlPanelView {
         Button runButton = UIFactory.createButton("Run", event -> {
             run(commandInputHandler.getText());
         });
-        Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearCommandHistory());
+        Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearHistory());
         Button newTabButton = UIFactory.createButton("New Tab", event -> {
             addNewTab();
         });
@@ -280,9 +280,11 @@ public class ControlPanelView {
         this.turtlePlayground = turtlePlayground;
     }
 
-    private void clearCommandHistory(){
-        VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
-        history.getChildren().clear();
+    private void clearHistory(){
+        VBox historyBox = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
+        VBox outputBox = (VBox)((ScrollPane) commandOutput.getContent()).getContent();
+        historyBox.getChildren().clear();
+        outputBox.getChildren().clear();
     }
 
     public void run(String input) {

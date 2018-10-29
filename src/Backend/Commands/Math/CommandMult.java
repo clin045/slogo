@@ -6,6 +6,7 @@ import Backend.VariableTracker;
 
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.DoubleStream;
 
 public class CommandMult extends MultiInputCommand {
     private static final String key="Product";
@@ -22,10 +23,6 @@ public class CommandMult extends MultiInputCommand {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        double out=1;
-        for(double d: myVals){
-            out*=d;
-        }
-        return ""+out;
+        return String.valueOf(myVals.stream().mapToDouble(d -> d).reduce((a, b) -> (a * b)).getAsDouble());
     }
 }

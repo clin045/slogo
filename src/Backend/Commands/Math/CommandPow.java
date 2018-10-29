@@ -14,8 +14,6 @@ public class CommandPow extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         try{
@@ -25,6 +23,6 @@ public class CommandPow extends Command {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        return ""+Math.pow(d1,d2);
+        return String.valueOf(Math.pow(d1, d2));
     }
 }

@@ -27,6 +27,6 @@ public class CommandRight extends Command {
         catch (Exception e){
             throw new InvalidSyntaxException(key);
         }
-        return Double.toString(turtle.right(rightAmt));
+        return String.valueOf(turtle.right(rightAmt));
     }
 }

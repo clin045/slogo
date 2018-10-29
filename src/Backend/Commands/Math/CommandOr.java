@@ -22,9 +22,6 @@ public class CommandOr extends MultiInputCommand {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        for(double d: myVals){
-            if(d==1){return "1";}
-        }
-        return "0";
+        return myVals.stream().anyMatch(i -> i == 1) ? "1" : "0";
     }
 }
