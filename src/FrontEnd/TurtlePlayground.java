@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import Backend.Turtle;
 import Backend.TurtleManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -10,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /*
@@ -25,6 +26,7 @@ public class TurtlePlayground extends Pane {
     ArrayList<TurtleView> turtleViews;
     TurtleViewManager turtleViewManager;
     TurtleManager turtleManager;
+    Map<Integer, Color> indexMap;
     Pen pen;
 
     // create a default white playground with one turtle
@@ -47,6 +49,10 @@ public class TurtlePlayground extends Pane {
             addTurtleToCenter(view.getTurtleImageView());
         }
 //        addTurtleToCenter(turtleView.getTurtleImageView());
+        indexMap = new HashMap<>();
+        indexMap.put(123, Color.RED);
+        indexMap.put(456, Color.BLUE);
+        indexMap.put(789, Color.YELLOW);
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
@@ -63,6 +69,12 @@ public class TurtlePlayground extends Pane {
         BackgroundFill primaryLayer = new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(primaryLayer);
         this.setBackground(background);
+    }
+
+    public void setBgColor(int index){
+        if(indexMap.containsKey(index)){
+            setBgColor(indexMap.get(index));
+        }
     }
 
     // update the turtle's position and leave trail if pen is down
@@ -118,10 +130,22 @@ public class TurtlePlayground extends Pane {
         addTurtleToCenter(turtleViews.get(0).getTurtleImageView());
         setTurtleToHome();
         turtleView.resetTurtleHeading();
+        ArrayList<Integer> list = new ArrayList<>();
+//        if(turtleManager.getActiveTurtles().contains(turtleManager.getTurtleByID(1))){
+            list.add(1);
+//        }
+        turtleManager.getActiveTurtles().clear();
+        turtleManager.setActiveTurtlesByID(list);
     }
 
     public void setPenColor(Color color){
         pen.setColor(color);
+    }
+
+    public void setPenColor(int index){
+        if(indexMap.containsKey(index)){
+            pen.setColor(indexMap.get(index));
+        }
     }
 
     public void setPenDown(boolean isPenDown){
