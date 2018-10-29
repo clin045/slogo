@@ -6,6 +6,7 @@ import Backend.Commands.BracketedCommand;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandIfElse extends BracketedCommand {
@@ -18,7 +19,9 @@ public class CommandIfElse extends BracketedCommand {
 
     @Override
     public String execute(List<String> params) {
-        int openBracket = params.indexOf("[");
+        List<Integer> testList = new ArrayList<Integer>();
+
+        int openBracket = params.indexOf(START_DELIMETER);
 
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
@@ -37,9 +40,11 @@ public class CommandIfElse extends BracketedCommand {
         }
 
         if(expressionValue == 0){
-            openBracket = params.indexOf("[");
-            int closeBracket = params.indexOf("]");
+            openBracket = params.indexOf(START_DELIMETER);
+            int closeBracket = getCloseIndex(params);
+
             if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
+
                 throw new InvalidSyntaxException(key);
             }
             try{
@@ -50,23 +55,27 @@ public class CommandIfElse extends BracketedCommand {
             catch(Exception e){
                 throw new InvalidSyntaxException(key);
             }
+            params.remove(getCloseIndex(params));
+            
+
             List<Double> retVals = evaluateBrackets(params);
 
 
             return Double.toString(retVals.get(0));
         }
         else{
-            System.out.println("===");
-            int closeBracket = params.indexOf("]");
+            int closeBracket = getCloseIndex(params);
             int paramSize = params.size();
             //var commandParams = params.subList(1, closeBracket);
-            for(int i = closeBracket+1; i < paramSize; i++){
-                params.remove(closeBracket+1);
-                System.out.println(params);
+            for(int i = closeBracket; i < paramSize; i++){
+                params.remove(closeBracket);
             }
-            System.out.println("===");
+            params.remove(0);
+            params.remove(params.subList(getCloseIndex(params), params.size()));
 
             List<Double> retVals = evaluateBrackets(params);
+            //params.remove(getCloseIndex(params));
+            //params.remove(params.indexOf(START_DELIMETER));
 
 
             return Double.toString(retVals.get(0));

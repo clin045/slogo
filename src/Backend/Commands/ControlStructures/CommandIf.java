@@ -17,9 +17,9 @@ public class CommandIf extends BracketedCommand {
 
     @Override
     public String execute(List<String> params) {
-        System.out.println("______If FIRED________");
+
         for(String s:params){System.out.print(s+" ");}
-        System.out.println("\n____________");
+
         int openBracket = params.indexOf(START_DELIMETER);
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
