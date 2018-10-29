@@ -37,6 +37,7 @@ public class ControlPanelView {
     private static final String DEFINED_COMMANDS_TITLE = "Defined Commands";
     private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
     private static final String COMMAND_HISTORY_TITLE = "Command History";
+    private static final String COMMAND_OUTPUT_TITLE = "Command Output";
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
@@ -48,6 +49,7 @@ public class ControlPanelView {
     Workspace workspace;
     TitledPane workspaceSetting;
     TitledPane commandHistory;
+    TitledPane commandOutput;
     TitledPane userDefinedCommands;
     TitledPane definedVariables;
     TitledPane turtleStatus;
@@ -72,7 +74,8 @@ public class ControlPanelView {
         userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE);
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         definedVariables.setExpanded(false);
-        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables, turtleStatus, turtleAction, colorIndexes);
+        commandOutput = setUpScrollingTitlePane(COMMAND_OUTPUT_TITLE);
+        vBox = new VBox(workspaceSetting, commandHistory, commandOutput, userDefinedCommands, definedVariables, turtleStatus, turtleAction, colorIndexes);
         workspace.setRight(vBox);
     }
 
@@ -160,9 +163,7 @@ public class ControlPanelView {
     private void setUpTextInputArea(Workspace workspace){
         commandInputHandler = new CommandInputHandler(controller);
         Button runButton = UIFactory.createButton("Run", event -> {
-            String command = commandInputHandler.run();
-            VBox history = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
-            history.getChildren().add(UIFactory.createText(command));
+            run(commandInputHandler.getText());
         });
         Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearCommandHistory());
         Button newTabButton = UIFactory.createButton("New Tab", event -> {
@@ -313,6 +314,14 @@ public class ControlPanelView {
     private void clearCommandHistory(){
         VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
         history.getChildren().clear();
+    }
+
+    public void run(String input) {
+        String output = commandInputHandler.run(input);
+        VBox historyBox = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
+        VBox outputBox = (VBox)((ScrollPane) commandOutput.getContent()).getContent();
+        historyBox.getChildren().add(UIFactory.createText(input));
+        outputBox.getChildren().add(UIFactory.createText(output));
     }
 
     private void addNewTab(){
