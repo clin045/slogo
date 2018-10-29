@@ -27,11 +27,12 @@ public class CommandInputHandler extends TextArea {
     }
 
     public String run(String command){
+        String ret = "";
         if(commandManager==null){
             System.out.println("CommandManager has not been set yet");
         }
         try{
-            commandManager.execute(command);
+            ret = commandManager.execute(command);
         }
         catch(IllegalArgumentException e){
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
@@ -44,9 +45,7 @@ public class CommandInputHandler extends TextArea {
             definedCommandMap();
             first = false;
         }
-        String ret = command;
         this.clear();
-
         return ret;
     }
 

@@ -33,6 +33,7 @@ public class ControlPanelView {
     private static final String DEFINED_COMMANDS_TITLE = "Defined Commands";
     private static final String DEFINED_VARIABLES_TITLE = "Defined Variables";
     private static final String COMMAND_HISTORY_TITLE = "Command History";
+    private static final String COMMAND_OUTPUT_TITLE = "Command Output";
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
@@ -44,6 +45,7 @@ public class ControlPanelView {
     Workspace workspace;
     TitledPane workspaceSetting;
     TitledPane commandHistory;
+    TitledPane commandOutput;
     TitledPane userDefinedCommands;
     TitledPane definedVariables;
     TitledPane turtleStatus;
@@ -63,10 +65,11 @@ public class ControlPanelView {
         commandHistory = setUpScrollingTitlePane(COMMAND_HISTORY_TITLE);
         setUpTurtleStatus();
         setUpTurtleAction();
+        commandOutput = setUpScrollingTitlePane(COMMAND_OUTPUT_TITLE);
         userDefinedCommands = setUpScrollingTitlePane(DEFINED_COMMANDS_TITLE);
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         definedVariables.setExpanded(false);
-        vBox = new VBox(workspaceSetting, commandHistory, userDefinedCommands, definedVariables, turtleStatus, turtleAction);
+        vBox = new VBox(workspaceSetting, commandHistory, commandOutput, userDefinedCommands, definedVariables, turtleStatus, turtleAction);
         workspace.setRight(vBox);
     }
 
@@ -283,9 +286,11 @@ public class ControlPanelView {
     }
 
     public void run(String input) {
-        String command = commandInputHandler.run(input);
-        VBox history = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
-        history.getChildren().add(UIFactory.createText(command));
+        String output = commandInputHandler.run(input);
+        VBox historyBox = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
+        VBox outputBox = (VBox)((ScrollPane) commandOutput.getContent()).getContent();
+        historyBox.getChildren().add(UIFactory.createText(input));
+        outputBox.getChildren().add(UIFactory.createText(output));
     }
 
     private void addNewTab(){
