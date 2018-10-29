@@ -2,12 +2,13 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Commands.BracketedCommand;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandTo extends Command {
+public class CommandTo extends BracketedCommand{
     private final String END_DELIMETER="]";
     private final String START_DELIMETER="[";
     private static final String myKey="MakeUserInstruction";
@@ -26,8 +27,12 @@ public class CommandTo extends Command {
         String key=params.remove(0);//[
         if(CommandManager.isCommand(key, myTracker)){throw new IllegalArgumentException("Illegal Command Name");}
             if(myTracker.get(key)!=null){throw new IllegalArgumentException("Command name taken by variable");}
-            params.remove(0);
-            for(int i=0;i<params.indexOf(END_DELIMETER);i+=2){//Storing variables
+           int endIndex=getCloseIndex(params);
+
+            System.out.println("_______________");
+        for(String s:params){System.out.println(s);}
+        System.out.println("_______________ endIndex:"+endIndex);
+            for(int i=1;i<endIndex;i+=2){//Storing variables
                 try {
                     varName = params.get(i);
                     varValue = Double.parseDouble(params.get(i+1));
@@ -36,15 +41,16 @@ public class CommandTo extends Command {
                     throw new IllegalArgumentException("Variable assignments must be doubles");
                 }
             }
-            int endIndex=params.indexOf(END_DELIMETER);
-            for(int i=0;i<endIndex;i+=1){
+
+            for(int i=0;i<endIndex;i+=1){//removing the variables
                 params.remove(0);
             }
             params.remove(0);
 
-            commandList=new ArrayList<>(params.subList(params.indexOf(START_DELIMETER)+1,params.indexOf(END_DELIMETER)));
+            commandList=new ArrayList<>(params.subList(params.indexOf(START_DELIMETER)+1,getCloseIndex(params)));
+            for(String s:commandList){System.out.println(s);}
             myTracker.putCommand(key,commandList);
-            int end = params.indexOf(END_DELIMETER);
+            int end = getCloseIndex(params);
 
             for(int i=0;i<=end;i+=1){
                 params.remove(0);
