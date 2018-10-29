@@ -208,9 +208,9 @@ public class TurtleManager {
         return index;
     }
 
-    public double setPalette(int index, int r, int b, int g){
+    public double setPalette(double index, double r, double b, double g){
         for(Turtle t: activeTurtles){
-            t.setPalette(index, r, b, g);
+            t.setPalette((int) index, (int) r, (int) b, (int) g);
         }
         return index;
     }
@@ -225,8 +225,6 @@ public class TurtleManager {
         Turtle newTurtle = new Turtle(id);
         turtleMap.put(id, newTurtle);
     }
-
-
 
 
 
