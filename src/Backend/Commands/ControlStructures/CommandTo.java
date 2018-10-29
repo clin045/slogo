@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandTo extends BracketedCommand{
-    private final String END_DELIMETER="]";
-    private final String START_DELIMETER="[";
+
     private static final String myKey="MakeUserInstruction";
     public CommandTo(VariableTracker tracker){
         super(tracker);

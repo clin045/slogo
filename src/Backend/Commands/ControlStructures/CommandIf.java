@@ -17,9 +17,10 @@ public class CommandIf extends BracketedCommand {
 
     @Override
     public String execute(List<String> params) {
-        System.out.println("===");
-        System.out.println(params);
-        int openBracket = params.indexOf("[");
+        System.out.println("______If FIRED________");
+        for(String s:params){System.out.print(s+" ");}
+        System.out.println("\n____________");
+        int openBracket = params.indexOf(START_DELIMETER);
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
 
@@ -42,13 +43,18 @@ public class CommandIf extends BracketedCommand {
         }
         else{
             openBracket = params.indexOf("[");
-            int closeBracket = params.indexOf("]");
+            System.out.println("OPENBRACKET: "+openBracket);
+            int closeBracket = getCloseIndex(params);
+            //Probably needs to be taken out
             if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
                 throw new InvalidSyntaxException(key);
             }
+            //-------------------------------------------
 
            List<String> bracketExp = params.subList(openBracket+1, closeBracket);
             List<Double> returnVals = evaluateBrackets(bracketExp);
+            params.remove(getCloseIndex(params));
+            params.remove(params.indexOf(START_DELIMETER));
             return Double.toString(returnVals.get(0));
         }
 

@@ -107,7 +107,7 @@ public class CommandManager {
         while(masterList.size()>0){
             System.out.println("executing with:");
             for(String s:masterList){System.out.println(s);}
-            if(masterList.get(0).equals("[")){return out;}
+//            if(masterList.get(0).equals("[")){return out;}
             if(isCommand(masterList.get(0), myTracker)){
                 Command init=getCommand(masterList, myTracker);
                 masterList.remove(0);

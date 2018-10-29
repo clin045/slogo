@@ -54,7 +54,7 @@ public class TextParser {
         List<String>out=new ArrayList<>();
         Stack<String> functions = new Stack<>();
         Stack<String> arguments = new Stack<>();
-        if(input[0].equals("[")){throw new IllegalArgumentException("Brackets can be used to group commands only when preceded by a Control Structures");}
+        if(input[0].equals("[")){   throw new IllegalArgumentException("Brackets can be used to group commands only when preceded by a Control Structures");}
         for (int i=0;i<input.length;i+=1) {
             try {
                 String symbol=getSymbol(input[i]);
