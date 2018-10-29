@@ -3,7 +3,6 @@ package FrontEnd;
 import javafx.application.Platform;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -12,14 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
 
 import java.io.File;
 import java.util.Optional;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
+
 
 /*
     A utility class for creating JavaFX UI elements including HBox, Button and FileChooser
@@ -75,7 +74,6 @@ public class UIFactory {
         return ret;
     }
 
-
     // create a file chooser which starts from the project's root directory
     public static FileChooser createFileChooser(String extension){
         FileChooser fileChooser = new FileChooser();
@@ -84,10 +82,24 @@ public class UIFactory {
         return fileChooser;
     }
 
+    public static VBox createTurtleStatusVBox(){
+        HBox ID = UIFactory.createTextLabelWithValue("ID: ", ControlPanelView.DEFAULT_ID);
+        HBox position = UIFactory.createTextLabelWithValue("Position: ", ControlPanelView.DEFAULT_POSITION);
+        HBox heading = UIFactory.createTextLabelWithValue("Heading: ", ControlPanelView.DEFAULT_HEADING);
+        return new VBox(ID, position, heading);
+    }
+
+    public static VBox createTurtleStatusVBox(int id, double x, double y, double heading){
+        HBox ID = UIFactory.createTextLabelWithValue("ID: ", String.valueOf(id));
+        HBox position = UIFactory.createTextLabelWithValue("Position: ", String.format("(%s, %s)", String.valueOf(x), String.valueOf(y)));
+        HBox headingBox = UIFactory.createTextLabelWithValue("Heading: ", String.valueOf(heading));
+        return new VBox(ID, position, headingBox);
+    }
+
     public static Point2D createDialogBox(){
         // Create the custom dialog.
         Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("TestName");
+        dialog.setTitle("New Turtle Position");
 
         // Set the button types.
         ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);

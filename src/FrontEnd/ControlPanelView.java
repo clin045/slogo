@@ -4,6 +4,7 @@ import Backend.CommandManager;
 
 import java.io.*;
 
+import Backend.Turtle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
     This class represents the UI view for all the settings like workspace setting,
@@ -34,9 +36,9 @@ public class ControlPanelView {
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
-    private static final String DEFAULT_HEADING = "90";
-    private static final String DEFAULT_POSITION = "0,0";
-    private static final String DEFAULT_ID = "0";
+    public static final String DEFAULT_HEADING = "90";
+    public static final String DEFAULT_POSITION = "0,0";
+    public static final String DEFAULT_ID = "1";
 
     VBox vBox;
     Workspace workspace;
@@ -201,11 +203,14 @@ public class ControlPanelView {
             Point2D position = UIFactory.createDialogBox();
             if(position!=null){
                 TurtleView newTurtle = controller.addNewTurtle(position);
-                controller.getTurtleManager().createTurtle(TurtleViewManager.ID+1, new Controller(turtlePlayground, newTurtle, commandManager));
-                ArrayList<Integer> list = new ArrayList<>();
-                list.add(TurtleViewManager.ID+1);
-                list.add(1);
-                controller.getTurtleManager().setActiveTurtlesByID(list);
+                controller.getTurtleManager().createTurtle(newTurtle.getId(), new Controller(turtlePlayground, newTurtle, commandManager));
+                List<Turtle> list = controller.getTurtleManager().getActiveTurtles();
+                List<Integer> activeList = new ArrayList<>();
+                for(Turtle t: list){
+                    activeList.add(t.getID());
+                }
+                activeList.add(newTurtle.getId());
+                controller.getTurtleManager().setActiveTurtlesByID(activeList);
                 System.out.println(controller.getTurtleManager().getActiveTurtles());
             }
             System.out.println(position);
@@ -227,10 +232,7 @@ public class ControlPanelView {
     }
 
     private void setUpTurtleStatus(){
-        HBox ID = UIFactory.createTextLabelWithValue("ID: ", DEFAULT_ID);
-        HBox position = UIFactory.createTextLabelWithValue("Position: ", DEFAULT_POSITION);
-        HBox heading = UIFactory.createTextLabelWithValue("Heading: ", DEFAULT_HEADING);
-        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, new VBox(ID, position, heading));
+        turtleStatus = new TitledPane(TURTLE_STATUS_TITLE, UIFactory.createTurtleStatusVBox());
         turtleStatus.setExpanded(false);
     }
 
@@ -294,5 +296,9 @@ public class ControlPanelView {
 
     public VBox getRightMenu(){
         return vBox;
+    }
+
+    public TitledPane getTurtleStatus(){
+        return turtleStatus;
     }
 }

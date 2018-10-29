@@ -41,6 +41,10 @@ public class Workspace extends BorderPane {
         controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
         controlPanelView.setCommandManager(commandManager);
         controlPanelView.setTurtlePlayground(area);
+        for(TurtleView view: turtleViewManager){
+            view.setTurtleStatusPane(controlPanelView.getTurtleStatus());
+        }
+//        turtleViewManager.setTurtleStatusTitlePane(controlPanelView.getTurtleStatus());
 
         CommandInputHandler commandInputHandler = controlPanelView.getCommandInputHandler();
         commandInputHandler.setCommandManager(commandManager);
