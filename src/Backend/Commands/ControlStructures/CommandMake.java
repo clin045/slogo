@@ -1,3 +1,6 @@
+/**
+ * @author Michael Glushakov (mg367)
+ */
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
@@ -21,7 +24,7 @@ public class CommandMake extends Command {
         ResourceBundle commandBundle=ResourceBundle.getBundle("config.Commands");
         try{
             String command=commandBundle.getString(key);
-            throw new IllegalArgumentException("Illegal variable name");
+            throw new InvalidSyntaxException(key);
         }catch(MissingResourceException e){
             //Make can override exising values, set cannot create values;
 //            if(CommandManager.myTracker.get(key)!=null){throw new IllegalArgumentException("Variable with this name already exists, please use Set to setTurtleToHome the value of this variable");}

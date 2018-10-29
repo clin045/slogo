@@ -27,7 +27,7 @@ public class CommandRepeat extends LoopCommand {
         increment = 1;
         key = "repCount";
         if (!params.get(0).equals("[") || params.indexOf("]") == -1) {
-            throw new IllegalArgumentException("Commands inside repeat block need to be surrounded by brackets");
+            throw new InvalidSyntaxException(mykey);
         }
         return super.execute(params);
     }

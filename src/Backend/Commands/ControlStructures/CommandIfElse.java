@@ -1,5 +1,5 @@
 /**
- * @author
+ * @author Michael Glushakov (mg367)
  */
 package Backend.Commands.ControlStructures;
 

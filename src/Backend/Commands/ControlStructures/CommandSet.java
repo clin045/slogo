@@ -22,11 +22,11 @@ public class CommandSet extends Command {
         ResourceBundle commandBundle = ResourceBundle.getBundle("config.Commands");
         try {
             String command = commandBundle.getString(key);
-            throw new IllegalArgumentException("Illegal variable name");
+            throw new InvalidSyntaxException(key);
         } catch (MissingResourceException e) {
             //Make can override exising values, set cannot create values;
             if (super.myTracker.get(key) == null) {
-                throw new IllegalArgumentException("Variable not found, please use MAKE to create new variable");
+                throw new InvalidSyntaxException(key);
             }
             params.remove(0);
             Double value;

@@ -31,6 +31,8 @@ public class TurtlePlayground extends Pane {
     TurtleManager turtleManager;
     Map<Integer, Color> indexMap;
     Map<Integer, String> imageMap;
+    int penIndex;
+    int imageIndex;
     Pen pen;
 
     // create a default white playground with one turtle
@@ -89,9 +91,14 @@ public class TurtlePlayground extends Pane {
     }
 
     public void setTurtleShape(int index){
+        imageIndex = index;
         for(TurtleView turtleView: turtleViews){
             turtleView.setTurtleImage(imageMap.get(index));
         }
+    }
+
+    public int getTurtleShape(){
+        return imageIndex;
     }
 
     // update the turtle's position and leave trail if pen is down
@@ -161,6 +168,7 @@ public class TurtlePlayground extends Pane {
     }
 
     public void setPenColor(int index){
+        penIndex = index;
         if(indexMap.containsKey(index)){
             pen.setColor(indexMap.get(index));
         }
@@ -172,6 +180,21 @@ public class TurtlePlayground extends Pane {
 
     public void setPenThickNess(double width){
         pen.setThickness(width);
+    }
+
+    public int getPenColor(){
+        return penIndex;
+//        if(indexMap.containsValue(pen.getColor())){
+//            for(int i: indexMap.keySet()){
+//                if(indexMap.get(i).equals(pen.getColor())){
+//                    return i;
+//                }
+//            }
+//            return 0;
+//        }
+//        else{
+//            return 0;
+//        }
     }
 
     public void togglePenDown(){

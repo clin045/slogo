@@ -19,10 +19,10 @@ public class CommandFor extends LoopCommand {
     @Override
     public String execute(List<String> params) {
         if (!params.remove(0).equals(START_DELIMETER)) {
-            throw new IllegalArgumentException(noBracketsErrorMsg);
+            throw new InvalidSyntaxException(myKey);
         }
         if (!params.remove(4).equals(END_DELIMETER)) {
-            throw new IllegalArgumentException("FOR only takes 3 limit argument");
+            throw new InvalidSyntaxException(myKey);
         }
         key = params.remove(0);
         try {
@@ -32,7 +32,6 @@ public class CommandFor extends LoopCommand {
         } catch (Exception e) {
             throw new InvalidSyntaxException(myKey);
         }
-
         return super.execute(params);
     }
 }

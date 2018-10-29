@@ -65,7 +65,7 @@ public class Workspace extends BorderPane {
 //        turtleView = new TurtleView();
         turtleViewManager = new TurtleViewManager(variableTracker);
 
-        area = new TurtlePlayground(turtleViewManager);
+       area = new TurtlePlayground(turtleViewManager);
 
         this.setCenter(area);
     }

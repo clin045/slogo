@@ -5,6 +5,7 @@ package Backend.Commands.ControlStructures;
 
 import Backend.CommandManager;
 import Backend.Commands.BracketedCommand;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -25,43 +26,21 @@ public class CommandTo extends BracketedCommand {
         String varName;
         double varValue;
         if (params.get(0).equals(START_DELIMETER)) {
-            throw new IllegalArgumentException("To needs a variable name to store the commands");
+            throw new InvalidSyntaxException(myKey);
         }
         String key = params.remove(0);//[
         if (CommandManager.isCommand(key, myTracker)) {
-            throw new IllegalArgumentException("Illegal Command Name");
+            throw new InvalidSyntaxException(myKey);
         }
         if (myTracker.get(key) != null) {
-            throw new IllegalArgumentException("Command name taken by variable");
+            throw new InvalidSyntaxException(myKey);
         }
+
         int endIndex = getCloseIndex(params);
-
-        System.out.println("_______________");
-        for (String s : params) {
-            System.out.println(s);
-        }
-        System.out.println("_______________ endIndex:" + endIndex);
-        for (int i = 1; i < endIndex; i += 2) {//Storing variables
-            try {
-                varName = params.get(i);
-                varValue = Double.parseDouble(params.get(i + 1));
-                myTracker.put(varName, varValue);
-            } catch (NumberFormatException ne) {
-                throw new IllegalArgumentException("Variable assignments must be doubles");
-            }
-        }
-
-        for (int i = 0; i < endIndex; i += 1) {//removing the variables
-            params.remove(0);
-        }
-        params.remove(0);
-
+        storeVars(params, endIndex);
         commandList = new ArrayList<>(params.subList(params.indexOf(START_DELIMETER) + 1, getCloseIndex(params)));
-        for (String s : commandList) {
-            System.out.println(s);
-        }
-        myTracker.putCommand(key, commandList);
         int end = getCloseIndex(params);
+        myTracker.putCommand(key, commandList);
 
         for (int i = 0; i <= end; i += 1) {
             params.remove(0);
@@ -70,5 +49,24 @@ public class CommandTo extends BracketedCommand {
         params.add(0, ":" + key);
 
         return "";
+    }
+
+    private void storeVars(List<String> params, int endIndex) {
+        String varName;
+        double varValue;
+        for (int i = 1; i < endIndex; i += 2) {//Storing variables
+            try {
+                varName = params.get(i);
+                varValue = Double.parseDouble(params.get(i + 1));
+                myTracker.put(varName, varValue);
+            } catch (NumberFormatException ne) {
+                throw new InvalidSyntaxException(myKey);
+            }
+        }
+
+        for (int i = 0; i < endIndex; i += 1) {//removing the variables
+            params.remove(0);
+        }
+        params.remove(0);
     }
 }
