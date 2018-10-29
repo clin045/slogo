@@ -47,6 +47,10 @@ public class Pen {
         color = c;
     }
 
+    protected Color getColor(){
+        return color;
+    }
+
     protected void setThickness(double width) {
         thickness = width;
     }

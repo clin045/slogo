@@ -296,6 +296,15 @@ public class Turtle {
         controller.setTurtleShape(index);
     }
 
+    public int getPenColorIndex(){
+        return controller.getPenColor();
+    }
+
+    public int getShapeIndex(){
+        return controller.getImageIndex();
+    }
+
+
     public void setController(Controller controller){
         this.controller = controller;
     }

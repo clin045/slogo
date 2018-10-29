@@ -3,6 +3,7 @@ package Backend.Commands.ControlStructures;
 import Backend.Command;
 import Backend.CommandManager;
 import Backend.Exceptions.InvalidInputException;
+import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public abstract class LoopCommand extends Command {
         for(int i=start;i<=end;i+=increment){
             super.myTracker.put(key,(double)i);
             tempList=new ArrayList<>(params);
-            if(!tempList.get(0).equals(START_DELIMETER)){throw new IllegalArgumentException("Loop commands must be surrounded by square brackets");}
+            if(!tempList.get(0).equals(START_DELIMETER)){throw new InvalidSyntaxException(key);}
             tempList.remove(START_DELIMETER);
             while(tempList.size()>0){
                 if(tempList.get(0).equals(END_DELIMETER)){

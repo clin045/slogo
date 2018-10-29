@@ -76,6 +76,13 @@ public class Controller {
         turtlePlayground.setTurtleShape(index);
     }
 
+    public int getPenColor(){
+        return turtlePlayground.getPenColor();
+    }
+
+    public int getImageIndex(){
+        return turtlePlayground.getTurtleShape();
+    }
 
     public void hideTurtle(){
         turtleView.hide();
