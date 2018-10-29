@@ -16,6 +16,11 @@ public abstract class BracketedCommand extends Command {
     @Override
     public abstract String execute(List<String> params);
 
+    protected int getCloseIndex(List<String> str){
+        return 0;
+    }
+
+
     protected ArrayList<Double> evaluateBrackets(List<String> exp) {
         System.out.println("---");
         System.out.println(exp);

@@ -47,7 +47,6 @@ public class CommandTo extends Command {
             int end = params.indexOf(END_DELIMETER);
 
             for(int i=0;i<=end;i+=1){
-
                 params.remove(0);
             }
 
