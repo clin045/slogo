@@ -15,6 +15,6 @@ public class CommandPi extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return ""+Math.PI;
+        return String.valueOf(Math.PI);
     }
 }

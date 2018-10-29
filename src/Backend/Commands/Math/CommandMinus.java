@@ -14,8 +14,6 @@ public class CommandMinus extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         try{
@@ -24,6 +22,6 @@ public class CommandMinus extends Command {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        return ""+(-1*d1);
+        return String.valueOf(d1 * -1);
     }
 }

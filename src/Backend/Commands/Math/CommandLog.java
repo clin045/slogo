@@ -16,12 +16,12 @@ public class CommandLog extends Command {
     @Override
     public String execute(List<String> params) {
         try{
-            d1= parseParameter(params);
+            d1 = parseParameter(params);
         }
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        if(d1<0){throw new IllegalArgumentException("Log input must be positive");}
-        return ""+(Math.log(d1));
+        if(d1 < 0){throw new IllegalArgumentException("Log input must be positive");}
+        return String.valueOf(Math.log(d1));
     }
 }

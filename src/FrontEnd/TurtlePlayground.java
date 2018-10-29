@@ -4,6 +4,7 @@ import Backend.TurtleManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -22,11 +23,14 @@ import java.util.Map;
 public class TurtlePlayground extends Pane {
 
     public static final double INIT_STROKE_WIDTH = 5;
+    private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_green.png"));
+    private Image alTurtleImage = new Image(this.getClip().getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
     TurtleView turtleView; // possibly extend it to contain multiple turtles
     ArrayList<TurtleView> turtleViews;
     TurtleViewManager turtleViewManager;
     TurtleManager turtleManager;
     Map<Integer, Color> indexMap;
+    Map<Integer, String> imageMap;
     Pen pen;
 
     // create a default white playground with one turtle
@@ -53,6 +57,9 @@ public class TurtlePlayground extends Pane {
         indexMap.put(123, Color.RED);
         indexMap.put(456, Color.BLUE);
         indexMap.put(789, Color.YELLOW);
+        imageMap = new HashMap<>();
+        imageMap.put(111, "turtle_green.png");
+        imageMap.put(222, "turtle_dark_green.png");
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
     }
 
@@ -74,6 +81,16 @@ public class TurtlePlayground extends Pane {
     public void setBgColor(int index){
         if(indexMap.containsKey(index)){
             setBgColor(indexMap.get(index));
+        }
+    }
+
+    public void setPalette(int index, Color color){
+        indexMap.put(index, color);
+    }
+
+    public void setTurtleShape(int index){
+        for(TurtleView turtleView: turtleViews){
+            turtleView.setTurtleImage(imageMap.get(index));
         }
     }
 
@@ -105,6 +122,7 @@ public class TurtlePlayground extends Pane {
         TurtleView view = new TurtleView(turtleManager, TurtleViewManager.ID);
         TurtleViewManager.ID++;
         turtleViewManager.addTurtleView(view);
+        turtleViews.add(view);
         this.getChildren().add(view.getTurtleImageView());
         view.getTurtleImageView().setLayoutX(position.getX());
         view.getTurtleImageView().setLayoutY(position.getY());

@@ -16,10 +16,8 @@ public class CommandAskWith extends BracketedCommand {
         setKey(key);
     }
 
-
     @Override
     public String execute(List<String> params) {
-
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
         if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
@@ -46,10 +44,10 @@ public class CommandAskWith extends BracketedCommand {
         if(validTurtles.size() < 1){
             return "";
         }
-        var commandOutput = evaluateBrackets(params.subList(closeBracket,params.size()-1));
+        var commandOutput = evaluateBrackets(params.subList(closeBracket,params.size() - 1));
 
         myTracker.getTurtleManager().setActiveTurtles(oldActiveTurtles);
 
-        return Double.toString(commandOutput.get(commandOutput.size()-1));
+        return Double.toString(commandOutput.get(commandOutput.size() - 1));
     }
 }
