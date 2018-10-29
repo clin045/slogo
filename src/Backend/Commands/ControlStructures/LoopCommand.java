@@ -1,3 +1,6 @@
+/**
+ * @author Michael Glushakov (mg367)
+ */
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
@@ -14,7 +17,8 @@ public abstract class LoopCommand extends Command {
     protected String key;
     protected final String END_DELIMETER="]";
     protected final String START_DELIMETER="[";
-
+    protected static final String noBracketsErrorMsg = "Limit must be enclosed by brackets []";
+    protected static final String wrongNumOfArgsErrorMsg = "Wrong number of arguments given";
 
     @Override
     public String execute(List<String> params) {
@@ -24,15 +28,14 @@ public abstract class LoopCommand extends Command {
         for(int i=start;i<=end;i+=increment){
             super.myTracker.put(key,(double)i);
             tempList=new ArrayList<>(params);
-            if(!tempList.get(0).equals(START_DELIMETER)){throw new IllegalArgumentException("Loop commands must be surrounded by square brackets");}
+            if(!tempList.get(0).equals(START_DELIMETER)){throw new IllegalArgumentException(noBracketsErrorMsg);}
             tempList.remove(START_DELIMETER);
             while(tempList.size()>0){
                 if(tempList.get(0).equals(END_DELIMETER)){
                     tempList.remove(0);
                     break;}
                 if(!CommandManager.isCommand(tempList.get(0), myTracker)&&tempList.get(0).charAt(0)!=':'){
-                        throw new InvalidInputException(tempList.get(0));
-
+                    throw new InvalidInputException(tempList.get(0));
                 }
                 Command loopCmd= CommandManager.getCommand(tempList, myTracker);
                 tempList.remove(0);
@@ -41,6 +44,6 @@ public abstract class LoopCommand extends Command {
         }
         params.clear();
         for(String s:tempList){params.add(s);}
-        return ""+out;
+        return String.valueOf(out);
     }
 }

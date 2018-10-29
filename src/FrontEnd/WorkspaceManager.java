@@ -1,3 +1,6 @@
+/**
+ * @author Xi Pu (xp19)
+ */
 package FrontEnd;
 
 import javafx.scene.Scene;
@@ -11,6 +14,9 @@ public class WorkspaceManager {
     Workspace workspace;
     TabPane tabPane;
 
+    /**
+     * @param scene
+     */
     public WorkspaceManager(Scene scene){
         tabPane = new TabPane();
         workspace = new Workspace(tabPane);
@@ -23,18 +29,23 @@ public class WorkspaceManager {
 
         stackPane = new StackPane();
         stackPane.getChildren().add(tabPane);
+
         // bind to take available space
         stackPane.prefHeightProperty().bind(scene.heightProperty());
         stackPane.prefWidthProperty().bind(scene.widthProperty());
     }
 
+    /**
+     * @return stackPane
+     */
     StackPane getWorkspace(){
         return stackPane;
     }
 
+    /**
+     * @return tabPane
+     */
     TabPane getTabPane(){
         return tabPane;
     }
-
-
 }

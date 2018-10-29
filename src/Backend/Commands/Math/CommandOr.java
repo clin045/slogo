@@ -1,3 +1,6 @@
+/**
+ * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
+ */
 package Backend.Commands.Math;
 
 import Backend.Command;

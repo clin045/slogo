@@ -15,7 +15,6 @@ public class CommandMake extends Command {
         setKey(key);
     }
 
-
     @Override
     public String execute(List<String> params) {
         String key=params.get(0);
@@ -35,7 +34,7 @@ public class CommandMake extends Command {
                 throw new InvalidSyntaxException(key);
             }
             super.myTracker.put(key,value);
-            return ""+value;
+            return String.valueOf(value);
         }
 
     }

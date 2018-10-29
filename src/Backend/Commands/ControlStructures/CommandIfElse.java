@@ -1,3 +1,6 @@
+/**
+ * @author
+ */
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
@@ -10,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandIfElse extends BracketedCommand {
-    private static final String key = "Ifelse";
-    public CommandIfElse(VariableTracker tracker){
-        super(tracker);
-        setKey(key);
-    }
+    private static final String myKey = "Ifelse";
 
+    public CommandIfElse(VariableTracker tracker) {
+        super(tracker);
+        setKey(myKey);
+    }
 
     @Override
     public String execute(List<String> params) {
@@ -27,47 +30,41 @@ public class CommandIfElse extends BracketedCommand {
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
-        if(CommandManager.isCommand(firstExpressionString, myTracker)){
+        if (CommandManager.isCommand(firstExpressionString, myTracker)) {
             firstExpressionCommand = CommandManager.getCommand(expressionParams, myTracker);
-        }
-        else{
-         //indicates that first expression is a value, not a command
+        } else {
+            //indicates that first expression is a value, not a command
             expressionValue = Double.parseDouble(firstExpressionString);
         }
         expressionParams.remove(0);
-        if(expressionValue == -1){
+        if (expressionValue == -1) {
             expressionValue = Double.parseDouble(firstExpressionCommand.execute(expressionParams));
         }
 
-        if(expressionValue == 0){
+        if (expressionValue == 0) {
             openBracket = params.indexOf(START_DELIMETER);
             int closeBracket = getCloseIndex(params);
 
-            if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
-
-                throw new InvalidSyntaxException(key);
+            if (openBracket == -1 || closeBracket == -1 || closeBracket < openBracket) {
+                throw new InvalidSyntaxException(myKey);
             }
-            try{
-                for(int i = 0; i <= closeBracket+1;i++){
+            try {
+                for (int i = 0; i <= closeBracket + 1; i++) {
                     params.remove(0);
                 }
-            }
-            catch(Exception e){
-                throw new InvalidSyntaxException(key);
+            } catch (Exception e) {
+                throw new InvalidSyntaxException(myKey);
             }
             params.remove(getCloseIndex(params));
-            
 
             List<Double> retVals = evaluateBrackets(params);
 
-
-            return Double.toString(retVals.get(0));
-        }
-        else{
+            return String.valueOf(retVals.get(0));
+        } else {
             int closeBracket = getCloseIndex(params);
             int paramSize = params.size();
             //var commandParams = params.subList(1, closeBracket);
-            for(int i = closeBracket; i < paramSize; i++){
+            for (int i = closeBracket; i < paramSize; i++) {
                 params.remove(closeBracket);
             }
             params.remove(0);
@@ -77,10 +74,7 @@ public class CommandIfElse extends BracketedCommand {
             //params.remove(getCloseIndex(params));
             //params.remove(params.indexOf(START_DELIMETER));
 
-
-            return Double.toString(retVals.get(0));
+            return String.valueOf(retVals.get(0));
         }
     }
-
-
 }
