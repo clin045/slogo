@@ -275,6 +275,18 @@ public class Turtle {
         return setXY(0, 0);
     }
 
+    public void changeBgColor(int index){
+        controller.setTurtlePlaygroundBgColor(index);
+    }
+
+    public void changePenColor(int index){
+        controller.setPenColor(index);
+    }
+
+    public void setPenStrokeWidth(double width){
+        controller.setPenThickness(width);
+    }
+
     public void setController(Controller controller){
         this.controller = controller;
     }

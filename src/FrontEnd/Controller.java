@@ -40,6 +40,10 @@ public class Controller {
         turtlePlayground.setPenColor(color);
     }
 
+    public void setPenColor(int index){
+        turtlePlayground.setPenColor(index);
+    }
+
     public void setTurtleImage(String fileName){
         turtleView.setTurtleImage(fileName);
     }
@@ -50,6 +54,10 @@ public class Controller {
 
     public void setPenDown(boolean isPenDown){
         turtlePlayground.setPenDown(isPenDown);
+    }
+
+    public void setTurtlePlaygroundBgColor(int index){
+        turtlePlayground.setBgColor(index);
     }
 
     public void togglePenDown(){

@@ -20,6 +20,7 @@ public class CommandNotEqualP extends MultiInputCommand {
             parseAllParameters(params);
         }
         catch(Exception e){
+            //e.printStackTrace();
             throw new InvalidSyntaxException(key);
         }
         return myVals.stream().distinct().count() > 1 ? "1" : "0";
