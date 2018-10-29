@@ -256,6 +256,7 @@ public class ControlPanelView {
         HBox red = new HBox(new Label("Red: 123"));
         HBox blue = new HBox(new Label("Blue: 456"));
         HBox yellow = new HBox(new Label("Yellow: 789"));
+        HBox black = new HBox(new Label("Black: 666"));
         ImageView dimage = new ImageView(turtleImage);
         dimage.setFitHeight(30);
         dimage.setFitWidth(30);
@@ -266,7 +267,7 @@ public class ControlPanelView {
         aimage.setFitWidth(30);
         HBox alterImage = new HBox(new Label("222"), aimage);
 
-        VBox vBox = new VBox(red, blue, yellow, defaultImage, alterImage);
+        VBox vBox = new VBox(red, blue, yellow, black, defaultImage, alterImage);
         colorIndexes = new TitledPane("UI Indexes", vBox);
 
     }
