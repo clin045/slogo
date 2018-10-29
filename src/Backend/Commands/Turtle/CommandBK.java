@@ -25,14 +25,9 @@ public class CommandBK extends Command {
         try{
             amountBack=parseParameter(params);
         }
-        catch(Exception e){
+        catch(Exception e) {
             throw new InvalidSyntaxException(key);
         }
-        return Double.toString(myTracker.getTurtleManager().back(amountBack));
-
+        return String.valueOf(myTracker.getTurtleManager().back(amountBack));
     }
-
-
-
-
 }

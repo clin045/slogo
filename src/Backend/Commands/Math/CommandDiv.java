@@ -14,9 +14,6 @@ public class CommandDiv extends MultiInputCommand {
         setKey(key);
     }
 
-
-
-
     @Override
     public String execute(List<String> params) {
         try{
@@ -25,11 +22,9 @@ public class CommandDiv extends MultiInputCommand {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        double out = myVals.remove(0);
-        if(myVals.contains(0)){throw new InvalidInputException("0");}
-        for (double d:myVals){
-            out/=d;
+        if(myVals.contains(0)){
+            throw new InvalidInputException("0");
         }
-        return ""+out;
+        return String.valueOf(myVals.stream().mapToDouble(d -> d).reduce((a, b) -> a / b).getAsDouble());
     }
 }

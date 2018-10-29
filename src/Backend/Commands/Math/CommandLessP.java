@@ -17,16 +17,12 @@ public class CommandLessP extends MultiInputCommand {
 
     @Override
     public String execute(List<String> params) {
-        try{
+        try {
             parseAllParameters(params);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
-        double check=myVals.remove(0);
-        for(double d: myVals){
-            if(d<=check){return "0";}
-        }
-        return "1";
+        double check = myVals.remove(0);
+        return myVals.stream().anyMatch(i -> i <= check) ? "0" : "1";
     }
 }

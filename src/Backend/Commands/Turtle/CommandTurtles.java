@@ -16,6 +16,6 @@ public class CommandTurtles extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Double.toString(myTracker.getTurtleManager().getNumTurtles());
+        return String.valueOf(myTracker.getTurtleManager().getNumTurtles());
     }
 }

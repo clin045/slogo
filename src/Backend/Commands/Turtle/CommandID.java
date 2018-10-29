@@ -12,9 +12,8 @@ public class CommandID extends Command {
         setKey(key);
     }
 
-
     @Override
     public String execute(List<String> params) {
-        return Integer.toString(myTracker.getTurtleManager().getID());
+        return String.valueOf(myTracker.getTurtleManager().getID());
     }
 }

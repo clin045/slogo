@@ -27,7 +27,7 @@ public class CommandTowards extends Command {
             throw new InvalidSyntaxException(key);
         }
         var turtleMan = myTracker.getTurtleManager();
-        return Double.toString(turtleMan.towards(pointX,pointY));
+        return String.valueOf(turtleMan.towards(pointX,pointY));
 
     }
 }

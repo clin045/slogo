@@ -14,8 +14,6 @@ public class CommandRemainder extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         try{
@@ -25,7 +23,9 @@ public class CommandRemainder extends Command {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
-        if(d2==0){throw new IllegalArgumentException("Cannot divide by 0");}
-        return ""+(d1%d2);
+        if(d2 == 0){
+            throw new IllegalArgumentException("Cannot divide by 0");
+        }
+        return String.valueOf(d1 % d2);
     }
 }

@@ -37,7 +37,7 @@ public class CommandTell extends BracketedCommand {
             idList.add(d.intValue());
         }
         myTracker.getTurtleManager().setActiveTurtlesByID(idList);
-        return Integer.toString(idList.get(idList.size()-1));
+        return String.valueOf(idList.get(idList.size()-1));
     }
 
 

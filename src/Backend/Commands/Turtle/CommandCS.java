@@ -14,7 +14,6 @@ public class CommandCS extends Command {
         setKey(key);
     }
 
-
     @Override
     public String execute(List<String> params) {
         var turtleMan = myTracker.getTurtleManager();

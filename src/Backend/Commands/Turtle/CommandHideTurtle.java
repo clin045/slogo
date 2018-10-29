@@ -13,8 +13,6 @@ public class CommandHideTurtle extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         myTracker.getTurtleManager().hide();
