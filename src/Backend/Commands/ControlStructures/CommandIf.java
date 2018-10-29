@@ -39,6 +39,11 @@ public class CommandIf extends BracketedCommand {
         }
 
         if(expressionValue == 0){
+            int start=params.indexOf(START_DELIMETER);
+            int end = getCloseIndex(params);
+            for (int i=start;i<=end;i+=1){
+                params.remove(0);
+            }
             return "0";
         }
         else{

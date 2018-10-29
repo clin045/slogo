@@ -22,6 +22,7 @@ public class CommandFD extends Command {
         catch(Exception e){
             throw new InvalidSyntaxException(key);
         }
+        System.out.println("done");
         return Double.toString(turtleMan.forward(amountFD));
     }
 }
