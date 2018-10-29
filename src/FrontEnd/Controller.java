@@ -68,6 +68,14 @@ public class Controller {
         turtlePlayground.setPenThickNess(width);
     }
 
+    public void setPalette(int index, Color color){
+        turtlePlayground.setPalette(index, color);
+    }
+
+    public void setTurtleShape(int index){
+        turtlePlayground.setTurtleShape(index);
+    }
+
 
     public void hideTurtle(){
         turtleView.hide();

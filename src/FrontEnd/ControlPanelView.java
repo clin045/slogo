@@ -218,6 +218,7 @@ public class ControlPanelView {
             if(position!=null){
                 TurtleView newTurtle = controller.addNewTurtle(position);
                 controller.getTurtleManager().createTurtle(newTurtle.getId(), new Controller(turtlePlayground, newTurtle, commandManager));
+                controller.getTurtleManager().getTurtleByID(newTurtle.getId()).setXY(position.getX(), position.getY());
                 List<Turtle> list = controller.getTurtleManager().getActiveTurtles();
                 List<Integer> activeList = new ArrayList<>();
                 for(Turtle t: list){
