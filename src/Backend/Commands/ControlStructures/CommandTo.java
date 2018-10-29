@@ -54,7 +54,6 @@ public class CommandTo extends Command {
 
             params.add(0,":"+key);
 
-
         return "";
     }
 }

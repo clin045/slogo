@@ -24,12 +24,11 @@ public abstract class BracketedCommand extends Command {
         //check if each param is a command, if so, evaluate it
         var retList = new ArrayList<Double>();
         while(exp.size() > 0){
-            System.out.println(exp.get(0));
             if(CommandManager.isCommand(exp.get(0), myTracker)){
                 var cmd = CommandManager.getCommand(exp, myTracker);
                 exp.remove(0);
                 try{
-                    System.out.println(exp);
+                    System.out.println("Expanded:" + exp);
                     var doubVal = Double.parseDouble(cmd.execute(exp));
                     retList.add(doubVal);
                 }

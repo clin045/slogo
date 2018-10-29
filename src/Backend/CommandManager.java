@@ -53,6 +53,7 @@ public class CommandManager {
         ResourceBundle commandBundle = ResourceBundle.getBundle(COMMAND_PATH);
         if(tempList.get(0).charAt(0)==':'){
             List<String>userCommand=tracker.getCommand(tempList.get(0).substring(1));
+            System.out.println("User Command:" + userCommand);
             String current=tempList.get(0);
             if(userCommand!=null){
                 tempList.addAll(0,userCommand);
