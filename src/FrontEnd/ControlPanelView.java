@@ -152,9 +152,7 @@ public class ControlPanelView {
     private void setUpTextInputArea(Workspace workspace){
         commandInputHandler = new CommandInputHandler(controller);
         Button runButton = UIFactory.createButton("Run", event -> {
-            String command = commandInputHandler.run();
-            VBox history = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
-            history.getChildren().add(UIFactory.createText(command));
+            run(commandInputHandler.getText());
         });
         Button clearHistoryButton = UIFactory.createButton("Clear History", event -> clearCommandHistory());
         Button newTabButton = UIFactory.createButton("New Tab", event -> {
@@ -168,7 +166,7 @@ public class ControlPanelView {
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                     String line;
                     while ((line = br.readLine()) != null) {
-                        controller.commandManager.execute(line);
+                        run(line);
                     }
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "File not found.", ButtonType.OK);
@@ -280,6 +278,12 @@ public class ControlPanelView {
     private void clearCommandHistory(){
         VBox history = (VBox) ((ScrollPane) commandHistory.getContent()).getContent();
         history.getChildren().clear();
+    }
+
+    public void run(String input) {
+        String command = commandInputHandler.run(input);
+        VBox history = (VBox)((ScrollPane) commandHistory.getContent()).getContent();
+        history.getChildren().add(UIFactory.createText(command));
     }
 
     private void addNewTab(){

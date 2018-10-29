@@ -26,16 +26,12 @@ public class CommandInputHandler extends TextArea {
         this.controller = controller;
     }
 
-    /*
-        this method will be executed when users press run button,
-        do all the text parsing and error handling here
-     */
-    public String run(){
+    public String run(String command){
         if(commandManager==null){
             System.out.println("CommandManager has not been set yet");
         }
         try{
-            commandManager.execute(this.getText());
+            commandManager.execute(command);
         }
         catch(IllegalArgumentException e){
             showWarningDialog("Error", "Illegal argument error", e.getMessage());
@@ -48,10 +44,18 @@ public class CommandInputHandler extends TextArea {
             definedCommandMap();
             first = false;
         }
-        String ret = this.getText();
+        String ret = command;
         this.clear();
 
         return ret;
+    }
+
+    /*
+    this method will be executed when users press run button,
+    do all the text parsing and error handling here
+ */
+    public String run(){
+        return run(this.getText());
     }
 
     private void varMap(){
