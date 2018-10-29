@@ -1,5 +1,6 @@
 package Backend.Commands.Turtle;
 
+import Backend.Commands.BracketedCommand;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.Turtle;
 import Backend.VariableTracker;

@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import Backend.Command;
 import Backend.CommandManager;
 import Backend.TurtleManager;
 import Backend.VariableTracker;
@@ -31,11 +30,10 @@ public class Controller {
     }
 
     public void update(double x, double y){
-//        turtlePlayground.update(x,y);
-        System.out.println("X:" + x);
-        System.out.println("Y:" + y);
-        turtlePlayground.leaveTrail(turtleView.getX(), turtleView.getY(), x, y, turtleView);
+        double originX = turtleView.getX();
+        double originY = turtleView.getY();
         turtleView.update(x,y);
+        turtlePlayground.leaveTrail(originX, originY, turtleView);
     }
 
     public void setPenColor(Color color){
@@ -46,9 +44,8 @@ public class Controller {
         turtleView.setTurtleImage(fileName);
     }
 
-
-    public void rotateTurtle(double heading){
-        turtleView.rotate(heading);
+    public void rotateTurtle(double oldHeading, double heading){
+        turtleView.rotate(oldHeading, heading);
     }
 
     public void setPenDown(boolean isPenDown){

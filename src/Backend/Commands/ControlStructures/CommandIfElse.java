@@ -2,12 +2,13 @@ package Backend.Commands.ControlStructures;
 
 import Backend.Command;
 import Backend.CommandManager;
+import Backend.Commands.BracketedCommand;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
 
-public class CommandIfElse extends Command {
+public class CommandIfElse extends BracketedCommand {
     private static final String key = "Ifelse";
     public CommandIfElse(VariableTracker tracker){
         super(tracker);
@@ -18,16 +19,13 @@ public class CommandIfElse extends Command {
     @Override
     public String execute(List<String> params) {
         int openBracket = params.indexOf("[");
-        int closeBracket = params.indexOf("]");
-        if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
-            throw new InvalidSyntaxException(key);
-        }
+
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
         Command firstExpressionCommand = null;
         double expressionValue = -1;
         if(CommandManager.isCommand(firstExpressionString)){
-            firstExpressionCommand = CommandManager.getCommand(firstExpressionString, myTracker);
+            firstExpressionCommand = CommandManager.getCommand(expressionParams, myTracker);
         }
         else{
          //indicates that first expression is a value, not a command
@@ -39,33 +37,34 @@ public class CommandIfElse extends Command {
         }
 
         if(expressionValue == 0){
-            closeBracket = params.indexOf("]");
-            for(int i = 0; i <= closeBracket;i++){
-                params.remove(0);
+            openBracket = params.indexOf("[");
+            int closeBracket = params.indexOf("]");
+            if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
+                throw new InvalidSyntaxException(key);
             }
+            try{
+                for(int i = 0; i <= closeBracket+1;i++){
+                    params.remove(0);
+                }
+            }
+            catch(Exception e){
+                throw new InvalidSyntaxException(key);
+            }
+            List<Double> retVals = evaluateBrackets(params);
 
-            params.remove("[");
-            var firstCommandStr = params.get(0);
-            Command firstCommand = CommandManager.getCommand(firstCommandStr, myTracker);
-            params.remove(0);
-            String str=firstCommand.execute(params);
 
-            params.remove("]");
-            return str;
+            return Double.toString(retVals.get(0));
         }
         else{
-
+            int closeBracket = params.indexOf("]");
             //var commandParams = params.subList(1, closeBracket);
-            params.remove("[");
-            var firstCommandStr = params.get(0);
-            Command firstCommand = CommandManager.getCommand(firstCommandStr, myTracker);
-            params.remove(0);
-            String str=firstCommand.execute(params);
-            closeBracket = params.indexOf("]");
-            for(int i = closeBracket; i < params.size(); i++){
+            for(int i = closeBracket+1; i < params.size(); i++){
                 params.remove(i);
             }
-            return str;
+            List<Double> retVals = evaluateBrackets(params);
+
+
+            return Double.toString(retVals.get(0));
         }
     }
 

@@ -33,7 +33,7 @@ public abstract class Command {
         if(params.size()==0){throw new ParameterAmountException();}
         if(CommandManager.isCommand(params.get(0))){
 
-            Command nextCmd= CommandManager.getCommand(params.get(0), myTracker);
+            Command nextCmd= CommandManager.getCommand(params, myTracker);
             params.remove(0);
             param=Double.parseDouble(nextCmd.execute(params));
         }
