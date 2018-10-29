@@ -296,7 +296,6 @@ public class Turtle {
         controller.setTurtleShape(index);
     }
 
-
     public void setController(Controller controller){
         this.controller = controller;
     }
