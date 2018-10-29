@@ -56,11 +56,16 @@ public class CommandIfElse extends BracketedCommand {
             return Double.toString(retVals.get(0));
         }
         else{
+            System.out.println("===");
             int closeBracket = params.indexOf("]");
+            int paramSize = params.size();
             //var commandParams = params.subList(1, closeBracket);
-            for(int i = closeBracket+1; i < params.size(); i++){
-                params.remove(i);
+            for(int i = closeBracket+1; i < paramSize; i++){
+                params.remove(closeBracket+1);
+                System.out.println(params);
             }
+            System.out.println("===");
+
             List<Double> retVals = evaluateBrackets(params);
 
 

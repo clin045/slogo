@@ -17,11 +17,12 @@ public class CommandIf extends BracketedCommand {
 
     @Override
     public String execute(List<String> params) {
+        System.out.println("===");
+        System.out.println(params);
         int openBracket = params.indexOf("[");
         var expressionParams = params.subList(0, openBracket);
         var firstExpressionString = expressionParams.get(0);
-        System.out.println("===");
-        System.out.println(params);
+
         Command firstExpressionCommand = null;
         double expressionValue = -1;
         if(CommandManager.isCommand(firstExpressionString, myTracker)){
