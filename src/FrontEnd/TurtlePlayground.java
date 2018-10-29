@@ -23,6 +23,7 @@ import java.util.Map;
 public class TurtlePlayground extends Pane {
 
     public static final double INIT_STROKE_WIDTH = 5;
+    public static final int DEFAULT_IMAGE_INDEX = 111;
     private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_green.png"));
     private Image alTurtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream("turtle_dark_green.png"));
     TurtleView turtleView; // possibly extend it to contain multiple turtles
@@ -31,8 +32,8 @@ public class TurtlePlayground extends Pane {
     TurtleManager turtleManager;
     Map<Integer, Color> indexMap;
     Map<Integer, String> imageMap;
-    int penIndex;
-    int imageIndex;
+    int penIndex = 666;
+    int imageIndex = DEFAULT_IMAGE_INDEX;
     Pen pen;
 
     // create a default white playground with one turtle
@@ -59,6 +60,7 @@ public class TurtlePlayground extends Pane {
         indexMap.put(123, Color.RED);
         indexMap.put(456, Color.BLUE);
         indexMap.put(789, Color.YELLOW);
+        indexMap.put(666, Color.BLACK);
         imageMap = new HashMap<>();
         imageMap.put(111, "turtle_green.png");
         imageMap.put(222, "turtle_dark_green.png");
