@@ -42,7 +42,6 @@ public class TurtleManager {
         return turtleMap.get(id);
     }
 
-
     public int getID(){
         return(activeTurtles.get(activeTurtles.size()-1).getID());
     }
@@ -100,9 +99,7 @@ public class TurtleManager {
 
     public double forward(double dist) {
         double last = 0;
-        System.out.println("forward called");
         for(Turtle t : activeTurtles){
-            System.out.println(t);
             last = t.forward(dist);
         }
         return last;

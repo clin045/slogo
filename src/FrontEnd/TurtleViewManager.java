@@ -14,22 +14,21 @@ public class TurtleViewManager implements Iterable<TurtleView> {
     public static int ID = 1;
     VariableTracker variableTracker; // track the state of each turtle
     TurtleManager turtleManager;
-//    TurtlePlayground turtlePlayground;
 
     public TurtleViewManager(VariableTracker variableTracker){
         this.variableTracker = variableTracker;
         this.turtleManager = variableTracker.getTurtleManager();
         turtleList = new ArrayList<>();
         ids = new HashSet<>();
-        addTurtle();
+        TurtleView view = new TurtleView(variableTracker, 1);
+//        view.setTurtleStatusPane(turtleStatusTitledPane);
+        addTurtleView(view);
 //        this.turtlePlayground = turtlePlayground;
     }
 
-    public void addTurtle(){
-        turtleList.add(new TurtleView());
-//        variableTracker.getTurtleManager().createTurtle(ID);
-//        variableTracker.getTurtleManager().setActiveTurtlesByID(new ArrayList<>(ID));
-//        ID++;
+    public void addTurtleView(TurtleView turtleView){
+        turtleList.add(turtleView);
+        ID++;
     }
 
     public TurtleManager getTurtleManager(){
