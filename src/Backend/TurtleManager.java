@@ -208,6 +208,10 @@ public class TurtleManager {
         return index;
     }
 
+    public double getShape(){
+        return activeTurtles.get(activeTurtles.size()-1).;
+    }
+
     public double setPalette(double index, double r, double b, double g){
         for(Turtle t: activeTurtles){
             t.setPalette((int) index, (int) r, (int) b, (int) g);

@@ -15,7 +15,7 @@ public class CommandSetPalette extends Command {
 
     @Override
     public String execute(List<String> params) {
-        double index = 0;
+        double index;
         try{
             index = parseParameter(params);
             double r = parseParameter(params);
