@@ -1,3 +1,6 @@
+/**
+ * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
+ */
 package Backend.Commands.Math;
 
 import Backend.Command;
@@ -6,9 +9,7 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-/**
- * @author Michael Glushakov (mg367)
- */
+
 public class CommandAdd extends MultiInputCommand {
    private static final String key="Sum";
     public CommandAdd(VariableTracker tracker) {

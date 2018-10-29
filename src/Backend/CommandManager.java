@@ -25,9 +25,6 @@ public class CommandManager {
     private TextParser myParser;
     private VariableTracker myTracker;
 
-
-
-
     /**
      * default constructor
      */

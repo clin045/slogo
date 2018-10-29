@@ -1,12 +1,12 @@
+/**
+ * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
+ */
 package Backend.Commands.Math;
 
-import Backend.Command;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.stream.DoubleStream;
 
 public class CommandMult extends MultiInputCommand {
     private static final String key="Product";

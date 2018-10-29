@@ -1,9 +1,9 @@
-package FrontEnd;
-
-/*
-    Represents the content inside each individual tab (all UI elements contained in it)
-    @author xp19
+/**
+ * @author Xi Pu (xp19)
+ *
+ * Represents the content inside each individual tab (all UI elements contained in it)
  */
+package FrontEnd;
 
 import Backend.CommandManager;
 import Backend.Turtle;
@@ -18,13 +18,14 @@ import javafx.scene.layout.VBox;
 public class Workspace extends BorderPane {
 
     TurtlePlayground area;
-    TurtleView turtleView;
     TurtleViewManager turtleViewManager;
     VariableTracker variableTracker;
     TabPane tabPane;
     public static final int PADDING = 10;
 
-    // create a new workspace
+    /**
+     * create a new workspace
+     */
     public Workspace(){
         CommandManager commandManager = new CommandManager("languages.English");
         variableTracker = commandManager.getMyTracker();

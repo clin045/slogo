@@ -1,3 +1,6 @@
+/**
+ * @author Michael Glushakov (mg367)
+ */
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
@@ -14,7 +17,6 @@ public class CommandMake extends Command {
         super(tracker);
         setKey(key);
     }
-
 
     @Override
     public String execute(List<String> params) {
@@ -35,7 +37,7 @@ public class CommandMake extends Command {
                 throw new InvalidSyntaxException(key);
             }
             super.myTracker.put(key,value);
-            return ""+value;
+            return String.valueOf(value);
         }
 
     }
