@@ -180,7 +180,6 @@ public class TurtleManager {
         double index=0;
         for(Turtle t:activeTurtles){
             index=t.getShapeIndex();
-            System.out.println(index);
         }
         return index;
     }
