@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Purpose: handle commands that take bracketed lists as parameters
+ * Assumptions: Subclasses can handle the output of evaluateBrackets
+ * Dependencies: Command
+ *
+ *
  * @author Christopher Lin
  * @author Michael Glushakov
  */
@@ -57,9 +62,6 @@ public abstract class BracketedCommand extends Command {
      * @return      A list of values contained in exp after evaluating
      */
     protected ArrayList<Double> evaluateBrackets(List<String> exp) {
-//        exp.remove(getCloseIndex(exp));
-//        exp.remove(START_DELIMETER);
-        //check if each param is a command, if so, evaluate it
         var retList = new ArrayList<Double>();
         while (exp.size() > 0) {
             if (CommandManager.isCommand(exp.get(0), myTracker)) {
