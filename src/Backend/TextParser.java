@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 
 /**
  * @author Michael Glushakov (mg367)
+ * @apiNote Purpose: Helper class used by CommandManager to parse initial user input
+ * @apiNote Assumptions: None
+ * @apiNote Dependencies: None
+ * @apiNote Usage: parse(String input) parses the string into an arraylist
  */
 
 public class TextParser {
@@ -46,14 +50,12 @@ public class TextParser {
 
     /**
      * @param userInput
-     * @return Array of 2 Stacks: Stack 1: contains commands, Stack 2 contains parameters neeeded for those commands
+     * @return List<String> of user input parsed by whitespace
      * @throws IllegalArgumentException
      */
     public List<String> parse(String userInput) throws IllegalArgumentException {
         String[] input = userInput.split(WHITESPACE);
         List<String> out = new ArrayList<>();
-        Stack<String> functions = new Stack<>();
-        Stack<String> arguments = new Stack<>();
         if (input[0].equals("[")) {
             throw new IllegalArgumentException("Brackets can be used to group commands only when preceded by a Control Structures");
         }
@@ -63,10 +65,7 @@ public class TextParser {
                 out.add(symbol);
 
             } catch (IllegalArgumentException e) {
-                if (functions.empty()) {
                     out.add(input[i]);
-                }
-                arguments.push(input[i]);
             }
         }
 
