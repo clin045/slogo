@@ -11,6 +11,11 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ * @author Christopher Lin
+ *
+ */
 public class CommandIf extends BracketedCommand {
     private static final String myKey = "If";
 

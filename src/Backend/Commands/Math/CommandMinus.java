@@ -8,7 +8,9 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandMinus extends Command {
     private static final String key = "Minus";
     double d1;

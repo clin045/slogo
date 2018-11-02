@@ -8,7 +8,9 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandDiv extends MultiInputCommand {
     private static final String key = "Quotient";
 

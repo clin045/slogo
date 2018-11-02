@@ -6,7 +6,9 @@ package Backend.Commands.Math;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandDiff extends MultiInputCommand {
     private static final String key = "Difference";
 

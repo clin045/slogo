@@ -8,7 +8,9 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandATan extends Command {
     private static final String key = "ArcTangent";
     private double d1;

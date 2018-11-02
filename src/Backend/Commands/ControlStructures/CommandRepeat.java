@@ -8,6 +8,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandRepeat extends LoopCommand {
     private static final String mykey = "Repeat";
 

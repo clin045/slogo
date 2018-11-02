@@ -12,6 +12,9 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
 public class CommandIfElse extends BracketedCommand {
     private static final String myKey = "Ifelse";
 

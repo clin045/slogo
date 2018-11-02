@@ -8,7 +8,9 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandLog extends Command {
     private static String key = "NaturalLog";
     private double d1;

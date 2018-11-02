@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandMake extends Command {
     private static final String key="MakeVariable";
     public CommandMake(VariableTracker tracker){
@@ -26,9 +29,7 @@ public class CommandMake extends Command {
             String command=commandBundle.getString(key);
             throw new InvalidSyntaxException(key);
         }catch(MissingResourceException e){
-            //Make can override exising values, set cannot create values;
-//            if(CommandManager.myTracker.get(key)!=null){throw new IllegalArgumentException("Variable with this name already exists, please use Set to setTurtleToHome the value of this variable");}
-            params.remove(0);
+             params.remove(0);
             Double value;
             try{
                 value= parseParameter(params);

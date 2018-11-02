@@ -7,7 +7,10 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ * @author Christopher Lin
+ */
 public class CommandGreaterP extends MultiInputCommand {
     private static final String key = "GreaterThan";
 

@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandSet extends Command {
     private static final String key = "SetVariable";
 

@@ -8,7 +8,9 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandSin extends Command {
     private static final String key = "Sine";
     private double d1;
