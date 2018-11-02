@@ -223,11 +223,10 @@ public class TurtleManager {
         return last;
     }
 
-    public double getShape() {
-        double index = 0;
-        for (Turtle t : activeTurtles) {
+    public double getShape(){
+        double index=0;
+        for(Turtle t:activeTurtles) {
             index = t.getShapeIndex();
-            System.out.println(index);
         }
         return index;
     }

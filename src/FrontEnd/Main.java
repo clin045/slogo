@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/*
+    @author xp19
+ */
 
 public class Main extends Application {
 

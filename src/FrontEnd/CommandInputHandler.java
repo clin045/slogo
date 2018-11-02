@@ -11,6 +11,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
+/*
+
+    @author xp19
+ */
+
 public class CommandInputHandler extends TextArea {
 
     private Controller controller;

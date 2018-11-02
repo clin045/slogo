@@ -181,17 +181,6 @@ public class TurtlePlayground extends Pane {
 
     public int getPenColor() {
         return penIndex;
-//        if(indexMap.containsValue(pen.getColor())){
-//            for(int i: indexMap.keySet()){
-//                if(indexMap.get(i).equals(pen.getColor())){
-//                    return i;
-//                }
-//            }
-//            return 0;
-//        }
-//        else{
-//            return 0;
-//        }
     }
 
     public void setPenColor(int index) {

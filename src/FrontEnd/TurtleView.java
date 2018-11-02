@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+/*
+    @author xp19
+ */
+
 public class TurtleView {
     private static final String TURTLE_IMAGE = "turtle_green.png";
     private static final int SIZE = 50;

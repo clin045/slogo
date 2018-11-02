@@ -1,8 +1,4 @@
-/**
- * @author Xi Pu (xp19)
- * <p>
- * Represents the content inside each individual tab (all UI elements contained in it)
- */
+
 package FrontEnd;
 
 import Backend.CommandManager;
@@ -14,6 +10,12 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+
+/**
+ * @author Xi Pu (xp19)
+ *
+ * Represents the content inside each individual tab (all UI elements contained in it)
+ */
 
 public class Workspace extends BorderPane {
 

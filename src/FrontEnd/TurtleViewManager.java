@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/*
+    @author xp19
+ */
+
 public class TurtleViewManager implements Iterable<TurtleView> {
 
     public static int ID = 1;

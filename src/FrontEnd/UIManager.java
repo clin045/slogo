@@ -4,6 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
+/*
+    @author xp19
+ */
+
+
 public class UIManager {
 
     StackPane stackPane;
