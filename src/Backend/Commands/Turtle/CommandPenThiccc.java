@@ -5,6 +5,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandPenThiccc extends Command {
     private static final String key = "THICCCCCC";
 

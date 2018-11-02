@@ -5,6 +5,10 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
+
 public class CommandPenUp extends Command {
     private static final String key = "PenUp";
 

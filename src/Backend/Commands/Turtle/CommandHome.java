@@ -5,6 +5,10 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
+
 public class CommandHome extends Command {
     public static final String key = "Home";
 

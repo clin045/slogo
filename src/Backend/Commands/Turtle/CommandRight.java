@@ -6,6 +6,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
 
 public class CommandRight extends Command {
     private static String key = "Right";

@@ -6,6 +6,12 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ *
+ * Implements the fd command
+ */
+
 public class CommandFD extends Command {
     private static final String key = "Forward";
     private double amountFD;

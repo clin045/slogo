@@ -7,6 +7,10 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Christopher Lin
+ */
 public class CommandTell extends BracketedCommand {
     private static final String key = "Tell";
 

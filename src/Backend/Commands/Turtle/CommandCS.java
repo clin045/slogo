@@ -5,7 +5,10 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-
+/**
+ * Implements ClearScreen command
+ * @author Christopher Lin
+ */
 public class CommandCS extends Command {
 
     private static final String key = "ClearScreen";

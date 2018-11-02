@@ -6,6 +6,10 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
+
 public class CommandSetHeading extends Command {
     private static final String key = "SetHeading";
     private double heading;
