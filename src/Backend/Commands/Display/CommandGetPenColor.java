@@ -5,6 +5,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Micheal Glushakov
+ */
 public class CommandGetPenColor extends Command {
     public final static String key = "GetPenColor";
     public CommandGetPenColor(VariableTracker tracker) {

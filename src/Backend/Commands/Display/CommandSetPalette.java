@@ -6,6 +6,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
 public class CommandSetPalette extends Command {
     public final String key = "setPalette";
     public CommandSetPalette(VariableTracker tracker) {

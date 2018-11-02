@@ -5,6 +5,10 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ *
+ */
 public class CommandSetBackground extends Command {
     public static final String key="SETBG";
 

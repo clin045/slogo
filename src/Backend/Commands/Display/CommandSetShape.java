@@ -5,6 +5,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ */
 public class CommandSetShape extends Command {
     private static final String key = "SetShape";
     public CommandSetShape(VariableTracker tracker) {
