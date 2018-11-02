@@ -6,6 +6,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/*
+    @author xp19
+ */
+
 public class Pen {
     private TurtlePlayground display;
     private SimpleBooleanProperty isDownProperty;

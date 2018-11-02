@@ -1,12 +1,14 @@
-/**
- * @author Xi Pu (xp19)
- */
+
 package FrontEnd;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
+
+/**
+ * @author Xi Pu (xp19)
+ */
 
 public class WorkspaceManager {
 

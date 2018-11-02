@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+/*
+    @author xp19
+ */
+
 public class TurtleView {
     private int id; // each turtle view will have to have a unique ID
     private ImageView turtleImageView;
