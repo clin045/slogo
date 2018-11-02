@@ -1,6 +1,3 @@
-/**
- * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
- */
 package Backend.Commands.Math;
 
 import Backend.Command;
@@ -10,6 +7,7 @@ import Backend.VariableTracker;
 import java.util.List;
 /**
  * @author Michael Glushakov
+ * @author Max Bartlett
  */
 public class CommandPow extends Command {
     private static final String key = "Power";

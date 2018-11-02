@@ -40,7 +40,7 @@ public class ControlPanelView {
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
-    private static final String LOGO_FILE_EXTENSION = "*.logo"
+    private static final String LOGO_FILE_EXTENSION = "*.logo";
     VBox vBox;
     Workspace workspace;
     TitledPane workspaceSetting;

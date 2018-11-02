@@ -10,6 +10,7 @@ import Backend.VariableTracker;
 import java.util.List;
 /**
  * @author Michael Glushakov
+ * @author Max Bartlett
  */
 
 public class CommandRand extends Command {
@@ -32,6 +33,6 @@ public class CommandRand extends Command {
         if (upperBound <= 0) {
             throw new IllegalArgumentException("Random ceiling must be positive");
         }
-        return Integer.toString((int) (Math.random() * upperBound));
+        return String.valueOf((int) (Math.random() * upperBound));
     }
 }

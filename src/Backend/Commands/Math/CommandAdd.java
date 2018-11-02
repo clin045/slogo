@@ -1,6 +1,3 @@
-/**
- * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
- */
 package Backend.Commands.Math;
 
 import Backend.Exceptions.InvalidSyntaxException;
@@ -10,12 +7,12 @@ import java.util.List;
 
 /**
  * @author Michael Glushakov
+ * @author Max Bartlett
  */
 public class CommandAdd extends MultiInputCommand {
     private static final String key = "Sum";
 
     public CommandAdd(VariableTracker tracker) {
-
         super(tracker);
         setKey(key);
     }
