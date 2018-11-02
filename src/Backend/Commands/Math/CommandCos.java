@@ -10,8 +10,9 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandCos extends Command {
-private double d1;
-private static final String key="Cosine";
+    private static final String key = "Cosine";
+    private double d1;
+
     public CommandCos(VariableTracker tracker) {
         super(tracker);
         setKey(key);
@@ -21,8 +22,7 @@ private static final String key="Cosine";
     public String execute(List<String> params) {
         try {
             d1 = parseParameter(params);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         return String.valueOf(Math.toDegrees(Math.cos(d1)));

@@ -6,13 +6,13 @@ import Backend.VariableTracker;
 import java.util.List;
 
 public class CommandTurtles extends Command {
-    private static final String key ="Turtles";
-    public CommandTurtles(VariableTracker tracker){
+    private static final String key = "Turtles";
+
+    public CommandTurtles(VariableTracker tracker) {
 
         super(tracker);
         setKey(key);
     }
-
 
     @Override
     public String execute(List<String> params) {

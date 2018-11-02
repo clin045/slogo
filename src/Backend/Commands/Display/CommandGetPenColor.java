@@ -14,6 +14,6 @@ public class CommandGetPenColor extends Command {
 
     @Override
     public String execute(List<String> params) {
-        return Double.toString(myTracker.getTurtleManager().getPenColor());
+        return String.valueOf(myTracker.getTurtleManager().getPenColor());
     }
 }

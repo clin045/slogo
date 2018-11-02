@@ -11,9 +11,10 @@ import java.util.List;
 
 
 public class CommandRand extends Command {
+    private static final String key = "Random";
     private int upperBound;
-    private static final String key="Random";
-    public CommandRand(VariableTracker tracker){
+
+    public CommandRand(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
@@ -22,12 +23,11 @@ public class CommandRand extends Command {
     public String execute(List<String> params) {
         try {
             upperBound = (int) parseParameter(params);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
 
-        if(upperBound <= 0) {
+        if (upperBound <= 0) {
             throw new IllegalArgumentException("Random ceiling must be positive");
         }
         return Integer.toString((int) (Math.random() * upperBound));

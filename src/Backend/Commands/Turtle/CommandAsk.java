@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandAsk extends BracketedCommand {
-    private static final String key="Ask";
+    private static final String key = "Ask";
 
-    public CommandAsk(VariableTracker tracker){
+    public CommandAsk(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
@@ -20,7 +20,7 @@ public class CommandAsk extends BracketedCommand {
     public String execute(List<String> params) {
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
-        if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
+        if (openBracket == -1 || closeBracket == -1 || closeBracket < openBracket) {
             throw new InvalidSyntaxException(key);
         }
         var turtleExp = params.subList(openBracket + 1, closeBracket);
@@ -29,7 +29,7 @@ public class CommandAsk extends BracketedCommand {
 
         var turtleIDs = new ArrayList<Integer>();
 
-        for (Double d : turtleIdDoubles){
+        for (Double d : turtleIdDoubles) {
             turtleIDs.add(d.intValue());
         }
 
@@ -39,12 +39,11 @@ public class CommandAsk extends BracketedCommand {
         myTracker.getTurtleManager().setActiveTurtlesByID(turtleIDs);
         List<String> commandExp = new ArrayList<>();
         var retList = new ArrayList<Double>();
-        try{
-            commandExp = params.subList(closeBracket+1, params.size() - 1);
+        try {
+            commandExp = params.subList(closeBracket + 1, params.size() - 1);
             commandExp.remove("[");
             commandExp.remove("]");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
 

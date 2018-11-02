@@ -3,16 +3,15 @@
  */
 package Backend.Commands.Math;
 
-import Backend.Command;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandLessP extends MultiInputCommand {
-    private static final String key="LessThan";
-    public CommandLessP(VariableTracker tracker){
+    private static final String key = "LessThan";
 
+    public CommandLessP(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }

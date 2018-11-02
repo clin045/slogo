@@ -10,14 +10,18 @@ import javafx.stage.Stage;
     @author xp19
  */
 
-public class Main extends Application{
+public class Main extends Application {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 800;
     private static final String TITLE = "SLogo";
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle(TITLE);
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
@@ -27,9 +31,4 @@ public class Main extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 }

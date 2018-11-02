@@ -43,16 +43,16 @@ public class Pen {
         isDownProperty.set(down);
     }
 
-    protected void togglePenDown(){
+    protected void togglePenDown() {
         isDownProperty.set(!isDown());
+    }
+
+    protected Color getColor() {
+        return color;
     }
 
     protected void setColor(Color c) {
         color = c;
-    }
-
-    protected Color getColor(){
-        return color;
     }
 
     protected void setThickness(double width) {

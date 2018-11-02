@@ -13,8 +13,6 @@ public class CommandShowTurtle extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
         return String.valueOf(myTracker.getTurtleManager().show());

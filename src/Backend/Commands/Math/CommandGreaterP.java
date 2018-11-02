@@ -3,25 +3,24 @@
  */
 package Backend.Commands.Math;
 
-import Backend.Command;
 import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
 
 public class CommandGreaterP extends MultiInputCommand {
-    private static final String key="GreaterThan";
-    public CommandGreaterP(VariableTracker tracker){
+    private static final String key = "GreaterThan";
+
+    public CommandGreaterP(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
     @Override
     public String execute(List<String> params) {
-        try{
+        try {
             parseAllParameters(params);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         double check = myVals.remove(0);

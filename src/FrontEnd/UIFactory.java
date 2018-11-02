@@ -19,7 +19,6 @@ import javafx.util.Pair;
 import java.io.File;
 import java.util.Optional;
 
-
 /*
     A utility class for creating JavaFX UI elements including HBox, Button and FileChooser
     @author xp19
@@ -27,31 +26,31 @@ import java.util.Optional;
 
 public class UIFactory {
 
-    public static HBox createInputFieldWithLabel(String label, Node node){
+    public static HBox createInputFieldWithLabel(String label, Node node) {
         HBox hBox = new HBox(new Label(label), node);
         hBox.setAlignment(Pos.CENTER_RIGHT);
         return hBox;
     }
 
-    public static Button createButton(String text, EventHandler<ActionEvent> handler){
+    public static Button createButton(String text, EventHandler<ActionEvent> handler) {
         Button button = new Button(text);
         button.setOnAction(handler);
         return button;
     }
 
-    public static Text createText(String text){
+    public static Text createText(String text) {
         Text ret = new Text(text);
         ret.setWrappingWidth(250);
         return ret;
     }
 
-    public static HBox createTextLabelWithValue(String label, String value){
+    public static HBox createTextLabelWithValue(String label, String value) {
         Text lab = new Text(label);
         Text val = new Text(value);
         return new HBox(lab, val);
     }
 
-    public static HBox createTextFieldWithLabel(String label, String value, EventHandler<ActionEvent> handler){
+    public static HBox createTextFieldWithLabel(String label, String value, EventHandler<ActionEvent> handler) {
         Text lab = new Text(label);
         Button textField = new Button();
         textField.setText(value);
@@ -61,13 +60,12 @@ public class UIFactory {
         return ret;
     }
 
-    public static HBox createTextFieldWithLabel(String label, String value, ObservableMap<String, Object> map){
+    public static HBox createTextFieldWithLabel(String label, String value, ObservableMap<String, Object> map) {
         Text lab = new Text(label);
         TextField textField = new TextField();
         textField.setText(value);
         textField.setOnAction(event -> {
             map.put(label, textField.getText());
-            System.out.println(textField.getText());
         });
         HBox ret = new HBox(lab, textField);
         ret.setAlignment(Pos.CENTER);
@@ -75,28 +73,28 @@ public class UIFactory {
     }
 
     // create a file chooser which starts from the project's root directory
-    public static FileChooser createFileChooser(String extension){
+    public static FileChooser createFileChooser(String extension) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("Choose a " + extension + " file", extension));
         return fileChooser;
     }
 
-    public static VBox createTurtleStatusVBox(){
+    public static VBox createTurtleStatusVBox() {
         HBox ID = UIFactory.createTextLabelWithValue("ID: ", ControlPanelView.DEFAULT_ID);
         HBox position = UIFactory.createTextLabelWithValue("Position: ", ControlPanelView.DEFAULT_POSITION);
         HBox heading = UIFactory.createTextLabelWithValue("Heading: ", ControlPanelView.DEFAULT_HEADING);
         return new VBox(ID, position, heading);
     }
 
-    public static VBox createTurtleStatusVBox(int id, double x, double y, double heading){
+    public static VBox createTurtleStatusVBox(int id, double x, double y, double heading) {
         HBox ID = UIFactory.createTextLabelWithValue("ID: ", String.valueOf(id));
         HBox position = UIFactory.createTextLabelWithValue("Position: ", String.format("(%s, %s)", String.valueOf(x), String.valueOf(y)));
         HBox headingBox = UIFactory.createTextLabelWithValue("Heading: ", String.valueOf(heading));
         return new VBox(ID, position, headingBox);
     }
 
-    public static Point2D createDialogBox(){
+    public static Point2D createDialogBox() {
         // Create the custom dialog.
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("New Turtle Position");
@@ -135,10 +133,8 @@ public class UIFactory {
         Optional<Pair<String, String>> result = dialog.showAndWait();
         final Point2D[] point2D = new Point2D[1];
         result.ifPresent(pair -> {
-            System.out.println("X Position:" + pair.getKey() + "Y Position:" + pair.getValue());
             point2D[0] = new Point2D(Double.parseDouble(pair.getKey()), Double.parseDouble(pair.getValue()));
         });
         return point2D[0];
     }
-
 }

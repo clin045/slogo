@@ -13,7 +13,6 @@ public class CommandShape extends Command {
 
     @Override
     public String execute(List<String> params) {
-
         return null;
     }
 }
