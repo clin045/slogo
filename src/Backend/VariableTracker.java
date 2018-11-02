@@ -1,5 +1,7 @@
 /**
  * @author Max Bartlett
+ *
+ * Tracks variables and commands
  */
 
 package Backend;
@@ -75,28 +77,45 @@ public class VariableTracker {
     /**
      * clears varMap
      */
-    public void clear() {
+    public void clearVars() {
         varMap.clear();
     }
 
+    /**
+     * puts command in commandMap
+     * @param key command
+     * @param commandSequence sequence of commands
+     */
     public void putCommand(String key, List<String> commandSequence) {
         commandMap.put(key, commandSequence);
-//        for(String str:commandSequence){System.out.print(str+" ");}
-//        System.out.println(" ");
     }
 
+    /**
+     * gets command from commandMap
+     * @param key key of command
+     * @return command
+     */
     public List<String> getCommand(String key) {
         return commandMap.get(key);
     }
 
+    /**
+     * clears commandMap
+     */
     public void clearCommands() {
         commandMap.clear();
     }
 
+    /**
+     * @return commandMap
+     */
     public ObservableMap<String, List<String>> getCommandMap() {
         return commandMap;
     }
 
+    /**
+     * @return varMap
+     */
     public ObservableMap<String, Object> getVarMap() {
         return varMap;
     }

@@ -1,5 +1,7 @@
 /**
  * @author Max Bartlett
+ *
+ * Handles all behaviors of Turtle
  */
 
 package Backend;
@@ -25,6 +27,7 @@ public class Turtle {
     /**
      * constructs a Turtle object with custom parameters
      *
+     * @param ID         ID number
      * @param x          initial x coordinate
      * @param y          initial y coordinate
      * @param heading    initial heading
@@ -49,6 +52,10 @@ public class Turtle {
         this(ID, x, y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
     }
 
+    /**
+     * constructs a Turtle object with a custom ID
+     * @param ID ID number
+     */
     public Turtle(int ID) {
         this(ID, DEFAULT_X, DEFAULT_Y);
     }
@@ -275,6 +282,9 @@ public class Turtle {
         return 0;
     }
 
+    /**
+     * clears screen
+     */
     public void clearScreen() {
         this.coordinates = new Point2D(DEFAULT_X, DEFAULT_Y);
         setHeading(DEFAULT_HEADING);
@@ -291,43 +301,81 @@ public class Turtle {
         return setXY(0, 0);
     }
 
+    /**
+     * Sets background color
+     * @param index index of color
+     */
     public void changeBgColor(int index) {
         controller.setTurtlePlaygroundBgColor(index);
     }
 
+    /**
+     * Sets pen color
+     * @param index index of color
+     */
     public void changePenColor(int index) {
         controller.setPenColor(index);
     }
 
+    /**
+     * Sets pen stroke width
+     * @param width size of width
+     */
     public void setPenStrokeWidth(double width) {
         controller.setPenThickness(width);
     }
 
+    /**
+     * Sets palette
+     * @param index color index
+     * @param r red value
+     * @param g green value
+     * @param b blue value
+     */
     public void setPalette(int index, int r, int g, int b) {
         Color c = Color.rgb(r, g, b);
         controller.setPalette(index, c);
     }
 
+    /**
+     * Sets turtle shape
+     * @param index index of shape
+     */
     public void setTurtleShape(int index) {
         controller.setTurtleShape(index);
     }
 
+    /**
+     * @return pen color index
+     */
     public int getPenColorIndex() {
         return controller.getPenColor();
     }
 
+    /**
+     * @return shape index
+     */
     public int getShapeIndex() {
         return controller.getImageIndex();
     }
 
+    /**
+     * @return controller
+     */
     public Controller getController() {
         return controller;
     }
 
+    /**
+     * @param controller sets controller
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * @return String indicating turtle's ID
+     */
     @Override
     public String toString() {
         return "Turtle with ID: " + getID();

@@ -22,11 +22,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-    This class represents the UI view for all the settings like workspace setting,
-    defined variables and commands, command history that appear in the right side of
-    @author xp19
- */
+/**
+ * This class represents the UI view for all the settings like workspace setting,
+ * defined variables and commands, command history that appear in the right side of
+ * @author xp19, mmb70
+ **/
 public class ControlPanelView {
 
     public static final String DEFAULT_HEADING = "90";
@@ -40,6 +40,7 @@ public class ControlPanelView {
     private static final String TURTLE_STATUS_TITLE = "Turtle Status";
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
+    private static final String LOGO_FILE_EXTENSION = "*.logo"
     VBox vBox;
     Workspace workspace;
     TitledPane workspaceSetting;
@@ -168,7 +169,7 @@ public class ControlPanelView {
         });
 
         Button loadButton = UIFactory.createButton("Load", event -> {
-            FileChooser chooser = UIFactory.createFileChooser("*.logo");
+            FileChooser chooser = UIFactory.createFileChooser(LOGO_FILE_EXTENSION);
             File file = chooser.showOpenDialog(null);
             if (file != null) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -189,7 +190,7 @@ public class ControlPanelView {
         });
 
         Button saveButton = UIFactory.createButton("Save", event -> {
-            FileChooser chooser = UIFactory.createFileChooser("*.logo");
+            FileChooser chooser = UIFactory.createFileChooser(LOGO_FILE_EXTENSION);
             File file = chooser.showSaveDialog(null);
             FileOutputStream fos;
             BufferedWriter bw;
