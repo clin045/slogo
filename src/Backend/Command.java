@@ -9,7 +9,11 @@ import java.util.ResourceBundle;
 /**
  * @author Michael Glushakov
  * @author Christopher Lin
- *
+ * @apiNote Purpose: Abstract class that contains some of the key logic needed by all commands
+ * @apiNote Assumptions: CommandManager.getCommand is a public static method
+ * @apiNote Dependencies: CommandManager's isCommand and getCommand methods
+ * @apiNote Usage: Command.execute() should take care of parsing and executing command
+
  */
 public abstract class Command {
 
@@ -95,7 +99,11 @@ public abstract class Command {
         return param;
     }
 
-
+    /**
+     *
+     * @param params array list of strings corresponding to user input following the command that's being parsed
+     * @return the return value of a command
+     */
     public abstract String execute(List<String> params);
 
 

@@ -11,6 +11,9 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandTo extends BracketedCommand {
 
     private static final String myKey = "MakeUserInstruction";

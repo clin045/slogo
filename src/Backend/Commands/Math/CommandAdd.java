@@ -8,7 +8,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
-
+/**
+ * @author Michael Glushakov
+ */
 public class CommandAdd extends MultiInputCommand {
     private static final String key = "Sum";
 

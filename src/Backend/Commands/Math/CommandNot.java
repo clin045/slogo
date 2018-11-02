@@ -8,7 +8,9 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Christopher Lin
+ */
 public class CommandNot extends Command {
     public static final String key = "Not";
 

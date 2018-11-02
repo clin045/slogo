@@ -8,6 +8,9 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandFor extends LoopCommand {
     private static final String myKey = "For";
 

@@ -12,6 +12,13 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ * @apiNote Purpose: Abstract class that contains logic for executing loop logic
+ * @apiNote Assumptions: start, end, key and increment are set by the subclasses before super.execute() is called
+ * @apiNote Command's parse parameters method
+ * @apiNote Usage: super.execute() called by loop commands
+ */
 public abstract class LoopCommand extends Command {
     protected static final String noBracketsErrorMsg = "Limit must be enclosed by brackets []";
     protected static final String wrongNumOfArgsErrorMsg = "Wrong number of arguments given";
@@ -23,6 +30,11 @@ public abstract class LoopCommand extends Command {
         super(tracker);
     }
 
+    /**
+     *
+     * @param params array list of strings corresponding to user input following the command that's being parsed
+     * @return the return value of the last command executed
+     */
     @Override
     public String execute(List<String> params) {
         List<String> tempList = new ArrayList<>();
