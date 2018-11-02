@@ -6,6 +6,11 @@ import Backend.Exceptions.ParameterAmountException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * @author Michael Glushakov
+ * @author Christopher Lin
+ *
+ */
 public abstract class Command {
 
     public static final String DESCRIPTION_PATH = "Config.CommandDescriptions";
@@ -17,19 +22,25 @@ public abstract class Command {
     }
 
     /**
-     * @return description of what the command does to the user
+     *
+     * @param key key value of the command in a resource bundle. Called by all subclasses in constructor
      */
     protected void setKey(String key) {
         myKey = key;
     }
-
+    /**
+     * @return description of what the command does to the user
+     */
     public String getDescription() {
         return ResourceBundle.getBundle(DESCRIPTION_PATH).getString(myKey);
     }
 
     /**
+     * @param  params: array list of strings corresponding to user input following the command that's being parsed
      * @throws IllegalArgumentException
-     * @apiNote parses the parameters needed for command to execute
+     * @apiNote parses a single parameter needed for command to execute. If a parameter is an putput of another command,
+     * recursively calls that command
+     * @return the double value of the parameter
      */
     public double parseParameter(List<String> params) throws IllegalArgumentException {
         double param;
@@ -57,6 +68,12 @@ public abstract class Command {
         return param;
     }
 
+    /**
+     *
+     * @param params array list of strings corresponding to user input following the command that's being parsed
+     * @apiNote helper method that handles parsing of the user defined variables and commands
+     * @return value of the parameter
+     */
     private double handleCustomInput(List<String> params) {
         double param;
         Double temp = (Double) myTracker.get(params.get(0).substring(1));
