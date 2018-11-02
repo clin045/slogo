@@ -7,6 +7,11 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Christopher Lin
+ * @author Michael Glushakov
+ */
+
 public abstract class BracketedCommand extends Command {
     protected final String END_DELIMETER = "]";
     protected final String START_DELIMETER = "[";
@@ -18,6 +23,13 @@ public abstract class BracketedCommand extends Command {
     @Override
     public abstract String execute(List<String> params);
 
+
+    /**
+     *Gets the last close bracket in a series of nested brackets
+     *
+     * @param str   String to search for end bracket in
+     * @return      Index of the end bracket
+     */
     protected int getCloseIndex(List<String> str) {
         int startIndex = str.indexOf(START_DELIMETER);
         if (startIndex <= -1 || str.indexOf(END_DELIMETER) < startIndex) {
@@ -39,6 +51,11 @@ public abstract class BracketedCommand extends Command {
         throw new IllegalArgumentException("Brackets don't match");
     }
 
+    /**
+     * Evaluates the expression inside brackets (values and commands)
+     * @param exp   Expression to evaluate
+     * @return      A list of values contained in exp after evaluating
+     */
     protected ArrayList<Double> evaluateBrackets(List<String> exp) {
 //        exp.remove(getCloseIndex(exp));
 //        exp.remove(START_DELIMETER);
