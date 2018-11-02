@@ -5,6 +5,7 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+
 public class CommandCS extends Command {
 
     private static final String key = "ClearScreen";

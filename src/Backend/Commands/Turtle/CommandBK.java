@@ -1,6 +1,4 @@
-/**
- * @author Christopher Lin cl349
- */
+
 package Backend.Commands.Turtle;
 
 import Backend.Command;
@@ -8,6 +6,11 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
+
+
+/**
+ * @author Christopher Lin cl349
+ */
 
 public class CommandBK extends Command {
     public static final String key = "Backward";
