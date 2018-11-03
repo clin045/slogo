@@ -24,7 +24,7 @@ import java.util.Optional;
     @author xp19
  */
 
-public class UIFactory {
+public class    UIFactory {
 
     public static HBox createInputFieldWithLabel(String label, Node node) {
         HBox hBox = new HBox(new Label(label), node);

@@ -20,8 +20,6 @@ import java.util.List;
  * @apiNote Usage: super.execute() called by loop commands
  */
 public abstract class LoopCommand extends Command {
-    protected static final String noBracketsErrorMsg = "Limit must be enclosed by brackets []";
-    protected static final String wrongNumOfArgsErrorMsg = "Wrong number of arguments given";
     protected final String END_DELIMETER = "]";
     protected final String START_DELIMETER = "[";
     protected int start, end, increment;

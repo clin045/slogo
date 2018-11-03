@@ -8,6 +8,7 @@ import Backend.VariableTracker;
 
 import java.util.List;
 /**
+ * I included this class to show how easy it is to extend the multi input command
  * @author Michael Glushakov
  */
 public class CommandMult extends MultiInputCommand {

@@ -10,6 +10,11 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* I chose this class because it is a good example of how to use inheritance to get rid of the duplicated code
+* This Class provides an additional method parse All parameters which is used by it's subclasses to parse any number
+* of parameters.
+*/
 /**
  * @author Michael Glushakov
  * @apiNote Purpose: Abstract class that contains logic for managing any number of inputs
@@ -19,7 +24,8 @@ import java.util.List;
  */
 public class MultiInputCommand extends Command {
     protected List<Double> myVals;
-
+    private static final String START_DELIMITER="(";
+    private static final String END_DELIMITER=")";
     public MultiInputCommand(VariableTracker tracker) {
         super(tracker);
         myVals = new ArrayList<>();
@@ -31,14 +37,14 @@ public class MultiInputCommand extends Command {
      * @return the return value of the last command executed
      */
     protected void parseAllParameters(List<String> params) {
-        if (params.get(0).equals("(")) {
-            if (!params.contains(")")) {
+        if (params.get(0).equals(START_DELIMITER)) {
+            if (!params.contains(END_DELIMITER)) {
                 throw new InvalidInputException();
             }
             params.remove(0);
-            int end = params.indexOf(")");
+            int end = params.indexOf(END_DELIMITER);
             for (int i = 0; i < end; i += 1) {
-                if (params.get(0).equals(")")) {
+                if (params.get(0).equals(END_DELIMITER)) {
                     params.remove(0);
                     break;
                 }
