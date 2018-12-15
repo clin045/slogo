@@ -40,6 +40,12 @@ public class TurtleManager {
         return turtleMap.size();
     }
 
+    public void removeTurtle(int id){
+        var toRemove = turtleMap.get(id);
+        toRemove.getController().getTurtlePlayground().getChildren().remove(toRemove.getController().getTurtleView().getTurtleImageView());
+        turtleMap.remove(id);
+    }
+
     /**
      *
      * @return all turtles in the turtleMap
@@ -116,6 +122,13 @@ public class TurtleManager {
         return (activeTurtles.get(activeTurtles.size() - 1).getPenDown());
     }
 
+
+    public void clearStamps(){
+        for(Turtle t : stampedTurtles){
+            removeTurtle(t.getID());
+        }
+    }
+
     /**
      * Sets the active turtle to a list of IDs
      * @param turtlesIDs    Integer list of turtle IDs
@@ -176,7 +189,7 @@ public class TurtleManager {
     }
 
     public double forward(double dist) {
-   
+
         double last = 0;
         for (Turtle t : getUnstampedTurtles()) {
             last = t.forward(dist);

@@ -30,7 +30,7 @@ public class CommandStamp extends Command {
         turtleMan.stampTurtle(firstActive);
 
         var newController = new Controller(myController.getTurtlePlayground(), myController.addNewTurtle(firstActivePos), ServiceLocator.getMyCommandManager());
-        turtleMan.createTurtle(turtleMan.getActiveTurtles().size(), newController);
+        turtleMan.createTurtle(turtleMan.getActiveTurtles().size()+1, newController);
         return "";
     }
 }
