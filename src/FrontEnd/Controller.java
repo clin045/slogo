@@ -3,7 +3,9 @@ package FrontEnd;
 import Backend.CommandManager;
 import Backend.TurtleManager;
 import Backend.VariableTracker;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
 /*
@@ -108,6 +110,10 @@ public class Controller {
         return turtlePlayground.addNewTurtleToPlayground(position);
     }
 
+    public int addNewStamp(int id) {
+        return turtlePlayground.addNewStampToPlayground(id);
+    }
+
     public VariableTracker getVariableTracker() {
         return commandManager.getMyTracker();
     }
@@ -116,4 +122,7 @@ public class Controller {
         return getVariableTracker().getTurtleManager();
     }
 
+    public int removeStamps() {
+        return turtlePlayground.removeStamps();
+    }
 }

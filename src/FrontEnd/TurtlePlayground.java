@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Backend.Turtle;
+
 /*
     Represents the area where turtle moves
     May be included in the turtle.java class
@@ -26,8 +29,10 @@ public class TurtlePlayground extends Pane {
 
     public static final double INIT_STROKE_WIDTH = 5;
     public static final int DEFAULT_IMAGE_INDEX = 111;
+    public final String STAMP_LABEL = "stamp";
     TurtleView turtleView; // possibly extend it to contain multiple turtles
     ArrayList<TurtleView> turtleViews;
+    ArrayList<ImageView> stamps;
     TurtleViewManager turtleViewManager;
     TurtleManager turtleManager;
     Map<Integer, Color> indexMap;
@@ -44,6 +49,7 @@ public class TurtlePlayground extends Pane {
         this.turtleView = turtleView;
         addTurtleToCenter(turtleView.getTurtleImageView());
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
+        stamps = new ArrayList<>();
     }
 
     // create a default white playground with many turtles
@@ -67,6 +73,7 @@ public class TurtlePlayground extends Pane {
         imageMap.put(111, "turtle_green.png");
         imageMap.put(222, "turtle_dark_green.png");
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
+        stamps = new ArrayList<>();
     }
 
     // create a colored playground with one turtle
@@ -75,6 +82,7 @@ public class TurtlePlayground extends Pane {
         this.turtleView = turtleView;
         addTurtleToCenter(turtleView.getTurtleImageView());
         pen = new Pen(this, true, Color.BLACK, INIT_STROKE_WIDTH);
+        stamps = new ArrayList<>();
     }
 
     // set the background color of this pane
@@ -140,6 +148,34 @@ public class TurtlePlayground extends Pane {
         return view;
     }
 
+    public int addNewStampToPlayground(int id) {
+        TurtleView view = new TurtleView();
+        for(TurtleView t : turtleViewManager.turtleList) {
+            if(t.getId() == id) {
+                view = t;
+            }
+        }
+        ImageView turtleImageView = view.getTurtleImageView();
+        Image turtleImage = turtleImageView.getImage();
+        ImageView stamp = new ImageView(turtleImage);
+        stamp.setX(view.getX());
+        stamp.setY(view.getY());
+        stamp.setFitHeight(turtleImageView.getFitHeight());
+        stamp.setFitWidth(turtleImageView.getFitWidth());
+        this.getChildren().add(stamp);
+        stamps.add(stamp);
+        return imageIndex;
+    }
+
+    public int removeStamps() {
+        if(stamps.equals(null)) {
+            return 0;
+        }
+        for(ImageView i : stamps) {
+            this.getChildren().remove(i);
+        }
+        return 1;
+    }
 
     // put an additional turtle to the center of pane
     private void addTurtleToCenter(Node element) {
