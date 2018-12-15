@@ -2,6 +2,7 @@
 package FrontEnd;
 
 import Backend.CommandManager;
+import Backend.Commands.ServiceLocator;
 import Backend.Turtle;
 import Backend.VariableTracker;
 import javafx.geometry.Insets;
@@ -29,7 +30,8 @@ public class Workspace extends BorderPane {
      * create a new workspace
      */
     public Workspace() {
-        CommandManager commandManager = new CommandManager("languages.English");
+        ServiceLocator.provideCommandManager(new CommandManager("languages.English"));
+        CommandManager commandManager = ServiceLocator.getMyCommandManager();
         variableTracker = commandManager.getMyTracker();
         setUpTurtleDisplayArea();
         Controller controller = new Controller(area, turtleViewManager.turtleList.get(0), commandManager);

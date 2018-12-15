@@ -36,6 +36,8 @@ public class Controller {
         turtlePlayground.leaveTrail(originX, originY, turtleView);
     }
 
+    public TurtlePlayground getTurtlePlayground(){return turtlePlayground;}
+
     public void setPenColor(Color color) {
         turtlePlayground.setPenColor(color);
     }
@@ -99,6 +101,8 @@ public class Controller {
     public void reset() {
         turtlePlayground.reset();
     }
+
+    public TurtleView getTurtleView(){ return turtleView;};
 
     public void setTurtlePosition(double x, double y) {
         turtlePlayground.setTurtlePosition(x, y);

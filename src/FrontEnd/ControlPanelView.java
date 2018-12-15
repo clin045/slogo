@@ -210,25 +210,27 @@ public class ControlPanelView {
             }
         });
 
-        Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> {
-            Point2D position = UIFactory.createDialogBox();
-            if (position != null) {
-                TurtleView newTurtle = controller.addNewTurtle(position);
-                controller.getTurtleManager().createTurtle(newTurtle.getId(), new Controller(turtlePlayground, newTurtle, commandManager));
-                controller.getTurtleManager().getTurtleByID(newTurtle.getId()).setXY(position.getX(), position.getY());
-                List<Turtle> list = controller.getTurtleManager().getActiveTurtles();
-                List<Integer> activeList = new ArrayList<>();
-                for (Turtle t : list) {
-                    activeList.add(t.getID());
-                }
-                activeList.add(newTurtle.getId());
-                controller.getTurtleManager().setActiveTurtlesByID(activeList);
-            }
-        });
+        Button addNewTurtleButton = UIFactory.createButton("New Turtle", event -> makeNewTurtle());
 
         HBox buttonsGroup = new HBox(runButton, clearHistoryButton, newTabButton, loadButton, saveButton, addNewTurtleButton);
         VBox textInput = new VBox(buttonsGroup, commandInputHandler);
         workspace.setBottom(textInput);
+    }
+
+    public void makeNewTurtle() {
+        Point2D position = UIFactory.createDialogBox();
+        if (position != null) {
+            TurtleView newTurtle = controller.addNewTurtle(position);
+            controller.getTurtleManager().createTurtle(newTurtle.getId(), new Controller(turtlePlayground, newTurtle, commandManager));
+            controller.getTurtleManager().getTurtleByID(newTurtle.getId()).setXY(position.getX(), position.getY());
+            List<Turtle> list = controller.getTurtleManager().getActiveTurtles();
+            List<Integer> activeList = new ArrayList<>();
+            for (Turtle t : list) {
+                activeList.add(t.getID());
+            }
+            activeList.add(newTurtle.getId());
+            controller.getTurtleManager().setActiveTurtlesByID(activeList);
+        }
     }
 
     private TitledPane setUpScrollingTitlePane(String title) {

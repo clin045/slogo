@@ -20,6 +20,7 @@ public class TurtleManager {
 
     private Map<Integer, Turtle> turtleMap;
     private List<Turtle> activeTurtles;
+    private List<Turtle> stampedTurtles;
 
 
     TurtleManager() {
@@ -27,6 +28,7 @@ public class TurtleManager {
         activeTurtles = new ArrayList<>();
         Turtle turtle1 = new Turtle();
         activeTurtles.add(turtle1);
+        stampedTurtles = new ArrayList<>();
         turtleMap.put(1, turtle1);
     }
 
@@ -56,8 +58,18 @@ public class TurtleManager {
      * @return a list of all active turtles
      */
     public List<Turtle> getActiveTurtles() {
+
         return activeTurtles;
     }
+
+    private List<Turtle> getUnstampedTurtles(){
+        var unstamped = new ArrayList<Turtle>();
+        unstamped.addAll(activeTurtles);
+        unstamped.removeAll(stampedTurtles);
+        return unstamped;
+    }
+
+
 
     /**
      * Directly sets the active turtles to a specified list
@@ -67,6 +79,8 @@ public class TurtleManager {
         activeTurtles.clear();
         activeTurtles.addAll(turtles);
     }
+
+
 
     /**
      *
@@ -119,8 +133,10 @@ public class TurtleManager {
         }
     }
 
+
     public double penDown() {
-        for (Turtle t : activeTurtles) {
+
+        for (Turtle t : getUnstampedTurtles()) {
             t.penDown();
         }
         return 0;
@@ -128,28 +144,28 @@ public class TurtleManager {
 
     public double penSize(int pixels) {
 
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.setPenStrokeWidth(pixels);
         }
         return pixels;
     }
 
     public double penUp() {
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.penUp();
         }
         return 1;
     }
 
     public double changeBG(int i) {
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.changeBgColor(i);
         }
         return i;
     }
 
     public double penColor(int i) {
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.changePenColor(i);
         }
         return i;
@@ -160,8 +176,9 @@ public class TurtleManager {
     }
 
     public double forward(double dist) {
+   
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.forward(dist);
         }
         return last;
@@ -169,7 +186,7 @@ public class TurtleManager {
 
     public double back(double dist) {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.back(dist);
         }
         return last;
@@ -177,7 +194,7 @@ public class TurtleManager {
 
     public double left(double degrees) {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.left(degrees);
         }
         return last;
@@ -185,7 +202,7 @@ public class TurtleManager {
 
     public double right(double degrees) {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.right(degrees);
         }
         return last;
@@ -193,7 +210,7 @@ public class TurtleManager {
 
     public double setHeading(double heading) {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.setHeading(heading);
         }
         return last;
@@ -201,7 +218,7 @@ public class TurtleManager {
 
     public double towards(double x, double y) {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.towards(x, y);
         }
         return last;
@@ -209,7 +226,7 @@ public class TurtleManager {
 
     public double setXY(double x, double y) {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.setXY(x, y);
         }
         return last;
@@ -217,7 +234,7 @@ public class TurtleManager {
 
     public double show() {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.show();
         }
         return last;
@@ -225,7 +242,7 @@ public class TurtleManager {
 
     public double getShape(){
         double index=0;
-        for(Turtle t:activeTurtles) {
+        for(Turtle t: getUnstampedTurtles()) {
             index = t.getShapeIndex();
         }
         return index;
@@ -233,7 +250,7 @@ public class TurtleManager {
 
     public double hide() {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.hide();
         }
         return last;
@@ -241,7 +258,7 @@ public class TurtleManager {
 
     public double clearScreen() {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.clearScreen();
         }
         return last;
@@ -249,7 +266,7 @@ public class TurtleManager {
 
     public double home() {
         double last = 0;
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             last = t.home();
         }
         return last;
@@ -257,10 +274,14 @@ public class TurtleManager {
 
     public double setShape(double index) {
 
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.setTurtleShape((int) index);
         }
         return index;
+    }
+
+    public void stampTurtle(Turtle t){
+        stampedTurtles.add(t);
     }
 
     public double getPenColor() {
@@ -268,7 +289,7 @@ public class TurtleManager {
     }
 
     public double setPalette(double index, double r, double b, double g) {
-        for (Turtle t : activeTurtles) {
+        for (Turtle t : getUnstampedTurtles()) {
             t.setPalette((int) index, (int) r, (int) b, (int) g);
         }
         return index;
@@ -282,6 +303,9 @@ public class TurtleManager {
 
     public void createTurtle(int id, Controller controller) {
         Turtle newTurtle = new Turtle(id);
+        if(!activeTurtles.contains(newTurtle)){
+            activeTurtles.add(newTurtle);
+        }
         newTurtle.setController(controller);
         turtleMap.put(id, newTurtle);
     }
