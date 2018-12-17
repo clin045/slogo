@@ -1,3 +1,11 @@
+/**
+ * Implements the Ask command
+ *
+ *
+ * @author Christopher Lin
+ *
+ */
+
 package Backend.Commands.Turtle;
 
 import Backend.Commands.BracketedCommand;
@@ -9,28 +17,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandAsk extends BracketedCommand {
-    private static final String key="Ask";
+    private static final String key = "Ask";
 
-    public CommandAsk(VariableTracker tracker){
+    public CommandAsk(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
-
 
     @Override
     public String execute(List<String> params) {
         int openBracket = params.indexOf("[");
         int closeBracket = params.indexOf("]");
-        if(openBracket == -1 || closeBracket == -1 || closeBracket < openBracket){
+        if (openBracket == -1 || closeBracket == -1 || closeBracket < openBracket) {
             throw new InvalidSyntaxException(key);
         }
-        var turtleExp = params.subList(openBracket+1, closeBracket);
+        var turtleExp = params.subList(openBracket + 1, closeBracket);
 
         var turtleIdDoubles = evaluateBrackets(turtleExp);
 
         var turtleIDs = new ArrayList<Integer>();
 
-        for (Double d : turtleIdDoubles){
+        for (Double d : turtleIdDoubles) {
             turtleIDs.add(d.intValue());
         }
 
@@ -40,12 +47,11 @@ public class CommandAsk extends BracketedCommand {
         myTracker.getTurtleManager().setActiveTurtlesByID(turtleIDs);
         List<String> commandExp = new ArrayList<>();
         var retList = new ArrayList<Double>();
-        try{
-            commandExp = params.subList(closeBracket+1, params.size()-1);
+        try {
+            commandExp = params.subList(closeBracket + 1, params.size() - 1);
             commandExp.remove("[");
             commandExp.remove("]");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
 
@@ -54,6 +60,6 @@ public class CommandAsk extends BracketedCommand {
 
         myTracker.getTurtleManager().setActiveTurtles(oldTurtleList);
 
-        return Double.toString(retList.get(retList.size()-1));
+        return String.valueOf(retList.get(retList.size() - 1));
     }
 }

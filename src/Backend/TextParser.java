@@ -7,11 +7,15 @@ import java.util.regex.Pattern;
 
 /**
  * @author Michael Glushakov (mg367)
+ * @apiNote Purpose: Helper class used by CommandManager to parse initial user input
+ * @apiNote Assumptions: None
+ * @apiNote Dependencies: None
+ * @apiNote Usage: parse(String input) parses the string into an arraylist
  */
 
 public class TextParser {
-    private List<Map.Entry<String, Pattern>> mySymbols;
     public static final String WHITESPACE = "\\s+";
+    private List<Map.Entry<String, Pattern>> mySymbols;
 
     /**
      * @apiNote Default constructor
@@ -22,6 +26,7 @@ public class TextParser {
 
     /**
      * Constructor with path of the initial language file
+     *
      * @param path to the initial language file
      */
     public TextParser(String path) {
@@ -44,27 +49,23 @@ public class TextParser {
     }
 
     /**
-     *
      * @param userInput
-     * @return Array of 2 Stacks: Stack 1: contains commands, Stack 2 contains parameters neeeded for those commands
+     * @return List<String> of user input parsed by whitespace
      * @throws IllegalArgumentException
      */
-    public List<String> parse(String userInput) throws IllegalArgumentException{
+    public List<String> parse(String userInput) throws IllegalArgumentException {
         String[] input = userInput.split(WHITESPACE);
-        List<String>out=new ArrayList<>();
-        Stack<String> functions = new Stack<>();
-        Stack<String> arguments = new Stack<>();
-        if(input[0].equals("[")){throw new IllegalArgumentException("Brackets can be used to group commands only when preceded by a Control Structures");}
-        for (int i=0;i<input.length;i+=1) {
+        List<String> out = new ArrayList<>();
+        if (input[0].equals("[")) {
+            throw new IllegalArgumentException("Brackets can be used to group commands only when preceded by a Control Structures");
+        }
+        for (int i = 0; i < input.length; i += 1) {
             try {
-                String symbol=getSymbol(input[i]);
+                String symbol = getSymbol(input[i]);
                 out.add(symbol);
 
             } catch (IllegalArgumentException e) {
-                if (functions.empty()) {
-                   out.add(input[i]);
-                }
-                arguments.push(input[i]);
+                    out.add(input[i]);
             }
         }
 
@@ -73,7 +74,7 @@ public class TextParser {
 
     /**
      * @param text
-     * @return the String matcing the key in the Backend.Command Map
+     * @return the String matching the key in the Backend.Command Map
      * @throws IllegalArgumentException
      * @author Robert C. Duvall
      * @author Michael Glushakov (mg367)

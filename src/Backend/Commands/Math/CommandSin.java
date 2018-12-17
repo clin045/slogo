@@ -5,23 +5,26 @@ import Backend.Exceptions.InvalidSyntaxException;
 import Backend.VariableTracker;
 
 import java.util.List;
-
+/**
+ * @author Michael Glushakov
+ * @author Max Bartlett
+ */
 public class CommandSin extends Command {
-   private double d1;
-   private static final String key ="Sine";
-    public CommandSin(VariableTracker tracker){
+    private static final String key = "Sine";
+    private double d1;
+
+    public CommandSin(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
     @Override
     public String execute(List<String> params) {
-        try{
-            d1= parseParameter(params);
-        }
-        catch(Exception e){
+        try {
+            d1 = parseParameter(params);
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
-        return ""+ (Math.sin(d1));
+        return Double.toString(Math.toDegrees(Math.sin(d1)));
     }
 }

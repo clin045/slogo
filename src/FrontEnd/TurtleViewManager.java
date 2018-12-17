@@ -7,15 +7,19 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/*
+    @author xp19
+ */
+
 public class TurtleViewManager implements Iterable<TurtleView> {
 
+    public static int ID = 1;
     HashSet<Integer> ids;
     ArrayList<TurtleView> turtleList;
-    public static int ID = 1;
     VariableTracker variableTracker; // track the state of each turtle
     TurtleManager turtleManager;
 
-    public TurtleViewManager(VariableTracker variableTracker){
+    public TurtleViewManager(VariableTracker variableTracker) {
         this.variableTracker = variableTracker;
         this.turtleManager = variableTracker.getTurtleManager();
         turtleList = new ArrayList<>();
@@ -26,12 +30,12 @@ public class TurtleViewManager implements Iterable<TurtleView> {
 //        this.turtlePlayground = turtlePlayground;
     }
 
-    public void addTurtleView(TurtleView turtleView){
+    public void addTurtleView(TurtleView turtleView) {
         turtleList.add(turtleView);
         ID++;
     }
 
-    public TurtleManager getTurtleManager(){
+    public TurtleManager getTurtleManager() {
         return turtleManager;
     }
 

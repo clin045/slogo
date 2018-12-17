@@ -6,26 +6,30 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+
+/**
+ * @author Christopher Lin
+ */
 public class CommandSetXY extends Command {
+    private static final String key = "SetPosition";
     int pointX;
     int pointY;
-    private static final String key="SetPosition";
-    public CommandSetXY(VariableTracker tracker){
+
+    public CommandSetXY(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
     @Override
     public String execute(List<String> params) {
-        try{
+        try {
             pointX = (int) parseParameter(params);
             pointY = (int) parseParameter(params);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
         var myTurtle = myTracker.getTurtleManager();
 
-        return Double.toString(myTurtle.setXY(pointX,pointY));
+        return String.valueOf(myTurtle.setXY(pointX, pointY));
     }
 }

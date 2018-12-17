@@ -7,32 +7,44 @@ import Backend.VariableTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiInputCommand extends Command{
+/**
+ * @author Michael Glushakov
+ * @apiNote Purpose: Abstract class that contains logic for managing any number of inputs
+ * @apiNote Assumptions: Command.java's parseParameter method
+ * @apiNote Dependencies: CommandManager's isCommand and getCommand methods
+ * @apiNote Usage: parseAllParameters() called by it's subclasses
+ */
+public class MultiInputCommand extends Command {
     protected List<Double> myVals;
-    public MultiInputCommand(VariableTracker tracker){
+
+    public MultiInputCommand(VariableTracker tracker) {
         super(tracker);
-        myVals= new ArrayList<>();
+        myVals = new ArrayList<>();
     }
 
-
-
-    protected void parseAllParameters(List<String>params){
-        if(params.get(0).equals("(")){
-            if(!params.contains(")")){throw new InvalidInputException();
+    /**
+     *
+     * @param params array list of strings corresponding to user input following the command that's being parsed
+     * @return the return value of the last command executed
+     */
+    protected void parseAllParameters(List<String> params) {
+        if (params.get(0).equals("(")) {
+            if (!params.contains(")")) {
+                throw new InvalidInputException();
             }
             params.remove(0);
-            int end=params.indexOf(")");
-            for(int i=0;i<end;i+=1){
-                if(params.get(0).equals(")")){
+            int end = params.indexOf(")");
+            for (int i = 0; i < end; i += 1) {
+                if (params.get(0).equals(")")) {
                     params.remove(0);
-                    break;}
+                    break;
+                }
                 myVals.add(parseParameter(params));
             }
-            if(params.size()>0&&params.get(0).equals(")")){
+            if (params.size() > 0 && params.get(0).equals(")")) {
                 params.remove(0);
             }
-        }
-        else{
+        } else {
             myVals.add(parseParameter(params));
             myVals.add(parseParameter(params));
         }

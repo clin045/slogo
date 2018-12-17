@@ -1,4 +1,16 @@
+/**
+ * This is a custom exception that handles syntax errors
+ * Assumptions: the syntax is thrown by a Command
+ * Dependencies: Syntax.properties
+ *
+ * Usage: throw new InvalidSyntaxException(key)
+ *
+ *
+ * @author Christopher Lin
+ */
+
 package Backend.Exceptions;
+
 
 import Backend.CommandManager;
 
