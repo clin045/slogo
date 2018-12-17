@@ -59,6 +59,7 @@ public class ControlPanelView {
     CommandInputHandler commandInputHandler;
     CommandManager commandManager;
     TurtlePlayground turtlePlayground;
+    TitledPane turtleImagesPane;
 
     public ControlPanelView(Workspace workspace, Controller controller){
         this.workspace = workspace;
@@ -75,7 +76,9 @@ public class ControlPanelView {
         definedVariables = new TitledPane(DEFINED_VARIABLES_TITLE, new VBox());
         definedVariables.setExpanded(false);
         commandOutput = setUpScrollingTitlePane(COMMAND_OUTPUT_TITLE);
-        vBox = new VBox(workspaceSetting, commandHistory, commandOutput, userDefinedCommands, definedVariables, turtleStatus, turtleAction, colorIndexes);
+//        turtleImagesPane = setUpScrollingTitlePane("Turtle Image");
+        setUpTurtleImagePane();
+        vBox = new VBox(workspaceSetting, commandHistory, commandOutput, userDefinedCommands, definedVariables, turtleStatus, turtleAction, colorIndexes, turtleImagesPane);
         workspace.setRight(vBox);
     }
 
@@ -301,6 +304,21 @@ public class ControlPanelView {
         VBox xbox = new VBox(fd, bk, lft, rght);
         turtleAction = new TitledPane("Turtle Action", xbox);
         turtleAction.setExpanded(false);
+    }
+
+    private void setUpTurtleImagePane(){
+        ImageView image = new ImageView(turtleImage);
+        image.setFitHeight(50);
+        image.setFitWidth(50);
+        image.setOnMousePressed(event -> {
+            FileChooser chooser = UIFactory.createFileChooser(IMAGE_FILE_EXTENSION);
+            File file = chooser.showOpenDialog(null);
+            if(file!=null){
+                controller.setTurtleImage(file.getName());
+            }
+        });
+        HBox imageBox = new HBox(image);
+        turtleImagesPane = new TitledPane("Turtle images", imageBox);
     }
 
     public void setCommandManager(CommandManager commandManager){
