@@ -1,6 +1,3 @@
-/**
- * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
- */
 package Backend.Commands.Math;
 
 import Backend.Exceptions.InvalidSyntaxException;
@@ -10,6 +7,7 @@ import java.util.List;
 /**
  * I included this class to show how easy it is to extend the multi input command
  * @author Michael Glushakov
+ * @author Max Bartlett
  */
 public class CommandMult extends MultiInputCommand {
     private static final String key = "Product";

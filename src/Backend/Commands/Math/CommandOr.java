@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * @author Michael Glushakov
  * @author Christopher Lin
+ * @author Max Bartlett
  */
 public class CommandOr extends MultiInputCommand {
     private static final String key = "Or";

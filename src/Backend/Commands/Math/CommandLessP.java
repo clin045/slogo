@@ -1,6 +1,3 @@
-/**
- * @author Michael Glushakov (mg367), Max Bartlett (mmb70)
- */
 package Backend.Commands.Math;
 
 import Backend.Exceptions.InvalidSyntaxException;
@@ -10,6 +7,7 @@ import java.util.List;
 /**
  * @author Michael Glushakov
  * @author Christopher Lin
+ * @author Max Bartlett
  */
 public class CommandLessP extends MultiInputCommand {
     private static final String key = "LessThan";
@@ -18,7 +16,6 @@ public class CommandLessP extends MultiInputCommand {
         super(tracker);
         setKey(key);
     }
-
 
     @Override
     public String execute(List<String> params) {
