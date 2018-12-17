@@ -41,6 +41,8 @@ public class ControlPanelView {
     private static final double VERTICAL_SPACING = 10.0;
     private static final String IMAGE_FILE_EXTENSION = "*.png";
     private static final String LOGO_FILE_EXTENSION = "*.logo";
+    private static final String TURTLE_IMAGE = "turtle_green.png";
+    private Image turtleImage = new Image(this.getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
     VBox vBox;
     Workspace workspace;
     TitledPane workspaceSetting;
@@ -258,12 +260,12 @@ public class ControlPanelView {
         dimage.setFitWidth(30);
         HBox defaultImage = new HBox(new Label("111"), dimage);
 
-        ImageView aimage = new ImageView(alTurtleImage);
-        aimage.setFitHeight(30);
-        aimage.setFitWidth(30);
-        HBox alterImage = new HBox(new Label("222"), aimage);
+//        ImageView aimage = new ImageView(alTurtleImage);
+//        aimage.setFitHeight(30);
+//        aimage.setFitWidth(30);
+//        HBox alterImage = new HBox(new Label("222"), aimage);
 
-        VBox vBox = new VBox(red, blue, yellow, black, defaultImage, alterImage);
+        VBox vBox = new VBox(red, blue, yellow, black, defaultImage);
         colorIndexes = new TitledPane("UI Indexes", vBox);
 
     }
