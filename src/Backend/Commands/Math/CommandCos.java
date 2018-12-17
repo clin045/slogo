@@ -6,22 +6,27 @@ import Backend.VariableTracker;
 
 import java.util.List;
 
+/**
+ * @author Michael Glushakov
+ * @author Max Bartlett
+ */
+
 public class CommandCos extends Command {
-private double d1;
-private static final String key="Cosine";
-    public CommandCos(VariableTracker tracker){
+    private static final String key = "Cosine";
+    private double d1;
+
+    public CommandCos(VariableTracker tracker) {
         super(tracker);
         setKey(key);
     }
 
     @Override
     public String execute(List<String> params) {
-        try{
-            d1= parseParameter(params);
-        }
-        catch (Exception e){
+        try {
+            d1 = parseParameter(params);
+        } catch (Exception e) {
             throw new InvalidSyntaxException(key);
         }
-        return ""+(Math.cos(d1));
+        return String.valueOf(Math.toDegrees(Math.cos(d1)));
     }
 }

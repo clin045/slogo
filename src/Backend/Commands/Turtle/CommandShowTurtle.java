@@ -1,7 +1,6 @@
 package Backend.Commands.Turtle;
 
 import Backend.Command;
-import Backend.CommandManager;
 import Backend.VariableTracker;
 
 import java.util.List;
@@ -13,10 +12,8 @@ public class CommandShowTurtle extends Command {
         setKey(key);
     }
 
-
-
     @Override
     public String execute(List<String> params) {
-        return Double.toString(myTracker.getTurtleManager().show());
+        return String.valueOf(myTracker.getTurtleManager().show());
     }
 }

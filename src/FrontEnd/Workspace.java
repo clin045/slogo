@@ -1,9 +1,5 @@
-package FrontEnd;
 
-/*
-    Represents the content inside each individual tab (all UI elements contained in it)
-    @author xp19
- */
+package FrontEnd;
 
 import Backend.CommandManager;
 import Backend.Turtle;
@@ -15,24 +11,30 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Xi Pu (xp19)
+ *
+ * Represents the content inside each individual tab (all UI elements contained in it)
+ */
+
 public class Workspace extends BorderPane {
 
+    public static final int PADDING = 10;
     TurtlePlayground area;
-    TurtleView turtleView;
     TurtleViewManager turtleViewManager;
     VariableTracker variableTracker;
     TabPane tabPane;
-    public static final int PADDING = 10;
 
-    // create a new workspace
-    public Workspace(){
+    /**
+     * create a new workspace
+     */
+    public Workspace() {
         CommandManager commandManager = new CommandManager("languages.English");
         variableTracker = commandManager.getMyTracker();
         setUpTurtleDisplayArea();
         Controller controller = new Controller(area, turtleViewManager.turtleList.get(0), commandManager);
 
-        for(Turtle turtle: commandManager.getMyTracker().getTurtleManager().getActiveTurtles()){
-            System.out.println("Controller set");
+        for (Turtle turtle : commandManager.getMyTracker().getTurtleManager().getActiveTurtles()) {
             turtle.setController(controller);
         }
 
@@ -41,7 +43,7 @@ public class Workspace extends BorderPane {
         controlPanelView.getRightMenu().getChildren().add(getHelperMenu());
         controlPanelView.setCommandManager(commandManager);
         controlPanelView.setTurtlePlayground(area);
-        for(TurtleView view: turtleViewManager){
+        for (TurtleView view : turtleViewManager) {
             view.setTurtleStatusPane(controlPanelView.getTurtleStatus());
         }
 //        turtleViewManager.setTurtleStatusTitlePane(controlPanelView.getTurtleStatus());
@@ -53,14 +55,14 @@ public class Workspace extends BorderPane {
         commandInputHandler.setUserDefinedCommands(controlPanelView.userDefinedCommands);
     }
 
-    public Workspace(TabPane tabPane){
+    public Workspace(TabPane tabPane) {
         this();
         this.tabPane = tabPane;
     }
 
     // initialize the playground in the border pane
     // TODO: do the initialization inside the turtle class
-    private void setUpTurtleDisplayArea(){
+    private void setUpTurtleDisplayArea() {
 //        turtleView = new TurtleView();
         turtleViewManager = new TurtleViewManager(variableTracker);
 
@@ -69,12 +71,12 @@ public class Workspace extends BorderPane {
         this.setCenter(area);
     }
 
-    private TitledPane getHelperMenu(){
+    private TitledPane getHelperMenu() {
         VBox allCommands = new VBox();
         ScrollPane sp = new ScrollPane();
         sp.setContent(allCommands);
-        for(String command: CommandManager.getCommands().keySet()){
-            allCommands.getChildren().add(UIFactory.createText(command+": "+CommandManager.getCommands().get(command).getDescription()));
+        for (String command : CommandManager.getCommands().keySet()) {
+            allCommands.getChildren().add(UIFactory.createText(command + ": " + CommandManager.getCommands().get(command).getDescription()));
         }
         TitledPane helperMenu = new TitledPane("User Guide", sp);
         sp.setPadding(new Insets(PADDING));

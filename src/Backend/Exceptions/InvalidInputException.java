@@ -1,9 +1,7 @@
 package Backend.Exceptions;
-
-import Backend.CommandManager;
-
-import java.util.ResourceBundle;
-
+/**
+ * @author Michael Glushakov
+ */
 public class InvalidInputException extends CustomException {
     private static String MY_KEY="InvalidInputException";
     public InvalidInputException(){

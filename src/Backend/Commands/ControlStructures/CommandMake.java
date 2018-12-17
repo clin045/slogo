@@ -1,3 +1,6 @@
+/**
+ * @author Michael Glushakov (mg367)
+ */
 package Backend.Commands.ControlStructures;
 
 import Backend.Command;
@@ -8,6 +11,9 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * @author Michael Glushakov
+ */
 public class CommandMake extends Command {
     private static final String key="MakeVariable";
     public CommandMake(VariableTracker tracker){
@@ -15,18 +21,15 @@ public class CommandMake extends Command {
         setKey(key);
     }
 
-
     @Override
     public String execute(List<String> params) {
         String key=params.get(0);
         ResourceBundle commandBundle=ResourceBundle.getBundle("config.Commands");
         try{
             String command=commandBundle.getString(key);
-            throw new IllegalArgumentException("Illegal variable name");
+            throw new InvalidSyntaxException(key);
         }catch(MissingResourceException e){
-            //Make can override exising values, set cannot create values;
-//            if(CommandManager.myTracker.get(key)!=null){throw new IllegalArgumentException("Variable with this name already exists, please use Set to setTurtleToHome the value of this variable");}
-            params.remove(0);
+             params.remove(0);
             Double value;
             try{
                 value= parseParameter(params);
@@ -35,7 +38,7 @@ public class CommandMake extends Command {
                 throw new InvalidSyntaxException(key);
             }
             super.myTracker.put(key,value);
-            return ""+value;
+            return String.valueOf(value);
         }
 
     }

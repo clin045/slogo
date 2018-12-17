@@ -1,5 +1,7 @@
 /**
  * @author Max Bartlett
+ *
+ * Handles all behaviors of Turtle
  */
 
 package Backend;
@@ -11,27 +13,27 @@ import javafx.geometry.Point2D;
 import java.lang.Math;
 
 public class Turtle {
-    private Controller controller;
-    private Point2D coordinates;
-
-    private int ID;
-    private double heading; //in degrees
-    private boolean penDown;
-    private boolean visibility;
-
     public static final int DEFAULT_ID = 1;
     public static final double DEFAULT_X = 0;
     public static final double DEFAULT_Y = 0;
     public static final int DEFAULT_HEADING = 90; //default is facing up
     public static final boolean DEFAULT_PENDOWN = true;
     public static final boolean DEFAULT_VISIBILITY = true;
+    private Controller controller;
+    private Point2D coordinates;
+    private int ID;
+    private double heading; //in degrees
+    private boolean penDown;
+    private boolean visibility;
 
     /**
      * constructs a Turtle object with custom parameters
-     * @param x initial x coordinate
-     * @param y initial y coordinate
-     * @param heading initial heading
-     * @param penDown initial penDown
+     *
+     * @param ID         ID number
+     * @param x          initial x coordinate
+     * @param y          initial y coordinate
+     * @param heading    initial heading
+     * @param penDown    initial penDown
      * @param visibility initial visibility
      */
     private Turtle(int ID, double x, double y, int heading, boolean penDown, boolean visibility) {
@@ -44,13 +46,19 @@ public class Turtle {
 
     /**
      * constructs a Turtle object with a custom x, y
+     *
      * @param x initial x coordinate
      * @param y initial y coordinate
      */
     public Turtle(int ID, double x, double y) {
         this(ID, x, y, DEFAULT_HEADING, DEFAULT_PENDOWN, DEFAULT_VISIBILITY);
     }
-    public Turtle(int ID){
+
+    /**
+     * constructs a Turtle object with a custom ID
+     * @param ID ID number
+     */
+    public Turtle(int ID) {
         this(ID, DEFAULT_X, DEFAULT_Y);
     }
 
@@ -70,6 +78,7 @@ public class Turtle {
 
     /**
      * sets ID
+     *
      * @param ID new ID
      */
     public void setID(int ID) {
@@ -106,6 +115,7 @@ public class Turtle {
 
     /**
      * sets penDown
+     *
      * @param penDown new penDown value
      */
     private void setPenDown(boolean penDown) {
@@ -122,6 +132,7 @@ public class Turtle {
 
     /**
      * sets visibility
+     *
      * @param visibility new visibility value
      */
     private void setVisibility(boolean visibility) {
@@ -130,6 +141,7 @@ public class Turtle {
 
     /**
      * moves coordinates a given distance in the direction of heading
+     *
      * @param distance distance to move coordinates
      * @return distance
      */
@@ -143,6 +155,7 @@ public class Turtle {
 
     /**
      * moves coordinates a given distance in the direction of heading
+     *
      * @param distance distance to move coordinates
      * @return distance
      */
@@ -152,6 +165,7 @@ public class Turtle {
 
     /**
      * moves coordinates a given distance in the opposite direction of heading
+     *
      * @param distance distance to move coordinates
      * @return distance
      */
@@ -161,6 +175,7 @@ public class Turtle {
 
     /**
      * turns heading degrees counterclockwise
+     *
      * @param degrees number of degrees to add to heading
      * @return degrees
      */
@@ -171,6 +186,7 @@ public class Turtle {
 
     /**
      * turns heading heading degrees clockwise
+     *
      * @param degrees number of degrees to subtract from heading
      * @return degrees
      */
@@ -181,6 +197,7 @@ public class Turtle {
 
     /**
      * sets heading to heading
+     *
      * @param heading new heading value
      * @return number of degrees moved
      */
@@ -200,6 +217,7 @@ public class Turtle {
 
     /**
      * sets heading to face the point (x, y)
+     *
      * @param x x coordinate of the point to turn towards
      * @param y y coordinate of the point to turn towards
      * @return angle between coordinates and (x, y)
@@ -212,6 +230,7 @@ public class Turtle {
 
     /**
      * sets coordinates to (x, y)
+     *
      * @param x x coordinate
      * @param y y coordinate
      * @return distance from current coordinates to (x, y)
@@ -219,12 +238,13 @@ public class Turtle {
     public double setXY(double x, double y) {
         double distance = coordinates.distance(x, y);
         this.coordinates = new Point2D(x, y);
-        controller.setTurtlePosition(x,y);
+        controller.setTurtlePosition(x, y);
         return distance;
     }
 
     /**
      * sets penDown to true
+     *
      * @return 1
      */
     public int penDown() {
@@ -234,6 +254,7 @@ public class Turtle {
 
     /**
      * sets penDown to false
+     *
      * @return 0
      */
     public int penUp() {
@@ -243,6 +264,7 @@ public class Turtle {
 
     /**
      * sets visibility to true
+     *
      * @return 1
      */
     public int show() {
@@ -253,6 +275,7 @@ public class Turtle {
 
     /**
      * sets visiblity to false
+     *
      * @return 0
      */
     public int hide() {
@@ -260,7 +283,11 @@ public class Turtle {
         controller.hideTurtle();
         return 0;
     }
-    public void clearScreen(){
+
+    /**
+     * clears screen
+     */
+    public void clearScreen() {
         this.coordinates = new Point2D(DEFAULT_X, DEFAULT_Y);
         setHeading(DEFAULT_HEADING);
         controller.reset();
@@ -268,6 +295,7 @@ public class Turtle {
 
     /**
      * sets x and y to 0
+     *
      * @return distance from current point to (0, 0)
      */
     public double home() {
@@ -275,30 +303,83 @@ public class Turtle {
         return setXY(0, 0);
     }
 
-    public void changeBgColor(int index){
+    /**
+     * Sets background color
+     * @param index index of color
+     */
+    public void changeBgColor(int index) {
         controller.setTurtlePlaygroundBgColor(index);
     }
 
-    public void changePenColor(int index){
+    /**
+     * Sets pen color
+     * @param index index of color
+     */
+    public void changePenColor(int index) {
         controller.setPenColor(index);
     }
 
-    public void setPenStrokeWidth(double width){
+    /**
+     * Sets pen stroke width
+     * @param width size of width
+     */
+    public void setPenStrokeWidth(double width) {
         controller.setPenThickness(width);
     }
 
-    public void setController(Controller controller){
-        this.controller = controller;
+    /**
+     * Sets palette
+     * @param index color index
+     * @param r red value
+     * @param g green value
+     * @param b blue value
+     */
+    public void setPalette(int index, int r, int g, int b) {
+        Color c = Color.rgb(r, g, b);
+        controller.setPalette(index, c);
     }
 
+    /**
+     * Sets turtle shape
+     * @param index index of shape
+     */
+    public void setTurtleShape(int index) {
+        controller.setTurtleShape(index);
+    }
 
-    public Controller getController(){
+    /**
+     * @return pen color index
+     */
+    public int getPenColorIndex() {
+        return controller.getPenColor();
+    }
+
+    /**
+     * @return shape index
+     */
+    public int getShapeIndex() {
+        return controller.getImageIndex();
+    }
+
+    /**
+     * @return controller
+     */
+    public Controller getController() {
         return controller;
     }
 
-    @Override
-    public String toString(){
-        return "Turtle with ID: " + getID();
+    /**
+     * @param controller sets controller
+     */
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
+    /**
+     * @return String indicating turtle's ID
+     */
+    @Override
+    public String toString() {
+        return "Turtle with ID: " + getID();
+    }
 }
