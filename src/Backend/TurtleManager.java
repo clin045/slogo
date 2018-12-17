@@ -20,7 +20,7 @@ public class TurtleManager {
 
     private Map<Integer, Turtle> turtleMap;
     private List<Turtle> activeTurtles;
-
+    private List<Turtle>turtleStamps;
 
     TurtleManager() {
         turtleMap = new HashMap<>();
@@ -28,6 +28,7 @@ public class TurtleManager {
         Turtle turtle1 = new Turtle();
         activeTurtles.add(turtle1);
         turtleMap.put(1, turtle1);
+        turtleStamps=new ArrayList<>();
     }
 
     /**
@@ -117,6 +118,26 @@ public class TurtleManager {
                 activeTurtles.add(turtleMap.get(id));
             }
         }
+    }
+    public double stamp(){
+        Turtle lastActiveTurtle= activeTurtles.get(activeTurtles.size()-1);
+        Turtle turtleStamp= new Turtle();
+        turtleStamp.setController(lastActiveTurtle.getController());
+        turtleStamp.setXY(lastActiveTurtle.getX(),lastActiveTurtle.getY());
+        turtleStamp.setTurtleShape(lastActiveTurtle.getShapeIndex());
+        turtleStamp.show();
+        turtleStamps.add(turtleStamp);
+        return turtleStamp.getShapeIndex();
+    }
+    public double unstamp(){
+        if (turtleStamps.size()==0){return 0;}
+        for(Turtle t:turtleStamps){
+            t.hide();
+            t.setController(null);
+
+        }
+        turtleStamps.clear();
+        return 1;
     }
 
     public double penDown() {
