@@ -17,7 +17,7 @@ related to UI for changing setting is implemented there.
 
 ### Analysis
 
-* Yes, it was as good as I remembered.
+* Yes, it was as good as I remembered. 
 
 * I could improve my variable naming and hide more boilerplate code.
 
